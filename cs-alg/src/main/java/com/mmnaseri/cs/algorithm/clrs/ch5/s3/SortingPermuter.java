@@ -37,10 +37,11 @@ public class SortingPermuter<E> implements Permuter<E> {
 
     @Override
     public void permute(E[] array) {
+        final int bound = array.length * array.length * array.length; //n^3
         final Random random = new Random();
         final List<PrioritizedElement<E>> elements = new ArrayList<>(array.length);
         for (E e : array) {
-            elements.add(new PrioritizedElement<E>(e, random.nextInt()));
+            elements.add(new PrioritizedElement<>(e, random.nextInt(bound)));
         }
         Collections.sort(elements);
         for (int i = 0; i < elements.size(); i++) {

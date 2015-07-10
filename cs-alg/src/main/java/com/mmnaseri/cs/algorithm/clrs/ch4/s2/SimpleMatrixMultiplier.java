@@ -1,7 +1,8 @@
 package com.mmnaseri.cs.algorithm.clrs.ch4.s2;
 
-import com.mmnaseri.cs.algorithm.common.*;
-import com.mmnaseri.cs.algorithm.common.impl.ArrayMatrix;
+import com.mmnaseri.cs.algorithm.common.Matrix;
+import com.mmnaseri.cs.algorithm.common.MatrixFactory;
+import com.mmnaseri.cs.algorithm.common.NumberUtils;
 import com.mmnaseri.cs.algorithm.common.impl.ArrayMatrixFactory;
 
 /**
@@ -41,37 +42,5 @@ public class SimpleMatrixMultiplier implements MatrixMultiplier {
         return result;
     }
 
-    public static void main(String[] args) {
-        final ArrayMatrix<Integer> first = new ArrayMatrix<>(3, 2);
-        first.set(0, 0, 2);
-        first.set(0, 1, 3);
-        first.set(1, 0, 0);
-        first.set(1, 1, 4);
-        first.set(2, 0, -1);
-        first.set(2, 1, 5);
-        final ArrayMatrix<Integer> second = new ArrayMatrix<>(2, 3);
-        second.set(0, 0, 6);
-        second.set(0, 1, 1);
-        second.set(0, 2, 1);
-        second.set(1, 0, 0);
-        second.set(1, 1, 3);
-        second.set(1, 2, 2);
-        final SimpleMatrixMultiplier multiplier = new SimpleMatrixMultiplier();
-        final Matrix<Integer> multiplication = multiplier.multiply(first, second);
-        for (MatrixRow<Integer> row : multiplication) {
-            for (MatrixCell<Integer> cell : row) {
-                System.out.print(cell.getValue() + "\t");
-            }
-            System.out.println();
-        }
-    }
-
 }
 
-/**
- *
- * |  2  3  |
- * |  0  4  |  * |  6  1  1  | =  |  11   27 |
- * | -1  5  |    |  0  3  2  |    |  -2   22 |
- *
- */

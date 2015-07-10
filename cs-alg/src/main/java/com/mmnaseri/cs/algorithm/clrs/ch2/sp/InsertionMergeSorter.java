@@ -1,10 +1,11 @@
-package com.mmnaseri.cs.algorithm.clrs.ch2.p;
+package com.mmnaseri.cs.algorithm.clrs.ch2.sp;
 
 import com.mmnaseri.cs.algorithm.clrs.ch2.s1.InsertionSorter;
 import com.mmnaseri.cs.algorithm.clrs.ch2.s3.MergeSorter;
 import com.mmnaseri.cs.algorithm.common.Sorter;
 
 import java.lang.reflect.Array;
+import java.util.Comparator;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -12,15 +13,17 @@ import java.lang.reflect.Array;
  */
 public class InsertionMergeSorter<E extends Comparable<E>> extends MergeSorter<E> {
 
-    private final Sorter<E> insertionSorter = new InsertionSorter<>();
+    private final Sorter<E> insertionSorter;
     private final int cross;
 
-    public InsertionMergeSorter() {
-        this(4);
+    public InsertionMergeSorter(Comparator<E> comparator) {
+        this(4, comparator);
     }
 
-    public InsertionMergeSorter(int cross) {
+    public InsertionMergeSorter(int cross, Comparator<E> comparator) {
+        super(comparator);
         this.cross = cross;
+        insertionSorter = new InsertionSorter<>(comparator);
     }
 
     @Override

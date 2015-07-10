@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class CoupleSumFinder {
 
-    private static Couple findCouple(int sum, int... target) {
+    public Couple findCouple(int sum, int... target) {
         Arrays.sort(target);
         int i = 0;
         int j = target.length - 1;

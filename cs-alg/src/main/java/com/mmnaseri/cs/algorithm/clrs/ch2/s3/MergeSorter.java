@@ -3,12 +3,19 @@ package com.mmnaseri.cs.algorithm.clrs.ch2.s3;
 import com.mmnaseri.cs.algorithm.common.Sorter;
 
 import java.lang.reflect.Array;
+import java.util.Comparator;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 2:58 AM)
  */
 public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
+
+    private final Comparator<E> comparator;
+
+    public MergeSorter(Comparator<E> comparator) {
+        this.comparator = comparator;
+    }
 
     @SuppressWarnings("unchecked")
     private void merge(E[] array, int from, int mid, int to) {
@@ -38,7 +45,7 @@ public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
             } else if (rightItem == null) {
                 array[cursor] = leftItem;
                 leftCursor ++;
-            } else if (rightItem.compareTo(leftItem) < 0) {
+            } else if (comparator.compare(rightItem, leftItem) < 0) {
                 array[cursor] = rightItem;
                 rightCursor ++;
             } else {

@@ -27,4 +27,19 @@ public class Couple {
         return first + "+" + second + "=" + (first + second);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Couple couple = (Couple) o;
+        return (first == couple.first && second == couple.second) || (second == couple.first && first == couple.second);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = first;
+        result = 31 * result + second;
+        return result;
+    }
+
 }

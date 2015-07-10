@@ -37,6 +37,9 @@ public class RecursiveMaximumSubArrayFinder implements MaximumSubArrayFinder {
 
     @Override
     public SubArray find(int... target) {
+        if (target.length == 0) {
+            return null;
+        }
         return find(0, target.length, target);
     }
 

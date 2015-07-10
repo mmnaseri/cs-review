@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.algorithm.clrs.ch2.p;
+package com.mmnaseri.cs.algorithm.clrs.ch2.sp;
 
 import java.lang.reflect.Array;
 

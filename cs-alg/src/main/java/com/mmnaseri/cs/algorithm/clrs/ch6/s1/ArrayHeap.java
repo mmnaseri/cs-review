@@ -2,9 +2,7 @@ package com.mmnaseri.cs.algorithm.clrs.ch6.s1;
 
 import com.mmnaseri.cs.algorithm.common.Heap;
 import com.mmnaseri.cs.algorithm.common.HeapProperty;
-import com.mmnaseri.cs.algorithm.common.impl.MinHeapProperty;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -182,17 +180,6 @@ public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
                 return get(cursor ++);
             }
         };
-    }
-
-    public static void main(String[] args) {
-        final Heap<Integer> heap = new ArrayHeap<>(new MinHeapProperty<Integer>(), Arrays.asList(5, 8, 3, 5, 8, 9, 9));
-        heap.add(11);
-        heap.add(15);
-        heap.add(19);
-        while (!heap.isEmpty()) {
-            final Integer value = heap.pop();
-            System.out.println(value);
-        }
     }
 
 }

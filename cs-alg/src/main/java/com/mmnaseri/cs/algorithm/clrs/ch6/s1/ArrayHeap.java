@@ -179,6 +179,11 @@ public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
                 }
                 return get(cursor ++);
             }
+
+            @Override
+            public void remove() {
+
+            }
         };
     }
 

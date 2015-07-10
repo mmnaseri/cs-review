@@ -66,6 +66,10 @@ public class ArrayMatrix<E> implements Matrix<E> {
             public MatrixRow<E> next() {
                 return new ArrayMatrixRow(cursor ++);
             }
+
+            @Override
+            public void remove() {
+            }
         };
     }
 
@@ -96,6 +100,11 @@ public class ArrayMatrix<E> implements Matrix<E> {
                 @Override
                 public MatrixCell<E> next() {
                     return new ArrayMatrixCell(rowNumber, cursor ++);
+                }
+
+                @Override
+                public void remove() {
+
                 }
             };
         }

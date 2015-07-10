@@ -10,29 +10,27 @@ public class RecursiveMaximumSubArrayFinder implements MaximumSubArrayFinder {
         if (from == to) {
             return new SubArray(from, from, target[from]);
         }
-        Integer left = null;
-        Integer right = null;
         int sum = 0;
-        int start = mid;
-        int end = mid;
-        for (int i = mid - 1; i >= from; i --) {
+        int leftSum = 0;
+        int left = mid;
+        int right = mid;
+        int rightSum = 0;
+        for (int i = mid; i >= from; i --) {
             sum += target[i];
-            if (left == null || sum > left) {
-                left = sum;
-                start = i;
+            if (sum > leftSum) {
+                leftSum = sum;
+                left = i;
             }
         }
         sum = 0;
-        for (int i = mid; i < to; i ++) {
+        for (int i = mid + 1; i < to; i ++) {
             sum += target[i];
-            if (right == null || sum > right) {
-                right = sum;
-                end = i;
+            if (sum > rightSum) {
+                rightSum = sum;
+                right = i;
             }
         }
-        left = left == null ? 0 : left;
-        right = right == null ? 0 : right;
-        return new SubArray(start, end, left + right);
+        return new SubArray(left, right, leftSum + rightSum);
     }
 
     @Override
@@ -54,9 +52,9 @@ public class RecursiveMaximumSubArrayFinder implements MaximumSubArrayFinder {
         final SubArray middle = findAcrossMiddle(from, to, mid, target);
         final SubArray leftSubArray = find(from, mid, target);
         final SubArray rightSubArray = find(mid + 1, to, target);
-        if (leftSubArray.getSum() > rightSubArray.getSum() && leftSubArray.getSum() > middle.getSum()) {
+        if (leftSubArray.getSum() >= rightSubArray.getSum() && leftSubArray.getSum() >= middle.getSum()) {
             return leftSubArray;
-        } else if (rightSubArray.getSum() > middle.getSum()) {
+        } else if (rightSubArray.getSum() >= middle.getSum()) {
             return rightSubArray;
         } else {
             return middle;

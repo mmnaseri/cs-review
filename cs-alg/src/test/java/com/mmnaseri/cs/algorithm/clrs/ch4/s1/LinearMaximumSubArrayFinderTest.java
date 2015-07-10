@@ -1,6 +1,5 @@
 package com.mmnaseri.cs.algorithm.clrs.ch4.s1;
 
-import com.mmnaseri.cs.algorithm.clrs.BaseMaximumSubArrayFinderTest;
 import org.testng.annotations.Test;
 
 @Test(enabled = false)

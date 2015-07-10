@@ -1,7 +1,5 @@
-package com.mmnaseri.cs.algorithm.clrs;
+package com.mmnaseri.cs.algorithm.clrs.ch4.s1;
 
-import com.mmnaseri.cs.algorithm.clrs.ch4.s1.MaximumSubArrayFinder;
-import com.mmnaseri.cs.algorithm.clrs.ch4.s1.SubArray;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,7 +23,7 @@ public abstract class BaseMaximumSubArrayFinderTest {
     @Test
     public void testFindingWhenItIsToTheLeft() throws Exception {
         final MaximumSubArrayFinder finder = getFinder();
-        final SubArray array = finder.find(10, 12, 14, -20, 20);
+        final SubArray array = finder.find(10, 12, 14, -1, -20, 20);
         assertThat(array, is(notNullValue()));
         assertThat(array.getStart(), is(0));
         assertThat(array.getEnd(), is(2));
@@ -35,10 +33,10 @@ public abstract class BaseMaximumSubArrayFinderTest {
     @Test
     public void testFindingWhenItIsToTheRight() throws Exception {
         final MaximumSubArrayFinder finder = getFinder();
-        final SubArray array = finder.find(8, 10, -20, 10, 12, 14);
+        final SubArray array = finder.find(8, 10, -20, -1, 10, 12, 14);
         assertThat(array, is(notNullValue()));
-        assertThat(array.getStart(), is(3));
-        assertThat(array.getEnd(), is(5));
+        assertThat(array.getStart(), is(4));
+        assertThat(array.getEnd(), is(6));
         assertThat(array.getSum(), is(10 + 12 + 14));
     }
 

@@ -52,6 +52,9 @@ public class RecursiveMaximumSubArrayFinder implements MaximumSubArrayFinder {
         final SubArray middle = findAcrossMiddle(from, to, mid, target);
         final SubArray leftSubArray = find(from, mid, target);
         final SubArray rightSubArray = find(mid + 1, to, target);
+        if (leftSubArray.isEmpty() && rightSubArray.isEmpty() && middle.isEmpty()) {
+            return new SubArray(0, 0, target[0]);
+        }
         if (leftSubArray.getSum() >= rightSubArray.getSum() && leftSubArray.getSum() >= middle.getSum()) {
             return leftSubArray;
         } else if (rightSubArray.getSum() >= middle.getSum()) {

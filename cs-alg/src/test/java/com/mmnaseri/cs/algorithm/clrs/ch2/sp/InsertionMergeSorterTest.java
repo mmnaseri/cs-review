@@ -1,6 +1,6 @@
 package com.mmnaseri.cs.algorithm.clrs.ch2.sp;
 
-import com.mmnaseri.cs.algorithm.BaseSortTest;
+import com.mmnaseri.cs.algorithm.common.BaseSortTest;
 import com.mmnaseri.cs.algorithm.common.Sorter;
 
 public class InsertionMergeSorterTest extends BaseSortTest {

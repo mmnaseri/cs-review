@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.algorithm;
+package com.mmnaseri.cs.algorithm.common;
 
 import com.mmnaseri.cs.algorithm.common.Sorter;
 import org.testng.annotations.Test;

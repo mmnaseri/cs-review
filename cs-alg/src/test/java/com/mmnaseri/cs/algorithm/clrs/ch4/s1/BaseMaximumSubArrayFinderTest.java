@@ -60,4 +60,14 @@ public abstract class BaseMaximumSubArrayFinderTest {
         assertThat(array.getSum(), is(1 + 2 + 3 + 4 + 5));
     }
 
+    @Test
+    public void testFindingWhenAllAreNegative() throws Exception {
+        final MaximumSubArrayFinder finder = getFinder();
+        final SubArray array = finder.find(-1, -2, -3);
+        assertThat(array, is(notNullValue()));
+        assertThat(array.getStart(), is(0));
+        assertThat(array.getEnd(), is(0));
+        assertThat(array.getSum(), is(-1));
+    }
+
 }

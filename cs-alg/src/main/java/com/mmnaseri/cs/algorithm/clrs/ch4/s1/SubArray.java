@@ -28,6 +28,14 @@ public class SubArray {
         return sum;
     }
 
+    public int length() {
+        return end - start;
+    }
+
+    public boolean isEmpty() {
+        return length() == 0;
+    }
+
     @Override
     public String toString() {
         return "(" + start + "," + end + ") = " + sum;

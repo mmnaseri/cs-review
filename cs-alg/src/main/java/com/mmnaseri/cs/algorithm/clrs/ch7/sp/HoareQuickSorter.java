@@ -11,27 +11,34 @@ import java.util.Comparator;
  */
 public class HoareQuickSorter<E extends Comparable<E>> extends QuickSorter<E> {
 
+    private final Comparator<E> comparator;
+
     public HoareQuickSorter(Comparator<E> comparator) {
         super(comparator);
+        this.comparator = comparator;
     }
 
     @Override
     protected int partition(E[] items, int from, int to) {
         final E pivot = items[from];
-        int left = from;
+        int left = from + 1;
         int right = to - 1;
-        while (true) {
-            while (right < left && pivot.compareTo(items[right]) < 0) {
+        while (left < right) {
+            while (right > left && comparator.compare(items[right], pivot) >= 0) {
                 right --;
             }
-            while (right < left && pivot.compareTo(items[left]) > 0) {
+            while (left < right && comparator.compare(items[left], pivot) < 0) {
                 left ++;
             }
             if (left < right) {
                 ArrayUtils.swap(items, left, right);
-            } else {
-                return left;
             }
+        }
+        if (comparator.compare(pivot, items[left]) > 0) {
+            ArrayUtils.swap(items, left, from);
+            return left;
+        } else {
+            return from;
         }
     }
 

@@ -4,7 +4,6 @@ import com.mmnaseri.cs.algorithm.common.BaseSortTest;
 import com.mmnaseri.cs.algorithm.common.Sorter;
 import org.testng.annotations.Test;
 
-@Test(enabled = false)
 public class HoareQuickSorterTest extends BaseSortTest{
 
     @Override

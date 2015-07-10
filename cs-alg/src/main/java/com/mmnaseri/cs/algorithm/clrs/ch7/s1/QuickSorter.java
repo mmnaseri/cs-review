@@ -18,7 +18,13 @@ public class QuickSorter<E extends Comparable<E>> implements Sorter<E> {
     }
 
     private void sort(E[] items, int from, int to) {
-        if (from < to) {
+        if (from < to - 1) {
+            if (to - from == 2) {
+                if (comparator.compare(items[from], items[to - 1]) > 0) {
+                    ArrayUtils.swap(items, from, to - 1);
+                }
+                return;
+            }
             int middle = partition(items, from, to);
             sort(items, from, middle);
             sort(items, middle + 1, to);

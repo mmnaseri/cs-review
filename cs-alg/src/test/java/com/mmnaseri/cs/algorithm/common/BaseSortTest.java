@@ -1,6 +1,5 @@
 package com.mmnaseri.cs.algorithm.common;
 
-import com.mmnaseri.cs.algorithm.common.Sorter;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -75,6 +74,24 @@ public abstract class BaseSortTest {
         getAscendingSorter().sort(items);
         assertThat(items, arrayWithSize(length));
         assertThat(items, arrayContaining(6, 6, 6, 7, 7, 7, 8, 8, 8));
+    }
+
+    @Test
+    public void testSortingAlreadySortedArray() throws Exception {
+        final Integer[] items = {1, 2, 3, 4, 5, 6};
+        final int length = items.length;
+        getAscendingSorter().sort(items);
+        assertThat(items, arrayWithSize(length));
+        assertThat(items, arrayContaining(1, 2, 3, 4, 5, 6));
+    }
+
+    @Test
+    public void testSortingReversedArray() throws Exception {
+        final Integer[] items = {6, 5, 4, 3, 2, 1};
+        final int length = items.length;
+        getAscendingSorter().sort(items);
+        assertThat(items, arrayWithSize(length));
+        assertThat(items, arrayContaining(1, 2, 3, 4, 5, 6));
     }
 
 }

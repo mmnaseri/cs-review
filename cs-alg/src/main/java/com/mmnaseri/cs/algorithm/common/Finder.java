@@ -6,6 +6,7 @@ package com.mmnaseri.cs.algorithm.common;
  */
 public interface Finder<E> {
 
+    @SuppressWarnings("unchecked")
     int find(E needle, E... items);
 
 }

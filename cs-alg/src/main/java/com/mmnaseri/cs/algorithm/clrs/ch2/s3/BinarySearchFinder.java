@@ -10,24 +10,29 @@ import java.util.Arrays;
  */
 public class BinarySearchFinder<E extends Comparable<E>> implements Finder<E> {
 
+    @SafeVarargs
     @Override
-    public int find(E[] items, E needle) {
+    public final int find(E needle, E... items) {
         Arrays.sort(items);
         return find(items, needle, 0, items.length);
     }
 
     private int find(E[] items, E needle, int from, int to) {
-        if (to < from) {
+        if (to < from || from < 0 || to > items.length || items.length == 0) {
             return -1;
         }
         int mid = from + (to - from) / 2;
         final int comparison = needle.compareTo(items[mid]);
         if (comparison == 0) {
             return mid;
-        } else if (comparison < 0) {
-            return find(items, needle, 0, mid);
+        } else if (to - from > 1) {
+            if (comparison < 0) {
+                return find(items, needle, 0, mid);
+            } else {
+                return find(items, needle, mid, to);
+            }
         } else {
-            return find(items, needle, mid, to);
+            return -1;
         }
     }
 

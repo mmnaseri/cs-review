@@ -6,6 +6,6 @@ package com.mmnaseri.cs.algorithm.common;
  */
 public interface Finder<E> {
 
-    int find(E[] items, E needle);
+    int find(E needle, E... items);
 
 }

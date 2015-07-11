@@ -1,11 +1,11 @@
 package com.mmnaseri.cs.algorithm.common;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
 import static org.hamcrest.collection.IsArrayWithSize.arrayWithSize;
 import static org.hamcrest.collection.IsArrayWithSize.emptyArray;
@@ -24,29 +24,12 @@ public abstract class BaseSortTest {
             return first.compareTo(second);
         }
     };
-    
+
     @Test
     public void testSortingEmptyArray() throws Exception {
         final Integer[] items = {};
         getAscendingSorter().sort(items);
         assertThat(items, emptyArray());
-    }
-
-    @Test
-    public void testSortingSingleItemList() throws Exception {
-        final Integer[] items = {10};
-        getAscendingSorter().sort(items);
-        assertThat(items, arrayWithSize(1));
-        assertThat(items, arrayContainingInAnyOrder(10));
-    }
-
-    @Test
-    public void testSimpleAscendingSort() throws Exception {
-        final Integer[] items = {1, 9, 3, 7, 3, 0};
-        final int length = items.length;
-        getAscendingSorter().sort(items);
-        assertThat(items, arrayWithSize(length));
-        assertThat(items, arrayContaining(0, 1, 3, 3, 7, 9));
     }
 
     @Test
@@ -67,31 +50,24 @@ public abstract class BaseSortTest {
         assertThat(items, arrayContaining(Integer.MIN_VALUE, 0, 1, 2, 3, 4, 5, 6, Integer.MAX_VALUE));
     }
 
-    @Test
-    public void testWithDuplicates() throws Exception {
-        final Integer[] items = {8, 8, 8, 7, 7, 7, 6, 6, 6};
-        final int length = items.length;
-        getAscendingSorter().sort(items);
-        assertThat(items, arrayWithSize(length));
-        assertThat(items, arrayContaining(6, 6, 6, 7, 7, 7, 8, 8, 8));
+    @DataProvider
+    public Object[][] normalDataProvider() {
+        return new Object[][]{
+                new Object[]{new Integer[]{10}, new Integer[]{10}}, //testSortingSingleItemList
+                new Object[]{new Integer[]{1, 9, 3, 7, 3, 0}, new Integer[]{0, 1, 3, 3, 7, 9}}, //testSimpleAscendingSort
+                new Object[]{new Integer[]{8, 8, 8, 7, 7, 7, 6, 6, 6}, new Integer[]{6, 6, 6, 7, 7, 7, 8, 8, 8}}, //testWithDuplicates
+                new Object[]{new Integer[]{1, 2, 3, 4, 5, 6}, new Integer[]{1, 2, 3, 4, 5, 6}}, //testSortingAlreadySortedArray
+                new Object[]{new Integer[]{6, 5, 4, 3, 2, 1}, new Integer[]{1, 2, 3, 4, 5, 6}}, //testSortingReversedArray
+        };
     }
 
-    @Test
-    public void testSortingAlreadySortedArray() throws Exception {
-        final Integer[] items = {1, 2, 3, 4, 5, 6};
-        final int length = items.length;
-        getAscendingSorter().sort(items);
-        assertThat(items, arrayWithSize(length));
-        assertThat(items, arrayContaining(1, 2, 3, 4, 5, 6));
-    }
-
-    @Test
-    public void testSortingReversedArray() throws Exception {
-        final Integer[] items = {6, 5, 4, 3, 2, 1};
-        final int length = items.length;
-        getAscendingSorter().sort(items);
-        assertThat(items, arrayWithSize(length));
-        assertThat(items, arrayContaining(1, 2, 3, 4, 5, 6));
+    @Test(dataProvider = "normalDataProvider")
+    public void testSortIntegrity(Integer[] items, Integer[] expected) throws Exception {
+        final Integer[] target = new Integer[items.length];
+        System.arraycopy(items, 0, target, 0, target.length);
+        getAscendingSorter().sort(target);
+        assertThat(target, arrayWithSize(expected.length));
+        assertThat(target, arrayContaining(expected));
     }
 
 }

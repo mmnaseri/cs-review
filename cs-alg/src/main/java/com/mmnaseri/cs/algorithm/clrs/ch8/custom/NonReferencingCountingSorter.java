@@ -1,5 +1,6 @@
-package com.mmnaseri.cs.algorithm.clrs.ch8.s2;
+package com.mmnaseri.cs.algorithm.clrs.ch8.custom;
 
+import com.mmnaseri.cs.algorithm.clrs.ch8.s2.CountingSorter;
 import com.mmnaseri.cs.algorithm.common.Sorter;
 
 import java.util.Comparator;

@@ -19,8 +19,9 @@ public class RandomizedSelector<E extends Comparable<E>> implements Selector<E> 
     }
 
     protected int partition(E[] items, int from, int to) {
-        final int index = new Random().nextInt(to - from) + from;
-        ArrayUtils.swap(items, index, to - 1);
+        //todo fix this
+//        final int index = new Random().nextInt(to - from) + from;
+//        ArrayUtils.swap(items, index, to - 1);
         final E partition = items[to - 1];
         int smaller = from - 1;
         int seen = from;
@@ -57,7 +58,7 @@ public class RandomizedSelector<E extends Comparable<E>> implements Selector<E> 
         if (items.length == 0) {
             return null;
         }
-        return select(Math.min(items.length, Math.max(0, order)), 0, items.length, items);
+        return select(Math.min(items.length - 1, Math.max(0, order)), 0, items.length, items);
     }
 
 }

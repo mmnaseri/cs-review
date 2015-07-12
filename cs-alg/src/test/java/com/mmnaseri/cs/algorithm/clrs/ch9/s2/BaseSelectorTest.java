@@ -40,7 +40,7 @@ public abstract class BaseSelectorTest {
         };
     }
 
-    @Test(dataProvider = "normalDataProvider")
+    @Test(dataProvider = "normalDataProvider", invocationCount = 50)
     public void testSelectorIntegrity(Integer[] data, int order, Integer expectation) throws Exception {
         final Integer[] items = new Integer[data.length];
         System.arraycopy(data, 0, items, 0, items.length);

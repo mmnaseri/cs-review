@@ -1,13 +1,6 @@
 package com.mmnaseri.cs.algorithm.clrs.ch9.s2;
 
 import com.mmnaseri.cs.algorithm.clrs.ch9.Selector;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import java.util.Comparator;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

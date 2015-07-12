@@ -4,7 +4,6 @@ import com.mmnaseri.cs.algorithm.clrs.ch9.Selector;
 import com.mmnaseri.cs.algorithm.common.ArrayUtils;
 
 import java.util.Comparator;
-import java.util.Random;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -20,7 +19,7 @@ public class RandomizedSelector<E extends Comparable<E>> implements Selector<E> 
 
     protected int partition(E[] items, int from, int to) {
         //todo fix this
-//        final int index = new Random().nextInt(to - from) + from;
+//        final int index = new Random().nextInt(to - from - 1) + from;
 //        ArrayUtils.swap(items, index, to - 1);
         final E partition = items[to - 1];
         int smaller = from - 1;

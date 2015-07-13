@@ -29,8 +29,9 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
 
         @Override
         public String toString() {
-            return String.valueOf(value);
+            return String.valueOf(value) + (next == null ? "" : "," + next);
         }
+
     }
 
     private LinkedListItem<E> first = null;
@@ -149,6 +150,11 @@ public class SinglyLinkedList<E> implements LinkedList<E> {
         final LinkedListItem<E> previous = index == 0 ? null : getByIndex(index - 1);
         final LinkedListItem<E> item = getByIndex(index);
         deleteListItem(previous, item);
+    }
+
+    @Override
+    public String toString() {
+        return "[" + (first == null ? "" : first.toString()) + "]";
     }
 
 }

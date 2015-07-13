@@ -29,12 +29,12 @@ public abstract class BaseSelectorTest {
         return new Object[][]{
             new Object[]{new Integer[]{1, 2, 3, 4, 5}, 3, 4}, //test sorted array
             new Object[]{new Integer[]{5, 4, 3, 2, 1}, 3, 4}, //test reversed array
-            new Object[]{new Integer[]{-1, -2, 3, 4, 0}, 2, 0}, //test with negatives //ok
-            new Object[]{new Integer[]{Integer.MIN_VALUE, Integer.MAX_VALUE, 0}, 1, 0}, //test with infinity //ok
+            new Object[]{new Integer[]{-1, -2, 3, 4, 0}, 2, 0}, //test with negatives
+            new Object[]{new Integer[]{Integer.MIN_VALUE, Integer.MAX_VALUE, 0}, 1, 0}, //test with infinity
             new Object[]{new Integer[]{1, 2, 3, 4, 1, 2, 3, 4}, 5, 3}, //test with duplicates
-            new Object[]{new Integer[]{1, 2, 3, 4, 1, 2, 3, 4}, 6, 4}, //test with duplicates (2) //ok
-            new Object[]{new Integer[]{1, 2, 3}, -1, 1}, //test violating lower bound //ok
-            new Object[]{new Integer[]{1, 2, 3}, 4, 3}, //test violating upper bound //ok
+            new Object[]{new Integer[]{1, 2, 3, 4, 1, 2, 3, 4}, 6, 4}, //test with duplicates (2)
+            new Object[]{new Integer[]{1, 2, 3}, -1, 1}, //test violating lower bound
+            new Object[]{new Integer[]{1, 2, 3}, 4, 3}, //test violating upper bound
         };
     }
 

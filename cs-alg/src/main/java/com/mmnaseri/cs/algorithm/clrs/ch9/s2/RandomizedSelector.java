@@ -4,6 +4,7 @@ import com.mmnaseri.cs.algorithm.clrs.ch9.Selector;
 import com.mmnaseri.cs.algorithm.common.ArrayUtils;
 
 import java.util.Comparator;
+import java.util.Random;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -18,18 +19,17 @@ public class RandomizedSelector<E extends Comparable<E>> implements Selector<E> 
     }
 
     protected int partition(E[] items, int from, int to) {
-        //todo fix this
-//        final int index = new Random().nextInt(to - from - 1) + from;
-//        ArrayUtils.swap(items, index, to - 1);
+        final int index = Math.max(from, Math.min(new Random().nextInt(to - from) + from, to - 1));
+        ArrayUtils.swap(items, index, to - 1);
         final E partition = items[to - 1];
         int smaller = from - 1;
         int seen = from;
         while (seen < to - 1) {
             if (comparator.compare(partition, items[seen]) >= 0) {
-                smaller ++;
+                smaller++;
                 ArrayUtils.swap(items, smaller, seen);
             }
-            seen ++;
+            seen++;
         }
         ArrayUtils.swap(items, smaller + 1, to - 1);
         return smaller + 1;
@@ -40,16 +40,14 @@ public class RandomizedSelector<E extends Comparable<E>> implements Selector<E> 
             return items[from];
         }
         final int partition = partition(items, from, to);
-        final int pivot = partition - from + 1;
         if (order == partition) {
             return items[order];
-        } else if (order < pivot) {
+        } else if (order < partition) {
             return select(order, from, partition, items);
         } else {
             return select(order, partition, to, items);
         }
     }
-
 
     @SafeVarargs
     @Override

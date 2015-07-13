@@ -61,7 +61,7 @@ public class LinearSelector<E extends Comparable<E>> implements Selector<E> {
     }
 
     @SuppressWarnings("unchecked")
-    private int select(E[] items, int[] positions, int from, int to, int order) {
+    public int select(E[] items, int[] positions, int from, int to, int order) {
         if (to - from <= 5) {
             sort(items, positions, from, to);
             return order;

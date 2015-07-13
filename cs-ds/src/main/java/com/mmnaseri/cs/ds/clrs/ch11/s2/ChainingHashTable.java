@@ -2,7 +2,7 @@ package com.mmnaseri.cs.ds.clrs.ch11.s2;
 
 import com.mmnaseri.cs.ds.clrs.ch11.HashCalculator;
 import com.mmnaseri.cs.ds.clrs.ch11.HashTable;
-import com.mmnaseri.cs.ds.clrs.ch11.s3.ModularHashCalculator;
+import com.mmnaseri.cs.ds.clrs.ch11.s3.DivisionHashCalculator;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -59,7 +59,7 @@ public class ChainingHashTable<E> implements HashTable<E> {
     private int size;
 
     public ChainingHashTable(int capacity) {
-        this(capacity, new ModularHashCalculator());
+        this(capacity, new DivisionHashCalculator());
     }
 
     public ChainingHashTable(int capacity, HashCalculator hashCalculator) {

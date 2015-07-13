@@ -27,18 +27,18 @@ public abstract class BaseSelectorTest {
     @DataProvider
     public Object[][] normalDataProvider() {
         return new Object[][]{
-            new Object[]{new Integer[]{1, 2, 3, 4, 5}, 3, 4}, //test sorted array
-            new Object[]{new Integer[]{5, 4, 3, 2, 1}, 3, 4}, //test reversed array
-            new Object[]{new Integer[]{-1, -2, 3, 4, 0}, 2, 0}, //test with negatives
-            new Object[]{new Integer[]{Integer.MIN_VALUE, Integer.MAX_VALUE, 0}, 1, 0}, //test with infinity
-            new Object[]{new Integer[]{1, 2, 3, 4, 1, 2, 3, 4}, 5, 3}, //test with duplicates
-            new Object[]{new Integer[]{1, 2, 3, 4, 1, 2, 3, 4}, 6, 4}, //test with duplicates (2)
-            new Object[]{new Integer[]{1, 2, 3}, -1, 1}, //test violating lower bound
-            new Object[]{new Integer[]{1, 2, 3}, 4, 3}, //test violating upper bound
+            new Object[]{new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 6, 7},
+            new Object[]{new Integer[]{5, 4, 3, 2, 1, 0, -1, -2, -3, -4}, 3, -1},
+            new Object[]{new Integer[]{-1, -2, 3, 4, 0, 6, 7, 8, 9}, 2, 0},
+            new Object[]{new Integer[]{Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 1, 2, 3, 4, 5, 6}, 4, 3},
+            new Object[]{new Integer[]{1, 2, 3, 4, 1, 2, 3, 4, 5, 6, 7, 8, 5, 6, 7, 8}, 11, 6},
+            new Object[]{new Integer[]{1, 2, 3, 4, 1, 2, 3, 4, 5, 6, 7, 8, 5, 6, 7, 8}, 12, 7},
+            new Object[]{new Integer[]{1, 2, 3, 4, 5, 6, 7, 8}, -1, 1},
+            new Object[]{new Integer[]{1, 2, 3, 4, 5, 6, 7, 8}, 8, 8},
         };
     }
 
-    @Test(dataProvider = "normalDataProvider", invocationCount = 50)
+    @Test(dataProvider = "normalDataProvider")
     public void testSelectorIntegrity(Integer[] data, int order, Integer expectation) throws Exception {
         final Integer[] items = new Integer[data.length];
         System.arraycopy(data, 0, items, 0, items.length);

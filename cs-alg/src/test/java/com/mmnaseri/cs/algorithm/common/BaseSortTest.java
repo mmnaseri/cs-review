@@ -61,7 +61,7 @@ public abstract class BaseSortTest {
         };
     }
 
-    @Test(dataProvider = "normalDataProvider", invocationCount = 50)
+    @Test(dataProvider = "normalDataProvider")
     public void testSortIntegrity(Integer[] items, Integer[] expected) throws Exception {
         final Integer[] target = new Integer[items.length];
         System.arraycopy(items, 0, target, 0, target.length);

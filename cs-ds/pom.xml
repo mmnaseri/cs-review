@@ -20,6 +20,11 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.mmnaseri.cs</groupId>
+            <artifactId>cs-alg</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

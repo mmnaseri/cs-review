@@ -152,4 +152,9 @@ public class ChainingHashTable<E> implements HashTable<E> {
         return getSize() == 0;
     }
 
+    @Override
+    public int getCapacity() {
+        return capacity;
+    }
+
 }

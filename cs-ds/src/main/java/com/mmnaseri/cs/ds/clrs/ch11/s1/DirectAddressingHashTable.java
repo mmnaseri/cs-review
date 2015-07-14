@@ -10,10 +10,12 @@ public class DirectAddressingHashTable<E> implements HashTable<E> {
 
     private static final Object NULL = new Object();
     private final Object[] storage;
+    private final int capacity;
     private int size;
 
     public DirectAddressingHashTable(int capacity) {
-        storage = new Object[capacity];
+        this.capacity = capacity;
+        storage = new Object[this.capacity];
         size = 0;
     }
 
@@ -55,6 +57,11 @@ public class DirectAddressingHashTable<E> implements HashTable<E> {
     @Override
     public boolean isEmpty() {
         return getSize() == 0;
+    }
+
+    @Override
+    public int getCapacity() {
+        return capacity;
     }
 
 }

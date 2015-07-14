@@ -2,8 +2,8 @@ package com.mmnaseri.cs.ds.clrs.ch11.s3;
 
 import com.mmnaseri.cs.ds.clrs.ch11.HashCalculator;
 import com.mmnaseri.cs.ds.clrs.ch11.HashTable;
+import com.mmnaseri.cs.ds.clrs.ch11.s2.BaseLargeKeysHashTableTest;
 import com.mmnaseri.cs.ds.clrs.ch11.s2.ChainingHashTable;
-import com.mmnaseri.cs.ds.clrs.ch11.s2.ChainingHashTableTest;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/13/15)
  */
-public abstract class BaseHashCalculatorTest extends ChainingHashTableTest {
+public abstract class BaseHashCalculatorTest extends BaseLargeKeysHashTableTest {
 
     @Override
     protected HashTable<Integer>[] getHashTables() {

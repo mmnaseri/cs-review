@@ -16,4 +16,6 @@ public interface HashTable<E> {
 
     boolean isEmpty();
 
+    int getCapacity();
+
 }

@@ -11,8 +11,12 @@ public class MultiplicationHashCalculatorTest extends BaseHashCalculatorTest {
     public static final double PHI = 0.6180339887;
 
     @Override
-    protected HashCalculator getHashCalculator() {
-        return new MultiplicationHashCalculator(PHI);
+    protected HashCalculator[] getHashCalculators() {
+        return new HashCalculator[]{
+            new MultiplicationHashCalculator(PHI),
+            new MultiplicationHashCalculator(Math.PI),
+            new MultiplicationHashCalculator(Math.E),
+        };
     }
 
 }

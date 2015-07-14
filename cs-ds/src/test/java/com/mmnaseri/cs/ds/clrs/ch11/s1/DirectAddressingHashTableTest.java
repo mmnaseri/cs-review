@@ -9,8 +9,9 @@ import com.mmnaseri.cs.ds.clrs.ch11.HashTable;
 public class DirectAddressingHashTableTest extends com.mmnaseri.cs.ds.clrs.ch11.BaseHashTableTest {
 
     @Override
-    protected HashTable<Integer> getHashTable() {
-        return new DirectAddressingHashTable<>(10);
+    protected HashTable<Integer>[] getHashTables() {
+        //noinspection unchecked
+        return new HashTable[]{new DirectAddressingHashTable<>(10)};
     }
 
 }

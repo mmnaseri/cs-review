@@ -12,8 +12,9 @@ import java.util.Map;
 public class ChainingHashTableTest extends BaseHashTableTest {
 
     @Override
-    protected HashTable<Integer> getHashTable() {
-        return new ChainingHashTable<>(10);
+    protected HashTable<Integer>[] getHashTables() {
+        //noinspection unchecked
+        return new HashTable[]{new ChainingHashTable<>(10)};
     }
 
     @Override

@@ -9,13 +9,13 @@ import com.mmnaseri.cs.ds.clrs.ch11.HashCalculator;
 public class DivisionHashCalculatorTest extends BaseHashCalculatorTest {
 
     @Override
-    protected HashCalculator getHashCalculator() {
-        return new DivisionHashCalculator();
+    protected HashCalculator[] getHashCalculators() {
+        return new HashCalculator[]{new DivisionHashCalculator()};
     }
 
     @Override
-    protected int getCapacity() {
-        return 701;
+    protected int[] getCapacities() {
+        return new int[]{701};
     }
 
 }

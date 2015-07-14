@@ -13,13 +13,16 @@ import static org.hamcrest.Matchers.is;
  * @since 1.0 (7/13/15)
  */
 public abstract class BaseHashTableTest {
-    protected abstract HashTable<Integer> getHashTable();
+
+    protected abstract HashTable<Integer>[] getHashTables();
 
     @Test
     public void testInitialState() throws Exception {
-        final HashTable<Integer> hashTable = getHashTable();
-        assertThat(hashTable.getSize(), is(0));
-        assertThat(hashTable.isEmpty(), is(true));
+        final HashTable<Integer>[] hashTables = getHashTables();
+        for (HashTable<Integer> hashTable : hashTables) {
+            assertThat(hashTable.getSize(), is(0));
+            assertThat(hashTable.isEmpty(), is(true));
+        }
     }
 
     protected Map<String, TestCase> getTestCases() {
@@ -43,15 +46,17 @@ public abstract class BaseHashTableTest {
         for (Map.Entry<String, TestCase> entry : testCases.entrySet()) {
             final String name = entry.getKey(); //name is added for test case visibility in case of failure
             final TestCase testCase = entry.getValue();
-            feed.add(new Object[]{name, testCase.getIndices(), testCase.getValues(), testCase.getSizes()});
+            final HashTable<Integer>[] hashTables = getHashTables();
+            for (HashTable<Integer> hashTable : hashTables) {
+                feed.add(new Object[]{hashTable, name, testCase.getIndices(), testCase.getValues(), testCase.getSizes()});
+            }
         }
         return feed.toArray(new Object[feed.size()][]);
     }
 
     @SuppressWarnings("UnusedParameters")
     @Test(dataProvider = "hashTableDataProvider")
-    public void testHashTableGrowth(String name, Integer[] indices, Integer[] items, Integer[] sizes) throws Exception {
-        final HashTable<Integer> hashTable = getHashTable();
+    public void testHashTableGrowth(HashTable<Integer> hashTable, String name, Integer[] indices, Integer[] items, Integer[] sizes) throws Exception {
         for (int i = 0; i < indices.length; i++) {
             final Integer index = indices[i];
             final Integer item = items[i];
@@ -64,8 +69,7 @@ public abstract class BaseHashTableTest {
 
     @SuppressWarnings("UnusedParameters")
     @Test(dataProvider = "hashTableDataProvider")
-    public void testHashTableShrinking(String name, Integer[] indices, Integer[] items, Integer[] sizes) throws Exception {
-        final HashTable<Integer> hashTable = getHashTable();
+    public void testHashTableShrinking(HashTable<Integer> hashTable, String name, Integer[] indices, Integer[] items, Integer[] sizes) throws Exception {
         final Set<Integer> keys = new HashSet<>();
         for (int i = 0; i < indices.length; i++) {
             final Integer index = indices[i];
@@ -84,9 +88,8 @@ public abstract class BaseHashTableTest {
 
     @SuppressWarnings("UnusedParameters")
     @Test(dataProvider = "hashTableDataProvider")
-    public void testHashTableValues(String name, Integer[] indices, Integer[] items, Integer[] sizes) throws Exception {
+    public void testHashTableValues(HashTable<Integer> hashTable, String name, Integer[] indices, Integer[] items, Integer[] sizes) throws Exception {
         final Map<Integer, Integer> values = new HashMap<>();
-        final HashTable<Integer> hashTable = getHashTable();
         for (int i = 0; i < indices.length; i++) {
             final Integer index = indices[i];
             final Integer item = items[i];
@@ -123,4 +126,5 @@ public abstract class BaseHashTableTest {
             return sizes;
         }
     }
+
 }

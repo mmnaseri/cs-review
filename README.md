@@ -14,3 +14,7 @@ From the esteemed Introduction to Algorithms book by Cormen, Leiserson, Rivest, 
 
   * Chapters 1-9: in the `cs-alg` module, since they are more concerned with algorithms
   * Chapters 10-11: in the `cs-ds` module, since they are more of a data structure-oriented nature.
+
+-----------------------
+
+keywords: algorithms, data structures, clrs, cormen, leiserson, rivest, stein, computer science, cs review

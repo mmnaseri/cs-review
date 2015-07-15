@@ -16,7 +16,7 @@ public class InOrderTreeWalkTest extends BaseTreeWalkTest {
     @Override
     public void testWalkingOnALeafNode() throws Exception {
         final BinaryTreeNode<Integer> node = create(10, null, null);
-        final InOrderTreeWalk<Integer, BinaryTreeNode<Integer>> walk = new InOrderTreeWalk<>();
+        final TreeWalk<Integer, BinaryTreeNode<Integer>> walk = getTreeWalk();
         final LoggingTreeWalkCallback<Integer, BinaryTreeNode<Integer>> callback = new LoggingTreeWalkCallback<>();
         walk.perform(node, callback);
         assertThat(callback.getLog(), is(notNullValue()));
@@ -28,7 +28,7 @@ public class InOrderTreeWalkTest extends BaseTreeWalkTest {
     @Override
     public void testWalkingWithALeftBranch() throws Exception {
         final BinaryTreeNode<Integer> node = create(10, create(11, create(12, create(13, null, null), null), null), null);
-        final InOrderTreeWalk<Integer, BinaryTreeNode<Integer>> walk = new InOrderTreeWalk<>();
+        final TreeWalk<Integer, BinaryTreeNode<Integer>> walk = getTreeWalk();
         final LoggingTreeWalkCallback<Integer, BinaryTreeNode<Integer>> callback = new LoggingTreeWalkCallback<>();
         walk.perform(node, callback);
         assertThat(callback.getLog(), is(notNullValue()));
@@ -43,7 +43,7 @@ public class InOrderTreeWalkTest extends BaseTreeWalkTest {
     @Override
     public void testWalkingWithARightBranch() throws Exception {
         final BinaryTreeNode<Integer> node = create(10, null, create(11, null, create(12, null, create(13, null, null))));
-        final InOrderTreeWalk<Integer, BinaryTreeNode<Integer>> walk = new InOrderTreeWalk<>();
+        final TreeWalk<Integer, BinaryTreeNode<Integer>> walk = getTreeWalk();
         final LoggingTreeWalkCallback<Integer, BinaryTreeNode<Integer>> callback = new LoggingTreeWalkCallback<>();
         walk.perform(node, callback);
         assertThat(callback.getLog(), is(notNullValue()));
@@ -58,7 +58,7 @@ public class InOrderTreeWalkTest extends BaseTreeWalkTest {
     @Override
     public void testWalkingWithAFullTree() throws Exception {
         final BinaryTreeNode<Integer> node = create(10, create(11, create(12, null, null), create(13, null, null)), create(14, create(15, null, null), create(16, null, null)));
-        final InOrderTreeWalk<Integer, BinaryTreeNode<Integer>> walk = new InOrderTreeWalk<>();
+        final TreeWalk<Integer, BinaryTreeNode<Integer>> walk = getTreeWalk();
         final LoggingTreeWalkCallback<Integer, BinaryTreeNode<Integer>> callback = new LoggingTreeWalkCallback<>();
         walk.perform(node, callback);
         assertThat(callback.getLog(), is(notNullValue()));
@@ -70,6 +70,10 @@ public class InOrderTreeWalkTest extends BaseTreeWalkTest {
         assertThat(callback.getLog().get(4).getValue(), is(15));
         assertThat(callback.getLog().get(5).getValue(), is(14));
         assertThat(callback.getLog().get(6).getValue(), is(16));
+    }
+
+    protected TreeWalk<Integer, BinaryTreeNode<Integer>> getTreeWalk() {
+        return new InOrderTreeWalk<>();
     }
 
 }

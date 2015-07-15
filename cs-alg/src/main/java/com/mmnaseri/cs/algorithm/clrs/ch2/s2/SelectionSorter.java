@@ -1,5 +1,6 @@
 package com.mmnaseri.cs.algorithm.clrs.ch2.s2;
 
+import com.mmnaseri.cs.algorithm.common.ArrayUtils;
 import com.mmnaseri.cs.algorithm.common.Sorter;
 
 import java.util.Comparator;
@@ -16,12 +17,6 @@ public class SelectionSorter<E extends Comparable<E>> implements Sorter<E> {
         this.comparator = comparator;
     }
 
-    private void swap(int i, int j, E[] items) {
-        E temp = items[i];
-        items[i] = items[j];
-        items[j] = temp;
-    }
-
     @Override
     public void sort(E[] items) {
         for (int i = 0; i < items.length; i ++) {
@@ -31,7 +26,7 @@ public class SelectionSorter<E extends Comparable<E>> implements Sorter<E> {
                     localMinimum = j;
                 }
             }
-            swap(i, localMinimum, items);
+            ArrayUtils.swap(items, i, localMinimum);
         }
     }
 

@@ -24,17 +24,17 @@ public abstract class BaseHashTableProbeTest {
     public Object[][] getData() {
         return new Object[][]{
                 new Object[]{54, 3},
-                new Object[]{54, 10},
-                new Object[]{54, 60},
-                new Object[]{0, 20},
-                new Object[]{0, 100},
-                new Object[]{0, 1000},
-                new Object[]{128712837, 10},
-                new Object[]{128712837, 20},
-                new Object[]{128712837, 30},
+                new Object[]{54, 13},
+                new Object[]{54, 61},
+                new Object[]{0, 23},
+                new Object[]{0, 101},
+                new Object[]{0, 997},
+                new Object[]{128712837, 11},
+                new Object[]{128712837, 29},
+                new Object[]{128712837, 37},
                 new Object[]{128712837, 2},
                 new Object[]{128712837, 3},
-                new Object[]{128712837, 4},
+                new Object[]{128712837, 5},
         };
     }
 

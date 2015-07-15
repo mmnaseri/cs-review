@@ -20,7 +20,7 @@ public class DoubleHashingHashTableProbe implements HashTableProbe {
     @Override
     public int probe(int index, int capacity, int sequence) {
         long base = firstHashCalculator.calculate(index, capacity);
-        base += sequence * secondHashCalculator.calculate(index, capacity);
+        base += sequence * secondHashCalculator.calculate(index + 1, capacity);
         return (int) (base % capacity);
     }
 

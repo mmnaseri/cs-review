@@ -12,8 +12,8 @@ What's covered
 
 From the esteemed Introduction to Algorithms book by Cormen, Leiserson, Rivest, and Stein:
 
-  * Chapters 1-9: in the `cs-alg` module, since they are more concerned with algorithms
-  * Chapters 10-11: in the `cs-ds` module, since they are more of a data structure-oriented nature.
+  * Chapters 1-12: these are implemented and (hopefully) well tested. Chapter 3 is missing, since
+  it didn't have anything directly algorithm- or data structure-related.
 
 The Tests
 ---------

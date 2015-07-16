@@ -108,6 +108,14 @@ public class AbstractBinarySearchTreeNodeTest {
             return null;
         }
 
+        @Override
+        public void delete(E value) {
+        }
+
+        @Override
+        public void delete() {
+        }
+
     }
 
 }

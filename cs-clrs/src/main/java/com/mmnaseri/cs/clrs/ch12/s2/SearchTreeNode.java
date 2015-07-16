@@ -20,4 +20,8 @@ public abstract class SearchTreeNode<E extends Comparable<E>> extends BinaryTree
 
     public abstract SearchTreeNode<E> insert(E value);
 
+    public abstract void delete(E value);
+
+    public abstract void delete();
+
 }

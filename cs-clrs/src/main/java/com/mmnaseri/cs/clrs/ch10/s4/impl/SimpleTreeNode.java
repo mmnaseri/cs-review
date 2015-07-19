@@ -77,7 +77,7 @@ public class SimpleTreeNode<E> implements TreeNode<E> {
 
     @Override
     public String toString() {
-        return String.valueOf(value) + (children.isEmpty() ? "" : children.toString());
+        return String.valueOf(value) + (getChildren().isEmpty() ? "" : children.toString());
     }
 
 }

@@ -9,7 +9,7 @@ import com.mmnaseri.cs.clrs.ch10.s4.TreeNode;
 public class PostOrderTreeWalk<E, N extends TreeNode<E>> implements TreeWalk<E, N> {
 
     @Override
-    public void perform(N root, TreeWalkCallback<E, N> callback) {
+    public <C extends TreeWalkCallback<E, N>> C perform(N root, C callback) {
         for (TreeNode<E> child : root.getChildren()) {
             if (child != null) {
                 //noinspection unchecked
@@ -17,6 +17,7 @@ public class PostOrderTreeWalk<E, N extends TreeNode<E>> implements TreeWalk<E, 
             }
         }
         callback.apply(root);
+        return callback;
     }
 
 }

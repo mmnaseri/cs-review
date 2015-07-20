@@ -8,6 +8,6 @@ import com.mmnaseri.cs.clrs.ch10.s4.TreeNode;
  */
 public interface TreeWalk<E, N extends TreeNode<E>> {
 
-    void perform(N root, TreeWalkCallback<E, N> callback);
+    <C extends TreeWalkCallback<E, N>> C perform(N root, C callback);
 
 }

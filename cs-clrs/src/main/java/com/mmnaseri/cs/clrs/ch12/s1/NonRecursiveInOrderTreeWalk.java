@@ -13,7 +13,7 @@ public class NonRecursiveInOrderTreeWalk<E, N extends BinaryTreeNode<E>> impleme
 
     @SuppressWarnings("unchecked")
     @Override
-    public void perform(N root, TreeWalkCallback<E, N> callback) {
+    public <C extends TreeWalkCallback<E, N>> C perform(N root, C callback) {
         final Stack<N> stack = new Stack<>();
         N current = root;
         boolean popped = false;
@@ -35,6 +35,7 @@ public class NonRecursiveInOrderTreeWalk<E, N extends BinaryTreeNode<E>> impleme
                 popped = false;
             }
         } while (true);
+        return callback;
     }
 
 }

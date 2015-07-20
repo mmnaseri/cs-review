@@ -7,7 +7,6 @@ import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
 import com.mmnaseri.cs.clrs.ch12.s3.BinarySearchTree;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -19,12 +18,7 @@ public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
     private final RadixTreeNode root = getFactory().createNode(Bit.NEUTRAL);
 
     public RadixTree() {
-        super(new Comparator<Bit>() {
-            @Override
-            public int compare(Bit first, Bit second) {
-                return Integer.compare(first.getValue(), second.getValue());
-            }
-        }, new TreeNodeFactory<Bit, RadixTreeNode>() {
+        super(null, new TreeNodeFactory<Bit, RadixTreeNode>() {
             @Override
             public RadixTreeNode createNode(Bit value) {
                 final RadixTreeNode node = new RadixTreeNode();
@@ -65,17 +59,9 @@ public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
         return nodes;
     }
 
-    public List<Integer> lookup() {
-        final List<RadixTreeNode> leaves = new ArrayList<>();
+    public List<Integer> list() {
         final TreeWalk<Bit, RadixTreeNode> walk = new PreOrderTreeWalk<>();
-        walk.perform(getRoot(), new TreeWalkCallback<Bit, RadixTreeNode>() {
-            @Override
-            public void apply(RadixTreeNode node) {
-                if (node.isLeaf() || node.isLastBit()) {
-                    leaves.add(node);
-                }
-            }
-        });
+        final List<RadixTreeNode> leaves = walk.perform(getRoot(), new LeafCollectingTreeWalkCallback()).getLeaves();
         final List<List<Bit>> numbers = new ArrayList<>();
         for (RadixTreeNode leaf : leaves) {
             final ArrayList<Bit> number = new ArrayList<>();
@@ -90,6 +76,53 @@ public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
             integers.add(fromBits(number.toArray(new Bit[number.size()])));
         }
         return integers;
+    }
+
+    public RadixTreeNode find(int number) {
+        final Bit[] bits = toBits(number);
+        RadixTreeNode current = getRoot();
+        for (Bit bit : bits) {
+            if (bit.equals(Bit.ZERO)) {
+                current = (RadixTreeNode) current.getLeftChild();
+            } else {
+                current = (RadixTreeNode) current.getRightChild();
+            }
+            if (current == null) {
+                return null;
+            }
+        }
+        if (current.isLastBit()) {
+            return current;
+        }
+        return null;
+    }
+
+    public void delete(int number) {
+        RadixTreeNode node = find(number);
+        if (node == null) {
+            return;
+        }
+        node.setLastBit(false);
+        if (node.isLeaf()) {
+            while (true) {
+                if (node.isLastBit()) {
+                    return;
+                }
+                if (!node.isLeaf()) {
+                    return;
+                }
+                if (node.isRoot()) {
+                    return;
+                }
+                final RadixTreeNode parent = (RadixTreeNode) node.getParent();
+                if (parent.getLeftChild() == node) {
+                    parent.setLeftChild(null);
+                } else {
+                    parent.setRightChild(null);
+                }
+                node = parent;
+            }
+        }
     }
 
     @Override
@@ -113,7 +146,7 @@ public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
     }
 
     private static Bit[] toBits(int number) {
-        final int digits = (int) Math.ceil(Math.log(number) / Math.log(2));
+        final int digits = Math.max((int) Math.ceil(Math.log(number) / Math.log(2)), 1);
         final Bit[] bits = new Bit[digits];
         for (int i = 0; i < digits; i ++) {
             bits[bits.length - i - 1] = number % 2 == 0 ? Bit.ZERO : Bit.ONE;
@@ -129,6 +162,23 @@ public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
             result += (bit.equals(Bit.ONE) ? 1 : 0);
         }
         return result;
+    }
+
+    private static class LeafCollectingTreeWalkCallback implements TreeWalkCallback<Bit, RadixTreeNode> {
+
+        private List<RadixTreeNode> leaves = new ArrayList<>();
+
+        @Override
+        public void apply(RadixTreeNode node) {
+            if (!node.isRoot() && (node.isLeaf() || node.isLastBit())) {
+                leaves.add(node);
+            }
+        }
+
+        public List<RadixTreeNode> getLeaves() {
+            return leaves;
+        }
+
     }
 
 }

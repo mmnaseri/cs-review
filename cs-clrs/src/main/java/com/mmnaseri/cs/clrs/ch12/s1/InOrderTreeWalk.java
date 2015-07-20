@@ -10,7 +10,7 @@ public class InOrderTreeWalk<E, N extends BinaryTreeNode<E>> implements TreeWalk
 
     @SuppressWarnings("unchecked")
     @Override
-    public void perform(N root, TreeWalkCallback<E, N> callback) {
+    public <C extends TreeWalkCallback<E, N>> C perform(N root, C callback) {
         final BinaryTreeNode<E> leftChild = root.getLeftChild();
         final BinaryTreeNode<E> rightChild = root.getRightChild();
         if (leftChild != null) {
@@ -20,6 +20,6 @@ public class InOrderTreeWalk<E, N extends BinaryTreeNode<E>> implements TreeWalk
         if (rightChild != null) {
             perform((N) rightChild, callback);
         }
+        return callback;
     }
-
 }

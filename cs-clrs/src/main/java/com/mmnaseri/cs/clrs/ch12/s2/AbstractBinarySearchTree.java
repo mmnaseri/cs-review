@@ -95,6 +95,9 @@ public abstract class AbstractBinarySearchTree<E, N extends BinaryTreeNode<E>> e
 
     protected N delete(N root, E value) {
         final N node = find(root, value);
+        if (node == null) {
+            return null;
+        }
         delete(node);
         return node;
     }

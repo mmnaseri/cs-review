@@ -33,4 +33,9 @@ public class SplitSpecification {
         this.operations = operations;
     }
 
+    @Override
+    public String toString() {
+        return operations + "@" + split;
+    }
+
 }

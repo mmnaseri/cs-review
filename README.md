@@ -12,8 +12,9 @@ What's covered
 
 From the esteemed Introduction to Algorithms book by Cormen, Leiserson, Rivest, and Stein:
 
-  * Chapters 1-12: these are implemented and (hopefully) well tested. Chapter 3 is missing, since
-  it didn't have anything directly algorithm- or data structure-related.
+  * Chapters 1-15: these are implemented and (hopefully) well tested. Chapter 3 is missing, since
+  it didn't have anything directly algorithm- or data structure-related. There are several as-of-yet
+  untested classes that need verification
 
 The Tests
 ---------

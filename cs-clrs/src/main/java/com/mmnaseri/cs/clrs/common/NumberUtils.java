@@ -1,5 +1,8 @@
 package com.mmnaseri.cs.clrs.common;
 
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -12,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public abstract class NumberUtils {
 
     @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
     public static <E extends Number> E add(E first, E second) {
         if (first == null) {
             return second;
@@ -65,6 +69,7 @@ public abstract class NumberUtils {
     }
     
     @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
     public static <E extends Number> E subtract(E first, E second) {
         if (first instanceof Float && second instanceof Float) {
             final Float firstValue = (Float) first;
@@ -112,6 +117,7 @@ public abstract class NumberUtils {
     }
     
     @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
     public static <E extends Number> E multiply(E first, E second) {
         if (first instanceof Float && second instanceof Float) {
             final Float firstValue = (Float) first;
@@ -159,6 +165,7 @@ public abstract class NumberUtils {
     }
 
     @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
     public static <E extends Number> E divide(E first, E second) {
         if (first instanceof Float && second instanceof Float) {
             final Float firstValue = (Float) first;

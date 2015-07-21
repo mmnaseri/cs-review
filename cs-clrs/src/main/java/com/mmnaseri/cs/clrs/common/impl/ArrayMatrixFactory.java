@@ -2,11 +2,14 @@ package com.mmnaseri.cs.clrs.common.impl;
 
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.MatrixFactory;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 11:17 PM)
  */
+@Quality(Stage.UNTESTED)
 public class ArrayMatrixFactory implements MatrixFactory {
 
     @Override

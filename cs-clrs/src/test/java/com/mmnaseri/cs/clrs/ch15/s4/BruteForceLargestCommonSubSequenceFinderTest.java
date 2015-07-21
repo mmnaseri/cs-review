@@ -13,10 +13,10 @@ import static org.hamcrest.Matchers.*;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/20/15)
  */
-public class BruteForceLargestCommonSubSequenceDiscovererTest {
+public class BruteForceLargestCommonSubSequenceFinderTest {
 
-    protected LargestCommonSubSequenceDiscoverer<Integer> getFinder() {
-        return new BruteForceLargestCommonSubSequenceDiscoverer<>();
+    protected LargestCommonSubSequenceFinder<Integer> getFinder() {
+        return new BruteForceLargestCommonSubSequenceFinder<>();
     }
 
     @DataProvider
@@ -38,7 +38,7 @@ public class BruteForceLargestCommonSubSequenceDiscovererTest {
 
     @Test(dataProvider = "testSuiteDataProvider")
     public void testFunctionality(@SuppressWarnings("UnusedParameters") String name, Integer[] first, Integer[] second, Integer[] expected) throws Exception {
-        final LargestCommonSubSequenceDiscoverer<Integer> finder = getFinder();
+        final LargestCommonSubSequenceFinder<Integer> finder = getFinder();
         final List<Integer> firstList = first == null ? null : Arrays.asList(first);
         final List<Integer> secondList = second == null ? null : Arrays.asList(second);
         final List<Integer> largestCommonSubSequence = finder.find(firstList, secondList);

@@ -13,7 +13,7 @@ import java.util.List;
  * @since 1.0 (7/20/15)
  */
 @Quality(Stage.TESTED)
-public class BruteForceLargestCommonSubSequenceDiscoverer<E> implements LargestCommonSubSequenceDiscoverer<E> {
+public class BruteForceLargestCommonSubSequenceFinder<E> implements LargestCommonSubSequenceFinder<E> {
 
     @Override
     public List<E> find(List<E> first, List<E> second) {

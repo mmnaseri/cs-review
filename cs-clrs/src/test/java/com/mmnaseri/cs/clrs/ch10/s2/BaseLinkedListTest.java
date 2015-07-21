@@ -1,6 +1,6 @@
 package com.mmnaseri.cs.clrs.ch10.s2;
 
-import com.mmnaseri.cs.clrs.ch5.s3.InPlacePermuter;
+import com.mmnaseri.cs.clrs.ch05.s3.InPlacePermuter;
 import com.mmnaseri.cs.clrs.common.Permuter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

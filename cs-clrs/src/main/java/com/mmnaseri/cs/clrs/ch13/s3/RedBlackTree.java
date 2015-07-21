@@ -4,6 +4,8 @@ import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
 import com.mmnaseri.cs.clrs.ch13.s1.NodeColor;
 import com.mmnaseri.cs.clrs.ch13.s1.RedBlackTreeNode;
 import com.mmnaseri.cs.clrs.ch13.s2.RotatingBinarySearchTree;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Comparator;
 
@@ -11,6 +13,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/19/15, 11:55 PM)
  */
+@Quality(value = Stage.BUGGY, explanation = "Coloring is not always done properly")
 public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNode<E>> {
 
     public RedBlackTree(Comparator<E> comparator) {

@@ -5,6 +5,8 @@ import com.mmnaseri.cs.clrs.ch12.s1.TreeWalk;
 import com.mmnaseri.cs.clrs.ch12.s1.TreeWalkCallback;
 import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
 import com.mmnaseri.cs.clrs.ch12.s3.BinarySearchTree;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/18/15, 10:10 PM)
  */
+@Quality(Stage.TESTED)
 public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
 
     private final RadixTreeNode root = getFactory().createNode(Bit.NEUTRAL);

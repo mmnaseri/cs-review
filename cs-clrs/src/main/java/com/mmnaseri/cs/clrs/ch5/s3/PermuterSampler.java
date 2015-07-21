@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch5.s3;
 
 import com.mmnaseri.cs.clrs.common.Permuter;
 import com.mmnaseri.cs.clrs.common.Sampler;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.lang.reflect.Array;
 
@@ -9,6 +11,7 @@ import java.lang.reflect.Array;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/27/15, 12:33 AM)
  */
+@Quality(Stage.UNTESTED)
 public class PermuterSampler<E> implements Sampler<E> {
 
     private final Permuter<E> permuter;

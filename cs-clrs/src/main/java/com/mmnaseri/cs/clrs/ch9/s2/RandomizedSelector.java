@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch9.s2;
 
 import com.mmnaseri.cs.clrs.ch9.Selector;
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Comparator;
 import java.util.Random;
@@ -10,6 +12,7 @@ import java.util.Random;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/11/15, 5:47 PM)
  */
+@Quality(Stage.TESTED)
 public class RandomizedSelector<E extends Comparable<E>> implements Selector<E> {
 
     private final Comparator<E> comparator;

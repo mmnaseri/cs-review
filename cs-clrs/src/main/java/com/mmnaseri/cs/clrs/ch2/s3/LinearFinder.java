@@ -1,11 +1,14 @@
 package com.mmnaseri.cs.clrs.ch2.s3;
 
 import com.mmnaseri.cs.clrs.common.Finder;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/11/15, 1:23 PM)
  */
+@Quality(Stage.TESTED)
 public class LinearFinder<E> implements Finder<E> {
 
     @SafeVarargs

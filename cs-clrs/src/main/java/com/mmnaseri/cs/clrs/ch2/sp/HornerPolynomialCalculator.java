@@ -1,9 +1,13 @@
 package com.mmnaseri.cs.clrs.ch2.sp;
 
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
+
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 3:35 AM)
  */
+@Quality(Stage.TESTED)
 public class HornerPolynomialCalculator {
 
     public double calculate(double x, double... coefficients) {

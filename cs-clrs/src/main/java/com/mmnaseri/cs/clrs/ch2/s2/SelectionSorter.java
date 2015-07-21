@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch2.s2;
 
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
 import com.mmnaseri.cs.clrs.common.Sorter;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Comparator;
 
@@ -9,6 +11,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 2:49 AM)
  */
+@Quality(Stage.TESTED)
 public class SelectionSorter<E extends Comparable<E>> implements Sorter<E> {
 
     private final Comparator<E> comparator;

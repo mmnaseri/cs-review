@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch9.s3;
 
 import com.mmnaseri.cs.clrs.ch9.Selector;
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;
@@ -10,6 +12,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/12/15, 7:26 PM)
  */
+@Quality(Stage.TESTED)
 public class LinearSelector<E extends Comparable<E>> implements Selector<E> {
 
     private final Comparator<E> comparator;

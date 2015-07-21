@@ -4,11 +4,14 @@ import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.MatrixFactory;
 import com.mmnaseri.cs.clrs.common.NumberUtils;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrixFactory;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 10:56 PM)
  */
+@Quality(Stage.TESTED)
 public class SimpleMatrixMultiplier implements MatrixMultiplier {
 
     private final MatrixFactory factory;

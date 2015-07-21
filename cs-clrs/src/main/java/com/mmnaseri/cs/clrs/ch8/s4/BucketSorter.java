@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch8.s4;
 
 import com.mmnaseri.cs.clrs.ch2.s1.InsertionSorter;
 import com.mmnaseri.cs.clrs.common.Sorter;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,6 +14,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/11/15, 4:40 PM)
  */
+@Quality(Stage.TESTED)
 public class BucketSorter implements Sorter<Double> {
 
     private final int buckets;

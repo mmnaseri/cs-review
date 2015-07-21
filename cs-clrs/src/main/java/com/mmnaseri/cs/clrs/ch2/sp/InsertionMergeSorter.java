@@ -3,6 +3,8 @@ package com.mmnaseri.cs.clrs.ch2.sp;
 import com.mmnaseri.cs.clrs.ch2.s1.InsertionSorter;
 import com.mmnaseri.cs.clrs.ch2.s3.MergeSorter;
 import com.mmnaseri.cs.clrs.common.Sorter;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;
@@ -11,6 +13,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 3:26 AM)
  */
+@Quality(Stage.TESTED)
 public class InsertionMergeSorter<E extends Comparable<E>> extends MergeSorter<E> {
 
     private final Sorter<E> insertionSorter;

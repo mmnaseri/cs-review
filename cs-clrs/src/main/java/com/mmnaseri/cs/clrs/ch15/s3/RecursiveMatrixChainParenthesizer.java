@@ -3,11 +3,14 @@ package com.mmnaseri.cs.clrs.ch15.s3;
 import com.mmnaseri.cs.clrs.ch15.s2.MatrixChainParenthesizer;
 import com.mmnaseri.cs.clrs.ch15.s2.MatrixParenthesization;
 import com.mmnaseri.cs.clrs.ch15.s2.SplitSpecification;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/20/15)
  */
+@Quality(value = Stage.BUGGY, explanation = "Output does not match the book example")
 public class RecursiveMatrixChainParenthesizer implements MatrixChainParenthesizer {
 
     @Override

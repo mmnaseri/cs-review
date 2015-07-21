@@ -1,11 +1,15 @@
 package com.mmnaseri.cs.clrs.ch2.sp;
 
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
+
 import java.util.Comparator;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/11/15, 1:03 PM)
  */
+@Quality(Stage.TESTED)
 public class BruteForceInversionCounter<E extends Comparable<E>> implements InversionCounter<E> {
 
     private final Comparator<E> comparator;

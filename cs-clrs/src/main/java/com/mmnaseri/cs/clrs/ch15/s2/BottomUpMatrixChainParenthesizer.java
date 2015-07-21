@@ -1,9 +1,13 @@
 package com.mmnaseri.cs.clrs.ch15.s2;
 
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
+
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/20/15, 5:40 AM)
  */
+@Quality(value = Stage.BUGGY, explanation = "Output does not match the book example")
 public class BottomUpMatrixChainParenthesizer implements MatrixChainParenthesizer {
 
     @Override

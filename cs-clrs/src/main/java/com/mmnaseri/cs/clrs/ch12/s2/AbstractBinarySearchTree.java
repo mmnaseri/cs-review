@@ -1,6 +1,8 @@
 package com.mmnaseri.cs.clrs.ch12.s2;
 
 import com.mmnaseri.cs.clrs.ch10.s4.impl.BinaryTreeNode;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Comparator;
 
@@ -9,6 +11,7 @@ import java.util.Comparator;
  * @since 1.0 (7/18/15, 7:45 PM)
  */
 @SuppressWarnings("unchecked")
+@Quality(Stage.TESTED)
 public abstract class AbstractBinarySearchTree<E, N extends BinaryTreeNode<E>> extends AbstractSearchTree<E, N> {
 
     protected AbstractBinarySearchTree(Comparator<E> comparator, TreeNodeFactory<E, N> factory) {

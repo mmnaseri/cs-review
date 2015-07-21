@@ -1,6 +1,8 @@
 package com.mmnaseri.cs.clrs.ch5.s3;
 
 import com.mmnaseri.cs.clrs.common.Sampler;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Collections;
 import java.util.Random;
@@ -10,6 +12,7 @@ import java.util.Set;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/27/15, 12:34 AM)
  */
+@Quality(Stage.UNTESTED)
 public class RandomSampler<E> implements Sampler<E> {
 
     private Set<E> sample(E[] array, int size, int consider) {

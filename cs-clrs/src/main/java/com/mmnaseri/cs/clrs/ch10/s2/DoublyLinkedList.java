@@ -1,9 +1,13 @@
 package com.mmnaseri.cs.clrs.ch10.s2;
 
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
+
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/12/15, 11:41 PM)
  */
+@Quality(Stage.TESTED)
 public class DoublyLinkedList<E> extends SinglyLinkedList<E> {
 
     private static class DoublyLinkedListItem<E> extends LinkedListItem<E> {

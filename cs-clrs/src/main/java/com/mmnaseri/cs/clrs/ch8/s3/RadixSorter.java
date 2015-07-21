@@ -1,11 +1,14 @@
 package com.mmnaseri.cs.clrs.ch8.s3;
 
 import com.mmnaseri.cs.clrs.common.Sorter;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/11/15, 3:39 PM)
  */
+@Quality(Stage.TESTED)
 public class RadixSorter implements Sorter<Integer> {
 
     @Override

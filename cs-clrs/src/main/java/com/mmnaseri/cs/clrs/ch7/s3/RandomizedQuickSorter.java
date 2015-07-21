@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch7.s3;
 
 import com.mmnaseri.cs.clrs.ch7.s1.QuickSorter;
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Comparator;
 import java.util.Random;
@@ -10,6 +12,7 @@ import java.util.Random;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/6/15, 4:41 PM)
  */
+@Quality(Stage.TESTED)
 public class RandomizedQuickSorter<E extends Comparable<E>> extends QuickSorter<E> {
 
     public RandomizedQuickSorter(Comparator<E> comparator) {

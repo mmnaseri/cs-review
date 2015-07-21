@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch6.s1;
 
 import com.mmnaseri.cs.clrs.common.Heap;
 import com.mmnaseri.cs.clrs.common.HeapProperty;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
@@ -11,6 +13,7 @@ import java.util.Iterator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/6/15, 3:21 PM)
  */
+@Quality(Stage.UNTESTED)
 public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
 
     public static final int DEFAULT_CAPACITY = 256;

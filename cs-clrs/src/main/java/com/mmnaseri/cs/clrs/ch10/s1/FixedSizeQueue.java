@@ -1,9 +1,13 @@
 package com.mmnaseri.cs.clrs.ch10.s1;
 
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
+
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/12/15, 9:44 PM)
  */
+@Quality(Stage.TESTED)
 public class FixedSizeQueue<E> {
 
     private final Object[] items;

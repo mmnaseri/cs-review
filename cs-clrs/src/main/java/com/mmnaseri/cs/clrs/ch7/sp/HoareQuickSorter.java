@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch7.sp;
 
 import com.mmnaseri.cs.clrs.ch7.s1.QuickSorter;
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Comparator;
 
@@ -9,6 +11,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/6/15, 4:45 PM)
  */
+@Quality(Stage.TESTED)
 public class HoareQuickSorter<E extends Comparable<E>> extends QuickSorter<E> {
 
     private final Comparator<E> comparator;

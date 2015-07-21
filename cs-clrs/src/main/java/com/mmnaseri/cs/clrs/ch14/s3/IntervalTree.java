@@ -3,11 +3,14 @@ package com.mmnaseri.cs.clrs.ch14.s3;
 import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
 import com.mmnaseri.cs.clrs.ch13.s1.RedBlackTreeNode;
 import com.mmnaseri.cs.clrs.ch13.s3.RedBlackTree;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/20/15, 4:21 AM)
  */
+@Quality(value = Stage.UNTESTED, explanation = "Node maximum is calculated in O(lgn) and not maintained during insertion and deletion")
 public class IntervalTree extends RedBlackTree<Interval> {
 
     private final TreeNodeFactory<Interval, RedBlackTreeNode<Interval>> factory;

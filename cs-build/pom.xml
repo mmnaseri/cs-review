@@ -26,6 +26,7 @@
     <modules>
         <module>../cs-parent</module>
         <module>../cs-clrs</module>
+        <module>../cs-qa</module>
     </modules>
 
 </project>

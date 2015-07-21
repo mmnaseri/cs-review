@@ -1,11 +1,15 @@
 package com.mmnaseri.cs.clrs.ch2.s3;
 
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
+
 import java.util.Arrays;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 1:50 AM)
  */
+@Quality(Stage.TESTED)
 public class CoupleSumFinder {
 
     public Couple findCouple(int sum, int... target) {

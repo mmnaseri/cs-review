@@ -3,6 +3,8 @@ package com.mmnaseri.cs.clrs.ch9.sp;
 import com.mmnaseri.cs.clrs.ch9.s3.LinearSelector;
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
 import com.mmnaseri.cs.clrs.common.Sorter;
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
 
 import java.util.Comparator;
 
@@ -10,6 +12,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/12/15, 9:05 PM)
  */
+@Quality(Stage.TESTED)
 public class BestCaseQuickSorter<E extends Comparable<E>> implements Sorter<E> {
 
     private final Comparator<E> comparator;

@@ -1,0 +1,52 @@
+package com.mmnaseri.cs.clrs.ch15.s4;
+
+import com.mmnaseri.cs.qa.Quality;
+import com.mmnaseri.cs.qa.Stage;
+
+import java.util.*;
+
+/**
+ * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @since 1.0 (7/21/15)
+ */
+@Quality(Stage.TESTED)
+public class MemoizedLongestCommonSubSequenceFinder<E> implements LongestCommonSubSequenceFinder<E> {
+
+    @Override
+    public List<E> find(List<E> first, List<E> second) {
+        if (first == null || second == null) {
+            return null;
+        }
+        return find(new HashMap<Integer, Map<Integer, List<E>>>(), first, second, first.size() - 1, second.size() - 1);
+    }
+
+    private List<E> find(Map<Integer, Map<Integer, List<E>>> memory, List<E> first, List<E> second, int firstCursor, int secondCursor) {
+        if (firstCursor < 0 || secondCursor < 0) {
+            return Collections.emptyList();
+        }
+        if (memory.containsKey(firstCursor) && memory.get(firstCursor).containsKey(secondCursor)) {
+            return memory.get(firstCursor).get(secondCursor);
+        }
+        final List<E> result;
+        final E firstItem = first.get(firstCursor);
+        final E secondItem = second.get(secondCursor);
+        if (firstItem == null && secondItem == null || firstItem != null && firstItem.equals(secondItem)) {
+            result = new ArrayList<>(find(memory, first, second, firstCursor - 1, secondCursor - 1));
+            result.add(firstItem);
+        } else {
+            final List<E> one = find(memory, first, second, firstCursor, secondCursor - 1);
+            final List<E> two = find(memory, first, second, firstCursor - 1, secondCursor);
+            if (one.size() > two.size()) {
+                result = one;
+            } else {
+                result = two;
+            }
+        }
+        if (!memory.containsKey(firstCursor)) {
+            memory.put(firstCursor, new HashMap<Integer, List<E>>());
+        }
+        memory.get(firstCursor).put(secondCursor, result);
+        return result;
+    }
+
+}

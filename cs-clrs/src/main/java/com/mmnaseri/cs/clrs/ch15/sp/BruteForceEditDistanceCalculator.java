@@ -42,9 +42,9 @@ public class BruteForceEditDistanceCalculator implements EditDistanceCalculator 
         if (sourceCursor < source.length() - 1 && targetCursor < target.length() - 1 && source.charAt(sourceCursor + 1) == target.charAt(targetCursor) && source.charAt(sourceCursor) == target.charAt(targetCursor + 1)) {
             candidates.add(new Specification(EditOperationType.TWIDDLE, sourceCursor, targetCursor, source.substring(sourceCursor, sourceCursor + 2)));
         }
-        candidates.add(new Specification(EditOperationType.DELETE, sourceCursor, targetCursor, String.valueOf(source.charAt(sourceCursor))));
-        candidates.add(new Specification(EditOperationType.INSERT, sourceCursor, targetCursor, String.valueOf(target.charAt(targetCursor))));
-        candidates.add(new Specification(EditOperationType.REPLACE, sourceCursor, targetCursor, source.charAt(sourceCursor) + " with " + target.charAt(targetCursor)));
+        candidates.add(new Specification(EditOperationType.DELETE, sourceCursor, targetCursor, source.charAt(sourceCursor) + " for " + target.charAt(targetCursor)));
+        candidates.add(new Specification(EditOperationType.INSERT, sourceCursor, targetCursor, source.charAt(sourceCursor) + " for " + target.charAt(targetCursor)));
+        candidates.add(new Specification(EditOperationType.REPLACE, sourceCursor, targetCursor, source.charAt(sourceCursor) + " for " + target.charAt(targetCursor)));
         int minimum = Integer.MAX_VALUE;
         for (Specification candidate : candidates) {
             final List<EditOperation> rest = calculate(source, target, candidate.getSource(), candidate.getTarget());

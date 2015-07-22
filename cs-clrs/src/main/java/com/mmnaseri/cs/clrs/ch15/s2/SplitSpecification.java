@@ -10,6 +10,7 @@ public class SplitSpecification {
     private int operations;
 
     public SplitSpecification() {
+        this(0, -1);
     }
 
     public SplitSpecification(int operations, int split) {

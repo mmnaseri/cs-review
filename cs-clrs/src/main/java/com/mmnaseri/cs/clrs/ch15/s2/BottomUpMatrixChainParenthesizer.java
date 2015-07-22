@@ -7,23 +7,29 @@ import com.mmnaseri.cs.qa.Stage;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/20/15, 5:40 AM)
  */
-@Quality(value = Stage.BUGGY, explanation = "Output does not match the book example")
+@Quality(value = Stage.UNTESTED)
 public class BottomUpMatrixChainParenthesizer implements MatrixChainParenthesizer {
 
     @Override
     public MatrixParenthesization parenthesize(int... dimensions) {
         final MatrixParenthesization parenthesization = new MatrixParenthesization();
-        for (int i = 0; i < dimensions.length; i ++) {
-            parenthesization.note(i, i, new SplitSpecification(0, -1));
+        final int matrices = dimensions.length - 1;
+        for (int i = 1; i <= matrices; i ++) {
+            //the base case
+            parenthesization.note(i, i, new SplitSpecification());
         }
-        for (int length = 1; length < dimensions.length; length ++) {
-            for (int i = 0; i < dimensions.length - length; i ++) {
-                final int j = i + length;
+        //we loop the length over all the useful chain lengths (only two or all items or anything in between)
+        for (int length = 2; length <= matrices; length ++) {
+            for (int i = 1; i <= matrices - length + 1; i ++) {
+                final int j = i + length - 1;
                 parenthesization.note(i, j, new SplitSpecification(Integer.MAX_VALUE, -1));
-                for (int k = i; k < j; k ++) {
-                    final int current = parenthesization.get(i, k).getOperations() + parenthesization.get(k + 1, j).getOperations() + dimensions[i - 1] * dimensions[k] * dimensions[j];
-                    if (current < parenthesization.get(i, j).getOperations()) {
-                        parenthesization.note(i, j, new SplitSpecification(current, k));
+                for (int k = i; k <= j - 1; k ++) {
+                    final int rightHalf = parenthesization.get(i, k).getOperations();
+                    final int leftHalf = parenthesization.get(k + 1, j).getOperations();
+                    final int current = dimensions[i - 1] * dimensions[k] * dimensions[j];
+                    final int operations = rightHalf + leftHalf + current;
+                    if (parenthesization.get(i, j).getOperations() > operations) {
+                        parenthesization.note(i, j, new SplitSpecification(operations, k));
                     }
                 }
             }

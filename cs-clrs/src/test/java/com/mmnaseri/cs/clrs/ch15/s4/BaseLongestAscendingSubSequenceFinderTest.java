@@ -31,7 +31,7 @@ public abstract class BaseLongestAscendingSubSequenceFinderTest {
             new Object[]{"sorted ascending", new Integer[]{1, 2, 3, 4, 5}, new Integer[]{1, 2, 3, 4, 5}},
             new Object[]{"sorted descending", new Integer[]{5, 4, 3, 2, 1}, new Integer[]{5}},
             new Object[]{"two candidates", new Integer[]{1, 4, 2, 6, 3, 7, 4, 5}, new Integer[]{1, 2, 3, 4, 5}},
-            new Object[]{"two candidates of same size", new Integer[]{1, 4, 2, 6, 3, 7, 4}, new Integer[]{1, 4, 6, 7}},
+            new Object[]{"two candidates of same size", new Integer[]{1, 4, 6, 3, 7, 4, 5}, new Integer[]{1, 4, 6, 7}},
         };
     }
 
@@ -41,6 +41,7 @@ public abstract class BaseLongestAscendingSubSequenceFinderTest {
         final List<Integer> list = finder.find(Arrays.asList(sequence));
         assertThat(list, is(notNullValue()));
         assertThat(list, hasSize(expectation.length));
+        System.out.println(list);
         for (int i = 0; i < expectation.length; i++) {
             assertThat(list.get(i), is(expectation[i]));
         }

@@ -10,7 +10,7 @@ import java.util.*;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/22/15)
  */
-@Quality(value = Stage.TESTED, explanation = "poorest design and running time possible (O(2^n))")
+@Quality(value = Stage.BUGGY, explanation = "poorest design and running time possible (O(2^n))")
 public class BruteForceActivitySelector implements ActivitySelector {
 
     @Override
@@ -26,6 +26,9 @@ public class BruteForceActivitySelector implements ActivitySelector {
                 return comparison;
             }
         });
+        for (List<IndexedActivity> sequence : sequences) {
+            Collections.sort(sequence);
+        }
         final Set<Integer> indices = new HashSet<>();
         for (List<IndexedActivity> sequence : sequences) {
             if (isCompatible(sequence)) {

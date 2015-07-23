@@ -29,11 +29,19 @@ public class Activity implements Comparable<Activity> {
     @SuppressWarnings("NullableProblems")
     @Override
     public int compareTo(Activity that) {
-        return Integer.compare(this.getFinish(), that.getFinish());
+        final int comparison = Integer.compare(this.getFinish(), that.getFinish());
+        if (comparison == 0) {
+            return Integer.compare(this.getFinish() - this.getStart(), that.getFinish() - that.getStart());
+        }
+        return comparison;
     }
 
     public boolean isCompatible(Activity activity) {
         return getStart() >= activity.getFinish() || getFinish() <= activity.getStart();
     }
 
+    @Override
+    public String toString() {
+        return "[" + getStart() + "," + getFinish() + "]";
+    }
 }

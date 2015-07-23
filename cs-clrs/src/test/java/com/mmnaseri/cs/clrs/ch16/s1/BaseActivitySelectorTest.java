@@ -19,13 +19,14 @@ public abstract class BaseActivitySelectorTest {
     @DataProvider
     public Object[][] dataProvider() {
         return new Object[][]{
-                new Object[]{"incompatible, second bigger", new int[]{1, 3}, new int[]{4, 7}, new int[]{1}},
-                new Object[]{"incompatible, first bigger", new int[]{1, 3}, new int[]{9, 7}, new int[]{0}},
-                new Object[]{"multiple", new int[]{1, 3, 0, 5, 3, 5, 6, 8, 8, 2, 12}, new int[]{4, 5, 6, 7, 9, 9, 10, 11, 12, 14, 16}, new int[]{0, 3, 8, 10}},
+                new Object[]{"incompatible, second bigger", new int[]{1, 3}, new int[]{4, 7}, new int[]{0}},
+                new Object[]{"incompatible, first bigger", new int[]{1, 3}, new int[]{9, 7}, new int[]{1}},
+                new Object[]{"multiple", new int[]{1, 3, 0, 5, 3, 5, 6, 8, 8, 2, 12}, new int[]{4, 5, 6, 7, 9, 9, 10, 11, 12, 14, 16}, new int[]{0, 3, 7, 10}},
+                new Object[]{"single", new int[]{1, 3, 5, 4, 8}, new int[]{4, 7, 8, 9, 11}, new int[]{0, 2, 4}},
         };
     }
 
-    @Test(dataProvider = "dataProvider", invocationCount = 10)
+    @Test(dataProvider = "dataProvider", invocationCount = 1)
     public void testFunctionality(@SuppressWarnings("UnusedParameters") String name, int[] start, int[] finish, int[] expected) throws Exception {
         if (start == null || finish == null || start.length != finish.length) {
             throw new IllegalStateException();

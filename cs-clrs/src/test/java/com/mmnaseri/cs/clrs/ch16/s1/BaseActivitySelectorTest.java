@@ -21,8 +21,8 @@ public abstract class BaseActivitySelectorTest {
         return new Object[][]{
                 new Object[]{"incompatible, second bigger", new int[]{1, 3}, new int[]{4, 7}, new int[]{0}},
                 new Object[]{"incompatible, first bigger", new int[]{1, 3}, new int[]{9, 7}, new int[]{1}},
-                new Object[]{"multiple", new int[]{1, 3, 0, 5, 3, 5, 6, 8, 8, 2, 12}, new int[]{4, 5, 6, 7, 9, 9, 10, 11, 12, 14, 16}, new int[]{0, 3, 7, 10}},
-                new Object[]{"single", new int[]{1, 3, 5, 4, 8}, new int[]{4, 7, 8, 9, 11}, new int[]{0, 2, 4}},
+                new Object[]{"multiple", new int[]{1, 3, 0, 5, 3, 5, 6, 7, 8, 2, 12}, new int[]{4, 5, 6, 7, 9, 9, 10, 11, 13, 14, 16}, new int[]{0, 3, 7, 10}},
+                new Object[]{"single", new int[]{1, 3, 5, 4, 8, 11, 1}, new int[]{4, 7, 8, 9, 11, 13, 14}, new int[]{0, 2, 4, 5}},
         };
     }
 
@@ -40,6 +40,7 @@ public abstract class BaseActivitySelectorTest {
         if (expected == null) {
             assertThat(indices, is(nullValue()));
         } else {
+            assertThat(indices, is(notNullValue()));
             assertThat(indices, hasSize(expected.length));
             for (int index : expected) {
                 assertThat(indices.contains(index), is(true));

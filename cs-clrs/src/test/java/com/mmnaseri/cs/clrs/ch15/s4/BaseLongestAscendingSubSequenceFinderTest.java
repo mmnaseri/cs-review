@@ -41,7 +41,6 @@ public abstract class BaseLongestAscendingSubSequenceFinderTest {
         final List<Integer> list = finder.find(Arrays.asList(sequence));
         assertThat(list, is(notNullValue()));
         assertThat(list, hasSize(expectation.length));
-        System.out.println(list);
         for (int i = 0; i < expectation.length; i++) {
             assertThat(list.get(i), is(expectation[i]));
         }

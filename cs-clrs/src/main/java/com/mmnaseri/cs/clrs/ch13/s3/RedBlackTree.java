@@ -13,7 +13,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/19/15, 11:55 PM)
  */
-@Quality(value = Stage.BUGGY, explanation = "Coloring is not always done properly")
+@Quality(value = Stage.BUGGY, explanation = "Coloring is not always done properly. See issue #1")
 public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNode<E>> {
 
     public RedBlackTree(Comparator<E> comparator) {

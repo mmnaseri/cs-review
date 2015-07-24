@@ -98,7 +98,7 @@ public class BottomUpActivitySelector implements ActivitySelector {
         return selection;
     }
 
-    @Complexity(value = "O(nln)", explanation = "We are using mergeSort")
+    @Complexity(value = "O(n * lg(n))", explanation = "We are using mergeSort")
     private IndexedActivity[] prepareIndexedActivities(Activity[] activities) {
         final IndexedActivity[] indexedActivities = IndexedActivity.index(activities);
         Arrays.sort(indexedActivities);

@@ -38,19 +38,18 @@ used throughout the codebase:
 
   * `@Quality` which indicates the standing quality of the piece of code being annotated. The `@Quality` annotation
   specifies a development `Stage` of one of the following values:
-  
-    - `INCOMPLETE`: the annotated piece of code has not been developed fully and that it will require
-    more development attention before it can be considered a working model.
-    - `BUGGY`: that particular piece of code has known issues that have not been tested and have not
-    been patched yet. This stage usually comes with an explanation as to the nature of the bug.
-    - `UNTESTED`: the piece of code is believed to be doing what it is supposed to, but that it is not
-    yet tested sufficiently.
-    - `FAILING`: this piece of code breaks some test somewhere. This should be accompanied by an `@Test` or
-    an `@Tests` annotation, since the failing tests are usually either disabled or commented out.
-    - `TESTED`: the code being annotated is believed to have been sufficiently tested and works according to the specifications.
-    - `DOCUMENTED`: the code is both well tested and well documented. Code marked as documented is expected to have at least been
-    given time complexity analysis using the `@Complexity` annotation.
-   
+   - `INCOMPLETE`: the annotated piece of code has not been developed fully and that it will require
+   more development attention before it can be considered a working model.
+   - `BUGGY`: that particular piece of code has known issues that have not been tested and have not
+   been patched yet. This stage usually comes with an explanation as to the nature of the bug.
+   - `UNTESTED`: the piece of code is believed to be doing what it is supposed to, but that it is not
+   yet tested sufficiently.
+   - `FAILING`: this piece of code breaks some test somewhere. This should be accompanied by an `@Test` or
+   an `@Tests` annotation, since the failing tests are usually either disabled or commented out.
+   - `TESTED`: the code being annotated is believed to have been sufficiently tested and works according to the specifications.
+   - `DOCUMENTED`: the code is both well tested and well documented. Code marked as documented is expected to have at least been
+   given time complexity analysis using the `@Complexity` annotation.
+
 Most of the code in this project is properly annotated. If you find one that is not, please do not hesitate to report it.
 
 The Tests

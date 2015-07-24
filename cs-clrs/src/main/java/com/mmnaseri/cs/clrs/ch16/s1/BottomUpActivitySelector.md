@@ -78,13 +78,13 @@ Whenever `x[i,j]` is `-1` it means no activity `a[k]` exists with `i < k < j` th
 
 We can then write the following function to print out the selection:
 
-    1: Print-Activities(start, end, x, l)
-    2:    print start
-    3:    if x[start,end] != -1
-    4:        Print-Activities(start, x[start, end], x, false)
-    5:        Print-Activities(x[start,end], end, x, true)
-    6:        if l == true
-    7:            print end
+    1 Print-Activities(start, end, x, l)
+    2    print start
+    3    if x[start,end] != -1
+    4        Print-Activities(start, x[start, end], x, false)
+    5        Print-Activities(x[start,end], end, x, true)
+    6        if l == true
+    7            print end
 
 where `l` is a flag that says whether or not we should print the last element in the interval `[i,j]` and is to avoid
 printing `k` for `a[k]` twice.
@@ -122,13 +122,13 @@ storing the counts and the lower half for the indices. Thus, our activity select
 
 and the print function now needs to read from the lower half as well:
 
-    1: Print-Activities(start, end, x, l)
-    2:    print start
-    3:    if x[end,start] != -1
-    4:        Print-Activities(start, x[end,start], x, false)
-    5:        Print-Activities(x[end,start], end, x, true)
-    6:        if l == true
-    7:            print end
+    1 Print-Activities(start, end, x, l)
+    2    print start
+    3    if x[end,start] != -1
+    4        Print-Activities(start, x[end,start], x, false)
+    5        Print-Activities(x[end,start], end, x, true)
+    6        if l == true
+    7            print end
 
 The print operation works in `O(n)` since we do not go over each item more than once (line 3 is executed exactly
 `n` times at worst). This is similar to the analysis for binary search.

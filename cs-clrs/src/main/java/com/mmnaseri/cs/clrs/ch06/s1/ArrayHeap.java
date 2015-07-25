@@ -50,7 +50,7 @@ public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
             temp = new Object[data.length * 2];
             System.arraycopy(data, 0, temp, 0, size);
         } else if (size < data.length / 4.0) {
-            temp = new Object[data.length / 2];
+            temp = new Object[(int) Math.ceil(data.length / 2.0)];
             System.arraycopy(data, 0, temp, 0, size);
         } else {
             temp = data;
@@ -116,6 +116,7 @@ public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
         //restructure the heap
         data[0] = data[size - 1];
         size --;
+        data[size] = null;
         heapify(0);
         checkCapacity();
         return top;

@@ -32,7 +32,7 @@ public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
     }
 
     public RadixTreeNode insert(int number) {
-        final Bit[] bits = toBits(number);
+        final Bit[] bits = BitUtils.toBits(number);
         RadixTreeNode current = getRoot();
         for (int i = 0; i < bits.length; i++) {
             final Bit bit = bits[i];
@@ -76,13 +76,13 @@ public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
         }
         final ArrayList<Integer> integers = new ArrayList<>();
         for (List<Bit> number : numbers) {
-            integers.add(fromBits(number.toArray(new Bit[number.size()])));
+            integers.add(BitUtils.fromBits(number.toArray(new Bit[number.size()])));
         }
         return integers;
     }
 
     public RadixTreeNode find(int number) {
-        final Bit[] bits = toBits(number);
+        final Bit[] bits = BitUtils.toBits(number);
         RadixTreeNode current = getRoot();
         for (Bit bit : bits) {
             if (bit.equals(Bit.ZERO)) {
@@ -146,25 +146,6 @@ public class RadixTree extends BinarySearchTree<Bit, RadixTreeNode> {
     @Override
     public RadixTreeNode delete(Bit value) {
         throw new UnsupportedOperationException();
-    }
-
-    private static Bit[] toBits(int number) {
-        final int digits = Math.max((int) Math.ceil(Math.log(number) / Math.log(2)), 1);
-        final Bit[] bits = new Bit[digits];
-        for (int i = 0; i < digits; i ++) {
-            bits[bits.length - i - 1] = number % 2 == 0 ? Bit.ZERO : Bit.ONE;
-            number = number >> 1;
-        }
-        return bits;
-    }
-
-    private static int fromBits(Bit[] bits) {
-        int result = 0;
-        for (Bit bit : bits) {
-            result = result << 1;
-            result += (bit.equals(Bit.ONE) ? 1 : 0);
-        }
-        return result;
     }
 
     private static class LeafCollectingTreeWalkCallback implements TreeWalkCallback<Bit, RadixTreeNode> {

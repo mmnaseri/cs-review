@@ -98,6 +98,11 @@ public class SimpleTreeNode<E> implements TreeNode<E> {
     }
 
     @Override
+    public TreeNode<E> getFirstChild() {
+        return getChildren().isEmpty() ? null : getChildren().get(0);
+    }
+
+    @Override
     public boolean isRoot() {
         return parent == null;
     }

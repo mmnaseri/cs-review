@@ -26,6 +26,8 @@ public interface TreeNode<E> {
 
     TreeNode<E> getNextSibling();
 
+    TreeNode<E> getFirstChild();
+
     boolean isRoot();
 
     boolean isLeaf();

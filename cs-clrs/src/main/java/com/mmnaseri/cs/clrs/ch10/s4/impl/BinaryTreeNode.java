@@ -111,4 +111,9 @@ public class BinaryTreeNode<E> extends SimpleTreeNode<E> {
         return getParent().getRightChild();
     }
 
+    @Override
+    public TreeNode<E> getFirstChild() {
+        return getLeftChild() != null ? getLeftChild() : getRightChild();
+    }
+
 }

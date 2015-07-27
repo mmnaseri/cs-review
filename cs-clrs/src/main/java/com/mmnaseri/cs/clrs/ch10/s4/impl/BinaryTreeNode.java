@@ -95,4 +95,20 @@ public class BinaryTreeNode<E> extends SimpleTreeNode<E> {
         return getLeftChild() == null && getRightChild() == null;
     }
 
+    @Override
+    public TreeNode<E> getPreviousSibling() {
+        if (getParent() == null || this == getParent().getLeftChild()) {
+            return null;
+        }
+        return getParent().getLeftChild();
+    }
+
+    @Override
+    public TreeNode<E> getNextSibling() {
+        if (getParent() == null || this == getParent().getRightChild()) {
+            return null;
+        }
+        return getParent().getRightChild();
+    }
+
 }

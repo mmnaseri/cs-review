@@ -22,6 +22,10 @@ public interface TreeNode<E> {
 
     void setParent(TreeNode<E> parent);
 
+    TreeNode<E> getPreviousSibling();
+
+    TreeNode<E> getNextSibling();
+
     boolean isRoot();
 
     boolean isLeaf();

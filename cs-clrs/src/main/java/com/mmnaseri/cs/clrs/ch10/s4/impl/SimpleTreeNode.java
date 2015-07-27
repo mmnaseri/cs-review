@@ -65,6 +65,38 @@ public class SimpleTreeNode<E> implements TreeNode<E> {
         this.parent = parent;
     }
 
+    private int getIndex() {
+        if (getParent() == null) {
+            return -1;
+        }
+        final List<? extends TreeNode<E>> children = parent.getChildren();
+        for (int i = 0; i < children.size(); i++) {
+            TreeNode<E> node = children.get(i);
+            if (node == this) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public TreeNode<E> getPreviousSibling() {
+        final int index = getIndex();
+        if (index <= 0) {
+            return null;
+        }
+        return getParent().getChildren().get(index - 1);
+    }
+
+    @Override
+    public TreeNode<E> getNextSibling() {
+        final int index = getIndex();
+        if (index == -1 || index >= getParent().getChildren().size() - 1) {
+            return null;
+        }
+        return getParent().getChildren().get(index + 1);
+    }
+
     @Override
     public boolean isRoot() {
         return parent == null;

@@ -77,4 +77,6 @@ public class RedBlackTreeTest {
         assertThat(tree.getRoot().getRightChild().getColor(), is(NodeColor.BLACK));
     }
 
+
+
 }

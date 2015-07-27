@@ -27,10 +27,15 @@ public class DefaultMonitor<D> implements Monitor<D> {
     @Override
     public void validate(D dataStructure) {
         final Map<Feature<D>, Set<Failure<D>>> failures = new HashMap<>();
+        boolean hasFailures = false;
         for (Feature<D> feature : features) {
-            failures.put(feature, feature.control(dataStructure));
+            final Set<Failure<D>> featureFailures = feature.control(dataStructure);
+            if (featureFailures != null) {
+                hasFailures = hasFailures || !featureFailures.isEmpty();
+                failures.put(feature, featureFailures);
+            }
         }
-        if (!failures.isEmpty()) {
+        if (hasFailures) {
             final StringBuilder builder = new StringBuilder();
             for (Map.Entry<Feature<D>, Set<Failure<D>>> entry : failures.entrySet()) {
                 builder.append(entry.getKey().getName()).append(":\n");

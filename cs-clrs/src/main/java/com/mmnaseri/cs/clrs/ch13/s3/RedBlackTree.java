@@ -4,6 +4,7 @@ import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
 import com.mmnaseri.cs.clrs.ch13.s1.NodeColor;
 import com.mmnaseri.cs.clrs.ch13.s1.RedBlackTreeNode;
 import com.mmnaseri.cs.clrs.ch13.s2.RotatingBinarySearchTree;
+import com.mmnaseri.cs.qa.annotation.Monitored;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -13,7 +14,8 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/19/15, 11:55 PM)
  */
-@Quality(value = Stage.BUGGY, explanation = "Coloring is not always done properly. See issue #1")
+@Quality(value = Stage.TESTED)
+@Monitored(MonitoredRedBlackTree.class)
 public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNode<E>> {
 
     public RedBlackTree(Comparator<E> comparator) {
@@ -130,53 +132,53 @@ public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNod
     protected void deleteFix(RedBlackTreeNode<E> node) {
         while (!node.isRoot() && NodeColor.BLACK.equals(node.getColor())) {
             if (node == node.getParent().getLeftChild()) {
-                RedBlackTreeNode<E> target = node.getParent().getRightChild();
-                if (target.getColor().equals(NodeColor.RED)) {
-                    target.setColor(NodeColor.BLACK);
-                    target.getParent().setColor(NodeColor.RED);
+                RedBlackTreeNode<E> sibling = node.getParent().getRightChild();
+                if (NodeColor.RED.equals(sibling.getColor())) {
+                    sibling.setColor(NodeColor.BLACK);
+                    node.getParent().setColor(NodeColor.RED);
                     rotateLeft(node.getParent());
-                    target = node.getParent().getRightChild();
+                    sibling = node.getParent().getRightChild();
                 }
-                if (target.getLeftChild() != null && target.getRightChild() != null) {
-                    if (target.getLeftChild().getColor().equals(NodeColor.BLACK) && target.getRightChild().getColor().equals(NodeColor.BLACK)) {
-                        target.setColor(NodeColor.RED);
-                        node = node.getParent();
-                    } else if (target.getRightChild().getColor().equals(NodeColor.BLACK)) {
-                        target.getLeftChild().setColor(NodeColor.BLACK);
-                        target.setColor(NodeColor.RED);
-                        rotateRight(target);
-                        target = node.getParent().getRightChild();
+                if (NodeColor.BLACK.equals(sibling.getLeftChild().getColor()) && NodeColor.BLACK.equals(sibling.getRightChild().getColor())) {
+                    sibling.setColor(NodeColor.RED);
+                    node = node.getParent();
+                } else {
+                    if (NodeColor.BLACK.equals(sibling.getRightChild().getColor())) {
+                        sibling.getLeftChild().setColor(NodeColor.BLACK);
+                        sibling.setColor(NodeColor.RED);
+                        rotateRight(sibling);
+                        sibling = node.getParent().getRightChild();
                     }
+                    sibling.setColor(node.getParent().getColor());
+                    sibling.getParent().setColor(NodeColor.BLACK);
+                    sibling.getRightChild().setColor(NodeColor.BLACK);
+                    rotateLeft(node.getParent());
+                    node = getRoot();
                 }
-                target.setColor(node.getParent().getColor());
-                node.getParent().setColor(NodeColor.BLACK);
-                target.getRightChild().setColor(NodeColor.BLACK);
-                rotateLeft(node.getParent());
-                node = getRoot();
             } else {
-                RedBlackTreeNode<E> target = node.getParent().getLeftChild();
-                if (target.getColor().equals(NodeColor.RED)) {
-                    target.setColor(NodeColor.BLACK);
-                    target.getParent().setColor(NodeColor.RED);
+                RedBlackTreeNode<E> sibling = node.getParent().getLeftChild();
+                if (NodeColor.RED.equals(sibling.getColor())) {
+                    sibling.setColor(NodeColor.BLACK);
+                    node.getParent().setColor(NodeColor.RED);
                     rotateRight(node.getParent());
-                    target = node.getParent().getLeftChild();
+                    sibling = node.getParent().getLeftChild();
                 }
-                if (target.getLeftChild() != null && target.getRightChild() != null) {
-                    if (target.getLeftChild().getColor().equals(NodeColor.BLACK) && target.getRightChild().getColor().equals(NodeColor.BLACK)) {
-                        target.setColor(NodeColor.RED);
-                        node = node.getParent();
-                    } else if (target.getLeftChild().getColor().equals(NodeColor.BLACK)) {
-                        target.getRightChild().setColor(NodeColor.BLACK);
-                        target.setColor(NodeColor.RED);
-                        rotateLeft(target);
-                        target = node.getParent().getLeftChild();
+                if (NodeColor.BLACK.equals(sibling.getLeftChild().getColor()) && NodeColor.BLACK.equals(sibling.getRightChild().getColor())) {
+                    sibling.setColor(NodeColor.RED);
+                    node = node.getParent();
+                } else {
+                    if (NodeColor.BLACK.equals(sibling.getLeftChild().getColor())) {
+                        sibling.getRightChild().setColor(NodeColor.BLACK);
+                        sibling.setColor(NodeColor.RED);
+                        rotateLeft(sibling);
+                        sibling = node.getParent().getLeftChild();
                     }
+                    sibling.setColor(node.getParent().getColor());
+                    sibling.getParent().setColor(NodeColor.BLACK);
+                    sibling.getLeftChild().setColor(NodeColor.BLACK);
+                    rotateRight(node.getParent());
+                    node = getRoot();
                 }
-                target.setColor(node.getParent().getColor());
-                node.getParent().setColor(NodeColor.BLACK);
-                target.getLeftChild().setColor(NodeColor.BLACK);
-                rotateRight(node.getParent());
-                node = getRoot();
             }
         }
         node.setColor(NodeColor.BLACK);

@@ -4,7 +4,9 @@ import com.mmnaseri.cs.clrs.ch10.s4.impl.BinaryTreeNode;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -25,6 +27,9 @@ public abstract class AbstractBinarySearchTree<E, N extends BinaryTreeNode<E>> e
 
     @Override
     public N find(N root, E value) {
+        if (root == null) {
+            return null;
+        }
         if (root.getValue() == null && value == null || root.getValue() != null && root.getValue().equals(value)) {
             return root;
         }
@@ -94,6 +99,16 @@ public abstract class AbstractBinarySearchTree<E, N extends BinaryTreeNode<E>> e
             return root;
         }
         return insert(getRoot(), value);
+    }
+
+    @Override
+    public List<N> delete(E... values) {
+        final List<N> nodes = new ArrayList<>();
+        for (E value : values) {
+            final N deleted = delete(value);
+            nodes.add(deleted);
+        }
+        return nodes;
     }
 
     protected N delete(N root, E value) {

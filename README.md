@@ -50,6 +50,10 @@ used throughout the codebase:
    - `DOCUMENTED`: the code is both well tested and well documented. Code marked as documented is expected to have at least been
    given time complexity analysis using the `@Complexity` annotation.
 
+  * `@Monitored` denotes the monitor that has been implemented for the given data structure. Monitors are
+  observers that observe your data structure's state before/after each modification to make sure that
+  they behave exactly as they should and that they present the same features that were advertised for them.
+  
 Most of the code in this project is properly annotated. If you find one that is not, please do not hesitate to report it.
 
 The Tests

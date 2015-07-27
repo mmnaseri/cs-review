@@ -33,7 +33,10 @@ public interface SearchTree<E, N extends TreeNode<E>> {
     N insert(E value);
 
     @SuppressWarnings("unchecked")
-    List<N> insert(E... value);
+    List<N> delete(E... values);
+
+    @SuppressWarnings("unchecked")
+    List<N> insert(E... values);
 
     N delete(E value);
 

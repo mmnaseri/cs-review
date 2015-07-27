@@ -7,8 +7,8 @@ import com.mmnaseri.cs.clrs.ch12.s1.TreeWalkCallback;
 import com.mmnaseri.cs.clrs.ch12.sp.Bit;
 import com.mmnaseri.cs.clrs.common.Heap;
 import com.mmnaseri.cs.clrs.common.impl.MinHeapProperty;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayList;
 import java.util.List;

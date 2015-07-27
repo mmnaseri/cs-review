@@ -3,8 +3,8 @@ package com.mmnaseri.cs.clrs.ch02.sp;
 import com.mmnaseri.cs.clrs.ch02.s1.InsertionSorter;
 import com.mmnaseri.cs.clrs.ch02.s3.MergeSorter;
 import com.mmnaseri.cs.clrs.common.Sorter;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;

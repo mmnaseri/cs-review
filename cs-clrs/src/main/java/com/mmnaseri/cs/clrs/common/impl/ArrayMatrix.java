@@ -3,8 +3,8 @@ package com.mmnaseri.cs.clrs.common.impl;
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.MatrixCell;
 import com.mmnaseri.cs.clrs.common.MatrixRow;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Iterator;
 

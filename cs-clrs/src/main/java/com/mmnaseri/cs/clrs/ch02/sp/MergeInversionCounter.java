@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch02.sp;
 
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;

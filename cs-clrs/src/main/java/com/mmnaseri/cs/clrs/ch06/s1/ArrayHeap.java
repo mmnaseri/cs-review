@@ -2,8 +2,8 @@ package com.mmnaseri.cs.clrs.ch06.s1;
 
 import com.mmnaseri.cs.clrs.common.Heap;
 import com.mmnaseri.cs.clrs.common.HeapProperty;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Collection;
 import java.util.ConcurrentModificationException;

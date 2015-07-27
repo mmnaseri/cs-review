@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.qa;
+package com.mmnaseri.cs.qa.annotation;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

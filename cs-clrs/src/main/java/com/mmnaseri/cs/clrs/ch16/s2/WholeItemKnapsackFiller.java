@@ -1,8 +1,8 @@
 package com.mmnaseri.cs.clrs.ch16.s2;
 
-import com.mmnaseri.cs.qa.Complexity;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Complexity;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.HashSet;
 import java.util.Set;

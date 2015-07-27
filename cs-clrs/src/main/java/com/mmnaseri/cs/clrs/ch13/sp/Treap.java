@@ -2,8 +2,8 @@ package com.mmnaseri.cs.clrs.ch13.sp;
 
 import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
 import com.mmnaseri.cs.clrs.ch13.s2.RotatingBinarySearchTree;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Comparator;
 import java.util.HashSet;

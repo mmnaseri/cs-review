@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch15.s2;
 
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

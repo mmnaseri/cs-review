@@ -3,8 +3,8 @@ package com.mmnaseri.cs.clrs.ch09.sp;
 import com.mmnaseri.cs.clrs.ch09.s3.LinearSelector;
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
 import com.mmnaseri.cs.clrs.common.Sorter;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Comparator;
 

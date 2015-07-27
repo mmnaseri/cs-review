@@ -3,8 +3,8 @@ package com.mmnaseri.cs.clrs.ch12.s4;
 import com.mmnaseri.cs.clrs.ch05.s3.InPlacePermuter;
 import com.mmnaseri.cs.clrs.ch12.s3.BinarySearchTree;
 import com.mmnaseri.cs.clrs.common.Permuter;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

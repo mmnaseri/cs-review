@@ -3,8 +3,8 @@ package com.mmnaseri.cs.clrs.ch14.s3;
 import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
 import com.mmnaseri.cs.clrs.ch13.s1.RedBlackTreeNode;
 import com.mmnaseri.cs.clrs.ch13.s3.RedBlackTree;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

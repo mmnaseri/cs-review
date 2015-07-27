@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch04.s1;
 
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 /**
  * This is an implementation of <a href="http://www.algorithmist.com/index.php/Kadane's_Algorithm">Kadane's algorithm</a>.

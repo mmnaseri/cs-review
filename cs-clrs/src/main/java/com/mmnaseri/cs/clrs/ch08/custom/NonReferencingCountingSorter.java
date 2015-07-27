@@ -2,8 +2,8 @@ package com.mmnaseri.cs.clrs.ch08.custom;
 
 import com.mmnaseri.cs.clrs.ch08.s2.CountingSorter;
 import com.mmnaseri.cs.clrs.common.Sorter;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Comparator;
 

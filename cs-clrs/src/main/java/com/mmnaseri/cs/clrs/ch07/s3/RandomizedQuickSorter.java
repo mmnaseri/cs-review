@@ -2,8 +2,8 @@ package com.mmnaseri.cs.clrs.ch07.s3;
 
 import com.mmnaseri.cs.clrs.ch07.s1.QuickSorter;
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Comparator;
 import java.util.Random;

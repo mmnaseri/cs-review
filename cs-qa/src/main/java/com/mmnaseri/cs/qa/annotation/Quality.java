@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.qa;
+package com.mmnaseri.cs.qa.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,14 +7,14 @@ import java.lang.annotation.Target;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (7/24/15)
+ * @since 1.0 (7/20/15)
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.SOURCE)
-public @interface Test {
+public @interface Quality {
 
-    String name();
+    Stage value();
 
-    String method() default "";
+    String explanation() default "";
 
 }

@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.common;
 
-import com.mmnaseri.cs.qa.Quality;
-import com.mmnaseri.cs.qa.Stage;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Arrays;
 

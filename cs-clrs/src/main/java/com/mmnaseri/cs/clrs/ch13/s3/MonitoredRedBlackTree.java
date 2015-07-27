@@ -63,7 +63,7 @@ public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {
                 @Override
                 public void apply(RedBlackTreeNode<E> node) {
                     if (!NodeColor.BLACK.equals(node.getColor()) && !NodeColor.RED.equals(node.getColor())) {
-                        failures.add(new Failure<>(node, dataStructure, "Expected node color to be either RED or BLACK but it is: " + node.getColor()));
+                        failures.add(new Failure<>(node, dataStructure, "Expected node color to be either RED or BLACK but it is " + node.getColor()));
                     }
                 }
             });
@@ -77,7 +77,7 @@ public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {
         @Override
         public Set<Failure<MonitoredRedBlackTree<E>>> control(MonitoredRedBlackTree<E> dataStructure) {
             if (dataStructure.getRoot() != null && !NodeColor.BLACK.equals(dataStructure.getRoot().getColor())) {
-                return Collections.singleton(new Failure<>(dataStructure.getRoot(), dataStructure, "Expected the root to be black but it was: " + dataStructure.getRoot().getColor()));
+                return Collections.singleton(new Failure<>(dataStructure.getRoot(), dataStructure, "Expected the root to be black but it was " + dataStructure.getRoot().getColor()));
             }
             return null;
         }
@@ -98,10 +98,10 @@ public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {
                 public void apply(RedBlackTreeNode<E> node) {
                     if (NodeColor.RED.equals(node.getColor())) {
                         if (node.getLeftChild() != null && !NodeColor.BLACK.equals(node.getLeftChild().getColor())) {
-                            failures.add(new Failure<>(node.getLeftChild(), dataStructure, "Expected the child of RED node to be black but it was: " + node.getLeftChild().getColor()));
+                            failures.add(new Failure<>(node, dataStructure, "Expected the child of RED node to be black but its left child was " + node.getLeftChild().getColor()));
                         }
                         if (node.getRightChild() != null && !NodeColor.BLACK.equals(node.getRightChild().getColor())) {
-                            failures.add(new Failure<>(node.getRightChild(), dataStructure, "Expected the child of RED node to be black but it was: " + node.getRightChild().getColor()));
+                            failures.add(new Failure<>(node, dataStructure, "Expected the child of RED node to be black but its right child was " + node.getRightChild().getColor()));
                         }
                     }
                 }
@@ -131,9 +131,9 @@ public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {
             final HashSet<Failure<MonitoredRedBlackTree<E>>> failures = new HashSet<>();
             int expected = -1;
             for (RedBlackTreeNode<E> leaf : leaves) {
-                int blacks = 1; //whether it is a red leaf with black `null` children or an actual `black` leaf we count it as one
+                int blacks = 0; //whether it is a red leaf with black `null` children or an actual `black` leaf we count it as one
                 RedBlackTreeNode<E> node = leaf;
-                while (!node.isRoot()) {
+                while (node != null) {
                     if (NodeColor.BLACK.equals(node.getColor())) {
                         blacks ++;
                     }
@@ -142,7 +142,7 @@ public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {
                 if (expected < 0) {
                     expected = blacks;
                 } else if (blacks != expected) {
-                    failures.add(new Failure<>(leaf, dataStructure, "Black height of leaf is not expected height " + expected + ": " + blacks));
+                    failures.add(new Failure<>(leaf, dataStructure, "Expected black height of leaf to be " + expected + " but it was " + blacks));
                 }
             }
             return failures;

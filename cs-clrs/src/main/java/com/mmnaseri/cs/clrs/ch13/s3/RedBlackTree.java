@@ -54,19 +54,10 @@ public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNod
     }
 
     protected void insertFix(RedBlackTreeNode<E> node) {
-        while (node != null && node.getParent() != null && node.getParent().getColor().equals(NodeColor.RED)) {
+        while (!node.isRoot() && node.getParent().getColor().equals(NodeColor.RED)) {
             if (node.getParent() == node.getParent().getParent().getLeftChild()) {
-                final RedBlackTreeNode<E> target = node.getParent().getParent().getRightChild();
-                if (target == null) {
-                    node = node.getParent().getParent();
-                    continue;
-                }
-                if (target.getColor().equals(NodeColor.RED)) {
-                    node.getParent().setColor(NodeColor.BLACK);
-                    target.setColor(NodeColor.BLACK);
-                    node.getParent().getParent().setColor(NodeColor.RED);
-                    node = node.getParent().getParent();
-                } else {
+                final RedBlackTreeNode<E> uncle = node.getParent().getParent().getRightChild();
+                if (uncle == null || NodeColor.BLACK.equals(uncle.getColor())) {
                     if (node == node.getParent().getRightChild()) {
                         node = node.getParent();
                         rotateLeft(node);
@@ -74,19 +65,15 @@ public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNod
                     node.getParent().setColor(NodeColor.BLACK);
                     node.getParent().getParent().setColor(NodeColor.RED);
                     rotateRight(node.getParent().getParent());
-                }
-            } else {
-                final RedBlackTreeNode<E> target = node.getParent().getParent().getLeftChild();
-                if (target == null) {
-                    node = node.getParent().getParent();
-                    continue;
-                }
-                if (target.getColor().equals(NodeColor.RED)) {
+                } else {
                     node.getParent().setColor(NodeColor.BLACK);
-                    target.setColor(NodeColor.BLACK);
+                    uncle.setColor(NodeColor.BLACK);
                     node.getParent().getParent().setColor(NodeColor.RED);
                     node = node.getParent().getParent();
-                } else {
+                }
+            } else {
+                final RedBlackTreeNode<E> uncle = node.getParent().getParent().getLeftChild();
+                if (uncle == null || NodeColor.BLACK.equals(uncle.getColor())) {
                     if (node == node.getParent().getLeftChild()) {
                         node = node.getParent();
                         rotateRight(node);
@@ -94,6 +81,11 @@ public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNod
                     node.getParent().setColor(NodeColor.BLACK);
                     node.getParent().getParent().setColor(NodeColor.RED);
                     rotateLeft(node.getParent().getParent());
+                } else {
+                    node.getParent().setColor(NodeColor.BLACK);
+                    uncle.setColor(NodeColor.BLACK);
+                    node.getParent().getParent().setColor(NodeColor.RED);
+                    node = node.getParent().getParent();
                 }
             }
         }
@@ -129,7 +121,7 @@ public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNod
             current.setLeftChild(node.getLeftChild());
             current.setColor(node.getColor());
         }
-        if (NodeColor.BLACK.equals(originalColor)) {
+        if (target != null && NodeColor.BLACK.equals(originalColor)) {
             deleteFix(target);
         }
         return node;

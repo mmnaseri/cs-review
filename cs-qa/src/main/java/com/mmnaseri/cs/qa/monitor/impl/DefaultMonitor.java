@@ -38,9 +38,12 @@ public class DefaultMonitor<D> implements Monitor<D> {
         if (hasFailures) {
             final StringBuilder builder = new StringBuilder();
             for (Map.Entry<Feature<D>, Set<Failure<D>>> entry : failures.entrySet()) {
-                builder.append(entry.getKey().getName()).append(":\n");
+                if (entry.getValue().isEmpty()) {
+                    continue;
+                }
+                builder.append("- ").append(entry.getKey().getName()).append(":\n");
                 for (Failure<D> failure : entry.getValue()) {
-                    builder.append(failure.getExplanation()).append(": ").append(failure.getSource()).append("\n");
+                    builder.append(failure.getExplanation()).append(" for ").append(failure.getSource()).append("\n");
                 }
             }
             throw new MonitorFailureException("There are feature failures for data structure " + dataStructure.getClass().getName() + ":\n" + builder.toString());

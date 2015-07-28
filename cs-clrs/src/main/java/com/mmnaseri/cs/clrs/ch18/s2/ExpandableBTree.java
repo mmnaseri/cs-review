@@ -4,8 +4,9 @@ import com.mmnaseri.cs.clrs.ch18.s1.*;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -16,9 +17,14 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
 
     private BTreeNode<I, K> root;
 
-    public ExpandableBTree(DataStore<I, K> dataStore, NodeStore<K> nodeStore, int degree) {
+    public ExpandableBTree(DataStore<I> dataStore, NodeStore<K> nodeStore, int degree) {
         super(dataStore, nodeStore, degree);
-        root = new BTreeNode<>(getDataStore(), getNodeStore(), Collections.<K>emptyList(), Collections.<K>emptyList());
+        init();
+    }
+
+    protected void init() {
+        final List<K> siblings = new ArrayList<>();
+        root = new BTreeNode<>(getDataStore(), getNodeStore(), siblings, 0, UUID.randomUUID());
         root.setLeaf(true);
     }
 
@@ -35,17 +41,17 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public BTreeNode<I, K> find(I value) {
-        return find(getRoot(), value);
-    }
-
     protected void split(BTreeNode<I, K> parent, int index) {
         throw new UnsupportedOperationException();
     }
 
     protected void insertNonFull(BTreeNode<I, K> node, I value) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public BTreeNode<I, K> find(I value) {
+        return find(getRoot(), value);
     }
 
     protected BTreeNode<I, K> find(BTreeNode<I, K> root, I value) {
@@ -63,18 +69,12 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
     }
 
     protected BTreeNode<I, K> assemble(BTreeNode<I, K> parent, int child) {
-        final NodeDefinition<K> definition = getNodeStore().read(parent.getKey(), child);
-        final List<K> children = definition.getKeys();
-        final List<K> siblings = parent.getKeys();
-        final K key = siblings.get(child);
-        final List<K> previous = siblings.subList(0, child);
-        final List<K> next = child < siblings.size() ? siblings.subList(child + 1, siblings.size()) : Collections.<K>emptyList();
-        final I data = getDataStore().read(key);
-        final BTreeNode<I, K> node = new BTreeNode<>(getDataStore(), getNodeStore(), previous, next);
-        node.setParent(parent);
+        final NodeDefinition<K> definition = getNodeStore().read(parent.getId(), child);
+        final I value = getDataStore().read(definition.getId());
+        final BTreeNode<I, K> node = new BTreeNode<>(getDataStore(), getNodeStore(), parent.getKeys(), child, definition.getId());
         node.setLeaf(definition.isLeaf());
-        node.setValue(data);
-        for (K childKey : children) {
+        node.setValue(value);
+        for (K childKey : definition.getKeys()) {
             node.addKey(childKey);
         }
         return node;

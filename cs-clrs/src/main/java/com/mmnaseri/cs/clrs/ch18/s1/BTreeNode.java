@@ -11,23 +11,23 @@ import java.util.UUID;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/27/15)
  */
-public class BTreeNode<I extends Indexed<K>, K extends Comparable<K>> extends LevelLinkedTreeNode<I> {
+public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I> {
 
-    private final DataStore<I, K> storage;
+    private final DataStore<I> dataStore;
     private final NodeStore<K> nodeStore;
-    private final List<K> before;
-    private final List<K> after;
     private final List<K> keys;
+    private final List<K> siblings;
+    private final int index;
     private boolean leaf;
     private final UUID id;
 
-    public BTreeNode(DataStore<I, K> storage, NodeStore<K> nodeStore, List<K> before, List<K> after) {
-        this.storage = storage;
+    public BTreeNode(DataStore<I> dataStore, NodeStore<K> nodeStore, List<K> siblings, int index, UUID id) {
+        this.dataStore = dataStore;
         this.nodeStore = nodeStore;
-        this.before = before;
-        this.after = after;
+        this.siblings = siblings;
+        this.index = index;
+        this.id = id;
         keys = new ArrayList<>();
-        id = UUID.randomUUID();
     }
 
     @Override
@@ -41,61 +41,35 @@ public class BTreeNode<I extends Indexed<K>, K extends Comparable<K>> extends Le
         return (BTreeNode<I, K>) super.getParent();
     }
 
-    @Override
-    public BTreeNode<I, K> getFirstChild() {
-        if (keys.isEmpty()) {
+    private BTreeNode<I, K> getNode(BTreeNode<I, K> parent, List<K> siblings, int index) {
+        if (index >= siblings.size() || index < 0) {
             return null;
         }
-        final I data = storage.read(keys.get(0));
-        final NodeDefinition<K> definition = nodeStore.read(getKey(), 0);
-        final List<K> children = definition.getKeys();
-        final BTreeNode<I, K> node = new BTreeNode<>(storage, nodeStore, Collections.<K>emptyList(), keys.subList(1, keys.size()));
+        final NodeDefinition<K> definition = nodeStore.read(parent.getId(), index);
+        final I data = dataStore.read(definition.getId());
+        final BTreeNode<I, K> node = new BTreeNode<>(dataStore, nodeStore, siblings, index, definition.getId());
         node.setValue(data);
-        node.setParent(this);
+        node.setParent(parent);
         node.setLeaf(definition.isLeaf());
-        for (K child : children) {
-            node.addKey(child);
+        for (K childKey : definition.getKeys()) {
+            node.addKey(childKey);
         }
         return node;
+    }
+
+    @Override
+    public BTreeNode<I, K> getFirstChild() {
+        return getNode(this, getKeys(), 0);
     }
 
     @Override
     public BTreeNode<I, K> getNextSibling() {
-        if (after.isEmpty()) {
-            return null;
-        }
-        final List<K> previous = new ArrayList<>(before);
-        final List<K> next = after.subList(1, after.size());
-        final I data = storage.read(after.get(0));
-        final NodeDefinition<K> definition = nodeStore.read(getKey(), previous.size());
-        final List<K> children = definition.getKeys();
-        final BTreeNode<I, K> node = new BTreeNode<>(storage, nodeStore, previous, next);
-        node.setValue(data);
-        node.setParent(getParent());
-        node.setLeaf(definition.isLeaf());
-        for (K child : children) {
-            node.addKey(child);
-        }
-        return node;
+        return getNode(getParent(), siblings, index + 1);
     }
 
     @Override
     public BTreeNode<I, K> getPreviousSibling() {
-        if (before.isEmpty()) {
-            return null;
-        }
-        final List<K> previous = before.subList(0, before.size() - 1);
-        final List<K> next = new ArrayList<>(after);
-        final I data = storage.read(before.get(before.size() - 1));
-        final NodeDefinition<K> definition = nodeStore.read(getKey(), previous.size());
-        final List<K> children = definition.getKeys();
-        final BTreeNode<I, K> node = new BTreeNode<>(storage, nodeStore, previous, next);
-        node.setValue(data);
-        node.setParent(getParent());
-        for (K child : children) {
-            node.addKey(child);
-        }
-        return node;
+        return getNode(getParent(), siblings, index - 1);
     }
 
     public void addKey(K key) {
@@ -120,10 +94,6 @@ public class BTreeNode<I extends Indexed<K>, K extends Comparable<K>> extends Le
     
     public K getKey(int index) {
         return getKeys().get(index);
-    }
-
-    public K getKey() {
-        return getValue() == null ? null : getValue().getKey();
     }
 
     @Override

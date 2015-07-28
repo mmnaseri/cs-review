@@ -10,11 +10,11 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 @Quality(Stage.UNTESTED)
 public abstract class AbstractBTree<I extends Indexed<K>, K extends Comparable<K>> {
 
-    private final DataStore<I, K> dataStore;
+    private final DataStore<I> dataStore;
     private final NodeStore<K> nodeStore;
     private final int degree;
 
-    public AbstractBTree(DataStore<I, K> dataStore, NodeStore<K> nodeStore, int degree) {
+    public AbstractBTree(DataStore<I> dataStore, NodeStore<K> nodeStore, int degree) {
         this.dataStore = dataStore;
         this.nodeStore = nodeStore;
         this.degree = degree;
@@ -26,7 +26,7 @@ public abstract class AbstractBTree<I extends Indexed<K>, K extends Comparable<K
 
     public abstract BTreeNode<I, K> find(I value);
 
-    protected DataStore<I, K> getDataStore() {
+    protected DataStore<I> getDataStore() {
         return dataStore;
     }
 

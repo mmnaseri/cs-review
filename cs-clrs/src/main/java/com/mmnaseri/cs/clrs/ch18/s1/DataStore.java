@@ -1,13 +1,15 @@
 package com.mmnaseri.cs.clrs.ch18.s1;
 
+import java.util.UUID;
+
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/27/15)
  */
-public interface DataStore<E extends Indexed<K>, K extends Comparable<K>> {
+public interface DataStore<E> {
 
-    E read(K key);
+    E read(UUID id);
 
-    void write(K key, E data);
+    void write(UUID id, E data);
 
 }

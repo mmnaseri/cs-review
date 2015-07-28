@@ -1,6 +1,7 @@
 package com.mmnaseri.cs.clrs.ch18.s1;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -10,6 +11,7 @@ public class NodeDefinition<K extends Comparable<K>> {
 
     private boolean leaf;
     private List<K> keys;
+    private UUID id;
 
     public NodeDefinition() {
     }
@@ -35,4 +37,11 @@ public class NodeDefinition<K extends Comparable<K>> {
         this.keys = keys;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 }

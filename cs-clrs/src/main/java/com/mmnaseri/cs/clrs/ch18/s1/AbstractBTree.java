@@ -12,10 +12,12 @@ public abstract class AbstractBTree<I extends Indexed<K>, K extends Comparable<K
 
     private final DataStore<I, K> dataStore;
     private final NodeStore<K> nodeStore;
+    private final int degree;
 
-    public AbstractBTree(DataStore<I, K> dataStore, NodeStore<K> nodeStore) {
+    public AbstractBTree(DataStore<I, K> dataStore, NodeStore<K> nodeStore, int degree) {
         this.dataStore = dataStore;
         this.nodeStore = nodeStore;
+        this.degree = degree;
     }
 
     public abstract void insert(I value);
@@ -30,6 +32,10 @@ public abstract class AbstractBTree<I extends Indexed<K>, K extends Comparable<K
 
     protected NodeStore<K> getNodeStore() {
         return nodeStore;
+    }
+
+    public int getDegree() {
+        return degree;
     }
 
 }

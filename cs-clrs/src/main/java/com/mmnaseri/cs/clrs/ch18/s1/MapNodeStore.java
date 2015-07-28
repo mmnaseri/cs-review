@@ -1,7 +1,6 @@
 package com.mmnaseri.cs.clrs.ch18.s1;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,16 +9,19 @@ import java.util.Map;
  */
 public class MapNodeStore<K extends Comparable<K>> implements NodeStore<K> {
 
-    private final Map<K, List<K>> map = new HashMap<>();
+    private final Map<K, Map<Integer, NodeDefinition<K>>> definitions = new HashMap<>();
 
     @Override
-    public List<K> read(K node) {
-        return map.get(node);
+    public NodeDefinition<K> read(K parent, int index) {
+        return definitions.containsKey(parent) ? definitions.get(parent).get(index) : null;
     }
 
     @Override
-    public void write(K node, List<K> children) {
-        map.put(node, children);
+    public void write(K parent, int index, NodeDefinition<K> definition) {
+        if (!definitions.containsKey(parent)) {
+            definitions.put(parent, new HashMap<Integer, NodeDefinition<K>>());
+        }
+        definitions.get(parent).put(index, definition);
     }
 
 }

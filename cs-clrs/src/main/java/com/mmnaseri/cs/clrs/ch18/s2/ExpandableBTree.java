@@ -4,6 +4,7 @@ import com.mmnaseri.cs.clrs.ch18.s1.*;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,8 +16,10 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
 
     private BTreeNode<I, K> root;
 
-    public ExpandableBTree(DataStore<I, K> dataStore, NodeStore<K> nodeStore) {
-        super(dataStore, nodeStore);
+    public ExpandableBTree(DataStore<I, K> dataStore, NodeStore<K> nodeStore, int degree) {
+        super(dataStore, nodeStore, degree);
+        root = new BTreeNode<>(getDataStore(), getNodeStore(), Collections.<K>emptyList(), Collections.<K>emptyList());
+        root.setLeaf(true);
     }
 
     public BTreeNode<I, K> getRoot() {
@@ -29,43 +32,47 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
 
     @Override
     public void insert(I value) {
-        throw new UnsupportedOperationException("This operation has not been implemented yet");
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public BTreeNode<I, K> find(I value) {
-        if (getRoot() == null) {
-            return null;
-        }
         return find(getRoot(), value);
     }
 
+    protected void split(BTreeNode<I, K> parent, int index) {
+        throw new UnsupportedOperationException();
+    }
+
+    protected void insertNonFull(BTreeNode<I, K> node, I value) {
+        throw new UnsupportedOperationException();
+    }
+
     protected BTreeNode<I, K> find(BTreeNode<I, K> root, I value) {
-        if (value.equals(root.getValue())) {
+        int i = 0;
+        while (i < root.getKeys().size() && root.getKey(i).compareTo(value.getKey()) < 0) {
+            i ++;
+        }
+        if (i < root.getKeys().size() && root.getKey(i).equals(value.getKey())) {
             return root;
-        }
-        if (root.isLeaf()) {
+        } else if (root.isLeaf()) {
             return null;
+        } else {
+            return find(assemble(root, i), value);
         }
-        final List<K> keys = root.getKeys();
-        final K key = value.getKey();
-        for (int i = 0; i < keys.size(); i++) {
-            K target = keys.get(i);
-            if (target.compareTo(key) > 0) {
-                return find(assemble(root, i), value);
-            }
-        }
-        return find(assemble(root, keys.size() - 1), value);
     }
 
     protected BTreeNode<I, K> assemble(BTreeNode<I, K> parent, int child) {
-        final List<K> keys = parent.getKeys();
-        final K key = keys.get(child);
+        final NodeDefinition<K> definition = getNodeStore().read(parent.getKey(), child);
+        final List<K> children = definition.getKeys();
+        final List<K> siblings = parent.getKeys();
+        final K key = siblings.get(child);
+        final List<K> previous = siblings.subList(0, child);
+        final List<K> next = child < siblings.size() ? siblings.subList(child + 1, siblings.size()) : Collections.<K>emptyList();
         final I data = getDataStore().read(key);
-        final List<K> children = getNodeStore().read(key);
-        final List<K> before = keys.subList(0, child);
-        final List<K> after = keys.subList(child + 1, keys.size());
-        final BTreeNode<I, K> node = new BTreeNode<>(getDataStore(), getNodeStore(), before, after);
+        final BTreeNode<I, K> node = new BTreeNode<>(getDataStore(), getNodeStore(), previous, next);
+        node.setParent(parent);
+        node.setLeaf(definition.isLeaf());
         node.setValue(data);
         for (K childKey : children) {
             node.addKey(childKey);

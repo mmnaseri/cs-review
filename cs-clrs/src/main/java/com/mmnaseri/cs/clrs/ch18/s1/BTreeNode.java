@@ -16,7 +16,7 @@ public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I
     private final Storage<I> dataStore;
     private final Storage<NodeDefinition<K>> nodeStore;
     private final List<K> keys;
-    private int index;
+    private final int index;
     private boolean leaf;
     private final UUID id;
 
@@ -78,10 +78,6 @@ public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I
         keys.add(index, key);
     }
 
-    public void removeKey(K key) {
-        keys.remove(key);
-    }
-
     public void removeKey(int index) {
         keys.remove(index);
     }
@@ -109,10 +105,6 @@ public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I
 
     public int getIndex() {
         return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 
 }

@@ -16,9 +16,10 @@ public class NodeDefinition<K extends Comparable<K>> {
     public NodeDefinition() {
     }
 
-    public NodeDefinition(boolean leaf, List<K> keys) {
+    public NodeDefinition(boolean leaf, List<K> keys, UUID id) {
         this.leaf = leaf;
         this.keys = keys;
+        this.id = id;
     }
 
     public boolean isLeaf() {
@@ -43,5 +44,10 @@ public class NodeDefinition<K extends Comparable<K>> {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return id.toString().substring(id.toString().length() - 4) + keys.toString();
     }
 }

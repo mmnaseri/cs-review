@@ -13,21 +13,19 @@ import java.util.UUID;
  */
 public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I> {
 
-    private final DataStore<I> dataStore;
-    private final NodeStore<K> nodeStore;
+    private final Storage<I> dataStore;
+    private final Storage<NodeDefinition<K>> nodeStore;
     private final List<K> keys;
-    private final List<K> siblings;
-    private final int index;
+    private int index;
     private boolean leaf;
     private final UUID id;
 
-    public BTreeNode(DataStore<I> dataStore, NodeStore<K> nodeStore, List<K> siblings, int index, UUID id) {
+    public BTreeNode(Storage<I> dataStore, Storage<NodeDefinition<K>> nodeStore, int index, UUID id) {
         this.dataStore = dataStore;
         this.nodeStore = nodeStore;
-        this.siblings = siblings;
         this.index = index;
         this.id = id;
-        keys = new ArrayList<>();
+        this.keys = new ArrayList<>();
     }
 
     @Override
@@ -41,13 +39,13 @@ public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I
         return (BTreeNode<I, K>) super.getParent();
     }
 
-    private BTreeNode<I, K> getNode(BTreeNode<I, K> parent, List<K> siblings, int index) {
-        if (index >= siblings.size() || index < 0) {
+    private BTreeNode<I, K> getNode(BTreeNode<I, K> parent, int index) {
+        final NodeDefinition<K> definition = nodeStore.read(parent.getId(), index);
+        if (definition == null) {
             return null;
         }
-        final NodeDefinition<K> definition = nodeStore.read(parent.getId(), index);
-        final I data = dataStore.read(definition.getId());
-        final BTreeNode<I, K> node = new BTreeNode<>(dataStore, nodeStore, siblings, index, definition.getId());
+        final I data = dataStore.read(parent.getId(), index);
+        final BTreeNode<I, K> node = new BTreeNode<>(dataStore, nodeStore, index, definition.getId());
         node.setValue(data);
         node.setParent(parent);
         node.setLeaf(definition.isLeaf());
@@ -59,17 +57,17 @@ public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I
 
     @Override
     public BTreeNode<I, K> getFirstChild() {
-        return getNode(this, getKeys(), 0);
+        return getNode(this, 0);
     }
 
     @Override
     public BTreeNode<I, K> getNextSibling() {
-        return getNode(getParent(), siblings, index + 1);
+        return getNode(getParent(), index + 1);
     }
 
     @Override
     public BTreeNode<I, K> getPreviousSibling() {
-        return getNode(getParent(), siblings, index - 1);
+        return getNode(getParent(), index - 1);
     }
 
     public void addKey(K key) {
@@ -107,6 +105,14 @@ public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I
 
     public UUID getId() {
         return id;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
 }

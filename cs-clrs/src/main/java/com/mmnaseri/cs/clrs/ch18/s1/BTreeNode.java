@@ -107,4 +107,8 @@ public class BTreeNode<I, K extends Comparable<K>> extends LevelLinkedTreeNode<I
         return index;
     }
 
+    @Override
+    public String toString() {
+        return id.toString().substring(id.toString().length() - 4) + keys;
+    }
 }

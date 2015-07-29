@@ -18,6 +18,9 @@ public abstract class AbstractBTree<I extends Indexed<K>, K extends Comparable<K
         this.dataStore = dataStore;
         this.nodeStore = nodeStore;
         this.degree = degree;
+        if (degree < 2) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public abstract void insert(I value);
@@ -36,7 +39,7 @@ public abstract class AbstractBTree<I extends Indexed<K>, K extends Comparable<K
         return nodeStore;
     }
 
-    public int getDegree() {
+    public final int getDegree() {
         return degree;
     }
 

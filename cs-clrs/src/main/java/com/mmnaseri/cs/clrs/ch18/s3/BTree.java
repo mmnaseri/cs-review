@@ -28,12 +28,12 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
         delete(getRoot(), key);
     }
 
-    private void delete(BTreeNode<I, K> node, K key) {
+    private void delete(BTreeNode<K> node, K key) {
         int index = 0;
         while (index < node.getKeys().size() && node.getKey(index).compareTo(key) < 0) {
             index ++;
         }
-        BTreeNode<I, K> child;
+        BTreeNode<K> child;
         if (index < node.getKeys().size() && node.getKey(index).equals(key)) {
             if (node.isLeaf()) {
                 //shift any satellite data to the right of the key by one
@@ -46,8 +46,8 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
                 //update node definition
                 writeNode(node);
             } else {
-                final BTreeNode<I, K> left = assemble(node, index);
-                final BTreeNode<I, K> predecessor = findLeaf(left).getNode();
+                final BTreeNode<K> left = assemble(node, index);
+                final BTreeNode<K> predecessor = findLeaf(left).getNode();
                 if (left.getKeys().size() > getDegree() - 1) {
                     //find the key we want to replace this node with
                     final K target = predecessor.getKey(predecessor.getKeys().size() - 1);
@@ -61,9 +61,9 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
                     writeNode(node);
                     return;
                 }
-                final BTreeNode<I, K> right = assemble(node, index + 1);
+                final BTreeNode<K> right = assemble(node, index + 1);
                 if (right.getKeys().size() > getDegree() - 1) {
-                    BTreeNode<I, K> successor = right;
+                    BTreeNode<K> successor = right;
                     while (!successor.isLeaf()) {
                         successor = assemble(successor, 0);
                     }
@@ -90,7 +90,7 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
             if (child.getKeys().size() < getDegree()) {
                 if (index > 0) {
                     //try to see if child's previous sibling can be of any help
-                    final BTreeNode<I, K> left = assemble(node, index - 1);
+                    final BTreeNode<K> left = assemble(node, index - 1);
                     if (left.getKeys().size() >= getDegree()) {
                         //we need to shift everything under child one to the right
                         for (int i = child.getKeys().size(); i >= 0; i--) {
@@ -113,7 +113,7 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
                     }
                 }
                 if (index < node.getKeys().size()) {
-                    final BTreeNode<I, K> right = assemble(node, index + 1);
+                    final BTreeNode<K> right = assemble(node, index + 1);
                     if (right.getKeys().size() >= getDegree()) {
                         getDataStore().move(right.getId(), 0, child.getId(), child.getKeys().size() + 1);
                         getNodeStore().move(right.getId(), 0, child.getId(), child.getKeys().size() + 1);
@@ -143,7 +143,7 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
         }
     }
 
-    private void fixRoot(BTreeNode<I, K> node, BTreeNode<I, K> child) {
+    private void fixRoot(BTreeNode<K> node, BTreeNode<K> child) {
         if (node.isRoot() && node.getKeys().isEmpty()) {
             //the root node was emptied after the merge, which means we have to replaced it
             child.setParent(null);
@@ -153,9 +153,9 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
         }
     }
 
-    private BTreeNode<I, K> merge(BTreeNode<I, K> node, int index) {
-        final BTreeNode<I, K> left = assemble(node, index);
-        final BTreeNode<I, K> right = assemble(node, index + 1);
+    private BTreeNode<K> merge(BTreeNode<K> node, int index) {
+        final BTreeNode<K> left = assemble(node, index);
+        final BTreeNode<K> right = assemble(node, index + 1);
         final K middle = node.getKey(index);
         for (int i = index + 1; i <= node.getKeys().size(); i ++) {
             getDataStore().move(node.getId(), i, node.getId(), i - 1);

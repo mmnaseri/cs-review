@@ -28,7 +28,7 @@ public abstract class BTreeTestTools {
         }
     }
 
-    public static void collectLeaves(Storage<?> dataStore, BTreeNode<?, ?> node, List<String> collection) {
+    public static void collectLeaves(Storage<?> dataStore, BTreeNode<?> node, List<String> collection) {
         if (node.isLeaf()) {
             int size = collection.size();
             final List<?> keys = node.getKeys();

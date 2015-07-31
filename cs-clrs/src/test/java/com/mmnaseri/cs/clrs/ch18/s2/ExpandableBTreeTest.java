@@ -52,7 +52,7 @@ public class ExpandableBTreeTest {
             }
         }
         int fromDegree = 2;
-        int toDegree = 250;
+        int toDegree = 100;
         int benchmark = 500;
         final List<Object[]> cases = new ArrayList<>();
         for (int degree = fromDegree; degree < toDegree + 1; degree++) {

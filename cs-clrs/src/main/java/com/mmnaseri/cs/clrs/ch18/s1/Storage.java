@@ -10,15 +10,9 @@ public interface Storage<E> {
 
     E read(UUID id, int child);
 
-    E read(UUID id);
-
     void write(UUID id, int index, E value);
 
-    void write(UUID id, E value);
-
     void move(UUID source, int sourceIndex, UUID target, int targetIndex);
-
-    void delete(UUID id);
 
     void delete(UUID id, int index);
 

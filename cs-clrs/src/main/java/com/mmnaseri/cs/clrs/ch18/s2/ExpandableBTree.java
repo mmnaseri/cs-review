@@ -25,7 +25,7 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
     protected void init() {
         root = new BTreeNode<>(getDataStore(), getNodeStore(), 0, UUID.randomUUID());
         root.setLeaf(true);
-        getNodeStore().write(root.getId(), new NodeDefinition<>(true, root.getKeys(), root.getId()));
+        getNodeStore().write(getId(), 0, new NodeDefinition<>(true, root.getKeys(), root.getId()));
     }
 
     public BTreeNode<I, K> getRoot() {
@@ -44,9 +44,9 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
             root.setLeaf(false);
             originalRoot.setParent(root);
             //delete the original root node from disk
-            getNodeStore().delete(originalRoot.getId());
+            getNodeStore().delete(getId(), 0);
             //write new root node definition unto the disk
-            getNodeStore().write(root.getId(), new NodeDefinition<>(root.isLeaf(), root.getKeys(), root.getId()));
+            getNodeStore().write(getId(), 0, new NodeDefinition<>(root.isLeaf(), root.getKeys(), root.getId()));
             //rewrite original root node as a new regular internal node
             getNodeStore().write(root.getId(), 0, new NodeDefinition<>(originalRoot.isLeaf(), originalRoot.getKeys(), originalRoot.getId()));
             setRoot(root);
@@ -187,7 +187,7 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
         if (!node.isRoot()) {
             getNodeStore().write(node.getParent().getId(), node.getIndex(), definition);
         } else {
-            getNodeStore().write(node.getId(), definition);
+            getNodeStore().write(getId(), 0, definition);
         }
     }
 

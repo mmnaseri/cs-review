@@ -51,10 +51,10 @@ public class BTreeTest {
     public Object[][] stressDataProvider() {
         final List<String> input = sampleProducer();
         int fromDegree = 2;
-        int toDegree = 250;
-        int benchmark = 250;
+        int toDegree = 100;
+        int benchmark = 100;
         final List<Object[]> cases = new ArrayList<>();
-        for (int degree = fromDegree; degree < toDegree + 1; degree++) {
+        for (int degree = fromDegree; degree < toDegree + 2; degree++) {
             cases.add(new Object[]{degree, benchmark, input});
         }
         return cases.toArray(new Object[cases.size()][]);

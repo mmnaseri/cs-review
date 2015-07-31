@@ -144,7 +144,7 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
             //the root node was emptied after the merge, which means we have to replaced it
             child.setParent(null);
             setRoot(child);
-            getNodeStore().delete(getId(), 0);
+            deleteNode(getId(), 0);
             writeNode(child);
         }
     }
@@ -167,8 +167,8 @@ public class BTree<I extends Indexed<K>, K extends Comparable<K>> extends Expand
         }
         writeNode(left);
         for (int i = 0; i < right.getKeys().size() + 1; i++) {
-            getDataStore().delete(right.getId(), i);
-            getNodeStore().delete(right.getId(), i);
+            deleteData(right.getId(), i);
+            deleteNode(right.getId(), i);
         }
         left.setParent(node);
         return left;

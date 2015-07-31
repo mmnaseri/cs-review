@@ -39,16 +39,56 @@ public abstract class AbstractBTree<I extends Indexed<K>, K extends Comparable<K
 
     public abstract I find(I value);
 
-    protected Storage<I> getDataStore() {
-        return dataStore;
-    }
-
-    protected Storage<NodeDefinition<K>> getNodeStore() {
-        return nodeStore;
-    }
-
     public final int getDegree() {
         return degree;
     }
 
+    protected BTreeNode<K> createNode(int index) {
+        return createNode(UUID.randomUUID(), index);
+    }
+
+    protected BTreeNode<K> createNode(UUID id, int index) {
+        return new BTreeNode<>(nodeStore, index, id);
+    }
+
+    protected void writeNode(BTreeNode<K> node) {
+        final NodeDefinition<K> definition = new NodeDefinition<>(node.isLeaf(), node.getKeys(), node.getId());
+        if (!node.isRoot()) {
+            nodeStore.write(node.getParent().getId(), node.getIndex(), definition);
+        } else {
+            nodeStore.write(getId(), 0, definition);
+        }
+    }
+
+    protected void moveInternals(BTreeNode<K> source, int sourceIndex, BTreeNode<K> target, int targetIndex) {
+        moveInternals(source, sourceIndex, target.getId(), targetIndex);
+    }
+
+    protected void moveInternals(BTreeNode<K> source, int sourceIndex, UUID target, int targetIndex) {
+        if (source.isLeaf()) {
+            dataStore.move(source.getId(), sourceIndex, target, targetIndex);
+        } else {
+            nodeStore.move(source.getId(), sourceIndex, target, targetIndex);
+        }
+    }
+
+    protected void deleteNode(UUID id, int index) {
+        nodeStore.delete(id, index);
+    }
+
+    protected NodeDefinition<K> readNode(UUID id, int index) {
+        return nodeStore.read(id, index);
+    }
+
+    protected void writeData(UUID id, int index, I value) {
+        dataStore.write(id, index, value);
+    }
+
+    protected I readData(UUID id, int index) {
+        return dataStore.read(id, index);
+    }
+
+    protected void deleteData(UUID id, int index) {
+        dataStore.delete(id, index);
+    }
 }

@@ -1,11 +1,17 @@
 package com.mmnaseri.cs.clrs.ch18.s2;
 
-import com.mmnaseri.cs.clrs.ch18.s1.*;
-import com.mmnaseri.cs.clrs.ch18.s3.BTreeTest;
+import com.mmnaseri.cs.clrs.ch18.BTreeTestTools;
+import com.mmnaseri.cs.clrs.ch18.s1.MapStorage;
+import com.mmnaseri.cs.clrs.ch18.s1.NodeDefinition;
+import com.mmnaseri.cs.clrs.ch18.s1.ReflectiveIndexed;
+import com.mmnaseri.cs.clrs.ch18.s1.Storage;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -65,7 +71,7 @@ public class ExpandableBTreeTest {
                 tree.insert(new ReflectiveIndexed<>(input.get(insertion)));
             }
             //each node must have a minimum of t-1 and a maximum of 2t-1 keys
-            check(tree.getRoot(), degree);
+            BTreeTestTools.checkNodes(tree.getRoot(), degree);
             //all the items inserted in the tree must be available via lookup
             for (int index = 0; index < size; index++) {
                 final ReflectiveIndexed<String> found = tree.find(new ReflectiveIndexed<>(input.get(index)));
@@ -79,38 +85,12 @@ public class ExpandableBTreeTest {
             }
             //the leaves in the tree must have the exact number of data that were inserted
             final List<String> trial = new ArrayList<>();
-            collectLeaves(dataStore, tree.getRoot(), trial);
+            BTreeTestTools.collectLeaves(dataStore, tree.getRoot(), trial);
             assertThat(trial.size(), is(size));
             //the dat collected from leaves must come in sorted order
             final List<String> inserted = input.subList(0, size);
             Collections.sort(inserted);
             assertThat(trial, is(inserted));
-        }
-    }
-
-    private static void collectLeaves(Storage<?> dataStore, BTreeNode<?, ?> node, List<String> collection) {
-        if (node.isLeaf()) {
-            int size = collection.size();
-            final List<?> keys = node.getKeys();
-            if (dataStore.read(node.getId(), 0) != null) {
-                collection.add(String.valueOf(dataStore.read(node.getId(), 0)));
-            } else {
-                size--;
-            }
-            for (int i = 0; i < keys.size(); i++) {
-                final Object value = dataStore.read(node.getId(), i + 1);
-                if (value == null) {
-                    size--;
-                    continue;
-                }
-                collection.add(String.valueOf(value));
-            }
-            assertThat(collection.size() - size, is(keys.size() + 1));
-        }
-        node = node.getFirstChild();
-        while (node != null) {
-            collectLeaves(dataStore, node, collection);
-            node = node.getNextSibling();
         }
     }
 
@@ -125,20 +105,6 @@ public class ExpandableBTreeTest {
             throw new UnsupportedOperationException();
         }
 
-    }
-
-    private static void check(BTreeNode node, int degree) {
-        if (node.isRoot()) {
-            assertThat(node.getKeys().isEmpty(), is(false));
-        } else {
-            assertThat(node.getKeys().size(), is(greaterThanOrEqualTo(degree - 1)));
-            assertThat(node.getKeys().size(), is(lessThan(2 * degree)));
-        }
-        node = node.getFirstChild();
-        while (node != null) {
-            check(node, degree);
-            node = node.getNextSibling();
-        }
     }
 
 }

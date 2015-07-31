@@ -58,15 +58,14 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
     }
 
     private void split(BTreeNode<K> parent, int index) {
-        final BTreeNode<K> child = assemble(parent, index);
+        final BTreeNode<K> child = loadChild(parent, index);
         final List<K> keys = child.getKeys();
         final int midpoint = getDegree() - 1;
         final List<K> left = new ArrayList<>(keys.subList(midpoint + 1, keys.size()));
         final K key = keys.get(midpoint);
         //shift everything one to the right on the parent side to make room for the new key
         for (int i = parent.getKeys().size(); i > index; i --) {
-            getNodeStore().move(parent.getId(), i, parent.getId(), i + 1);
-            getDataStore().move(parent.getId(), i, parent.getId(), i + 1);
+            moveInternals(parent, i, parent, i + 1);
         }
         //pull the key up to the parent
         parent.addKey(index, key);
@@ -74,8 +73,7 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
         final UUID uuid = UUID.randomUUID();
         //move items in the parent to make room for the new key
         for (int i = midpoint + 1; i <= keys.size(); i ++) {
-            getNodeStore().move(child.getId(), i, uuid, i - midpoint - 1);
-            getDataStore().move(child.getId(), i, uuid, i - midpoint - 1);
+            moveInternals(child, i, uuid, i - midpoint - 1);
         }
         //remove keys from the original node
         while (child.getKeys().size() > midpoint) {
@@ -100,11 +98,11 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
         int i = node.getKeys().size() - 1;
         if (node.isLeaf()) {
             while (i >= 0 && node.getKey(i).compareTo(value.getKey()) > 0) {
-                getDataStore().move(node.getId(), i + 1, node.getId(), i + 2);
+                moveInternals(node, i + 1, node, i + 2);
                 i --;
             }
             i ++;
-            getDataStore().move(node.getId(), i, node.getId(), i + 1);
+            moveInternals(node, i, node.getId(), i + 1);
             node.addKey(i, value.getKey());
             writeNode(node);
             getDataStore().write(node.getId(), i, value);
@@ -113,13 +111,13 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
                 i --;
             }
             i ++;
-            BTreeNode<K> child = assemble(node, i);
+            BTreeNode<K> child = loadChild(node, i);
             if (isFull(child)) {
                 split(node, i);
                 if (node.getKeys().get(i).compareTo(value.getKey()) < 0) {
-                    child = assemble(node, i + 1);
+                    child = loadChild(node, i + 1);
                 } else {
-                    child = assemble(node, i);
+                    child = loadChild(node, i);
                 }
             }
             insertNonFull(child, value);
@@ -137,14 +135,14 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
             return null;
         }
         if (!result.getNode().isLeaf()) {
-            result = findLeaf(assemble(result.getNode(), result.getIndex()));
+            result = findLeaf(loadChild(result.getNode(), result.getIndex()));
         }
         return getDataStore().read(result.getNode().getId(), result.getIndex());
     }
 
     protected SearchResult<K> findLeaf(BTreeNode<K> node) {
         if (!node.isLeaf()) {
-            return findLeaf(assemble(node, node.getKeys().size()));
+            return findLeaf(loadChild(node, node.getKeys().size()));
         } else {
             return new SearchResult<>(node, node.getKeys().size());
         }
@@ -165,11 +163,11 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
         } else if (root.isLeaf()) {
             return null;
         } else {
-            return find(assemble(root, i), key);
+            return find(loadChild(root, i), key);
         }
     }
     
-    protected BTreeNode<K> assemble(BTreeNode<K> parent, int child) {
+    protected BTreeNode<K> loadChild(BTreeNode<K> parent, int child) {
         final NodeDefinition<K> definition = getNodeStore().read(parent.getId(), child);
         final I value = getDataStore().read(parent.getId(), child);
         final BTreeNode<K> node = new BTreeNode<>(getNodeStore(), child, definition.getId());
@@ -188,6 +186,18 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
             getNodeStore().write(node.getParent().getId(), node.getIndex(), definition);
         } else {
             getNodeStore().write(getId(), 0, definition);
+        }
+    }
+
+    protected void moveInternals(BTreeNode<K> source, int sourceIndex, BTreeNode<K> target, int targetIndex) {
+        moveInternals(source, sourceIndex, target.getId(), targetIndex);
+    }
+
+    protected void moveInternals(BTreeNode<K> source, int sourceIndex, UUID target, int targetIndex) {
+        if (source.isLeaf()) {
+            getDataStore().move(source.getId(), sourceIndex, target, targetIndex);
+        } else {
+            getNodeStore().move(source.getId(), sourceIndex, target, targetIndex);
         }
     }
 

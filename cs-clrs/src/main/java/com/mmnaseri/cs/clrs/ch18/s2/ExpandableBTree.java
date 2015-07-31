@@ -57,7 +57,7 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
         }
     }
 
-    protected void split(BTreeNode<I, K> parent, int index) {
+    private void split(BTreeNode<I, K> parent, int index) {
         final BTreeNode<I, K> child = assemble(parent, index);
         final List<K> keys = child.getKeys();
         final int midpoint = getDegree() - 1;
@@ -96,7 +96,7 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
         }
     }
 
-    protected void insertNonFull(BTreeNode<I, K> node, I value) {
+    private void insertNonFull(BTreeNode<I, K> node, I value) {
         int i = node.getKeys().size() - 1;
         if (node.isLeaf()) {
             while (i >= 0 && node.getKey(i).compareTo(value.getKey()) > 0) {
@@ -106,12 +106,7 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
             i ++;
             getDataStore().move(node.getId(), i, node.getId(), i + 1);
             node.addKey(i, value.getKey());
-            final NodeDefinition<K> definition = new NodeDefinition<>(true, node.getKeys(), node.getId());
-            if (!node.isRoot()) {
-                getNodeStore().write(node.getParent().getId(), node.getIndex(), definition);
-            } else {
-                getNodeStore().write(node.getId(), definition);
-            }
+            writeNode(node);
             getDataStore().write(node.getId(), i, value);
         } else {
             while (i >= 0 && node.getKey(i).compareTo(value.getKey()) > 0) {
@@ -147,7 +142,7 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
         return getDataStore().read(result.getNode().getId(), result.getIndex());
     }
 
-    private SearchResult<I, K> findLeaf(BTreeNode<I, K> node) {
+    protected SearchResult<I, K> findLeaf(BTreeNode<I, K> node) {
         if (!node.isLeaf()) {
             return findLeaf(assemble(node, node.getKeys().size()));
         } else {
@@ -185,6 +180,15 @@ public abstract class ExpandableBTree<I extends Indexed<K>, K extends Comparable
             node.addKey(childKey);
         }
         return node;
+    }
+
+    protected void writeNode(BTreeNode<I, K> node) {
+        final NodeDefinition<K> definition = new NodeDefinition<>(node.isLeaf(), node.getKeys(), node.getId());
+        if (!node.isRoot()) {
+            getNodeStore().write(node.getParent().getId(), node.getIndex(), definition);
+        } else {
+            getNodeStore().write(node.getId(), definition);
+        }
     }
 
     protected static class SearchResult<I extends Indexed<K>, K extends Comparable<K>> {

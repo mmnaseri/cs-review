@@ -49,6 +49,9 @@ public class MapStorage<E> implements Storage<E> {
 
     @Override
     public void move(UUID source, int sourceIndex, UUID target, int targetIndex) {
+        if (read(target, targetIndex) != null) {
+            delete(target, targetIndex);
+        }
         final E value = read(source, sourceIndex);
         if (value != null) {
             delete(source, sourceIndex);

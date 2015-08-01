@@ -14,7 +14,7 @@ import java.util.Iterator;
  * @since 1.0 (6/6/15, 3:21 PM)
  */
 @Quality(Stage.UNTESTED)
-public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
+public class ArrayHeap<E extends Comparable<E>> implements Heap<E>, Iterable<E> {
 
     public static final int DEFAULT_CAPACITY = 256;
     private final HeapProperty<E> heapProperty;
@@ -111,6 +111,9 @@ public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
 
     @Override
     public E pop() {
+        if (size() == 0) {
+            throw new ArrayIndexOutOfBoundsException(-1);
+        }
         mark();
         final E top = peek();
         //restructure the heap
@@ -127,7 +130,6 @@ public class ArrayHeap<E extends Comparable<E>> implements Heap<E> {
         return size;
     }
 
-    @Override
     public E get(int index) {
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException(index);

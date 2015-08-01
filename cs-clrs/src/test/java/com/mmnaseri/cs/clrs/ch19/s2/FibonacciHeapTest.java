@@ -2,7 +2,6 @@ package com.mmnaseri.cs.clrs.ch19.s2;
 
 import com.mmnaseri.cs.clrs.ch06.s1.ArrayHeap;
 import com.mmnaseri.cs.clrs.common.Heap;
-import com.mmnaseri.cs.clrs.common.HeapProperty;
 import com.mmnaseri.cs.clrs.common.MergeableHeap;
 import com.mmnaseri.cs.clrs.common.TestTools;
 import com.mmnaseri.cs.clrs.common.impl.MinHeapProperty;

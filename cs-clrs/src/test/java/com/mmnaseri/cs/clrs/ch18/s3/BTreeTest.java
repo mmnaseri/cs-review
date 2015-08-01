@@ -4,11 +4,11 @@ import com.mmnaseri.cs.clrs.ch18.BTreeTestTools;
 import com.mmnaseri.cs.clrs.ch18.s1.MapStorage;
 import com.mmnaseri.cs.clrs.ch18.s1.NodeDefinition;
 import com.mmnaseri.cs.clrs.ch18.s1.ReflectiveIndexed;
+import com.mmnaseri.cs.clrs.common.TestTools;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,35 +21,9 @@ import static org.hamcrest.Matchers.*;
  */
 public class BTreeTest {
 
-    private List<String> sampleProducer() {
-        final List<String> input = new ArrayList<>();
-        final List<String> seed = Arrays.asList("1", "3", "2");
-        for (String prefix : seed) {
-            input.add(prefix);
-        }
-        for (int i = 0; i < 5; i ++) {
-            final List<List<String>> addendum = new ArrayList<>();
-            for (String word : input) {
-                final List<String> variations = new ArrayList<>();
-                for (String suffix : seed) {
-                    variations.add(word + suffix);
-                }
-                addendum.add(variations);
-            }
-            for (List<String> derivatives : addendum) {
-                for (String derivative : derivatives) {
-                    if (!input.contains(derivative)) {
-                        input.add(derivative);
-                    }
-                }
-            }
-        }
-        return input;
-    }
-
     @DataProvider
     public Object[][] stressDataProvider() {
-        final List<String> input = sampleProducer();
+        final List<String> input = TestTools.sampleProducer(5);
         int fromDegree = 2;
         int toDegree = 100;
         int benchmark = 100;
@@ -58,13 +32,6 @@ public class BTreeTest {
             cases.add(new Object[]{degree, benchmark, input});
         }
         return cases.toArray(new Object[cases.size()][]);
-    }
-
-    @DataProvider
-    public Object[][] failingTest() {
-        return new Object[][]{
-            new Object[]{3, 32, sampleProducer()}
-        };
     }
 
     @Test(dataProvider = "stressDataProvider")

@@ -14,20 +14,20 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/1/15, 12:50 AM)
  */
-@Quality(value = Stage.UNTESTED, explanation = "Checked out manually")
-public abstract class FibonacciHeap<E extends Comparable<E>> implements MergeableHeap<E> {
+@Quality(value = Stage.TESTED, explanation = "Stress tested against all interaction possibilities")
+public abstract class AbstractFibonacciHeap<E extends Comparable<E>> implements MergeableHeap<E> {
 
     private final HeapProperty<E> heapProperty;
     private FibonacciHeapNode<E> root = null;
     private int size = 0;
 
-    public FibonacciHeap(HeapProperty<E> heapProperty) {
+    public AbstractFibonacciHeap(HeapProperty<E> heapProperty) {
         this.heapProperty = heapProperty;
     }
 
     @Override
     public void merge(Heap<E> heap) {
-        if (!(heap instanceof FibonacciHeap<?>)) {
+        if (!(heap instanceof AbstractFibonacciHeap<?>)) {
             //if it isn't a fibonacci heap, just iterate over the items and merge them anyway
             while (!heap.isEmpty()) {
                 final E element = heap.pop();
@@ -36,7 +36,7 @@ public abstract class FibonacciHeap<E extends Comparable<E>> implements Mergeabl
         } else {
             //if it is a fibonacci heap merge by concatenating the two root chains and then
             //picking the better top node
-            final FibonacciHeap<E> that = (FibonacciHeap<E>) heap;
+            final AbstractFibonacciHeap<E> that = (AbstractFibonacciHeap<E>) heap;
             if (root == null) {
                 //if the current root is null, we prefer the new root, regardless of its value
                 root = that.root;
@@ -93,10 +93,6 @@ public abstract class FibonacciHeap<E extends Comparable<E>> implements Mergeabl
         }
         //keep a pointer to the top of the heap
         final FibonacciHeapNode<E> top = this.root;
-        //if the top is null this is an exception
-        if (top == null) {
-            throw new IllegalStateException();
-        }
         //reset parent pointer for all children of the top element
         FibonacciHeapNode<E> child = top.getChild();
         while (child != null) {

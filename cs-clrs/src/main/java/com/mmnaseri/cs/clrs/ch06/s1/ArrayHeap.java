@@ -130,6 +130,7 @@ public class ArrayHeap<E extends Comparable<E>> implements Heap<E>, Iterable<E> 
         return size;
     }
 
+    @Override
     public E get(int index) {
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException(index);

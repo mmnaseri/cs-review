@@ -20,10 +20,10 @@ import static org.hamcrest.Matchers.is;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/1/15, 11:30 AM)
  */
-public class AbstractFibonacciHeapTest {
+public class FibonacciHeapTest {
 
     protected MergeableHeap<String> getHeap() {
-        return new SimpleFibonacciHeap<>(new MinHeapProperty<String>());
+        return new FibonacciHeap<>(new MinHeapProperty<String>());
     }
 
     @Test
@@ -190,19 +190,6 @@ public class AbstractFibonacciHeapTest {
             assertThat(heap.size(), is(inserted.size() - i - 1));
         }
         assertThat(heap.isEmpty(), is(true));
-    }
-
-    private static class SimpleFibonacciHeap<E extends Comparable<E>> extends AbstractFibonacciHeap<E> {
-
-        public SimpleFibonacciHeap(HeapProperty<E> heapProperty) {
-            super(heapProperty);
-        }
-
-        @Override
-        public int change(int index, E newValue) {
-            throw new UnsupportedOperationException();
-        }
-
     }
 
 }

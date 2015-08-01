@@ -15,19 +15,19 @@ import java.util.List;
  * @since 1.0 (8/1/15, 12:50 AM)
  */
 @Quality(value = Stage.TESTED, explanation = "Stress tested against all interaction possibilities")
-public abstract class AbstractFibonacciHeap<E extends Comparable<E>> implements MergeableHeap<E> {
+public class FibonacciHeap<E extends Comparable<E>> implements MergeableHeap<E> {
 
     private final HeapProperty<E> heapProperty;
     private FibonacciHeapNode<E> root = null;
     private int size = 0;
 
-    public AbstractFibonacciHeap(HeapProperty<E> heapProperty) {
+    public FibonacciHeap(HeapProperty<E> heapProperty) {
         this.heapProperty = heapProperty;
     }
 
     @Override
     public void merge(Heap<E> heap) {
-        if (!(heap instanceof AbstractFibonacciHeap<?>)) {
+        if (!(heap instanceof FibonacciHeap<?>)) {
             //if it isn't a fibonacci heap, just iterate over the items and merge them anyway
             while (!heap.isEmpty()) {
                 final E element = heap.pop();
@@ -36,7 +36,7 @@ public abstract class AbstractFibonacciHeap<E extends Comparable<E>> implements 
         } else {
             //if it is a fibonacci heap merge by concatenating the two root chains and then
             //picking the better top node
-            final AbstractFibonacciHeap<E> that = (AbstractFibonacciHeap<E>) heap;
+            final FibonacciHeap<E> that = (FibonacciHeap<E>) heap;
             if (root == null) {
                 //if the current root is null, we prefer the new root, regardless of its value
                 root = that.root;
@@ -236,6 +236,16 @@ public abstract class AbstractFibonacciHeap<E extends Comparable<E>> implements 
                 }
             }
         }
+    }
+
+    @Override
+    public E get(int index) {
+        throw new UnsupportedOperationException("Order statistics is not supported in a fibonacci heap");
+    }
+
+    @Override
+    public int change(int index, E newValue) {
+        throw new UnsupportedOperationException("Order statistics is not supported in a fibonacci heap");
     }
 
 }

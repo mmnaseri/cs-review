@@ -8,11 +8,11 @@ import java.util.Set;
  */
 public interface DisjointSet<E extends Element<I>, I> {
 
-    Element<I> create(I representative);
+    E create(I representative);
 
-    Element<I> find(E item);
+    E find(E item);
 
-    Element<I> union(E first, E second);
+    E union(E first, E second);
 
     Set<I> elements(E item);
 

@@ -1,0 +1,68 @@
+package com.mmnaseri.cs.clrs.ch21.s1;
+
+import com.mmnaseri.cs.clrs.ch21.DisjointSet;
+import com.mmnaseri.cs.clrs.ch21.Element;
+import org.testng.annotations.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+/**
+ * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @since 1.0 (8/2/15, 11:37 AM)
+ */
+public abstract class BaseDisjointSetTest {
+    protected abstract DisjointSet<Element<Integer>, Integer> createSet();
+
+    @Test
+    public void testCreatingASet() throws Exception {
+        final DisjointSet<Element<Integer>, Integer> set = createSet();
+        final Element<Integer> first = set.create(1);
+        final Element<Integer> second = set.create(2);
+        assertThat(first, is(notNullValue()));
+        assertThat(second, is(notNullValue()));
+        assertThat(first.getValue(), is(notNullValue()));
+        assertThat(first.getValue(), is(1));
+        assertThat(second.getValue(), is(notNullValue()));
+        assertThat(second.getValue(), is(2));
+        final Element<Integer> firstRepresentative = set.find(first);
+        assertThat(firstRepresentative, is(notNullValue()));
+        assertThat(firstRepresentative.getValue(), is(first.getValue()));
+        final Element<Integer> secondRepresentative = set.find(second);
+        assertThat(secondRepresentative, is(notNullValue()));
+        assertThat(secondRepresentative.getValue(), is(second.getValue()));
+    }
+
+    @Test
+    public void testUnion() throws Exception {
+        final DisjointSet<Element<Integer>, Integer> set = createSet();
+        final Element<Integer> first = set.create(1);
+        final Element<Integer> second = set.create(2);
+        final Element<Integer> third = set.create(3);
+        assertThat(set.elements(first), contains(1));
+        assertThat(set.elements(second), contains(2));
+        assertThat(set.elements(third), contains(3));
+        set.union(first, second);
+        assertThat(set.elements(first), containsInAnyOrder(1, 2));
+        assertThat(set.elements(second), containsInAnyOrder(1, 2));
+        assertThat(set.elements(third), contains(3));
+        set.union(second, third);
+        assertThat(set.elements(first), containsInAnyOrder(1, 2, 3));
+        assertThat(set.elements(second), containsInAnyOrder(1, 2, 3));
+        assertThat(set.elements(third), containsInAnyOrder(1, 2, 3));
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testIncompatibleSetsFind() throws Exception {
+        final DisjointSet<Element<Integer>, Integer> one = createSet();
+        final DisjointSet<Element<Integer>, Integer> two = createSet();
+        two.find(one.create(1));
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testIncompatibleSetsUnion() throws Exception {
+        final DisjointSet<Element<Integer>, Integer> one = createSet();
+        final DisjointSet<Element<Integer>, Integer> two = createSet();
+        two.union(one.create(1), one.create(2));
+    }
+}

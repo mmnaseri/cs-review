@@ -10,7 +10,7 @@ import java.util.*;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/2/15, 3:41 AM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class BasicDisjointSet<I> implements DisjointSet<BasicElement<I>, I> {
 
     private final Map<UUID, List<I>> storage = new HashMap<>();
@@ -36,7 +36,7 @@ public class BasicDisjointSet<I> implements DisjointSet<BasicElement<I>, I> {
             element.setIndex(item.getIndex());
             return element;
         }
-        return null;
+        throw new IllegalArgumentException("This item does not belong to the current context");
     }
 
     @Override
@@ -44,9 +44,10 @@ public class BasicDisjointSet<I> implements DisjointSet<BasicElement<I>, I> {
         if (storage.containsKey(first.getIndex()) && storage.containsKey(second.getIndex())) {
             storage.get(first.getIndex()).addAll(storage.get(second.getIndex()));
             storage.remove(second.getIndex());
+            second.setIndex(first.getIndex());
             return find(first);
         }
-        return null;
+        throw new IllegalArgumentException("This item does not belong to the current context");
     }
 
     @Override

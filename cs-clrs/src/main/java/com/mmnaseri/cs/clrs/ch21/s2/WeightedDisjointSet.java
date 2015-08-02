@@ -7,7 +7,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/2/15, 3:36 AM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class WeightedDisjointSet<I> extends AbstractLinkedDisjointSet<WeightedLinkedElement<I>, I, WeightedLinkedElementContainer<I>> {
     
     @Override

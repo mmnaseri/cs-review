@@ -37,9 +37,14 @@ public abstract class AbstractForestDisjointSet<E extends TreeElement<I, E>, I> 
     public E union(E first, E second) {
         control(first);
         control(second);
-        final E root = find(first);
-        second.setParent(root);
-        return root;
+        final E firstRoot = find(first);
+        final E secondRoot = find(second);
+        return link(firstRoot, secondRoot);
+    }
+
+    protected E link(E firstRoot, E secondRoot) {
+        secondRoot.setParent(firstRoot);
+        return firstRoot;
     }
 
     @Override

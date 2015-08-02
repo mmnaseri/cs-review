@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.clrs.ch21.s1;
+package com.mmnaseri.cs.clrs.ch21.s2;
 
 import java.util.UUID;
 

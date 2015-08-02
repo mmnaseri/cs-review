@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch06.s1;
 
-import com.mmnaseri.cs.clrs.common.Heap;
 import com.mmnaseri.cs.clrs.common.HeapProperty;
+import com.mmnaseri.cs.clrs.common.PriorityQueue;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -14,7 +14,7 @@ import java.util.Iterator;
  * @since 1.0 (6/6/15, 3:21 PM)
  */
 @Quality(Stage.UNTESTED)
-public class ArrayHeap<E extends Comparable<E>> implements Heap<E>, Iterable<E> {
+public class ArrayHeap<E extends Comparable<E>> implements PriorityQueue<E>, Iterable<E> {
 
     public static final int DEFAULT_CAPACITY = 256;
     private final HeapProperty<E> heapProperty;

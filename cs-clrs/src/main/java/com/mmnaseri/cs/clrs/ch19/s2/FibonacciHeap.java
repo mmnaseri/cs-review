@@ -238,14 +238,4 @@ public class FibonacciHeap<E extends Comparable<E>> implements MergeableHeap<E> 
         }
     }
 
-    @Override
-    public E get(int index) {
-        throw new UnsupportedOperationException("Order statistics is not supported in a fibonacci heap");
-    }
-
-    @Override
-    public int change(int index, E newValue) {
-        throw new UnsupportedOperationException("Order statistics is not supported in a fibonacci heap");
-    }
-
 }

@@ -14,10 +14,6 @@ public interface Heap<E extends Comparable<E>> {
 
     int size();
 
-    E get(int index);
-
-    int change(int index, E newValue);
-
     void add(E item);
 
     boolean isEmpty();

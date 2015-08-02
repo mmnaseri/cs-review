@@ -4,6 +4,9 @@ import com.mmnaseri.cs.clrs.ch21.DisjointSet;
 import com.mmnaseri.cs.clrs.ch21.Element;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -65,4 +68,27 @@ public abstract class BaseDisjointSetTest {
         final DisjointSet<Element<Integer>, Integer> two = createSet();
         two.union(one.create(1), one.create(2));
     }
+
+    @Test
+    public void testLargeSet() throws Exception {
+        final DisjointSet<Element<Integer>, Integer> set = createSet();
+        final Element<Integer> base = set.create(-1);
+        final List<Element<Integer>> inserted = new ArrayList<>();
+        for (int i = 0; i < 5000; i++) {
+            final Element<Integer> element = set.create(i);
+            set.union(base, element);
+            inserted.add(element);
+            for (int j = 0; j < inserted.size(); j++) {
+                final Element<Integer> baseRepresentative = set.find(base);
+                final Element<Integer> itemRepresentative = set.find(inserted.get(i));
+                final Element<Integer> elementRepresentative = set.find(element);
+                assertThat(baseRepresentative, is(notNullValue()));
+                assertThat(itemRepresentative, is(notNullValue()));
+                assertThat(elementRepresentative, is(notNullValue()));
+                assertThat(itemRepresentative.getValue(), is(baseRepresentative.getValue()));
+                assertThat(elementRepresentative.getValue(), is(baseRepresentative.getValue()));
+            }
+        }
+    }
+
 }

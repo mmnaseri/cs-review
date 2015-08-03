@@ -11,30 +11,25 @@ import java.util.List;
  * @since 1.0 (8/2/15, 10:51 PM)
  */
 @Quality(Stage.UNTESTED)
-public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> implements Graph<E, V> {
+public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> extends AbstractGraph<E, V> {
 
     final List<AdjacencyEdge<E, V>> adjacencyLists = new ArrayList<>();
     final List<Vertex<V>> vertices = new ArrayList<>();
 
     @Override
-    public int getVertices() {
+    public int size() {
         return vertices.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return getVertices() == 0;
     }
 
     @Override
     public V deleteVertex(int index) {
         check(index);
         final V details = vertices.get(index).getDetails();
-        for (int i = 0; i < getVertices(); i++) {
+        for (int i = 0; i < size(); i++) {
             deleteEdge(index, (AdjacencyEdge<E, V>) getEdge(index, i));
             deleteEdge(i, (AdjacencyEdge<E, V>) getEdge(i, index));
         }
-        for (int i = index; i < getVertices() - 1; i++) {
+        for (int i = index; i < size() - 1; i++) {
             final Vertex<V> vertex = vertices.get(i + 1);
             vertex.setIndex(i);
             vertices.set(i, vertex);
@@ -133,11 +128,11 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
     public Graph<E, V> inverse() {
         final AdjacencyListGraph<E, V> graph = new AdjacencyListGraph<>();
         graph.vertices.addAll(vertices);
-        for (int i = 0; i < getVertices(); i++) {
+        for (int i = 0; i < size(); i++) {
             graph.adjacencyLists.add(null);
         }
-        for (int i = 0; i < getVertices(); i++) {
-            for (int j = 0; j < getVertices(); j++) {
+        for (int i = 0; i < size(); i++) {
+            for (int j = 0; j < size(); j++) {
                 if (getEdge(i, j) == null) {
                     graph.connect(i, j, null);
                 }
@@ -147,7 +142,7 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
     }
 
     private void check(int index) {
-        if (index < 0 || index >= getVertices()) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException("Invalid vertex number: " + index);
         }
     }

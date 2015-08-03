@@ -13,7 +13,7 @@ import java.util.Map;
  * @since 1.0 (8/2/15, 10:17 PM)
  */
 @Quality(Stage.UNTESTED)
-public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails> implements Graph<E, V> {
+public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails> extends AbstractGraph<E, V> {
     
     private int capacity = 20;
     private int vertices = 0;
@@ -21,13 +21,8 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
     private Map<Integer, Vertex<V>> vertexMap = new HashMap<>();
     
     @Override
-    public int getVertices() {
+    public int size() {
         return vertices;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return getVertices() == 0;
     }
 
     @Override

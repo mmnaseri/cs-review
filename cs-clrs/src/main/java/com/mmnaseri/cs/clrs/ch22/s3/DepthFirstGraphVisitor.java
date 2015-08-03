@@ -2,10 +2,7 @@ package com.mmnaseri.cs.clrs.ch22.s3;
 
 import com.mmnaseri.cs.clrs.ch22.GraphVertexVisitor;
 import com.mmnaseri.cs.clrs.ch22.GraphVisitor;
-import com.mmnaseri.cs.clrs.ch22.s1.Edge;
-import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;
-import com.mmnaseri.cs.clrs.ch22.s1.Graph;
-import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
+import com.mmnaseri.cs.clrs.ch22.s1.*;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -44,7 +41,12 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
             }
             visit(graph, i, visitor, colors);
         }
+        postProcess(graph, graph.getVertex(vertex));
         colors.put(vertex, Color.BLACK);
+    }
+
+    protected void postProcess(Graph<E, V> graph, Vertex<V> vertex) {
+
     }
 
 }

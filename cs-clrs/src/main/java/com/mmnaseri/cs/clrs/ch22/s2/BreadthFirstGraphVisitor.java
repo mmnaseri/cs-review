@@ -39,7 +39,7 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
         queue.add(startingVertex);
         while (!queue.isEmpty()) {
             final Vertex<V> vertex = queue.poll();
-            visitor.visit(graph, vertex);
+            visitor.beforeExploration(graph, vertex);
             for (Vertex<V> neighbor : graph.getNeighbors(vertex)) {
                 neighbor.setProperty("color", Color.WHITE);
                 neighbor.setProperty("distance", Integer.MAX_VALUE);
@@ -47,6 +47,7 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
                 queue.add(neighbor);
             }
             vertex.setProperty("color", Color.BLACK);
+            visitor.afterExploration(graph, vertex);
         }
     }
 

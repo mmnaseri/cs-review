@@ -11,6 +11,8 @@ import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
  */
 public interface GraphVertexVisitor<E extends EdgeDetails, V extends VertexDetails> {
 
-    void visit(Graph<E, V> graph, Vertex<V> vertex);
+    void beforeExploration(Graph<E, V> graph, Vertex<V> vertex);
+
+    void afterExploration(Graph<E, V> graph, Vertex<V> vertex);
 
 }

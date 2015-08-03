@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch22.s1;
 
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.Map;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/2/15, 10:17 PM)
  */
+@Quality(Stage.UNTESTED)
 public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails> implements Graph<E, V> {
     
     private int capacity = 20;

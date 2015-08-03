@@ -6,6 +6,7 @@ import com.mmnaseri.cs.clrs.ch11.s2.BaseLargeKeysHashTableTest;
 import com.mmnaseri.cs.clrs.ch11.s2.ChainingHashTable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -15,7 +16,7 @@ public abstract class BaseHashCalculatorTest extends BaseLargeKeysHashTableTest 
 
     @Override
     protected HashTable<Integer>[] getHashTables() {
-        final ArrayList<HashTable<Integer>> hashTables = new ArrayList<>();
+        final List<HashTable<Integer>> hashTables = new ArrayList<>();
         for (int capacity : getCapacities()) {
             for (HashCalculator calculator : getHashCalculators()) {
                 hashTables.add(new ChainingHashTable<Integer>(capacity, calculator));

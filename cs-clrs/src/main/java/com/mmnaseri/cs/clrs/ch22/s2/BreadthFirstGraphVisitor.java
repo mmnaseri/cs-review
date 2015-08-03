@@ -2,16 +2,15 @@ package com.mmnaseri.cs.clrs.ch22.s2;
 
 import com.mmnaseri.cs.clrs.ch22.GraphVertexVisitor;
 import com.mmnaseri.cs.clrs.ch22.GraphVisitor;
-import com.mmnaseri.cs.clrs.ch22.s1.Edge;
 import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
+import com.mmnaseri.cs.clrs.ch22.s1.Vertex;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayDeque;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -21,32 +20,40 @@ import java.util.Queue;
 @Quality(Stage.UNTESTED)
 public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetails> implements GraphVisitor<E, V> {
 
-    private enum Color {
-        WHITE, GREY, BLACK
-    }
-
     @Override
     public void visit(Graph<E, V> graph, int start, GraphVertexVisitor<E, V> visitor) {
-        final Map<Integer, Color> colors = new HashMap<>();
-        for (int i = 0; i < graph.getVertices(); i++) {
-            colors.put(i, Color.WHITE);
-        }
-        colors.put(start, Color.GREY);
-        final Queue<Integer> queue = new ArrayDeque<>();
-        queue.add(start);
-        while (!queue.isEmpty()) {
-            final Integer vertex = queue.poll();
-            visitor.visit(graph, graph.getVertex(vertex));
-            for (int i = 0; i < graph.getVertices(); i++) {
-                final Edge<E, V> edge = graph.getEdge(vertex, i);
-                if (edge == null || !Color.WHITE.equals(colors.get(i))) {
-                    continue;
-                }
-                colors.put(i, Color.GREY);
-                queue.add(i);
+        final List<Vertex<V>> vertices = graph.getVertices();
+        for (Vertex<V> vertex : vertices) {
+            if (vertex.getIndex() == start) {
+                continue;
             }
-            colors.put(vertex, Color.BLACK);
+            vertex.setProperty("color", Color.WHITE);
+            vertex.setProperty("distance", Integer.MAX_VALUE);
+            vertex.setProperty("parent", null);
         }
+        final Vertex<V> startingVertex = graph.getVertex(start);
+        startingVertex.setProperty("color", Color.GREY);
+        startingVertex.setProperty("distance", 0);
+        startingVertex.setProperty("parent", null);
+        final Queue<Vertex<V>> queue = new ArrayDeque<>();
+        queue.add(startingVertex);
+        while (!queue.isEmpty()) {
+            final Vertex<V> vertex = queue.poll();
+            visitor.visit(graph, vertex);
+            for (Vertex<V> neighbor : graph.getNeighbors(vertex)) {
+                neighbor.setProperty("color", Color.WHITE);
+                neighbor.setProperty("distance", Integer.MAX_VALUE);
+                neighbor.setProperty("parent", vertex);
+                queue.add(neighbor);
+            }
+            vertex.setProperty("color", Color.BLACK);
+        }
+    }
+
+    private enum Color {
+
+        WHITE, GREY, BLACK
+
     }
 
 }

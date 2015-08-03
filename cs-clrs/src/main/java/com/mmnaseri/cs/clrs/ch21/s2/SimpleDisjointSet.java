@@ -11,10 +11,9 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 public class SimpleDisjointSet<I> extends AbstractLinkedDisjointSet<SimpleLinkedElement<I>, I, SimpleLinkedElementContainer<I>> {
 
     @Override
-    public SimpleLinkedElement<I> create(I representative) {
+    protected SimpleLinkedElement<I> newRoot(I representative) {
         final SimpleLinkedElement<I> element = new SimpleLinkedElement<>();
         final SimpleLinkedElementContainer<I> container = new SimpleLinkedElementContainer<>();
-        container.setUuid(getUuid());
         container.setHead(element);
         container.setTail(element);
         element.setContainer(container);

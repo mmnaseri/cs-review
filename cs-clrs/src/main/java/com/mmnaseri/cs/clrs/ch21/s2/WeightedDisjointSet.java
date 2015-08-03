@@ -11,14 +11,13 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 public class WeightedDisjointSet<I> extends AbstractLinkedDisjointSet<WeightedLinkedElement<I>, I, WeightedLinkedElementContainer<I>> {
     
     @Override
-    public WeightedLinkedElement<I> create(I representative) {
+    protected WeightedLinkedElement<I> newRoot(I representative) {
         final WeightedLinkedElementContainer<I> container = new WeightedLinkedElementContainer<>();
         final WeightedLinkedElement<I> element = new WeightedLinkedElement<>();
         element.setValue(representative);
         element.setContainer(container);
         container.setHead(element);
         container.setTail(element);
-        container.setUuid(getUuid());
         container.setWeight(1);
         return element;
     }

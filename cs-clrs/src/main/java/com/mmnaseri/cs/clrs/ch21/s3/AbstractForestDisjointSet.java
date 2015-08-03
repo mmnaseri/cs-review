@@ -14,13 +14,18 @@ import java.util.UUID;
 public abstract class AbstractForestDisjointSet<E extends TreeElement<I, E>, I> implements DisjointSet<E, I> {
 
     private final UUID uuid;
+    private final Set<E> roots = new HashSet<>();
 
     public AbstractForestDisjointSet() {
         uuid = UUID.randomUUID();
     }
 
-    protected UUID getUuid() {
-        return uuid;
+    @Override
+    public final E create(I representative) {
+        final E root = newRoot(representative);
+        addRoot(root);
+        root.setUuid(uuid);
+        return root;
     }
 
     @Override
@@ -39,7 +44,13 @@ public abstract class AbstractForestDisjointSet<E extends TreeElement<I, E>, I> 
         control(second);
         final E firstRoot = find(first);
         final E secondRoot = find(second);
-        return link(firstRoot, secondRoot);
+        final E replacement = link(firstRoot, secondRoot);
+        if (replacement == first) {
+            removeRoot(secondRoot);
+        } else {
+            removeRoot(firstRoot);
+        }
+        return replacement;
     }
 
     protected E link(E firstRoot, E secondRoot) {
@@ -53,6 +64,11 @@ public abstract class AbstractForestDisjointSet<E extends TreeElement<I, E>, I> 
         return collect(root);
     }
 
+    @Override
+    public Set<E> sets() {
+        return new HashSet<>(roots);
+    }
+
     private Set<I> collect(E root) {
         final Set<I> values = new HashSet<>();
         values.add(root.getValue());
@@ -64,9 +80,19 @@ public abstract class AbstractForestDisjointSet<E extends TreeElement<I, E>, I> 
 
     protected void control(E element) {
         Objects.requireNonNull(element.getUuid());
-        if (!element.getUuid().equals(getUuid())) {
+        if (!element.getUuid().equals(uuid)) {
             throw new IllegalArgumentException("Item does not belong to this context");
         }
     }
+
+    protected void addRoot(E root) {
+        roots.add(root);
+    }
+
+    protected void removeRoot(E root) {
+        roots.remove(root);
+    }
+
+    protected abstract E newRoot(I representative);
 
 }

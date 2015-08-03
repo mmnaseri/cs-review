@@ -7,9 +7,8 @@ package com.mmnaseri.cs.clrs.ch21.s3;
 public class SimpleForestDisjointSet<I> extends AbstractForestDisjointSet<SimpleTreeElement<I>, I> {
 
     @Override
-    public SimpleTreeElement<I> create(I representative) {
+    protected SimpleTreeElement<I> newRoot(I representative) {
         final SimpleTreeElement<I> element = new SimpleTreeElement<>();
-        element.setUuid(getUuid());
         element.setValue(representative);
         return element;
     }

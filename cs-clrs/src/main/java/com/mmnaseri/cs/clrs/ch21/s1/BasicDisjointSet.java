@@ -24,7 +24,7 @@ public class BasicDisjointSet<I> implements DisjointSet<BasicElement<I>, I> {
         final BasicElement<I> element = new BasicElement<>();
         element.setValue(representative);
         element.setIndex(index);
-        storage.put(index, new ArrayList<I>(Collections.singletonList(representative)));
+        storage.put(index, new ArrayList<>(Collections.singletonList(representative)));
         return element;
     }
 
@@ -53,6 +53,18 @@ public class BasicDisjointSet<I> implements DisjointSet<BasicElement<I>, I> {
     @Override
     public Set<I> elements(BasicElement<I> item) {
         return storage.containsKey(item.getIndex()) ? new HashSet<>(storage.get(item.getIndex())) : null;
+    }
+
+    @Override
+    public Set<BasicElement<I>> sets() {
+        final Set<BasicElement<I>> set = new HashSet<>();
+        for (Map.Entry<UUID, List<I>> entry : storage.entrySet()) {
+            final BasicElement<I> element = new BasicElement<>();
+            element.setIndex(entry.getKey());
+            element.setValue(entry.getValue().get(0));
+            set.add(element);
+        }
+        return set;
     }
 
 }

@@ -16,4 +16,6 @@ public interface DisjointSet<E extends Element<I>, I> {
 
     Set<I> elements(E item);
 
+    Set<E> sets();
+
 }

@@ -14,6 +14,7 @@ import java.util.UUID;
 public abstract class AbstractLinkedDisjointSet<E extends LinkedElement<E, I, C>, I, C extends LinkedElementContainer<E, I>> implements DisjointSet<E, I> {
 
     private final UUID uuid;
+    private final Set<E> roots = new HashSet<>();
 
     public AbstractLinkedDisjointSet() {
         uuid = UUID.randomUUID();
@@ -21,6 +22,14 @@ public abstract class AbstractLinkedDisjointSet<E extends LinkedElement<E, I, C>
 
     protected UUID getUuid() {
         return uuid;
+    }
+
+    @Override
+    public final E create(I representative) {
+        final E root = newRoot(representative);
+        root.getContainer().setUuid(uuid);
+        roots.add(root);
+        return root;
     }
 
     @Override
@@ -43,6 +52,7 @@ public abstract class AbstractLinkedDisjointSet<E extends LinkedElement<E, I, C>
     protected E absorb(E parent, E child) {
         control(parent);
         control(child);
+        roots.remove(child);
         E element = child.getContainer().getHead();
         parent.getContainer().getTail().setNext(child.getContainer().getHead());
         child.getContainer().getHead().setPrevious(parent.getContainer().getTail());
@@ -63,5 +73,12 @@ public abstract class AbstractLinkedDisjointSet<E extends LinkedElement<E, I, C>
             throw new IllegalArgumentException("Object does not belong to the current context");
         }
     }
+
+    @Override
+    public Set<E> sets() {
+        return new HashSet<>(roots);
+    }
+
+    protected abstract E newRoot(I representative);
 
 }

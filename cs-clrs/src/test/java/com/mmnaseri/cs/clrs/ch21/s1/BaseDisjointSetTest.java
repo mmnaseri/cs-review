@@ -5,7 +5,9 @@ import com.mmnaseri.cs.clrs.ch21.Element;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -34,6 +36,11 @@ public abstract class BaseDisjointSetTest {
         final Element<Integer> secondRepresentative = set.find(second);
         assertThat(secondRepresentative, is(notNullValue()));
         assertThat(secondRepresentative.getValue(), is(second.getValue()));
+        final Set<Element<Integer>> elements = set.sets();
+        assertThat(elements.size(), is(2));
+        for (Element<Integer> element : elements) {
+            assertThat(element.getValue(), isIn(Arrays.asList(1, 2)));
+        }
     }
 
     @Test
@@ -45,14 +52,17 @@ public abstract class BaseDisjointSetTest {
         assertThat(set.elements(first), contains(1));
         assertThat(set.elements(second), contains(2));
         assertThat(set.elements(third), contains(3));
+        assertThat(set.sets().size(), is(3));
         set.union(first, second);
         assertThat(set.elements(first), containsInAnyOrder(1, 2));
         assertThat(set.elements(second), containsInAnyOrder(1, 2));
         assertThat(set.elements(third), contains(3));
+        assertThat(set.sets().size(), is(2));
         set.union(second, third);
         assertThat(set.elements(first), containsInAnyOrder(1, 2, 3));
         assertThat(set.elements(second), containsInAnyOrder(1, 2, 3));
         assertThat(set.elements(third), containsInAnyOrder(1, 2, 3));
+        assertThat(set.sets().size(), is(1));
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)

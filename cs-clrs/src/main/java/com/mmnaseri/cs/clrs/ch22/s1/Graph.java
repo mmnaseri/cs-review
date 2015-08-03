@@ -14,11 +14,15 @@ public interface Graph<E extends EdgeDetails, V extends VertexDetails> {
 
     V deleteVertex(int index);
 
+    int addVertex();
+
     int addVertex(V details);
 
     Vertex<V> getVertex(int index);
 
     Edge<E, V> getEdge(int from, int to);
+
+    Edge<E, V> connect(int from, int to);
 
     Edge<E, V> connect(int from, int to, E details);
 

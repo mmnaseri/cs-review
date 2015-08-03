@@ -10,7 +10,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/2/15, 10:51 PM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> extends AbstractGraph<E, V> {
 
     final List<AdjacencyEdge<E, V>> adjacencyLists = new ArrayList<>();

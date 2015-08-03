@@ -12,14 +12,26 @@ import java.util.Map;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/2/15, 10:17 PM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails> extends AbstractGraph<E, V> {
-    
-    private int capacity = 20;
-    private int vertices = 0;
-    private Matrix<Edge<E, V>> matrix = new ArrayMatrix<>(capacity, capacity);
-    private Map<Integer, Vertex<V>> vertexMap = new HashMap<>();
-    
+
+    public static final int DEFAULT_CAPACITY = 32;
+    private int capacity;
+    private int vertices;
+    private Matrix<Edge<E, V>> matrix;
+    private Map<Integer, Vertex<V>> vertexMap;
+
+    public AdjacencyMatrixGraph() {
+        this(DEFAULT_CAPACITY);
+    }
+
+    public AdjacencyMatrixGraph(int capacity) {
+        this.capacity = capacity;
+        vertices = 0;
+        matrix = new ArrayMatrix<>(capacity, capacity);
+        vertexMap = new HashMap<>(capacity);
+    }
+
     @Override
     public int size() {
         return vertices;
@@ -132,6 +144,7 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
             capacity = newCapacity;
             final Matrix<Edge<E, V>> temp = new ArrayMatrix<>(capacity, capacity);
             copy(matrix, temp);
+            matrix = temp;
         }
     }
 

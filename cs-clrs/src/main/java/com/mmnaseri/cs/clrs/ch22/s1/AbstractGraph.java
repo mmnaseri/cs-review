@@ -16,6 +16,16 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     }
 
     @Override
+    public int addVertex() {
+        return addVertex(null);
+    }
+
+    @Override
+    public Edge<E, V> connect(int from, int to) {
+        return connect(from, to, null);
+    }
+
+    @Override
     public List<Vertex<V>> getVertices() {
         final List<Vertex<V>> vertices = new ArrayList<>();
         for (int i = 0; i < size(); i++) {

@@ -38,7 +38,7 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
     }
 
     @Override
-    public V deleteVertex(int index) {
+    public V delete(int index) {
         checkIndex(index);
         final V details = vertexMap.get(index).getDetails();
         for (int i = index; i < vertices - 1; i++) {
@@ -62,7 +62,7 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
     }
 
     @Override
-    public int addVertex(V details) {
+    public int add(V details) {
         relaxCapacity();
         final int index = vertices++;
         final Vertex<V> vertex = new Vertex<>();
@@ -73,13 +73,13 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
     }
 
     @Override
-    public Vertex<V> getVertex(int index) {
+    public Vertex<V> get(int index) {
         checkIndex(index);
         return vertexMap.get(index);
     }
 
     @Override
-    public Edge<E, V> getEdge(int from, int to) {
+    public Edge<E, V> edge(int from, int to) {
         checkIndex(from);
         checkIndex(to);
         return matrix.get(from, to);
@@ -90,8 +90,8 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
         checkIndex(from);
         checkIndex(to);
         final Edge<E, V> edge = new Edge<>();
-        edge.setFrom(getVertex(from));
-        edge.setTo(getVertex(to));
+        edge.setFrom(get(from));
+        edge.setTo(get(to));
         edge.setDetails(details);
         matrix.set(from, to, edge);
         return edge;
@@ -122,8 +122,8 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
                 if (matrix.get(i, j) == null) {
                     final Edge<E, V> edge = new Edge<>();
                     edge.setDetails(null);
-                    edge.setFrom(getVertex(i));
-                    edge.setFrom(getVertex(j));
+                    edge.setFrom(get(i));
+                    edge.setFrom(get(j));
                     graph.matrix.set(i, j, edge);
                 }
             }

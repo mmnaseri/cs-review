@@ -12,15 +12,15 @@ public interface Graph<E extends EdgeDetails, V extends VertexDetails> {
 
     boolean isEmpty();
 
-    V deleteVertex(int index);
+    V delete(int index);
 
-    int addVertex();
+    int add();
 
-    int addVertex(V details);
+    int add(V details);
 
-    Vertex<V> getVertex(int index);
+    Vertex<V> get(int index);
 
-    Edge<E, V> getEdge(int from, int to);
+    Edge<E, V> edge(int from, int to);
 
     Edge<E, V> connect(int from, int to);
 

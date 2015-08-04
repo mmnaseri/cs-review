@@ -16,8 +16,8 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     }
 
     @Override
-    public int addVertex() {
-        return addVertex(null);
+    public int add() {
+        return add(null);
     }
 
     @Override
@@ -29,7 +29,7 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     public List<Vertex<V>> getVertices() {
         final List<Vertex<V>> vertices = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
-            vertices.add(getVertex(i));
+            vertices.add(get(i));
         }
         return vertices;
     }
@@ -38,7 +38,7 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     public List<Vertex<V>> getNeighbors(int index) {
         final List<Vertex<V>> vertices = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
-            final Edge<E, V> edge = getEdge(index, i);
+            final Edge<E, V> edge = edge(index, i);
             if (edge != null) {
                 vertices.add(edge.getTo());
             }

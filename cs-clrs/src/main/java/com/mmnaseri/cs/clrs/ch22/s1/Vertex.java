@@ -25,4 +25,9 @@ public class Vertex<V extends VertexDetails> extends GraphElement {
         this.index = index;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(index);
+    }
+
 }

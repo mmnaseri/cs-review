@@ -31,7 +31,7 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
             vertex.setProperty("distance", Integer.MAX_VALUE);
             vertex.setProperty("parent", null);
         }
-        final Vertex<V> startingVertex = graph.getVertex(start);
+        final Vertex<V> startingVertex = graph.get(start);
         startingVertex.setProperty("color", Color.GREY);
         startingVertex.setProperty("distance", 0);
         startingVertex.setProperty("parent", null);
@@ -41,10 +41,12 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
             final Vertex<V> vertex = queue.poll();
             visitor.beforeExploration(graph, vertex);
             for (Vertex<V> neighbor : graph.getNeighbors(vertex)) {
-                neighbor.setProperty("color", Color.WHITE);
-                neighbor.setProperty("distance", Integer.MAX_VALUE);
-                neighbor.setProperty("parent", vertex);
-                queue.add(neighbor);
+                if (Color.WHITE.equals(neighbor.getProperty("color", Color.class))) {
+                    neighbor.setProperty("color", Color.GREY);
+                    neighbor.setProperty("distance", vertex.getProperty("distance", Integer.class) + 1);
+                    neighbor.setProperty("parent", vertex);
+                    queue.add(neighbor);
+                }
             }
             vertex.setProperty("color", Color.BLACK);
             visitor.afterExploration(graph, vertex);

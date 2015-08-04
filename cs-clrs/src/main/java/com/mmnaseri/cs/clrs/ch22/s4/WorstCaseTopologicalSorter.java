@@ -29,7 +29,7 @@ public class WorstCaseTopologicalSorter<E extends EdgeDetails, V extends VertexD
         }
         final LinkedList<Vertex<V>> result = new LinkedList<>();
         for (Integer index : sorted) {
-            result.add(graph.getVertex(index));
+            result.add(graph.get(index));
         }
         return result;
     }
@@ -45,7 +45,7 @@ public class WorstCaseTopologicalSorter<E extends EdgeDetails, V extends VertexD
                 if (sorted.contains(j)) {
                     continue;
                 }
-                if (graph.getEdge(j, i) != null) {
+                if (graph.edge(j, i) != null) {
                     index = -1;
                     break;
                 }

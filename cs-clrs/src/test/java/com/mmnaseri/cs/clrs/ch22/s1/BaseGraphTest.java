@@ -32,7 +32,7 @@ public abstract class BaseGraphTest {
         assertThat(graph.size(), is(0));
         assertThat(graph.isEmpty(), is(true));
         final VertexDetails details = new VertexDetails();
-        final int index = graph.addVertex(details);
+        final int index = graph.add(details);
         assertThat(graph.size(), is(1));
         assertThat(graph.isEmpty(), is(false));
         assertThat(index, is(0));
@@ -42,8 +42,8 @@ public abstract class BaseGraphTest {
     public void testRetrievingAVertex() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         final VertexDetails details = new VertexDetails();
-        final int index = graph.addVertex(details);
-        final Vertex<VertexDetails> vertex = graph.getVertex(0);
+        final int index = graph.add(details);
+        final Vertex<VertexDetails> vertex = graph.get(0);
         assertThat(vertex, is(notNullValue()));
         assertThat(vertex.getIndex(), is(index));
         assertThat(vertex.getDetails(), is(details));
@@ -52,10 +52,10 @@ public abstract class BaseGraphTest {
     @Test
     public void testDeletingAVertex() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
-        final int index = graph.addVertex(null);
+        final int index = graph.add(null);
         assertThat(graph.size(), is(1));
         assertThat(graph.isEmpty(), is(false));
-        graph.deleteVertex(index);
+        graph.delete(index);
         assertThat(graph.size(), is(0));
         assertThat(graph.isEmpty(), is(true));
     }
@@ -66,7 +66,7 @@ public abstract class BaseGraphTest {
         assertThat(graph.size(), is(0));
         assertThat(graph.isEmpty(), is(true));
         for (int i = 0; i < 500; i++) {
-            final int index = graph.addVertex(null);
+            final int index = graph.add(null);
             assertThat(index, is(i));
             assertThat(graph.size(), is(i + 1));
             assertThat(graph.isEmpty(), is(false));
@@ -80,10 +80,10 @@ public abstract class BaseGraphTest {
         for (int i = 0; i < 500; i++) {
             final VertexDetails details = new VertexDetails();
             vertices.add(details);
-            graph.addVertex(details);
+            graph.add(details);
         }
         for (int i = 0; i < graph.size(); i++) {
-            final Vertex<VertexDetails> vertex = graph.getVertex(i);
+            final Vertex<VertexDetails> vertex = graph.get(i);
             vertex.setProperty("index", i);
             assertThat(vertex, is(notNullValue()));
             assertThat(vertex.getIndex(), is(i));
@@ -110,7 +110,7 @@ public abstract class BaseGraphTest {
         for (int i = 0; i < 500; i++) {
             final VertexDetails details = new VertexDetails();
             vertices.add(details);
-            graph.addVertex(details);
+            graph.add(details);
         }
         final Random random = new Random();
         for (int i = 0; i < 500; i++) {
@@ -120,7 +120,7 @@ public abstract class BaseGraphTest {
             graph.connect(to, from);
         }
         while (!graph.isEmpty()) {
-            final VertexDetails details = graph.deleteVertex(0);
+            final VertexDetails details = graph.delete(0);
             assertThat(details, is(notNullValue()));
             assertThat(details, is(vertices.get(0)));
             vertices.remove(0);
@@ -131,7 +131,7 @@ public abstract class BaseGraphTest {
     public void testCreatingEdges() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         for (int i = 0; i < 50; i++) {
-            graph.addVertex();
+            graph.add();
         }
         final Set<Integer> expectedNeighbors = new HashSet<>();
         for (int i = 0; i < 10; i++) {
@@ -142,17 +142,17 @@ public abstract class BaseGraphTest {
             }
         }
         for (int i = 0; i < 10; i++) {
-            final List<Vertex<VertexDetails>> neighbors = graph.getNeighbors(graph.getVertex(i));
+            final List<Vertex<VertexDetails>> neighbors = graph.getNeighbors(graph.get(i));
             final Set<Integer> neighborsIndices = new HashSet<>();
             for (Vertex<VertexDetails> neighbor : neighbors) {
                 neighborsIndices.add(neighbor.getIndex());
             }
             assertThat(neighborsIndices, is(expectedNeighbors));
             for (int j = 0; j < 20; j++) {
-                assertThat(graph.getEdge(i, j), is(nullValue()));
+                assertThat(graph.edge(i, j), is(nullValue()));
             }
             for (int j = 20; j < 30; j++) {
-                final Edge<EdgeDetails, VertexDetails> edge = graph.getEdge(i, j);
+                final Edge<EdgeDetails, VertexDetails> edge = graph.edge(i, j);
                 assertThat(edge.getFrom(), is(notNullValue()));
                 assertThat(edge.getFrom().getIndex(), is(i));
                 assertThat(edge.getTo(), is(notNullValue()));
@@ -163,12 +163,12 @@ public abstract class BaseGraphTest {
                 }).get(), is(i * j));
             }
             for (int j = 30; j < 50; j++) {
-                assertThat(graph.getEdge(i, j), is(nullValue()));
+                assertThat(graph.edge(i, j), is(nullValue()));
             }
         }
         for (int i = 10; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
-                assertThat(graph.getEdge(i, j), is(nullValue()));
+                assertThat(graph.edge(i, j), is(nullValue()));
             }
         }
     }
@@ -177,7 +177,7 @@ public abstract class BaseGraphTest {
     public void testRemovingEdges() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         for (int i = 0; i < 50; i++) {
-            graph.addVertex();
+            graph.add();
         }
         for (int i = 0; i < 10; i++) {
             for (int j = 20; j < 30; j++) {
@@ -191,7 +191,7 @@ public abstract class BaseGraphTest {
         }
         for (int i = 0; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
-                assertThat(graph.getEdge(i, j), is(nullValue()));
+                assertThat(graph.edge(i, j), is(nullValue()));
             }
         }
     }
@@ -200,7 +200,7 @@ public abstract class BaseGraphTest {
     public void testDisconnectingNonExistentEdge() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         for (int i = 0; i < 50; i++) {
-            graph.addVertex();
+            graph.add();
         }
         for (int i = 0; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
@@ -214,7 +214,7 @@ public abstract class BaseGraphTest {
     public void testTakingTheInverse() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         for (int i = 0; i < 50; i++) {
-            graph.addVertex();
+            graph.add();
         }
         for (int i = 0; i < 10; i++) {
             for (int j = 20; j < 30; j++) {
@@ -225,18 +225,18 @@ public abstract class BaseGraphTest {
         assertThat(inverse.size(), is(graph.size()));
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 20; j++) {
-                assertThat(inverse.getEdge(i, j), is(notNullValue()));
+                assertThat(inverse.edge(i, j), is(notNullValue()));
             }
             for (int j = 20; j < 30; j++) {
-                assertThat(inverse.getEdge(i, j), is(nullValue()));
+                assertThat(inverse.edge(i, j), is(nullValue()));
             }
             for (int j = 30; j < 50; j++) {
-                assertThat(inverse.getEdge(i, j), is(notNullValue()));
+                assertThat(inverse.edge(i, j), is(notNullValue()));
             }
         }
         for (int i = 10; i < 50; i++) {
             for (int j = 0; j < 50; j++) {
-                assertThat(inverse.getEdge(i, j), is(notNullValue()));
+                assertThat(inverse.edge(i, j), is(notNullValue()));
             }
         }
     }
@@ -245,36 +245,36 @@ public abstract class BaseGraphTest {
     public void testAddressingABelowRangeVertex() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         for (int i = 0; i < 50; i++) {
-            graph.addVertex();
+            graph.add();
         }
-        graph.getVertex(-1);
+        graph.get(-1);
     }
 
     @Test(expectedExceptions = IndexOutOfBoundsException.class)
     public void testAddressingAnAboveRangeVertex() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         for (int i = 0; i < 50; i++) {
-            graph.addVertex();
+            graph.add();
         }
-        graph.getVertex(50);
+        graph.get(50);
     }
 
     @Test(expectedExceptions = IndexOutOfBoundsException.class)
     public void testAddressingAnOutOfRangeFromVertexForEdge() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         for (int i = 0; i < 50; i++) {
-            graph.addVertex();
+            graph.add();
         }
-        graph.getEdge(51, 20);
+        graph.edge(51, 20);
     }
 
     @Test(expectedExceptions = IndexOutOfBoundsException.class)
     public void testAddressingAnOutOfRangeToVertexForEdge() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         for (int i = 0; i < 50; i++) {
-            graph.addVertex();
+            graph.add();
         }
-        graph.getEdge(20, 51);
+        graph.edge(20, 51);
     }
 
 }

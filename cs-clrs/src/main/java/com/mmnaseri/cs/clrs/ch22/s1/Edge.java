@@ -34,4 +34,9 @@ public class Edge<E extends EdgeDetails, V extends VertexDetails> extends GraphE
         this.details = details;
     }
 
+    @Override
+    public String toString() {
+        return from.getIndex() + " -> " + to.getIndex();
+    }
+
 }

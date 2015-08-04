@@ -22,12 +22,12 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
     }
 
     @Override
-    public V deleteVertex(int index) {
+    public V delete(int index) {
         check(index);
         final V details = vertices.get(index).getDetails();
         for (int i = 0; i < size(); i++) {
-            deleteEdge(index, (AdjacencyEdge<E, V>) getEdge(index, i));
-            deleteEdge(i, (AdjacencyEdge<E, V>) getEdge(i, index));
+            deleteEdge(index, (AdjacencyEdge<E, V>) edge(index, i));
+            deleteEdge(i, (AdjacencyEdge<E, V>) edge(i, index));
         }
         for (int i = index; i < size() - 1; i++) {
             final Vertex<V> vertex = vertices.get(i + 1);
@@ -41,7 +41,7 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
     }
 
     @Override
-    public int addVertex(V details) {
+    public int add(V details) {
         final Vertex<V> vertex = new Vertex<>();
         vertex.setIndex(vertices.size());
         vertex.setDetails(details);
@@ -51,13 +51,13 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
     }
 
     @Override
-    public Vertex<V> getVertex(int index) {
+    public Vertex<V> get(int index) {
         check(index);
         return vertices.get(index);
     }
 
     @Override
-    public Edge<E, V> getEdge(int from, int to) {
+    public Edge<E, V> edge(int from, int to) {
         check(from);
         check(to);
         AdjacencyEdge<E, V> edge = adjacencyLists.get(from);
@@ -75,8 +75,8 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
         check(from);
         check(to);
         final AdjacencyEdge<E, V> element = new AdjacencyEdge<>();
-        element.setFrom(getVertex(from));
-        element.setTo(getVertex(to));
+        element.setFrom(get(from));
+        element.setTo(get(to));
         element.setDetails(details);
         AdjacencyEdge<E, V> edge = adjacencyLists.get(from);
         if (edge == null) {
@@ -133,7 +133,7 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
         }
         for (int i = 0; i < size(); i++) {
             for (int j = 0; j < size(); j++) {
-                if (getEdge(i, j) == null) {
+                if (edge(i, j) == null) {
                     graph.connect(i, j, null);
                 }
             }

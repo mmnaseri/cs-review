@@ -9,9 +9,7 @@ import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
-import java.util.ArrayDeque;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -19,6 +17,34 @@ import java.util.Queue;
  */
 @Quality(Stage.UNTESTED)
 public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetails> implements GraphVisitor<E, V> {
+
+    private final Comparator<Vertex<V>> comparator;
+
+    public BreadthFirstGraphVisitor() {
+        this(null);
+    }
+
+    public BreadthFirstGraphVisitor(Comparator<Vertex<V>> comparator) {
+        this.comparator = comparator;
+    }
+
+    @Override
+    public void visit(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor) {
+        final List<Vertex<V>> vertices = graph.getVertices();
+        for (Vertex<V> vertex : vertices) {
+            vertex.setProperty("color", Color.WHITE);
+            vertex.setProperty("distance", Integer.MAX_VALUE);
+            vertex.setProperty("parent", null);
+        }
+        if (comparator != null) {
+            Collections.sort(vertices, comparator);
+        }
+        for (Vertex<V> vertex : vertices) {
+            if (Color.WHITE.equals(vertex.getProperty("color", Color.class))) {
+                visitSubGraph(graph, visitor, vertex);
+            }
+        }
+    }
 
     @Override
     public void visit(Graph<E, V> graph, int start, GraphVertexVisitor<E, V> visitor) {
@@ -32,6 +58,10 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
             vertex.setProperty("parent", null);
         }
         final Vertex<V> startingVertex = graph.get(start);
+        visitSubGraph(graph, visitor, startingVertex);
+    }
+
+    private void visitSubGraph(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor, Vertex<V> startingVertex) {
         startingVertex.setProperty("color", Color.GREY);
         startingVertex.setProperty("distance", 0);
         startingVertex.setProperty("parent", null);

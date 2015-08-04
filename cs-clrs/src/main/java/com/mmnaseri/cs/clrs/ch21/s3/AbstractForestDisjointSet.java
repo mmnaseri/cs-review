@@ -45,7 +45,7 @@ public abstract class AbstractForestDisjointSet<E extends TreeElement<I, E>, I> 
         final E firstRoot = find(first);
         final E secondRoot = find(second);
         final E replacement = link(firstRoot, secondRoot);
-        if (replacement == first) {
+        if (replacement == firstRoot) {
             removeRoot(secondRoot);
         } else {
             removeRoot(firstRoot);

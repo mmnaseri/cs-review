@@ -10,6 +10,8 @@ import java.util.Objects;
  */
 public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetails> implements Graph<E, V> {
 
+    private Graph<E, V> transposed = null;
+
     @Override
     public boolean isEmpty() {
         return size() == 0;
@@ -23,6 +25,14 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     @Override
     public Edge<E, V> connect(int from, int to) {
         return connect(from, to, null);
+    }
+
+    @Override
+    public Graph<E, V> transpose() {
+        if (transposed == null) {
+            transposed = new TransposedGraph<>(this);
+        }
+        return transposed;
     }
 
     @Override
@@ -49,6 +59,91 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     @Override
     public List<Vertex<V>> getNeighbors(Vertex<V> vertex) {
         return getNeighbors(Objects.requireNonNull(vertex, "Vertex must not be null").getIndex());
+    }
+
+    private static class TransposedGraph<E extends EdgeDetails, V extends VertexDetails> implements Graph<E, V> {
+
+        private final Graph<E, V> delegate;
+
+        private TransposedGraph(Graph<E, V> delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public int size() {
+            return delegate.size();
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return delegate.isEmpty();
+        }
+
+        @Override
+        public V delete(int index) {
+            return delegate.delete(index);
+        }
+
+        @Override
+        public int add() {
+            return delegate.add();
+        }
+
+        @Override
+        public int add(V details) {
+            return delegate.add(details);
+        }
+
+        @Override
+        public Vertex<V> get(int index) {
+            return delegate.get(index);
+        }
+
+        @Override
+        public Edge<E, V> edge(int from, int to) {
+            return delegate.edge(from, to);
+        }
+
+        @Override
+        public Edge<E, V> connect(int from, int to) {
+            return delegate.connect(to, from);
+        }
+
+        @Override
+        public Edge<E, V> connect(int from, int to, E details) {
+            return delegate.connect(to, from, details);
+        }
+
+        @Override
+        public E disconnect(int from, int to) {
+            return delegate.disconnect(to, from);
+        }
+
+        @Override
+        public Graph<E, V> inverse() {
+            return delegate.inverse();
+        }
+
+        @Override
+        public Graph<E, V> transpose() {
+            return delegate.transpose();
+        }
+
+        @Override
+        public List<Vertex<V>> getVertices() {
+            return delegate.getVertices();
+        }
+
+        @Override
+        public List<Vertex<V>> getNeighbors(int index) {
+            return delegate.getNeighbors(index);
+        }
+
+        @Override
+        public List<Vertex<V>> getNeighbors(Vertex<V> vertex) {
+            return delegate.getNeighbors(vertex);
+        }
+
     }
 
 }

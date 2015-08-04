@@ -32,7 +32,7 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
     }
 
     @Override
-    public void visit(Graph<E, V> graph, int start, GraphVertexVisitor<E, V> visitor) {
+    public void visit(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor) {
         final List<Vertex<V>> vertices = graph.getVertices();
         if (comparator != null) {
             Collections.sort(vertices, comparator);
@@ -44,12 +44,26 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
         final AtomicInteger time = new AtomicInteger(0);
         for (Vertex<V> vertex : vertices) {
             if (Color.WHITE.equals(vertex.getProperty("color", Color.class))) {
-                visit(graph, vertex, time, visitor);
+                visitSubGraph(graph, vertex, time, visitor);
             }
         }
     }
 
-    private void visit(Graph<E, V> graph, Vertex<V> vertex, AtomicInteger time, GraphVertexVisitor<E, V> visitor) {
+    @Override
+    public void visit(Graph<E, V> graph, int start, GraphVertexVisitor<E, V> visitor) {
+        final List<Vertex<V>> vertices = graph.getVertices();
+        if (comparator != null) {
+            Collections.sort(vertices, comparator);
+        }
+        for (Vertex<V> vertex : vertices) {
+            vertex.setProperty("color", Color.WHITE);
+            vertex.setProperty("parent", null);
+        }
+        final AtomicInteger time = new AtomicInteger(0);
+        visitSubGraph(graph, graph.get(start), time, visitor);
+    }
+
+    private void visitSubGraph(Graph<E, V> graph, Vertex<V> vertex, AtomicInteger time, GraphVertexVisitor<E, V> visitor) {
         vertex.setProperty("discovery", time.incrementAndGet());
         vertex.setProperty("color", Color.GREY);
         visitor.beforeExploration(graph, vertex);
@@ -60,7 +74,7 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
         for (Vertex<V> neighbor : neighbors) {
             if (Color.WHITE.equals(neighbor.getProperty("color", Color.class))) {
                 neighbor.setProperty("parent", vertex);
-                visit(graph, neighbor, time, visitor);
+                visitSubGraph(graph, neighbor, time, visitor);
             }
         }
         vertex.setProperty("color", Color.BLACK);

@@ -12,6 +12,7 @@ import com.mmnaseri.cs.clrs.ch22.s3.DepthFirstGraphVisitor;
 import com.mmnaseri.cs.clrs.common.ParameterizedTypeReference;
 
 import java.util.Comparator;
+import java.util.Set;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -24,15 +25,15 @@ public class StronglyConnectedComponentFinder<E extends EdgeDetails, V extends V
 
     public DisjointSet<?, Vertex<V>> find(Graph<E, V> graph) {
         //visit all nodes
-        first.visit(graph, -1, new GraphVertexVisitorAdapter<E, V>() {
+        first.visit(graph,new GraphVertexVisitorAdapter<E, V>() {
         });
-        //compute the inverse
-        final Graph<E, V> inverse = graph.inverse();
+        //compute the transposed graph
+        final Graph<E, V> transposed = graph.transpose();
         //visit the inverse nodes in decreasing order of the finish time the first time around
-        second.visit(inverse, -1, new GraphVertexVisitorAdapter<E, V>() {});
+        second.visit(transposed, new GraphVertexVisitorAdapter<E, V>() {});
         //create a disjoint set where each set is represented by a root of the DFS tree and contains all its internal nodes
         final PathCompressingRankedForestDisjointSet<Vertex<V>> set = new PathCompressingRankedForestDisjointSet<>();
-        for (Vertex<V> vertex : inverse.getVertices()) {
+        for (Vertex<V> vertex : transposed.getVertices()) {
             final RankedTreeElement<Vertex<V>> element = set.create(vertex);
             final Vertex<V> root = findRoot(vertex);
             if (root.getIndex() == vertex.getIndex()) {
@@ -40,7 +41,8 @@ public class StronglyConnectedComponentFinder<E extends EdgeDetails, V extends V
             }
             RankedTreeElement<Vertex<V>> rootElement = null;
             for (RankedTreeElement<Vertex<V>> treeElement : set.sets()) {
-                if (treeElement.getValue().getIndex() == root.getIndex()) {
+                final Set<Vertex<V>> elements = set.elements(treeElement);
+                if (elements.contains(root)) {
                     rootElement = treeElement;
                     break;
                 }

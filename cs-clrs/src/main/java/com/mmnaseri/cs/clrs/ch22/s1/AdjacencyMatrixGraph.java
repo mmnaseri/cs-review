@@ -119,7 +119,7 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
         }
         for (int i = 0; i < vertices; i++) {
             for (int j = 0; j < vertices; j++) {
-                if (matrix.get(i, j) == null) {
+                if (edge(i, j) == null) {
                     final Edge<E, V> edge = new Edge<>();
                     edge.setDetails(null);
                     edge.setFrom(get(i));

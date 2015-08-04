@@ -30,6 +30,8 @@ public interface Graph<E extends EdgeDetails, V extends VertexDetails> {
 
     Graph<E, V> inverse();
 
+    Graph<E, V> transpose();
+
     List<Vertex<V>> getVertices();
 
     List<Vertex<V>> getNeighbors(int index);

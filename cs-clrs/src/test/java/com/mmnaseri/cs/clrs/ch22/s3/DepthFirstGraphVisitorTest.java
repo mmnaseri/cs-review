@@ -23,7 +23,7 @@ public class DepthFirstGraphVisitorTest {
     public void testDirected() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.directed();
         final DepthFirstGraphVisitor<EdgeDetails, VertexDetails> visitor = new DepthFirstGraphVisitor<>();
-        visitor.visit(graph, -1, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
+        visitor.visit(graph, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
         });
         assertThat(graph.get(0).getProperty("discovery", Integer.class), is(1));
         assertThat(graph.get(1).getProperty("discovery", Integer.class), is(2));
@@ -49,7 +49,7 @@ public class DepthFirstGraphVisitorTest {
     public void testUndirected() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.undirected();
         final DepthFirstGraphVisitor<EdgeDetails, VertexDetails> visitor = new DepthFirstGraphVisitor<>();
-        visitor.visit(graph, -1, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
+        visitor.visit(graph, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
         });
         assertThat(graph.get(0).getProperty("discovery", Integer.class), is(1));
         assertThat(graph.get(1).getProperty("discovery", Integer.class), is(2));

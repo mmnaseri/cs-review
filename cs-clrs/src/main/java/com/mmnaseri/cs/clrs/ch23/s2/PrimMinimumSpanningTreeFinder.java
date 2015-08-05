@@ -1,6 +1,5 @@
 package com.mmnaseri.cs.clrs.ch23.s2;
 
-import com.mmnaseri.cs.clrs.ch06.s1.ArrayHeap;
 import com.mmnaseri.cs.clrs.ch22.s1.*;
 import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
 import com.mmnaseri.cs.clrs.common.HeapProperty;
@@ -21,7 +20,7 @@ public class PrimMinimumSpanningTreeFinder<E extends WeightedEdgeDetails, V exte
         final Map<Integer, Integer> weights = new HashMap<>();
         final Map<Integer, Integer> parents = new HashMap<>();
         final Set<Integer> examined = new HashSet<>();
-        final ArrayHeap<Integer> heap = new ArrayHeap<>(new PrimHeapProperty(weights));
+        final PriorityQueue<Integer> heap = new PriorityQueue<>(graph.size(), new PrimHeapProperty(weights));//new ArrayHeap<>(new PrimHeapProperty(weights));
         final AdjacencyListGraph<E, V> result = new AdjacencyListGraph<>();
         for (Vertex<V> vertex : graph) {
             weights.put(vertex.getIndex(), Integer.MAX_VALUE);
@@ -31,7 +30,7 @@ public class PrimMinimumSpanningTreeFinder<E extends WeightedEdgeDetails, V exte
         }
         weights.put(0, 0);
         while (!heap.isEmpty()) {
-            final Integer vertex = heap.pop();
+            final Integer vertex = heap.remove();
             examined.add(vertex);
             final List<Vertex<V>> neighbors = graph.getNeighbors(vertex);
             for (Vertex<V> neighbor : neighbors) {
@@ -40,9 +39,6 @@ public class PrimMinimumSpanningTreeFinder<E extends WeightedEdgeDetails, V exte
                     if (edgeWeight < weights.get(neighbor.getIndex())) {
                         weights.put(neighbor.getIndex(), edgeWeight);
                         parents.put(neighbor.getIndex(), vertex);
-                        for (int i = heap.size() - 1; i >= 0; i--) {
-                            heap.heapify(i);
-                        }
                     }
                 }
             }

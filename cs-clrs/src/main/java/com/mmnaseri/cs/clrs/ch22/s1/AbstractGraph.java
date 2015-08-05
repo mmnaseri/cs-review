@@ -1,6 +1,7 @@
 package com.mmnaseri.cs.clrs.ch22.s1;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -64,6 +65,11 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     @Override
     public List<Vertex<V>> getNeighbors(Vertex<V> vertex) {
         return getNeighbors(Objects.requireNonNull(vertex, "Vertex must not be null").getIndex());
+    }
+
+    @Override
+    public Iterator<Vertex<V>> iterator() {
+        return getVertices().iterator();
     }
 
     private static class TransposedGraph<E extends EdgeDetails, V extends VertexDetails> implements Graph<E, V> {
@@ -152,6 +158,11 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
         @Override
         public List<Vertex<V>> getNeighbors(Vertex<V> vertex) {
             return delegate.getNeighbors(vertex);
+        }
+
+        @Override
+        public Iterator<Vertex<V>> iterator() {
+            return delegate.iterator();
         }
 
     }

@@ -21,18 +21,7 @@ public abstract class BaseMinimumSpanningTreeFinderTest {
     @Test
     public void testAgainstSample() throws Exception {
         final Graph<WeightedEdgeDetails, VertexDetails> graph = GraphSamples.sampleWeightedGraph();
-        final Graph<WeightedEdgeDetails, VertexDetails> expected = new AdjacencyListGraph<>();
-        for (int i = 0; i < graph.size(); i++) {
-            expected.add();
-        }
-        connect(expected, 0, 1);
-        connect(expected, 0, 7);
-        connect(expected, 2, 3);
-        connect(expected, 2, 5);
-        connect(expected, 2, 8);
-        connect(expected, 3, 4);
-        connect(expected, 5, 6);
-        connect(expected, 6, 7);
+        final Graph<WeightedEdgeDetails, VertexDetails> expected = getExpectedGraph(graph);
         final MinimumSpanningTreeFinder<WeightedEdgeDetails, VertexDetails> finder = getFinder();
         final Graph<WeightedEdgeDetails, VertexDetails> actual = finder.find(graph);
         assertThat(actual.size(), is(graph.size()));
@@ -49,7 +38,23 @@ public abstract class BaseMinimumSpanningTreeFinderTest {
         assertThat(edges, is((graph.size() - 1) * 2));
     }
 
-    private void connect(Graph<WeightedEdgeDetails, VertexDetails> expected, int from, int to) {
+    protected Graph<WeightedEdgeDetails, VertexDetails> getExpectedGraph(Graph<WeightedEdgeDetails, VertexDetails> graph) {
+        final Graph<WeightedEdgeDetails, VertexDetails> expected = new AdjacencyListGraph<>();
+        for (int i = 0; i < graph.size(); i++) {
+            expected.add();
+        }
+        connect(expected, 0, 1);
+        connect(expected, 0, 7);
+        connect(expected, 2, 3);
+        connect(expected, 2, 5);
+        connect(expected, 2, 8);
+        connect(expected, 3, 4);
+        connect(expected, 5, 6);
+        connect(expected, 6, 7);
+        return expected;
+    }
+
+    protected void connect(Graph<WeightedEdgeDetails, VertexDetails> expected, int from, int to) {
         expected.connect(from, to);
         expected.connect(to, from);
     }

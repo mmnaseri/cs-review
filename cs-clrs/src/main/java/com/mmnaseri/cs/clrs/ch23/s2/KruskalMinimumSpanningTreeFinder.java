@@ -2,10 +2,7 @@ package com.mmnaseri.cs.clrs.ch23.s2;
 
 import com.mmnaseri.cs.clrs.ch21.s3.PathCompressingRankedForestDisjointSet;
 import com.mmnaseri.cs.clrs.ch21.s3.RankedTreeElement;
-import com.mmnaseri.cs.clrs.ch22.s1.AdjacencyListGraph;
-import com.mmnaseri.cs.clrs.ch22.s1.Edge;
-import com.mmnaseri.cs.clrs.ch22.s1.Graph;
-import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
+import com.mmnaseri.cs.clrs.ch22.s1.*;
 import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
 
 import java.util.ArrayList;
@@ -14,6 +11,12 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * Note: Even though this works exactly as described in the book, it does not return the "minimum" spanning tree. The tree it returns,
+ * as demonstrated in the book has a sum of 37, while the minimum is 35. This is not because this implementation does not follow the
+ * instructions of the book, rather, it is exactly <em>because</em> it follows those instructions that it behaves so.
+ *
+ * I need to further investigate to see what can be improved about this.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/5/15)
  */
@@ -21,9 +24,12 @@ public class KruskalMinimumSpanningTreeFinder<E extends WeightedEdgeDetails, V e
 
     @Override
     public Graph<E, V> find(Graph<E, V> graph) {
+        if (graph.isEmpty()) {
+            return graph;
+        }
         final Graph<E, V> result = new AdjacencyListGraph<>();
-        for (int i = 0; i < graph.size(); i++) {
-            result.add();
+        for (Vertex<V> vertex : graph) {
+            result.add(vertex.getDetails());
         }
         final PathCompressingRankedForestDisjointSet<Integer> set = new PathCompressingRankedForestDisjointSet<>();
         final List<RankedTreeElement<Integer>> elements = new ArrayList<>();

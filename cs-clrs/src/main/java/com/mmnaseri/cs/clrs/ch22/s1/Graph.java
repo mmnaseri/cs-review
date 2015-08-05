@@ -6,7 +6,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/2/15, 8:09 PM)
  */
-public interface Graph<E extends EdgeDetails, V extends VertexDetails> {
+public interface Graph<E extends EdgeDetails, V extends VertexDetails> extends Iterable<Vertex<V>> {
 
     int size();
 

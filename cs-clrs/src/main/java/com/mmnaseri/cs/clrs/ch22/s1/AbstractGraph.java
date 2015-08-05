@@ -23,6 +23,11 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     }
 
     @Override
+    public boolean connected(int from, int to) {
+        return edge(from, to) != null;
+    }
+
+    @Override
     public Edge<E, V> connect(int from, int to) {
         return connect(from, to, null);
     }
@@ -102,6 +107,11 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
         @Override
         public Edge<E, V> edge(int from, int to) {
             return delegate.edge(from, to);
+        }
+
+        @Override
+        public boolean connected(int from, int to) {
+            return delegate.connected(from, to);
         }
 
         @Override

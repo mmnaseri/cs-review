@@ -22,6 +22,8 @@ public interface Graph<E extends EdgeDetails, V extends VertexDetails> {
 
     Edge<E, V> edge(int from, int to);
 
+    boolean connected(int from, int to);
+
     Edge<E, V> connect(int from, int to);
 
     Edge<E, V> connect(int from, int to, E details);

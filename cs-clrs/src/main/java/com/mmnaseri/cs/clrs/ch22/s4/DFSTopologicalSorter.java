@@ -21,7 +21,7 @@ public class DFSTopologicalSorter<E extends EdgeDetails, V extends VertexDetails
     @Override
     public List<Vertex<V>> sort(Graph<E, V> graph) {
         final LinkedList<Vertex<V>> sorted = new LinkedList<>();
-        visitor.visit(graph, -1, new GraphVertexVisitorAdapter<E, V>() {
+        visitor.visit(graph, new GraphVertexVisitorAdapter<E, V>() {
             @Override
             public void afterExploration(Graph<E, V> graph, Vertex<V> vertex) {
                 sorted.add(0, vertex);

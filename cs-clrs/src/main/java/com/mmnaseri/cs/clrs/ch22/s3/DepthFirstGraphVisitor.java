@@ -1,5 +1,6 @@
 package com.mmnaseri.cs.clrs.ch22.s3;
 
+import com.mmnaseri.cs.clrs.ch22.EdgeColor;
 import com.mmnaseri.cs.clrs.ch22.GraphVertexVisitor;
 import com.mmnaseri.cs.clrs.ch22.GraphVisitor;
 import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;
@@ -38,12 +39,12 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
             Collections.sort(vertices, comparator);
         }
         for (Vertex<V> vertex : vertices) {
-            vertex.setProperty("color", Color.WHITE);
+            vertex.setProperty("color", EdgeColor.WHITE);
             vertex.setProperty("parent", null);
         }
         final AtomicInteger time = new AtomicInteger(0);
         for (Vertex<V> vertex : vertices) {
-            if (Color.WHITE.equals(vertex.getProperty("color", Color.class))) {
+            if (EdgeColor.WHITE.equals(vertex.getProperty("color", EdgeColor.class))) {
                 visitSubGraph(graph, vertex, time, visitor);
             }
         }
@@ -56,7 +57,7 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
             Collections.sort(vertices, comparator);
         }
         for (Vertex<V> vertex : vertices) {
-            vertex.setProperty("color", Color.WHITE);
+            vertex.setProperty("color", EdgeColor.WHITE);
             vertex.setProperty("parent", null);
         }
         final AtomicInteger time = new AtomicInteger(0);
@@ -65,27 +66,21 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
 
     private void visitSubGraph(Graph<E, V> graph, Vertex<V> vertex, AtomicInteger time, GraphVertexVisitor<E, V> visitor) {
         vertex.setProperty("discovery", time.incrementAndGet());
-        vertex.setProperty("color", Color.GREY);
+        vertex.setProperty("color", EdgeColor.GREY);
         visitor.beforeExploration(graph, vertex);
         final List<Vertex<V>> neighbors = graph.getNeighbors(vertex.getIndex());
         if (comparator != null) {
             Collections.sort(neighbors, comparator);
         }
         for (Vertex<V> neighbor : neighbors) {
-            if (Color.WHITE.equals(neighbor.getProperty("color", Color.class))) {
+            if (EdgeColor.WHITE.equals(neighbor.getProperty("color", EdgeColor.class))) {
                 neighbor.setProperty("parent", vertex);
                 visitSubGraph(graph, neighbor, time, visitor);
             }
         }
-        vertex.setProperty("color", Color.BLACK);
+        vertex.setProperty("color", EdgeColor.BLACK);
         vertex.setProperty("finish", time.incrementAndGet());
         visitor.afterExploration(graph, vertex);
-    }
-
-    private enum Color {
-
-        WHITE, GREY, BLACK
-
     }
 
 }

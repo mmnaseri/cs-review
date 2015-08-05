@@ -11,12 +11,6 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Note: Even though this works exactly as described in the book, it does not return the "minimum" spanning tree. The tree it returns,
- * as demonstrated in the book has a sum of 37, while the minimum is 35. This is not because this implementation does not follow the
- * instructions of the book, rather, it is exactly <em>because</em> it follows those instructions that it behaves so.
- *
- * I need to further investigate to see what can be improved about this.
- *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/5/15)
  */

@@ -17,29 +17,38 @@ public abstract class AbstractSingleSourceShortestPathFinder<E extends WeightedE
             createdVertex.setProperty("distance", Integer.MAX_VALUE);
             createdVertex.setProperty("predecessor", null);
         }
+        for (Edge<E, V> edge : graph.getEdges()) {
+            result.connect(edge.getFrom().getIndex(), edge.getTo().getIndex(), edge.getDetails());
+        }
         result.get(start).setProperty("distance", 0);
         return result;
     }
 
     protected void relax(Graph<E, V> graph, int midpoint, int destination) {
-        final Edge<E, V> edge = graph.edge(midpoint, destination);
-        final int edgeWeight;
-        if (edge == null) {
-            //the nodes where not adjacent
-            edgeWeight = Integer.MAX_VALUE;
-        } else {
-            final E details = edge.getDetails();
-            edgeWeight = details == null ? 0 : details.getWeight();
-        }
-        final Vertex<V> midpointVertex = graph.get(midpoint);
-        final Vertex<V> destinationVertex = graph.get(destination);
-        final Integer midpointDistance = midpointVertex.getProperty("distance", Integer.class);
-        final Integer currentDistance = destinationVertex.getProperty("distance", Integer.class);
+        relax(graph, graph.get(midpoint), graph.get(destination));
+    }
+
+    protected void relax(Graph<E, V> graph, Vertex<V> midpoint, Vertex<V> destination) {
+        final Edge<E, V> edge = graph.edge(midpoint.getIndex(), destination.getIndex());
+        relax(edge);
+    }
+
+    protected void relax(Edge<E, V> edge) {
+        final Vertex<V> midpoint = edge.getFrom();
+        final Vertex<V> destination = edge.getTo();
+        final int edgeWeight = weight(edge);
+        final Integer midpointDistance = midpoint.getProperty("distance", Integer.class);
+        final Integer currentDistance = destination.getProperty("distance", Integer.class);
         final long detourDistance = (long) midpointDistance + (long) edgeWeight;
         if (detourDistance < currentDistance) {
-            destinationVertex.setProperty("distance", (int) detourDistance);
-            destinationVertex.setProperty("predecessor", midpointVertex);
+            destination.setProperty("distance", (int) detourDistance);
+            destination.setProperty("predecessor", midpoint);
         }
+    }
+
+    protected int weight(Edge<E, V> edge) {
+        final E details = edge.getDetails();
+        return details == null ? 0 : details.getWeight();
     }
 
 }

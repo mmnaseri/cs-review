@@ -57,7 +57,7 @@ public abstract class GraphSamples {
     }
 
     /**
-     * @return the weighted graph on page 632 of CLRS book, 3rd edition, accodring to the ebook version
+     * @return the weighted graph on page 632 of CLRS book, 3rd edition, according to the ebook version
      */
     public static Graph<WeightedEdgeDetails, VertexDetails> sampleWeightedGraph() {
         final Graph<WeightedEdgeDetails, VertexDetails> graph = new AdjacencyListGraph<>();
@@ -70,21 +70,44 @@ public abstract class GraphSamples {
         graph.add(); //g: 6
         graph.add(); //h: 7
         graph.add(); //i: 8
-        connect(graph, 0, 1, 4);
-        connect(graph, 0, 7, 8);
-        connect(graph, 1, 2, 8);
-        connect(graph, 1, 7, 11);
-        connect(graph, 2, 3, 7);
-        connect(graph, 2, 5, 4);
-        connect(graph, 2, 8, 2);
+        bidiConnect(graph, 0, 1, 4);
+        bidiConnect(graph, 0, 7, 8);
+        bidiConnect(graph, 1, 2, 8);
+        bidiConnect(graph, 1, 7, 11);
+        bidiConnect(graph, 2, 3, 7);
+        bidiConnect(graph, 2, 5, 4);
+        bidiConnect(graph, 2, 8, 2);
+        bidiConnect(graph, 3, 4, 9);
+        bidiConnect(graph, 3, 5, 14);
+        bidiConnect(graph, 4, 5, 10);
+        bidiConnect(graph, 4, 5, 10);
+        bidiConnect(graph, 5, 6, 2);
+        bidiConnect(graph, 6, 7, 1);
+        bidiConnect(graph, 6, 8, 6);
+        bidiConnect(graph, 7, 8, 7);
+        return graph;
+    }
+
+    /**
+     * @return the weighted graph on page 653 of CLRS book, 3rd edition, according to the ebook version
+     */
+    public static Graph<WeightedEdgeDetails, VertexDetails> sampleWeightedGraphWithNegativeLoops() {
+        final Graph<WeightedEdgeDetails, VertexDetails> graph = new AdjacencyListGraph<>();
+        graph.add(); //s: 0
+        graph.add(); //t: 1
+        graph.add(); //x: 2
+        graph.add(); //y: 3
+        graph.add(); //z: 4
+        connect(graph, 0, 1, 6);
+        connect(graph, 0, 3, 7);
+        connect(graph, 1, 2, 5);
+        connect(graph, 1, 3, 8);
+        connect(graph, 1, 4, -4);
+        connect(graph, 2, 1, -2);
+        connect(graph, 3, 2, -3);
         connect(graph, 3, 4, 9);
-        connect(graph, 3, 5, 14);
-        connect(graph, 4, 5, 10);
-        connect(graph, 4, 5, 10);
-        connect(graph, 5, 6, 2);
-        connect(graph, 6, 7, 1);
-        connect(graph, 6, 8, 6);
-        connect(graph, 7, 8, 7);
+        connect(graph, 4, 0, 2);
+        connect(graph, 4, 2, 7);
         return graph;
     }
 
@@ -94,10 +117,15 @@ public abstract class GraphSamples {
         return details;
     }
 
-    private static void connect(Graph<WeightedEdgeDetails, VertexDetails> graph, int from, int to, int weight) {
+    private static void bidiConnect(Graph<WeightedEdgeDetails, VertexDetails> graph, int from, int to, int weight) {
         final WeightedEdgeDetails edgeDetails = weight(weight);
         graph.connect(from, to, edgeDetails);
         graph.connect(to, from, edgeDetails);
+    }
+
+    private static void connect(Graph<WeightedEdgeDetails, VertexDetails> graph, int from, int to, int weight) {
+        final WeightedEdgeDetails edgeDetails = weight(weight);
+        graph.connect(from, to, edgeDetails);
     }
 
 }

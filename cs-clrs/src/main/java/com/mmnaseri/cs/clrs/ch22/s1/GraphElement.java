@@ -30,4 +30,8 @@ public class GraphElement {
         return properties.containsKey(name) ? (E) properties.get(name) : null;
     }
 
+    public boolean hasProperty(String name) {
+        return properties.containsKey(name);
+    }
+
 }

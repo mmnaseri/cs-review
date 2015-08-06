@@ -31,7 +31,7 @@ public class BellmanFordSingleSourceShortestPathFinder<E extends WeightedEdgeDet
             final Vertex<V> midpoint = edge.getFrom();
             final Vertex<V> destination = edge.getTo();
             final int currentDistance = destination.getProperty("distance", Integer.class);
-            final int detourDistance = midpoint.getProperty("distance", Integer.class) + weight(edge);
+            final long detourDistance = (long) midpoint.getProperty("distance", Integer.class) + (long) weight(edge);
             if (currentDistance > detourDistance) {
                 return null;
             }

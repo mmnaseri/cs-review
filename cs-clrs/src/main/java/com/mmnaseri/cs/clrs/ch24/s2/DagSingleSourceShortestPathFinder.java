@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.clrs.ch24.s3;
+package com.mmnaseri.cs.clrs.ch24.s2;
 
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
 import com.mmnaseri.cs.clrs.ch22.s1.Vertex;

@@ -1,10 +1,9 @@
-package com.mmnaseri.cs.clrs.ch24.s2;
+package com.mmnaseri.cs.clrs.ch24.s1;
 
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
 import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
 import com.mmnaseri.cs.clrs.ch24.BaseSingleSourceShortestPathFinderTest;
-import com.mmnaseri.cs.clrs.ch24.s1.SingleSourceShortestPathFinder;
 import com.mmnaseri.cs.clrs.common.GraphSamples;
 import org.testng.annotations.Test;
 

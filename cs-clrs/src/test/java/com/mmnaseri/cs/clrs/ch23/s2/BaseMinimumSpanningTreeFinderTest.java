@@ -1,7 +1,6 @@
 package com.mmnaseri.cs.clrs.ch23.s2;
 
 import com.mmnaseri.cs.clrs.ch22.EdgeColor;
-import com.mmnaseri.cs.clrs.ch22.GraphSamples;
 import com.mmnaseri.cs.clrs.ch22.GraphVertexVisitorAdapter;
 import com.mmnaseri.cs.clrs.ch22.s1.Edge;
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
@@ -9,6 +8,7 @@ import com.mmnaseri.cs.clrs.ch22.s1.Vertex;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
 import com.mmnaseri.cs.clrs.ch22.s2.BreadthFirstGraphVisitor;
 import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
+import com.mmnaseri.cs.clrs.common.GraphSamples;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -16,9 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isIn;
+import static org.hamcrest.Matchers.*;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

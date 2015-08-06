@@ -1,10 +1,10 @@
 package com.mmnaseri.cs.clrs.ch22.s4;
 
-import com.mmnaseri.cs.clrs.ch22.GraphSamples;
 import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
 import com.mmnaseri.cs.clrs.ch22.s1.Vertex;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
+import com.mmnaseri.cs.clrs.common.GraphSamples;
 import org.testng.annotations.Test;
 
 import java.util.List;

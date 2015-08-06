@@ -2,11 +2,11 @@ package com.mmnaseri.cs.clrs.ch22.s5;
 
 import com.mmnaseri.cs.clrs.ch21.DisjointSet;
 import com.mmnaseri.cs.clrs.ch21.Element;
-import com.mmnaseri.cs.clrs.ch22.GraphSamples;
 import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
 import com.mmnaseri.cs.clrs.ch22.s1.Vertex;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
+import com.mmnaseri.cs.clrs.common.GraphSamples;
 import org.testng.annotations.Test;
 
 import java.util.Set;

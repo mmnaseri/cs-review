@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.clrs.ch22;
+package com.mmnaseri.cs.clrs.common;
 
 import com.mmnaseri.cs.clrs.ch22.s1.AdjacencyListGraph;
 import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;

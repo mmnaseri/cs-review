@@ -10,9 +10,7 @@ import com.mmnaseri.cs.clrs.common.ParameterizedTypeReference;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -34,6 +32,19 @@ public abstract class BaseSingleSourceShortestPathFinderTest {
         checkPathProperty(result, 3, 6, 1);
         checkPathProperty(result, 4, 5, 3);
         checkPathProperty(result, 5, 3, 4);
+    }
+
+    @Test
+    public void testAgainstCyclicSampleWithoutNegativeEdges() throws Exception {
+        final Graph<WeightedEdgeDetails, VertexDetails> graph = GraphSamples.sampleWeightedLoopingGraphWithoutNegativeEdges();
+        final Graph<WeightedEdgeDetails, VertexDetails> result = getFinder().find(graph, 0);
+        checkResultIntegrity(graph, result);
+        checkVertexProperties(result);
+        checkPathProperty(result, 0, 0, null);
+        checkPathProperty(result, 1, 8, 3);
+        checkPathProperty(result, 2, 9, 1);
+        checkPathProperty(result, 3, 5, 0);
+        checkPathProperty(result, 4, 7, 3);
     }
 
     protected void checkVertexProperties(Graph<WeightedEdgeDetails, VertexDetails> result) {
@@ -59,4 +70,5 @@ public abstract class BaseSingleSourceShortestPathFinderTest {
             assertThat(graph.get(vertex).getProperty("predecessor", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(predecessor)));
         }
     }
+
 }

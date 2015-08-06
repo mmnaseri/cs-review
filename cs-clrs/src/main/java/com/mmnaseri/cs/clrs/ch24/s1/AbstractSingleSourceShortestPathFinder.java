@@ -24,10 +24,6 @@ public abstract class AbstractSingleSourceShortestPathFinder<E extends WeightedE
         return result;
     }
 
-    protected void relax(Graph<E, V> graph, int midpoint, int destination) {
-        relax(graph, graph.get(midpoint), graph.get(destination));
-    }
-
     protected void relax(Graph<E, V> graph, Vertex<V> midpoint, Vertex<V> destination) {
         final Edge<E, V> edge = graph.edge(midpoint.getIndex(), destination.getIndex());
         relax(edge);

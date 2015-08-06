@@ -135,6 +135,29 @@ public abstract class GraphSamples {
         return graph;
     }
 
+    /**
+     * @return the weighted graph on page 659 of CLRS book, 3rd edition, according to the ebook version
+     */
+    public static Graph<WeightedEdgeDetails, VertexDetails> sampleWeightedLoopingGraphWithoutNegativeEdges() {
+        final Graph<WeightedEdgeDetails, VertexDetails> graph = new AdjacencyListGraph<>();
+        graph.add(); //s: 0
+        graph.add(); //t: 1
+        graph.add(); //x: 2
+        graph.add(); //y: 3
+        graph.add(); //z: 4
+        connect(graph, 0, 1, 10);
+        connect(graph, 0, 3, 5);
+        connect(graph, 1, 2, 1);
+        connect(graph, 1, 3, 2);
+        connect(graph, 2, 4, 4);
+        connect(graph, 3, 1, 3);
+        connect(graph, 3, 2, 9);
+        connect(graph, 3, 4, 2);
+        connect(graph, 4, 0, 7);
+        connect(graph, 4, 2, 6);
+        return graph;
+    }
+
     private static WeightedEdgeDetails weight(int weight) {
         final WeightedEdgeDetails details = new WeightedEdgeDetails();
         details.setWeight(weight);

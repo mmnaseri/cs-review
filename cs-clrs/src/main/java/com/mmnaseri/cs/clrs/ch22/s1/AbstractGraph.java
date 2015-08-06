@@ -161,6 +161,11 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
         }
 
         @Override
+        public List<Edge<E, V>> getEdges() {
+            return delegate.getEdges();
+        }
+
+        @Override
         public Iterator<Vertex<V>> iterator() {
             return delegate.iterator();
         }

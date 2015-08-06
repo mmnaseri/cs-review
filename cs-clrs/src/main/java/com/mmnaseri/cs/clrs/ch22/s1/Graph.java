@@ -40,4 +40,6 @@ public interface Graph<E extends EdgeDetails, V extends VertexDetails> extends I
 
     List<Vertex<V>> getNeighbors(Vertex<V> vertex);
 
+    List<Edge<E, V>> getEdges();
+
 }

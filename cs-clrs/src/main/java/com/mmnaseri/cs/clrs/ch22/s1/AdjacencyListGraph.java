@@ -4,6 +4,7 @@ import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -139,6 +140,19 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
             }
         }
         return graph;
+    }
+
+    @Override
+    public List<Edge<E, V>> getEdges() {
+        final List<Edge<E, V>> edges = new LinkedList<>();
+        for (AdjacencyEdge<E, V> list : adjacencyLists) {
+            AdjacencyEdge<E, V> edge = list;
+            while (edge != null) {
+                edges.add(edge);
+                edge = edge.getNext();
+            }
+        }
+        return edges;
     }
 
     private void check(int index) {

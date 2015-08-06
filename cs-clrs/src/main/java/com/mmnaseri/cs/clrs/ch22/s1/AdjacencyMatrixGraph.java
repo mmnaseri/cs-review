@@ -6,6 +6,8 @@ import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -130,6 +132,20 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
         }
         graph.relaxCapacity();
         return graph;
+    }
+
+    @Override
+    public List<Edge<E, V>> getEdges() {
+        final List<Edge<E, V>> list = new LinkedList<>();
+        for (int i = 0; i < size(); i++) {
+            for (int j = 0; j < size(); j++) {
+                final Edge<E, V> edge = edge(i, j);
+                if (edge != null) {
+                    list.add(edge);
+                }
+            }
+        }
+        return list;
     }
 
     private void relaxCapacity() {

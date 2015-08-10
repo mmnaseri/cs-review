@@ -4,10 +4,12 @@ import com.mmnaseri.cs.clrs.ch22.s1.Graph;
 import com.mmnaseri.cs.clrs.ch22.s1.Vertex;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
 import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
+import com.mmnaseri.cs.clrs.ch24.SingleSourceShortestPathFinder;
 import com.mmnaseri.cs.clrs.ch24.s1.BellmanFordSingleSourceShortestPathFinder;
-import com.mmnaseri.cs.clrs.ch24.s1.SingleSourceShortestPathFinder;
 import com.mmnaseri.cs.clrs.ch25.AllPairsShortestPathFinder;
+import com.mmnaseri.cs.clrs.ch25.ShortestPathMetadata;
 import com.mmnaseri.cs.clrs.common.Matrix;
+import com.mmnaseri.cs.clrs.common.ParameterizedTypeReference;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
@@ -30,12 +32,14 @@ public class BruteForceAllPairsShortestPathFinder<E extends WeightedEdgeDetails,
     }
 
     @Override
-    public Matrix<Integer> find(Graph<E, V> graph) {
-        final Matrix<Integer> matrix = new ArrayMatrix<>(graph.size(), graph.size());
+    public Matrix<ShortestPathMetadata<V>> find(Graph<E, V> graph) {
+        final Matrix<ShortestPathMetadata<V>> matrix = new ArrayMatrix<>(graph.size(), graph.size());
         for (Vertex<V> vertex : graph) {
             final Graph<E, V> current = finder.find(graph, vertex.getIndex());
             for (Vertex<V> destination : current) {
-                matrix.set(vertex.getIndex(), destination.getIndex(), destination.getProperty("distance", Integer.class));
+                final Integer distance = destination.getProperty("distance", Integer.class);
+                matrix.set(vertex.getIndex(), destination.getIndex(), new ShortestPathMetadata<>(distance, destination.getProperty("predecessor", new ParameterizedTypeReference<Vertex<V>>() {
+                })));
             }
         }
         return matrix;

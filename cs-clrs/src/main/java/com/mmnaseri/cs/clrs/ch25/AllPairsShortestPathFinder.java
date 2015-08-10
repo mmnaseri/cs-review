@@ -11,6 +11,6 @@ import com.mmnaseri.cs.clrs.common.Matrix;
  */
 public interface AllPairsShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> {
 
-    Matrix<Integer> find(Graph<E, V> graph);
+    Matrix<ShortestPathMetadata<V>> find(Graph<E, V> graph);
 
 }

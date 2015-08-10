@@ -14,7 +14,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/9/15, 6:23 PM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.BUGGY)
 public class SlowAllPairsShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> implements com.mmnaseri.cs.clrs.ch25.AllPairsShortestPathFinder<E,V> {
 
     private Matrix<ShortestPathMetadata<V>> extend(Matrix<ShortestPathMetadata<V>> original, Graph<E, V> graph) {
@@ -56,6 +56,9 @@ public class SlowAllPairsShortestPathFinder<E extends WeightedEdgeDetails, V ext
         }
         for (int i = 2; i < size; i++) {
             result = extend(result, graph);
+        }
+        for (int i = 0; i < size; i++) {
+            result.set(i, i, new ShortestPathMetadata<V>(0, null));
         }
         return result;
     }

@@ -18,7 +18,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/7/15)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class BruteForceAllPairsShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> implements AllPairsShortestPathFinder<E, V> {
 
     private final SingleSourceShortestPathFinder<E, V> finder;

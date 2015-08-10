@@ -180,7 +180,7 @@ public class FibonacciHeapTest {
             assertThat(heap.size(), is(size - i + 1));
             assertThat(heap.isEmpty(), is(false));
         }
-        final List<String> inserted = input.subList(0, size);
+        final List<String> inserted = new ArrayList<>(input).subList(0, size);
         Collections.sort(inserted);
         for (int i = 0; i < inserted.size(); i++) {
             assertThat(heap.size(), is(inserted.size() - i));

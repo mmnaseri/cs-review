@@ -158,6 +158,22 @@ public abstract class GraphSamples {
         return graph;
     }
 
+    public static Graph<WeightedEdgeDetails, VertexDetails> sampleWeightedGraphForAllPairsShortestPathCalculation() {
+        final Graph<WeightedEdgeDetails, VertexDetails> graph = new AdjacencyListGraph<>();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        connect(graph, 0, 1, 4);
+        connect(graph, 0, 2, 3);
+        connect(graph, 0, 3, 6);
+        connect(graph, 1, 2, 1);
+        connect(graph, 2, 0, 2);
+        connect(graph, 2, 3, 1);
+        connect(graph, 3, 2, 1);
+        return graph;
+    }
+
     private static WeightedEdgeDetails weight(int weight) {
         final WeightedEdgeDetails details = new WeightedEdgeDetails();
         details.setWeight(weight);

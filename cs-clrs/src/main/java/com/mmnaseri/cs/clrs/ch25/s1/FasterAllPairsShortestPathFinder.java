@@ -13,7 +13,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/9/15, 6:27 PM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.BUGGY)
 public class FasterAllPairsShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> implements com.mmnaseri.cs.clrs.ch25.AllPairsShortestPathFinder<E,V> {
 
     private Matrix<ShortestPathMetadata<V>> extend(Matrix<ShortestPathMetadata<V>> original, Matrix<ShortestPathMetadata<V>> reference) {
@@ -49,6 +49,9 @@ public class FasterAllPairsShortestPathFinder<E extends WeightedEdgeDetails, V e
         while (iteration < size - 1) {
             result = extend(result, result);
             iteration = iteration * 2;
+        }
+        for (int i = 0; i < size; i++) {
+            result.set(i, i, new ShortestPathMetadata<V>(0, null));
         }
         return result;
     }

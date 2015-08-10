@@ -161,6 +161,19 @@ public class AdjacencyListGraph<E extends EdgeDetails, V extends VertexDetails> 
         }
     }
 
+    @Override
+    public List<Vertex<V>> getNeighbors(int index) {
+        check(index);
+        final List<Vertex<V>> vertices = new ArrayList<>();
+        AdjacencyEdge<E, V> edge = adjacencyLists.get(index);
+        while (edge != null) {
+            final Vertex<V> vertex = edge.getTo();
+            vertices.add(vertex);
+            edge = edge.getNext();
+        }
+        return vertices;
+    }
+
     private static class AdjacencyEdge<E extends EdgeDetails, V extends VertexDetails> extends Edge<E, V> {
 
         private AdjacencyEdge<E, V> previous;

@@ -5,10 +5,7 @@ import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -176,6 +173,18 @@ public class AdjacencyMatrixGraph<E extends EdgeDetails, V extends VertexDetails
         if (index < 0 || index >= vertices) {
             throw new IndexOutOfBoundsException("Invalid vertex index: " + index);
         }
+    }
+
+    @Override
+    public List<Vertex<V>> getNeighbors(int index) {
+        final List<Vertex<V>> vertices = new ArrayList<>();
+        for (int i = 0; i < size(); i++) {
+            final Edge<E, V> edge = matrix.get(index, i);
+            if (edge != null) {
+                vertices.add(edge.getTo());
+            }
+        }
+        return vertices;
     }
 
 }

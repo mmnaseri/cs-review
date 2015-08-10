@@ -51,18 +51,6 @@ public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetai
     }
 
     @Override
-    public List<Vertex<V>> getNeighbors(int index) {
-        final List<Vertex<V>> vertices = new ArrayList<>();
-        for (int i = 0; i < size(); i++) {
-            final Edge<E, V> edge = edge(index, i);
-            if (edge != null) {
-                vertices.add(edge.getTo());
-            }
-        }
-        return vertices;
-    }
-
-    @Override
     public List<Vertex<V>> getNeighbors(Vertex<V> vertex) {
         return getNeighbors(Objects.requireNonNull(vertex, "Vertex must not be null").getIndex());
     }

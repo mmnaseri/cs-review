@@ -25,4 +25,8 @@ public class ShortestPathMetadata<V extends VertexDetails> {
         return predecessor;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(distance);
+    }
 }

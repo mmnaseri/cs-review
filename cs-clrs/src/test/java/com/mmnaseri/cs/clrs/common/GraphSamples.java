@@ -174,6 +174,28 @@ public abstract class GraphSamples {
         return graph;
     }
 
+    /**
+     * @return the weighted graph on page 690 of CLRS book, 3rd edition, according to the ebook version
+     */
+    public static Graph<WeightedEdgeDetails, VertexDetails> sampleFiveVertexWeightedGraphForAllPairsShortestPathCalculation() {
+        final Graph<WeightedEdgeDetails, VertexDetails> graph = new AdjacencyListGraph<>();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        connect(graph, 0, 1, 3);
+        connect(graph, 0, 2, 8);
+        connect(graph, 0, 4, -4);
+        connect(graph, 1, 3, 1);
+        connect(graph, 1, 4, 7);
+        connect(graph, 2, 1, 4);
+        connect(graph, 3, 0, 2);
+        connect(graph, 3, 2, -5);
+        connect(graph, 4, 3, 6);
+        return graph;
+    }
+
     private static WeightedEdgeDetails weight(int weight) {
         final WeightedEdgeDetails details = new WeightedEdgeDetails();
         details.setWeight(weight);
@@ -190,5 +212,4 @@ public abstract class GraphSamples {
         final WeightedEdgeDetails edgeDetails = weight(weight);
         graph.connect(from, to, edgeDetails);
     }
-
 }

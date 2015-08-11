@@ -49,6 +49,46 @@ public abstract class BaseAllPairsShortestPathFinderTest {
         validateMetadata(matrix, 3, 3, 0, null);
     }
 
+    @Test
+    public void testAgainstBookSample() throws Exception {
+        final Graph<WeightedEdgeDetails, VertexDetails> graph = GraphSamples.sampleFiveVertexWeightedGraphForAllPairsShortestPathCalculation();
+        final AllPairsShortestPathFinder<WeightedEdgeDetails, VertexDetails> finder = getFinder();
+        final Matrix<ShortestPathMetadata<VertexDetails>> matrix = finder.find(graph);
+        assertThat(matrix, is(notNullValue()));
+        assertThat(matrix.getRows(), is(graph.size()));
+        assertThat(matrix.getColumns(), is(graph.size()));
+        for (int i = 0; i < graph.size(); i++) {
+            for (int j = 0; j < graph.size(); j++) {
+                assertThat(matrix.get(i, j), is(notNullValue()));
+            }
+        }
+        validateMetadata(matrix, 0, 0, 0, null);
+        validateMetadata(matrix, 0, 1, 1, 2);
+        validateMetadata(matrix, 0, 2, -3, 3);
+        validateMetadata(matrix, 0, 3, 2, 4);
+        validateMetadata(matrix, 0, 4, -4, 0);
+        validateMetadata(matrix, 1, 0, 3, 3);
+        validateMetadata(matrix, 1, 1, 0, null);
+        validateMetadata(matrix, 1, 2, -4, 3);
+        validateMetadata(matrix, 1, 3, 1, 1);
+        validateMetadata(matrix, 1, 4, -1, 0);
+        validateMetadata(matrix, 2, 0, 7, 3);
+        validateMetadata(matrix, 2, 1, 4, 2);
+        validateMetadata(matrix, 2, 2, 0, null);
+        validateMetadata(matrix, 2, 3, 5, 1);
+        validateMetadata(matrix, 2, 4, 3, 0);
+        validateMetadata(matrix, 3, 0, 2, 3);
+        validateMetadata(matrix, 3, 1, -1, 2);
+        validateMetadata(matrix, 3, 2, -5, 3);
+        validateMetadata(matrix, 3, 3, 0, null);
+        validateMetadata(matrix, 3, 4, -2, 0);
+        validateMetadata(matrix, 4, 0, 8, 3);
+        validateMetadata(matrix, 4, 1, 5, 2);
+        validateMetadata(matrix, 4, 2, 1, 3);
+        validateMetadata(matrix, 4, 3, 6, 4);
+        validateMetadata(matrix, 4, 4, 0, null);
+    }
+
     protected void validateMetadata(Matrix<ShortestPathMetadata<VertexDetails>> matrix, int i, int j, int distance, Integer predecessor) {
         final ShortestPathMetadata<VertexDetails> metadata = matrix.get(i, j);
         assertThat(metadata.getDistance(), is(distance));
@@ -59,4 +99,5 @@ public abstract class BaseAllPairsShortestPathFinderTest {
             assertThat(metadata.getPredecessor().getIndex(), is(predecessor));
         }
     }
+
 }

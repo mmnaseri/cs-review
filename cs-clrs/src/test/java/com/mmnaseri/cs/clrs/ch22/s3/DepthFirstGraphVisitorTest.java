@@ -23,51 +23,51 @@ public class DepthFirstGraphVisitorTest {
     public void testDirected() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.directed();
         final DepthFirstGraphVisitor<EdgeDetails, VertexDetails> visitor = new DepthFirstGraphVisitor<>();
-        visitor.visit(graph, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
+        final Graph<EdgeDetails, VertexDetails> result = visitor.visit(graph, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
         });
-        assertThat(graph.get(0).getProperty("discovery", Integer.class), is(1));
-        assertThat(graph.get(1).getProperty("discovery", Integer.class), is(2));
-        assertThat(graph.get(2).getProperty("discovery", Integer.class), is(4));
-        assertThat(graph.get(3).getProperty("discovery", Integer.class), is(3));
-        assertThat(graph.get(4).getProperty("discovery", Integer.class), is(9));
-        assertThat(graph.get(5).getProperty("discovery", Integer.class), is(10));
-        assertThat(graph.get(0).getProperty("finish", Integer.class), is(8));
-        assertThat(graph.get(1).getProperty("finish", Integer.class), is(7));
-        assertThat(graph.get(2).getProperty("finish", Integer.class), is(5));
-        assertThat(graph.get(3).getProperty("finish", Integer.class), is(6));
-        assertThat(graph.get(4).getProperty("finish", Integer.class), is(12));
-        assertThat(graph.get(5).getProperty("finish", Integer.class), is(11));
-        assertThat(graph.get(0).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
-        assertThat(graph.get(1).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(0)));
-        assertThat(graph.get(2).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(3)));
-        assertThat(graph.get(3).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(1)));
-        assertThat(graph.get(4).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
-        assertThat(graph.get(5).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(4)));
+        assertThat(result.get(0).getProperty("discovery", Integer.class), is(1));
+        assertThat(result.get(1).getProperty("discovery", Integer.class), is(2));
+        assertThat(result.get(2).getProperty("discovery", Integer.class), is(4));
+        assertThat(result.get(3).getProperty("discovery", Integer.class), is(3));
+        assertThat(result.get(4).getProperty("discovery", Integer.class), is(9));
+        assertThat(result.get(5).getProperty("discovery", Integer.class), is(10));
+        assertThat(result.get(0).getProperty("finish", Integer.class), is(8));
+        assertThat(result.get(1).getProperty("finish", Integer.class), is(7));
+        assertThat(result.get(2).getProperty("finish", Integer.class), is(5));
+        assertThat(result.get(3).getProperty("finish", Integer.class), is(6));
+        assertThat(result.get(4).getProperty("finish", Integer.class), is(12));
+        assertThat(result.get(5).getProperty("finish", Integer.class), is(11));
+        assertThat(result.get(0).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
+        assertThat(result.get(1).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(0)));
+        assertThat(result.get(2).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(3)));
+        assertThat(result.get(3).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(1)));
+        assertThat(result.get(4).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
+        assertThat(result.get(5).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(4)));
     }
 
     @Test
     public void testUndirected() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.undirected();
         final DepthFirstGraphVisitor<EdgeDetails, VertexDetails> visitor = new DepthFirstGraphVisitor<>();
-        visitor.visit(graph, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
+        final Graph<EdgeDetails, VertexDetails> result = visitor.visit(graph, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
         });
-        assertThat(graph.get(0).getProperty("discovery", Integer.class), is(1));
-        assertThat(graph.get(1).getProperty("discovery", Integer.class), is(2));
-        assertThat(graph.get(2).getProperty("discovery", Integer.class), is(3));
-        assertThat(graph.get(3).getProperty("discovery", Integer.class), is(4));
-        assertThat(graph.get(4).getProperty("discovery", Integer.class), is(5));
-        assertThat(graph.get(5).getProperty("discovery", Integer.class), is(6));
-        assertThat(graph.get(0).getProperty("finish", Integer.class), is(12));
-        assertThat(graph.get(1).getProperty("finish", Integer.class), is(11));
-        assertThat(graph.get(2).getProperty("finish", Integer.class), is(10));
-        assertThat(graph.get(3).getProperty("finish", Integer.class), is(9));
-        assertThat(graph.get(4).getProperty("finish", Integer.class), is(8));
-        assertThat(graph.get(5).getProperty("finish", Integer.class), is(7));
-        assertThat(graph.get(0).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
-        assertThat(graph.get(1).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(0)));
-        assertThat(graph.get(2).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(1)));
-        assertThat(graph.get(3).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(2)));
-        assertThat(graph.get(4).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(3)));
-        assertThat(graph.get(5).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(4)));
+        assertThat(result.get(0).getProperty("discovery", Integer.class), is(1));
+        assertThat(result.get(1).getProperty("discovery", Integer.class), is(2));
+        assertThat(result.get(2).getProperty("discovery", Integer.class), is(3));
+        assertThat(result.get(3).getProperty("discovery", Integer.class), is(4));
+        assertThat(result.get(4).getProperty("discovery", Integer.class), is(5));
+        assertThat(result.get(5).getProperty("discovery", Integer.class), is(6));
+        assertThat(result.get(0).getProperty("finish", Integer.class), is(12));
+        assertThat(result.get(1).getProperty("finish", Integer.class), is(11));
+        assertThat(result.get(2).getProperty("finish", Integer.class), is(10));
+        assertThat(result.get(3).getProperty("finish", Integer.class), is(9));
+        assertThat(result.get(4).getProperty("finish", Integer.class), is(8));
+        assertThat(result.get(5).getProperty("finish", Integer.class), is(7));
+        assertThat(result.get(0).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
+        assertThat(result.get(1).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(0)));
+        assertThat(result.get(2).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(1)));
+        assertThat(result.get(3).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(2)));
+        assertThat(result.get(4).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(3)));
+        assertThat(result.get(5).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(4)));
     }
 }

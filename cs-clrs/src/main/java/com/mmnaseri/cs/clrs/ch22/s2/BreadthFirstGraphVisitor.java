@@ -3,10 +3,7 @@ package com.mmnaseri.cs.clrs.ch22.s2;
 import com.mmnaseri.cs.clrs.ch22.EdgeColor;
 import com.mmnaseri.cs.clrs.ch22.GraphVertexVisitor;
 import com.mmnaseri.cs.clrs.ch22.GraphVisitor;
-import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;
-import com.mmnaseri.cs.clrs.ch22.s1.Graph;
-import com.mmnaseri.cs.clrs.ch22.s1.Vertex;
-import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
+import com.mmnaseri.cs.clrs.ch22.s1.*;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -30,8 +27,9 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
     }
 
     @Override
-    public void visit(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor) {
-        final List<Vertex<V>> vertices = graph.getVertices();
+    public Graph<E, V> visit(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor) {
+        final Graph<E, V> copy = GraphUtils.copy(graph);
+        final List<Vertex<V>> vertices = copy.getVertices();
         for (Vertex<V> vertex : vertices) {
             vertex.setProperty("color", EdgeColor.WHITE);
             vertex.setProperty("distance", Integer.MAX_VALUE);
@@ -42,14 +40,16 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
         }
         for (Vertex<V> vertex : vertices) {
             if (EdgeColor.WHITE.equals(vertex.getProperty("color", EdgeColor.class))) {
-                visitSubGraph(graph, visitor, vertex);
+                visitSubGraph(copy, visitor, vertex);
             }
         }
+        return copy;
     }
 
     @Override
-    public void visit(Graph<E, V> graph, int start, GraphVertexVisitor<E, V> visitor) {
-        final List<Vertex<V>> vertices = graph.getVertices();
+    public Graph<E, V> visit(Graph<E, V> graph, int start, GraphVertexVisitor<E, V> visitor) {
+        final Graph<E, V> copy = GraphUtils.copy(graph);
+        final List<Vertex<V>> vertices = copy.getVertices();
         for (Vertex<V> vertex : vertices) {
             if (vertex.getIndex() == start) {
                 continue;
@@ -58,8 +58,9 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
             vertex.setProperty("distance", Integer.MAX_VALUE);
             vertex.setProperty("parent", null);
         }
-        final Vertex<V> startingVertex = graph.get(start);
-        visitSubGraph(graph, visitor, startingVertex);
+        final Vertex<V> startingVertex = copy.get(start);
+        visitSubGraph(copy, visitor, startingVertex);
+        return copy;
     }
 
     private void visitSubGraph(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor, Vertex<V> startingVertex) {

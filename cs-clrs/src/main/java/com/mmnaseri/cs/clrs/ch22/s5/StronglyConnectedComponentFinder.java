@@ -27,15 +27,16 @@ public class StronglyConnectedComponentFinder<E extends EdgeDetails, V extends V
 
     public DisjointSet<?, Vertex<V>> find(Graph<E, V> graph) {
         //visit all nodes
-        first.visit(graph,new GraphVertexVisitorAdapter<E, V>() {
+        final Graph<E, V> coloredGraph = first.visit(graph, new GraphVertexVisitorAdapter<E, V>() {
         });
         //compute the transposed graph
-        final Graph<E, V> transposed = graph.transpose();
+        final Graph<E, V> transposed = coloredGraph.transpose();
         //visit the inverse nodes in decreasing order of the finish time the first time around
-        second.visit(transposed, new GraphVertexVisitorAdapter<E, V>() {});
+        final Graph<E, V> coloredTransposed = second.visit(transposed, new GraphVertexVisitorAdapter<E, V>() {
+        });
         //create a disjoint set where each set is represented by a root of the DFS tree and contains all its internal nodes
         final PathCompressingRankedForestDisjointSet<Vertex<V>> set = new PathCompressingRankedForestDisjointSet<>();
-        for (Vertex<V> vertex : transposed.getVertices()) {
+        for (Vertex<V> vertex : coloredTransposed.getVertices()) {
             final RankedTreeElement<Vertex<V>> element = set.create(vertex);
             final Vertex<V> root = findRoot(vertex);
             if (root.getIndex() == vertex.getIndex()) {

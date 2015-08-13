@@ -4,14 +4,16 @@ import com.mmnaseri.cs.clrs.common.ParameterizedTypeReference;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/3/15)
  */
-public class GraphElement {
+public class GraphElement<D extends GraphDetails> {
 
     private Map<String, Object> properties = new HashMap<>();
+    private D details;
 
     public void setProperty(String name, Object value) {
         properties.put(name, value);
@@ -32,6 +34,18 @@ public class GraphElement {
 
     public boolean hasProperty(String name) {
         return properties.containsKey(name);
+    }
+
+    public Set<String> getPropertyNames() {
+        return properties.keySet();
+    }
+
+    public D getDetails() {
+        return details;
+    }
+
+    public void setDetails(D details) {
+        this.details = details;
     }
 
 }

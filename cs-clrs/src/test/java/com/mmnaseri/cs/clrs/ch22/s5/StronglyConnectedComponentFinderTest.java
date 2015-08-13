@@ -9,6 +9,7 @@ import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
 import com.mmnaseri.cs.clrs.common.GraphSamples;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
@@ -29,7 +30,12 @@ public class StronglyConnectedComponentFinderTest {
         assertThat(set, is(notNullValue()));
         assertThat(set.sets(), hasSize(1));
         final Element<Vertex<VertexDetails>> root = set.sets().iterator().next();
-        assertThat(set.elements(root), containsInAnyOrder(graph.get(0), graph.get(1), graph.get(2), graph.get(3), graph.get(4), graph.get(5)));
+        final Set<Vertex<VertexDetails>> elements = set.elements(root);
+        final Set<Integer> indices = new HashSet<>();
+        for (Vertex<VertexDetails> element : elements) {
+            indices.add(element.getIndex());
+        }
+        assertThat(indices, containsInAnyOrder(0, 1, 2, 3, 4, 5));
     }
 
     @Test
@@ -42,10 +48,14 @@ public class StronglyConnectedComponentFinderTest {
         assertThat(sets, hasSize(2));
         for (Element<Vertex<VertexDetails>> element : sets) {
             final Set<Vertex<VertexDetails>> elements = set.elements(element);
-            if (elements.contains(graph.get(0))) {
-                assertThat(elements, containsInAnyOrder(graph.get(0), graph.get(1), graph.get(2), graph.get(3)));
+            final Set<Integer> indices = new HashSet<>();
+            for (Vertex<VertexDetails> vertex : elements) {
+                indices.add(vertex.getIndex());
+            }
+            if (indices.contains(0)) {
+                assertThat(indices, containsInAnyOrder(0, 1, 2, 3));
             } else {
-                assertThat(elements, containsInAnyOrder(graph.get(4), graph.get(5)));
+                assertThat(indices, containsInAnyOrder(4, 5));
             }
         }
     }

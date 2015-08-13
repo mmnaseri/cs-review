@@ -23,40 +23,40 @@ public class BreadthFirstGraphVisitorTest {
     public void testDirectedGraph() throws Exception {
         final BreadthFirstGraphVisitor<EdgeDetails, VertexDetails> visitor = new BreadthFirstGraphVisitor<>();
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.directed();
-        visitor.visit(graph, 0, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
+        final Graph<EdgeDetails, VertexDetails> result = visitor.visit(graph, 0, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
         });
-        assertThat(graph.get(0).getProperty("distance", Integer.class), is(0));
-        assertThat(graph.get(1).getProperty("distance", Integer.class), is(1));
-        assertThat(graph.get(2).getProperty("distance", Integer.class), is(2));
-        assertThat(graph.get(3).getProperty("distance", Integer.class), is(1));
-        assertThat(graph.get(4).getProperty("distance", Integer.class), is(Integer.MAX_VALUE));
-        assertThat(graph.get(5).getProperty("distance", Integer.class), is(Integer.MAX_VALUE));
-        assertThat(graph.get(0).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
-        assertThat(graph.get(1).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(0)));
-        assertThat(graph.get(2).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(3)));
-        assertThat(graph.get(3).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(0)));
-        assertThat(graph.get(4).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
-        assertThat(graph.get(5).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
+        assertThat(result.get(0).getProperty("distance", Integer.class), is(0));
+        assertThat(result.get(1).getProperty("distance", Integer.class), is(1));
+        assertThat(result.get(2).getProperty("distance", Integer.class), is(2));
+        assertThat(result.get(3).getProperty("distance", Integer.class), is(1));
+        assertThat(result.get(4).getProperty("distance", Integer.class), is(Integer.MAX_VALUE));
+        assertThat(result.get(5).getProperty("distance", Integer.class), is(Integer.MAX_VALUE));
+        assertThat(result.get(0).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
+        assertThat(result.get(1).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(0)));
+        assertThat(result.get(2).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(3)));
+        assertThat(result.get(3).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(0)));
+        assertThat(result.get(4).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
+        assertThat(result.get(5).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
     }
 
     @Test
     public void testUndirectedGraph() throws Exception {
         final BreadthFirstGraphVisitor<EdgeDetails, VertexDetails> visitor = new BreadthFirstGraphVisitor<>();
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.undirected();
-        visitor.visit(graph, 0, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
+        final Graph<EdgeDetails, VertexDetails> result = visitor.visit(graph, 0, new GraphVertexVisitorAdapter<EdgeDetails, VertexDetails>() {
         });
-        assertThat(graph.get(0).getProperty("distance", Integer.class), is(0));
-        assertThat(graph.get(1).getProperty("distance", Integer.class), is(1));
-        assertThat(graph.get(2).getProperty("distance", Integer.class), is(1));
-        assertThat(graph.get(3).getProperty("distance", Integer.class), is(1));
-        assertThat(graph.get(4).getProperty("distance", Integer.class), is(2));
-        assertThat(graph.get(5).getProperty("distance", Integer.class), is(2));
-        assertThat(graph.get(0).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
-        assertThat(graph.get(1).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(0)));
-        assertThat(graph.get(2).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(0)));
-        assertThat(graph.get(3).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(0)));
-        assertThat(graph.get(4).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(3)));
-        assertThat(graph.get(5).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(graph.get(1)));
+        assertThat(result.get(0).getProperty("distance", Integer.class), is(0));
+        assertThat(result.get(1).getProperty("distance", Integer.class), is(1));
+        assertThat(result.get(2).getProperty("distance", Integer.class), is(1));
+        assertThat(result.get(3).getProperty("distance", Integer.class), is(1));
+        assertThat(result.get(4).getProperty("distance", Integer.class), is(2));
+        assertThat(result.get(5).getProperty("distance", Integer.class), is(2));
+        assertThat(result.get(0).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(nullValue()));
+        assertThat(result.get(1).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(0)));
+        assertThat(result.get(2).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(0)));
+        assertThat(result.get(3).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(0)));
+        assertThat(result.get(4).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(3)));
+        assertThat(result.get(5).getProperty("parent", new ParameterizedTypeReference<Vertex<VertexDetails>>() {}), is(result.get(1)));
     }
     
 }

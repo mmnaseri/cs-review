@@ -7,6 +7,7 @@ import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
 import com.mmnaseri.cs.clrs.common.GraphSamples;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,14 +26,22 @@ public abstract class BaseTopologicalSorterTest {
     public void testUndirected() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.undirected();
         final List<Vertex<VertexDetails>> list = getTopologicalSorter().sort(graph);
-        assertThat(list, contains(graph.get(0), graph.get(1), graph.get(2), graph.get(3), graph.get(4), graph.get(5)));
+        final List<Integer> indices = new ArrayList<>();
+        for (Vertex<VertexDetails> vertex : list) {
+            indices.add(vertex.getIndex());
+        }
+        assertThat(indices, contains(0, 1, 2, 3, 4, 5));
     }
 
     @Test
     public void testDirected() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.directed();
         final List<Vertex<VertexDetails>> list = getTopologicalSorter().sort(graph);
-        assertThat(list, contains(graph.get(4), graph.get(5), graph.get(0), graph.get(1), graph.get(3), graph.get(2)));
+        final List<Integer> indices = new ArrayList<>();
+        for (Vertex<VertexDetails> vertex : list) {
+            indices.add(vertex.getIndex());
+        }
+        assertThat(indices, contains(4, 5, 0, 1, 3, 2));
     }
 
 }

@@ -13,8 +13,8 @@ public class RandomizedQuickSorterTest extends BaseSortTest {
 
     @Override
     @Test(dataProvider = "normalDataProvider", invocationCount = 100)
-    public void testSortIntegrity(Integer[] items, Integer[] expected) throws Exception {
-        super.testSortIntegrity(items, expected);
+    public void testSortIntegrity(Integer[] items) throws Exception {
+        super.testSortIntegrity(items);
     }
 
 }

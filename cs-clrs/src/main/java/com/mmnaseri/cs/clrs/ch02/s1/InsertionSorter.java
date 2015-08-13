@@ -21,15 +21,9 @@ public class InsertionSorter<E extends Comparable<E>> implements Sorter<E> {
 
     @Override
     public void sort(E[] items) {
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 1; i < items.length; i++) {
             E item = items[i];
-            int placement = i;
-            for (int j = 0; j < i; j ++) {
-                if (comparator.compare(items[j], item) > 0) {
-                    placement = j;
-                    break;
-                }
-            }
+            int placement = findPlacement(items, item, i, comparator);
             /**
              * This call to System.arraycopy is equivalent to:
              * for (int j = i; j > placement; j --) {
@@ -39,6 +33,17 @@ public class InsertionSorter<E extends Comparable<E>> implements Sorter<E> {
             System.arraycopy(items, placement, items, placement + 1, i - placement);
             items[placement] = item;
         }
+    }
+
+    protected int findPlacement(E[] items, E item, int length, Comparator<E> comparator) {
+        int placement = length;
+        for (int j = 0; j < length; j ++) {
+            if (comparator.compare(items[j], item) > 0) {
+                placement = j;
+                break;
+            }
+        }
+        return placement;
     }
 
 }

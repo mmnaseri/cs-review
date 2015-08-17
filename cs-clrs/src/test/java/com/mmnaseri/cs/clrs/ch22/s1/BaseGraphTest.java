@@ -31,7 +31,7 @@ public abstract class BaseGraphTest {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         assertThat(graph.size(), is(0));
         assertThat(graph.isEmpty(), is(true));
-        final VertexDetails details = new VertexDetails();
+        final VertexDetails details = new SimpleVertexDetails();
         final int index = graph.add(details);
         assertThat(graph.size(), is(1));
         assertThat(graph.isEmpty(), is(false));
@@ -41,7 +41,7 @@ public abstract class BaseGraphTest {
     @Test
     public void testRetrievingAVertex() throws Exception {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
-        final VertexDetails details = new VertexDetails();
+        final VertexDetails details = new SimpleVertexDetails();
         final int index = graph.add(details);
         final Vertex<VertexDetails> vertex = graph.get(0);
         assertThat(vertex, is(notNullValue()));
@@ -78,7 +78,7 @@ public abstract class BaseGraphTest {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         final List<VertexDetails> vertices = new ArrayList<>();
         for (int i = 0; i < 500; i++) {
-            final VertexDetails details = new VertexDetails();
+            final VertexDetails details = new SimpleVertexDetails();
             vertices.add(details);
             graph.add(details);
         }
@@ -108,7 +108,7 @@ public abstract class BaseGraphTest {
         final Graph<EdgeDetails, VertexDetails> graph = graph();
         final List<VertexDetails> vertices = new ArrayList<>();
         for (int i = 0; i < 500; i++) {
-            final VertexDetails details = new VertexDetails();
+            final VertexDetails details = new SimpleVertexDetails();
             vertices.add(details);
             graph.add(details);
         }

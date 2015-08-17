@@ -1,6 +1,7 @@
 package com.mmnaseri.cs.clrs.ch25.s3;
 
 import com.mmnaseri.cs.clrs.ch22.s1.*;
+import com.mmnaseri.cs.clrs.ch23.s1.MutableWeightedEdgeDetails;
 import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
 import com.mmnaseri.cs.clrs.ch24.s1.BellmanFordSingleSourceShortestPathFinder;
 import com.mmnaseri.cs.clrs.ch24.s3.DijkstraSingleSourceShortestPathFinder;
@@ -48,7 +49,7 @@ public class JohnsonAllPairsShortestPathFinder<E extends WeightedEdgeDetails, V 
             } else {
                 newWeight = edgeWeight + sourcePotential - targetPotential;
             }
-            final WeightedEdgeDetails newDetails = new WeightedEdgeDetails();
+            final MutableWeightedEdgeDetails newDetails = new MutableWeightedEdgeDetails();
             newDetails.setWeight(newWeight);
             edge.setDetails(newDetails);
         }
@@ -76,7 +77,7 @@ public class JohnsonAllPairsShortestPathFinder<E extends WeightedEdgeDetails, V 
         final Graph<WeightedEdgeDetails, V> copy = copyGraph(graph);
         final int startingPoint = copy.add();
         for (int i = 0; i < graph.size(); i++) {
-            final WeightedEdgeDetails details = new WeightedEdgeDetails();
+            final MutableWeightedEdgeDetails details = new MutableWeightedEdgeDetails();
             details.setWeight(0);
             copy.connect(startingPoint, i, details);
         }

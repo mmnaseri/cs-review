@@ -4,6 +4,7 @@ import com.mmnaseri.cs.clrs.ch22.s1.AdjacencyListGraph;
 import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
+import com.mmnaseri.cs.clrs.ch23.s1.MutableWeightedEdgeDetails;
 import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
 
 /**
@@ -197,7 +198,7 @@ public abstract class GraphSamples {
     }
 
     private static WeightedEdgeDetails weight(int weight) {
-        final WeightedEdgeDetails details = new WeightedEdgeDetails();
+        final MutableWeightedEdgeDetails details = new MutableWeightedEdgeDetails();
         details.setWeight(weight);
         return details;
     }

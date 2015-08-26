@@ -6,6 +6,8 @@ import com.mmnaseri.cs.clrs.ch22.s1.Graph;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
 import com.mmnaseri.cs.clrs.ch23.s1.MutableWeightedEdgeDetails;
 import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
+import com.mmnaseri.cs.clrs.ch26.s1.FlowEdgeDetails;
+import com.mmnaseri.cs.clrs.ch26.s1.MutableFlowEdgeDetails;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -195,6 +197,36 @@ public abstract class GraphSamples {
         connect(graph, 3, 2, -5);
         connect(graph, 4, 3, 6);
         return graph;
+    }
+
+    /**
+     * @return the flow network from page 710 of CLRS book, 3rd edition, according to the ebook version
+     */
+    public static Graph<FlowEdgeDetails, VertexDetails> sampleFlowNetwork() {
+        final Graph<FlowEdgeDetails, VertexDetails> graph = new AdjacencyListGraph<>();
+        graph.add(); //0: s
+        graph.add(); //1: v1
+        graph.add(); //2: v2
+        graph.add(); //3: v3
+        graph.add(); //4: v4
+        graph.add(); //5: t
+        flow(graph, 0, 1, 16);
+        flow(graph, 0, 2, 13);
+        flow(graph, 1, 3, 12);
+        flow(graph, 2, 1, 4);
+        flow(graph, 2, 4, 14);
+        flow(graph, 3, 2, 9);
+        flow(graph, 3, 5, 20);
+        flow(graph, 4, 3, 7);
+        flow(graph, 4, 5, 4);
+        return graph;
+    }
+
+    private static void flow(Graph<FlowEdgeDetails, VertexDetails> graph, int from, int to, int capacity) {
+        final MutableFlowEdgeDetails details = new MutableFlowEdgeDetails();
+        details.setCapacity(capacity);
+        details.setFlow(0);
+        graph.connect(from, to, details);
     }
 
     private static WeightedEdgeDetails weight(int weight) {

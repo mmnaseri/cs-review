@@ -13,15 +13,15 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/26/15)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public abstract class AbstractFordFulkersonMaximumFlowFinder<E extends FlowEdgeDetails, V extends VertexDetails> implements MaximumFlowFinder<E, V> {
 
     @Override
-    public Graph<FlowEdgeDetails, V> find(Graph<E, V> network) {
+    public Graph<FlowEdgeDetails, V> find(Graph<E, V> network, int source, int destination) {
         final Graph<FlowEdgeDetails, V> result = initializeNetwork(network);
         while (true) {
             final Graph<FlowEdgeDetails, V> residualNetwork = getResidualNetwork(result);
-            final List<Integer> augmentingPath = findAugmentingPath(residualNetwork);
+            final List<Integer> augmentingPath = findAugmentingPath(residualNetwork, source, destination);
             if (augmentingPath == null || augmentingPath.isEmpty()) {
                 break;
             }
@@ -51,7 +51,7 @@ public abstract class AbstractFordFulkersonMaximumFlowFinder<E extends FlowEdgeD
         return residualCapacity;
     }
 
-    protected abstract List<Integer> findAugmentingPath(Graph<FlowEdgeDetails, V> residualNetwork);
+    protected abstract List<Integer> findAugmentingPath(Graph<FlowEdgeDetails, V> residualNetwork, int source, int destination);
 
     private Graph<FlowEdgeDetails, V> getResidualNetwork(Graph<FlowEdgeDetails, V> network) {
         final Graph<FlowEdgeDetails, V> result = new AdjacencyListGraph<>();

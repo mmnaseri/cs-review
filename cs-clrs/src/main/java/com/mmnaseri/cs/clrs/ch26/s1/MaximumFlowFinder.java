@@ -9,6 +9,6 @@ import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
  */
 public interface MaximumFlowFinder<E extends FlowEdgeDetails, V extends VertexDetails> {
 
-    Graph<FlowEdgeDetails, V> find(Graph<E, V> network);
+    Graph<FlowEdgeDetails, V> find(Graph<E, V> network, int source, int destination);
 
 }

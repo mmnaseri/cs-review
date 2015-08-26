@@ -28,7 +28,12 @@ public abstract class AbstractFordFulkersonMaximumFlowFinder<E extends FlowEdgeD
             int residualCapacity = getResidualCapacity(residualNetwork, augmentingPath);
             for (int i = 0; i < augmentingPath.size() - 1; i++) {
                 final Edge<FlowEdgeDetails, V> edge = result.edge(augmentingPath.get(i), augmentingPath.get(i + 1));
-                ((MutableFlowEdgeDetails) edge.getDetails()).setFlow(edge.getDetails().getFlow() + residualCapacity);
+                if (edge == null) {
+                    final Edge<FlowEdgeDetails, V> reverse = result.edge(augmentingPath.get(i), augmentingPath.get(i + 1));
+                    ((MutableFlowEdgeDetails) reverse.getDetails()).setFlow(reverse.getDetails().getFlow() + residualCapacity);
+                } else {
+                    ((MutableFlowEdgeDetails) edge.getDetails()).setFlow(edge.getDetails().getFlow() + residualCapacity);
+                }
             }
         }
         return result;

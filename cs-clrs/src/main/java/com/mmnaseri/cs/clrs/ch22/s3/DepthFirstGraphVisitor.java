@@ -39,6 +39,7 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
         for (Vertex<V> vertex : vertices) {
             vertex.setProperty("color", EdgeColor.WHITE);
             vertex.setProperty("parent", null);
+            vertex.setProperty("distance", 0);
         }
         final AtomicInteger time = new AtomicInteger(0);
         for (Vertex<V> vertex : vertices) {
@@ -59,6 +60,7 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
         for (Vertex<V> vertex : vertices) {
             vertex.setProperty("color", EdgeColor.WHITE);
             vertex.setProperty("parent", null);
+            vertex.setProperty("distance", 0);
         }
         final AtomicInteger time = new AtomicInteger(0);
         visitSubGraph(copy, copy.get(start), time, visitor);
@@ -75,6 +77,7 @@ public class DepthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDetai
         }
         for (Vertex<V> neighbor : neighbors) {
             if (EdgeColor.WHITE.equals(neighbor.getProperty("color", EdgeColor.class))) {
+                neighbor.setProperty("distance", vertex.getProperty("distance", Integer.class) + 1);
                 neighbor.setProperty("parent", vertex);
                 visitSubGraph(graph, neighbor, time, visitor);
             }

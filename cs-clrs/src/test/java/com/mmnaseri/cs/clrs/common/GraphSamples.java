@@ -222,6 +222,39 @@ public abstract class GraphSamples {
         return graph;
     }
 
+    /**
+     * @return sample bipartite graph from page 733 of CLRS 3rd edition according to the ebook
+     */
+    public static Graph<EdgeDetails, VertexDetails> sampleBipartiteGraph() {
+        final Graph<EdgeDetails, VertexDetails> graph = new AdjacencyListGraph<>();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.add();
+        graph.connect(0, 5);
+        graph.connect(5, 0);
+        graph.connect(1, 5);
+        graph.connect(1, 7);
+        graph.connect(5, 1);
+        graph.connect(7, 1);
+        graph.connect(2, 6);
+        graph.connect(2, 7);
+        graph.connect(2, 8);
+        graph.connect(6, 2);
+        graph.connect(7, 2);
+        graph.connect(8, 2);
+        graph.connect(3, 7);
+        graph.connect(7, 3);
+        graph.connect(4, 7);
+        graph.connect(7, 4);
+        return graph;
+    }
+
     private static void flow(Graph<FlowEdgeDetails, VertexDetails> graph, int from, int to, int capacity) {
         final MutableFlowEdgeDetails details = new MutableFlowEdgeDetails();
         details.setCapacity(capacity);

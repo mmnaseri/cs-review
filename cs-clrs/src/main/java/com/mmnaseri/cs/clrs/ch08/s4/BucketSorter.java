@@ -1,6 +1,7 @@
 package com.mmnaseri.cs.clrs.ch08.s4;
 
 import com.mmnaseri.cs.clrs.ch02.s1.InsertionSorter;
+import com.mmnaseri.cs.clrs.ch02.s1.IterativeInsertionSorter;
 import com.mmnaseri.cs.clrs.common.Sorter;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
@@ -18,7 +19,7 @@ import java.util.List;
 public class BucketSorter implements Sorter<Double> {
 
     private final int buckets;
-    private final InsertionSorter<Double> sorter = new InsertionSorter<>(new Comparator<Double>() {
+    private final InsertionSorter<Double> sorter = new IterativeInsertionSorter<>(new Comparator<Double>() {
         @Override
         public int compare(Double first, Double second) {
             return first.compareTo(second);

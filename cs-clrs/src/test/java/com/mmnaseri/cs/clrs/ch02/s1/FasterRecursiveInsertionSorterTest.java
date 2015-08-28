@@ -5,13 +5,13 @@ import com.mmnaseri.cs.clrs.common.Sorter;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (8/13/15)
+ * @since 1.0 (8/27/15)
  */
-public class FasterInsertionSorterTest extends BaseSortTest {
+public class FasterRecursiveInsertionSorterTest extends BaseSortTest {
 
     @Override
     protected Sorter<Integer> getAscendingSorter() {
-        return new FasterInsertionSorter<>(NATURAL_COMPARATOR);
+        return new FasterRecursiveInsertionSorter<>(NATURAL_COMPARATOR);
     }
 
 }

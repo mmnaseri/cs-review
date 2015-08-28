@@ -1,8 +1,8 @@
 package com.mmnaseri.cs.clrs.ch02.sp;
 
 import com.mmnaseri.cs.clrs.ch02.s1.InsertionSorter;
+import com.mmnaseri.cs.clrs.ch02.s1.IterativeInsertionSorter;
 import com.mmnaseri.cs.clrs.ch02.s3.MergeSorter;
-import com.mmnaseri.cs.clrs.common.Sorter;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -16,7 +16,7 @@ import java.util.Comparator;
 @Quality(Stage.TESTED)
 public class InsertionMergeSorter<E extends Comparable<E>> extends MergeSorter<E> {
 
-    private final Sorter<E> insertionSorter;
+    private final InsertionSorter<E> insertionSorter;
     private final int cross;
 
     public InsertionMergeSorter(Comparator<E> comparator) {
@@ -26,7 +26,7 @@ public class InsertionMergeSorter<E extends Comparable<E>> extends MergeSorter<E
     public InsertionMergeSorter(int cross, Comparator<E> comparator) {
         super(comparator);
         this.cross = cross;
-        insertionSorter = new InsertionSorter<>(comparator);
+        insertionSorter = new IterativeInsertionSorter<>(comparator);
     }
 
     @Override

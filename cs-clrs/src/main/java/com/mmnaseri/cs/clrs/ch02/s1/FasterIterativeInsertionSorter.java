@@ -6,9 +6,9 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/13/15)
  */
-public class FasterInsertionSorter<E extends Comparable<E>> extends InsertionSorter<E> {
+public class FasterIterativeInsertionSorter<E extends Comparable<E>> extends IterativeInsertionSorter<E> {
 
-    public FasterInsertionSorter(Comparator<E> comparator) {
+    public FasterIterativeInsertionSorter(Comparator<E> comparator) {
         super(comparator);
     }
 

@@ -1,14 +1,18 @@
 package com.mmnaseri.cs.clrs.ch02.s1;
 
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
+
 import java.util.Comparator;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (8/13/15)
+ * @since 1.0 (8/27/15)
  */
-public class FasterBinaryInsertionSorter<E extends Comparable<E>> extends BinaryInsertionSorter<E> {
+@Quality(Stage.TESTED)
+public class FasterRecursiveInsertionSorter<E extends Comparable<E>> extends RecursiveInsertionSorter<E> {
 
-    public FasterBinaryInsertionSorter(Comparator<E> comparator) {
+    public FasterRecursiveInsertionSorter(Comparator<E> comparator) {
         super(comparator);
     }
 

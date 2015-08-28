@@ -15,7 +15,6 @@ public class RecursiveInsertionSorter<E extends Comparable<E>> extends Insertion
     private final Comparator<E> comparator;
 
     public RecursiveInsertionSorter(Comparator<E> comparator) {
-        super(comparator);
         this.comparator = comparator;
     }
 

@@ -1,9 +1,6 @@
 package com.mmnaseri.cs.clrs.ch27.s1.impl;
 
-import com.mmnaseri.cs.clrs.ch27.s1.Action;
-import com.mmnaseri.cs.clrs.ch27.s1.Computation;
-import com.mmnaseri.cs.clrs.ch27.s1.ComputationResult;
-import com.mmnaseri.cs.clrs.ch27.s1.Scheduler;
+import com.mmnaseri.cs.clrs.ch27.s1.*;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -45,12 +42,18 @@ public class ParallelScheduler implements Scheduler {
     }
 
     @Override
-    public void loop(int from, int to, Action action) {
-        if (from > to) {
+    public void loop(int from, int to, final LoopStep step) {
+        if (from >= to) {
             return;
         }
-        for (int i = from; i <= to; i++) {
-            spawn(action);
+        for (int i = from; i < to; i++) {
+            final int stepNumber = i;
+            spawn(new Action() {
+                @Override
+                public void perform() {
+                    step.perform(stepNumber);
+                }
+            });
         }
     }
 

@@ -1,9 +1,6 @@
 package com.mmnaseri.cs.clrs.ch27.s1.impl;
 
-import com.mmnaseri.cs.clrs.ch27.s1.Action;
-import com.mmnaseri.cs.clrs.ch27.s1.Computation;
-import com.mmnaseri.cs.clrs.ch27.s1.ComputationResult;
-import com.mmnaseri.cs.clrs.ch27.s1.Scheduler;
+import com.mmnaseri.cs.clrs.ch27.s1.*;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -25,12 +22,12 @@ public class SerialScheduler implements Scheduler {
     }
 
     @Override
-    public void loop(int from, int to, Action action) {
-        if (from > to) {
+    public void loop(int from, int to, LoopStep step) {
+        if (from >= to) {
             return;
         }
-        for (int i = from; i <= to; i++) {
-            action.perform();
+        for (int i = from; i < to; i++) {
+            step.perform(i);
         }
     }
 

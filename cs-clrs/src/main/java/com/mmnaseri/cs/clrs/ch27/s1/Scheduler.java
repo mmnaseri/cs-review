@@ -10,7 +10,7 @@ public interface Scheduler {
 
     <E> ComputationResult<E> spawn(Computation<E> computation);
 
-    void loop(int from, int to, Action action);
+    void loop(int from, int to, LoopStep step);
 
     void sync();
 

@@ -12,7 +12,7 @@ What's covered
 
 From the esteemed Introduction to Algorithms book by Cormen, Leiserson, Rivest, and Stein:
 
-  * Chapters 1-25: these are implemented and (hopefully) well tested. Chapter 3 is missing, since
+  * Chapters 1-27: these are implemented and (hopefully) well tested. Chapter 3 is missing, since
   it didn't have anything directly algorithm- or data structure-related. There are several as-of-yet
   untested classes that need verification
 
@@ -25,7 +25,7 @@ used throughout the codebase:
   * `@Test` which points to specific test cases directed at the annotated piece of code.
   
   * `@Tests` which acts to aggregate all the test cases directed at the annotated piece of code.
-  
+
   * `@Complexity` which indicates one of the following:
    
     - if it is placed on a method, it is indicative of that piece of code's time complexity in terms of `O`, `Omega`,

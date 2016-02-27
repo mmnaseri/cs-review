@@ -1,6 +1,6 @@
-package com.mmnaseri.cs.clrs.ch27.s1.impl;
+package com.mmnaseri.cs.clrs.ch27.s0.impl;
 
-import com.mmnaseri.cs.clrs.ch27.s1.Action;
+import com.mmnaseri.cs.clrs.ch27.s0.Action;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

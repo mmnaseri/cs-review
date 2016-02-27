@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.clrs.ch27.s1.impl;
+package com.mmnaseri.cs.clrs.ch27.s0.impl;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

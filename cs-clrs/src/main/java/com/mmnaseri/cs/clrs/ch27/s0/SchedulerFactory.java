@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.clrs.ch27.s1;
+package com.mmnaseri.cs.clrs.ch27.s0;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

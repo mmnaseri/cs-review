@@ -1,6 +1,6 @@
-package com.mmnaseri.cs.clrs.ch27.s1.impl;
+package com.mmnaseri.cs.clrs.ch27.s0.impl;
 
-import com.mmnaseri.cs.clrs.ch27.s1.*;
+import com.mmnaseri.cs.clrs.ch27.s0.*;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

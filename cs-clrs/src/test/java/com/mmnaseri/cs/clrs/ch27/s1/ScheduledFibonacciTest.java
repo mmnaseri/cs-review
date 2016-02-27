@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch27.s1;
 
-import com.mmnaseri.cs.clrs.ch27.s1.impl.ParallelSchedulerFactory;
-import com.mmnaseri.cs.clrs.ch27.s1.impl.SerialSchedulerFactory;
+import com.mmnaseri.cs.clrs.ch27.s0.impl.ParallelSchedulerFactory;
+import com.mmnaseri.cs.clrs.ch27.s0.impl.SerialSchedulerFactory;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.is;

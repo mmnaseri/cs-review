@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.notNullValue;
 public class FlowBipartiteMatchingFinderTest {
 
     @Test
-    public void testName() throws Exception {
+    public void testMatching() throws Exception {
         final BipartiteMatchingFinder<EdgeDetails, VertexDetails> finder = new FlowBipartiteMatchingFinder<>();
         final Graph<EdgeDetails, VertexDetails> graph = GraphSamples.sampleBipartiteGraph();
         final Graph<EdgeDetails, VertexDetails> result = finder.find(graph);

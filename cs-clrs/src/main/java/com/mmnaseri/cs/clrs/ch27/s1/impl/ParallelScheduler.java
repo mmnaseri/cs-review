@@ -5,7 +5,6 @@ import com.mmnaseri.cs.clrs.ch27.s1.Computation;
 import com.mmnaseri.cs.clrs.ch27.s1.ComputationResult;
 import com.mmnaseri.cs.clrs.ch27.s1.Scheduler;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,18 +12,12 @@ import java.util.concurrent.Executors;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2/27/16)
  */
-public class DefaultScheduler implements Scheduler {
+public class ParallelScheduler implements Scheduler {
 
-    public static Scheduler initialize(Object surrogate) {
-        return new DefaultScheduler(surrogate);
-    }
-
-    private final Object source;
     private ExecutorService executor;
     private final SchedulerContext context;
 
-    private DefaultScheduler(Object source) {
-        this.source = source;
+    ParallelScheduler() {
         executor = startExecutor();
         context = new SchedulerContext();
     }
@@ -63,10 +56,10 @@ public class DefaultScheduler implements Scheduler {
 
     @Override
     public void sync() {
-        synchronized (source) {
+        synchronized (this) {
             do {
                 try {
-                    source.wait(100);
+                    wait(100);
                 } catch (InterruptedException e) {
                     throw new IllegalStateException(e);
                 }

@@ -55,6 +55,7 @@ public class ParallelScheduler implements Scheduler {
                 }
             });
         }
+        sync();
     }
 
     @Override

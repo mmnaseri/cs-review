@@ -60,6 +60,7 @@ public class ParallelScheduler implements Scheduler {
 
     @Override
     public void sync() {
+        final SchedulerContext.ContextMetadata metadata = context.freeze();
         synchronized (this) {
             do {
                 try {
@@ -67,7 +68,7 @@ public class ParallelScheduler implements Scheduler {
                 } catch (InterruptedException e) {
                     throw new IllegalStateException(e);
                 }
-            } while (context.current() > 0);
+            } while (metadata.current() > 0);
         }
     }
 

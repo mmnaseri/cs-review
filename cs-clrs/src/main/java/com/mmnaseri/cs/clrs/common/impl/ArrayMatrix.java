@@ -42,6 +42,7 @@ public class ArrayMatrix<E> implements Matrix<E> {
 
     @Override
     public E get(int row, int col) {
+        checkIndices(row, col);
         if (values[row][col] != null) {
             //noinspection unchecked
             return (E) values[row][col];
@@ -51,7 +52,17 @@ public class ArrayMatrix<E> implements Matrix<E> {
 
     @Override
     public void set(int row, int col, E value) {
+        checkIndices(row, col);
         values[row][col] = value;
+    }
+
+    protected void checkIndices(int row, int col) {
+        if (row < 0 || row >= getRows()) {
+            throw new IndexOutOfBoundsException("Row index out of bounds(0," + (getRows() - 1) + "): " + row);
+        }
+        if (col < 0 || col >= getColumns()) {
+            throw new IndexOutOfBoundsException("Columns index out of bounds(0," + (getColumns() - 1) + "): " + col);
+        }
     }
 
     @Override

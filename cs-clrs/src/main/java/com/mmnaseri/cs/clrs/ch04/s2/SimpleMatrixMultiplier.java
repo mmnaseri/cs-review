@@ -32,17 +32,21 @@ public class SimpleMatrixMultiplier implements MatrixMultiplier {
         final Matrix<E> result = factory.getMatrix(second.getRows(), first.getColumns());
         for (int j = 0; j < first.getColumns(); j ++) {
             for (int i = 0; i < second.getRows(); i ++) {
-                E value = null;
-                for (int k = 0; k < first.getRows(); k ++) {
-                    final E firstValue = first.get(k, j);
-                    final E secondValue = second.get(i, k);
-                    final E multiplication = NumberUtils.multiply(firstValue, secondValue);
-                    value = NumberUtils.add(value, multiplication);
-                }
-                result.set(i, j, value);
+                multiplyRowByColumn(first, second, result, i, j);
             }
         }
         return result;
+    }
+
+    public static <E extends Number> void multiplyRowByColumn(Matrix<E> first, Matrix<E> second, Matrix<E> result, int row, int column) {
+        E value = null;
+        for (int k = 0; k < first.getRows(); k ++) {
+            final E firstValue = first.get(k, column);
+            final E secondValue = second.get(row, k);
+            final E multiplication = NumberUtils.multiply(firstValue, secondValue);
+            value = NumberUtils.add(value, multiplication);
+        }
+        result.set(row, column, value);
     }
 
 }

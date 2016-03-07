@@ -51,12 +51,17 @@ public class ScheduledSimpleMatrixMultiplierTest {
         second.set(1, 2, 2);
         final MatrixMultiplier multiplier = new ScheduledSimpleMatrixMultiplier(schedulerFactory);
         final Matrix<Integer> multiplication = multiplier.multiply(first, second);
-        assertThat(multiplication.getColumns(), is(2));
-        assertThat(multiplication.getRows(), is(2));
-        assertThat(multiplication.get(0, 0), is(11));
-        assertThat(multiplication.get(0, 1), is(27));
-        assertThat(multiplication.get(1, 0), is(-2));
-        assertThat(multiplication.get(1, 1), is(22));
+        assertThat(multiplication.getColumns(), is(3));
+        assertThat(multiplication.getRows(), is(3));
+        assertThat(multiplication.get(0, 0), is(12));
+        assertThat(multiplication.get(0, 1), is(11));
+        assertThat(multiplication.get(0, 2), is(8));
+        assertThat(multiplication.get(1, 0), is(0));
+        assertThat(multiplication.get(1, 1), is(12));
+        assertThat(multiplication.get(1, 2), is(8));
+        assertThat(multiplication.get(2, 0), is(-6));
+        assertThat(multiplication.get(2, 1), is(14));
+        assertThat(multiplication.get(2, 2), is(9));
     }
 
     @Test

@@ -57,7 +57,7 @@ public class MatrixVectorMultiplierTest {
     }
 
     @Test(dataProvider = "getSchedulerFactory")
-    public void testSerial(String name, SchedulerFactory factory) throws Exception {
+    public void testSerial(@SuppressWarnings("UnusedParameters") String name, SchedulerFactory factory) throws Exception {
         final MatrixVectorMultiplier multiplier = new MatrixVectorMultiplier(factory);
         final Vector<Integer> result = multiplier.multiply(matrix, vector);
         assertThat(result, is(notNullValue()));

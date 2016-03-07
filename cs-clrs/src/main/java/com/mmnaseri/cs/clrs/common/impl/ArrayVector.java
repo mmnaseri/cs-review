@@ -73,6 +73,11 @@ public class ArrayVector<E> implements Vector<E> {
             return (E) array[cursor];
         }
 
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
     }
 
 }

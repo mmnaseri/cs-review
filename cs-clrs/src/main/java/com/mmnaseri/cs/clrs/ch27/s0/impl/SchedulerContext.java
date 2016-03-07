@@ -31,7 +31,6 @@ class SchedulerContext {
     }
 
     void increase(UUID id) {
-        System.out.printf("[%s] INCREASE%n", id);
         final ContextMetadata metadata = contextMap.get(id);
         if (metadata == null) {
             throw new IllegalStateException("Increase request is out of context");
@@ -40,7 +39,6 @@ class SchedulerContext {
     }
 
     void decrease(UUID id) {
-        System.out.printf("[%s] DECREASE%n", id);
         final ContextMetadata metadata = contextMap.get(id);
         if (metadata == null) {
             throw new IllegalStateException("Decrease request is out of context");

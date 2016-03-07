@@ -190,7 +190,7 @@ public class DelegatingMatrix<E> implements Matrix<E> {
 
         @Override
         public MatrixCell<E> next() {
-            return new DelegateMatrixCell<>(delegate, columnOffset, rowOffset, cols, row, cursor ++);
+            return new DelegateMatrixCell<>(delegate, columnOffset, rowOffset, row, cursor ++);
         }
 
         @Override
@@ -205,15 +205,13 @@ public class DelegatingMatrix<E> implements Matrix<E> {
         private final Matrix<E> delegate;
         private final int columnOffset;
         private final int rowOffset;
-        private final int cols;
         private final int row;
         private final int col;
 
-        private DelegateMatrixCell(Matrix<E> delegate, int columnOffset, int rowOffset, int cols, int row, int col) {
+        private DelegateMatrixCell(Matrix<E> delegate, int columnOffset, int rowOffset, int row, int col) {
             this.delegate = delegate;
             this.columnOffset = columnOffset;
             this.rowOffset = rowOffset;
-            this.cols = cols;
             this.row = row;
             this.col = col;
         }

@@ -87,6 +87,15 @@ public class ArrayMatrix<E> implements Matrix<E> {
         };
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        for (MatrixRow<E> row : this) {
+            builder.append(row).append("\n");
+        }
+        return builder.toString().trim();
+    }
+
     private class ArrayMatrixRow implements MatrixRow<E> {
 
         private final int rowNumber;
@@ -123,6 +132,22 @@ public class ArrayMatrix<E> implements Matrix<E> {
             };
         }
 
+        @Override
+        public String toString() {
+            final StringBuilder builder = new StringBuilder();
+            builder.append("[");
+            boolean first = true;
+            for (MatrixCell<E> cell : this) {
+                if (!first) {
+                    builder.append(",");
+                } else {
+                    first = false;
+                }
+                builder.append(cell);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
     }
 
     private class ArrayMatrixCell implements MatrixCell<E> {
@@ -148,6 +173,11 @@ public class ArrayMatrix<E> implements Matrix<E> {
         @Override
         public E getValue() {
             return ArrayMatrix.this.get(rowNumber, columnNumber);
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(getValue());
         }
     }
 

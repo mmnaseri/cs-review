@@ -21,7 +21,7 @@ public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
     }
 
     @SuppressWarnings("unchecked")
-    private void merge(E[] array, int from, int mid, int to) {
+    protected void merge(E[] array, int from, int mid, int to) {
         final E[] left = (E[]) Array.newInstance(array.getClass().getComponentType(), mid - from);
         final E[] right = (E[]) Array.newInstance(array.getClass().getComponentType(), to - mid);
         System.arraycopy(array, from, left, 0, left.length);
@@ -70,7 +70,7 @@ public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
     }
 
     @Override
-    public void sort(E[] items) {
+    public final void sort(E[] items) {
         sort(items, 0, items.length);
     }
 

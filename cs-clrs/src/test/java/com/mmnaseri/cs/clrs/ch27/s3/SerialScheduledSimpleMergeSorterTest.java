@@ -7,7 +7,7 @@ import com.mmnaseri.cs.clrs.ch27.s0.impl.SerialSchedulerFactory;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (3/13/16, 6:56 PM)
  */
-public class SerialScheduledMergeSorterTest extends ScheduledMergeSorterTest {
+public class SerialScheduledSimpleMergeSorterTest extends ScheduledSimpleMergeSorterTest {
 
     @Override
     protected SchedulerFactory getSchedulerFactory() {

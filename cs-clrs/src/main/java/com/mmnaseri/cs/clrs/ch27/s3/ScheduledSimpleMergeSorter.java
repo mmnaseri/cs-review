@@ -4,6 +4,8 @@ import com.mmnaseri.cs.clrs.ch02.s3.MergeSorter;
 import com.mmnaseri.cs.clrs.ch27.s0.Action;
 import com.mmnaseri.cs.clrs.ch27.s0.Scheduler;
 import com.mmnaseri.cs.clrs.ch27.s0.SchedulerFactory;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Comparator;
 
@@ -11,11 +13,12 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (3/13/16, 6:48 PM)
  */
-public class ScheduledMergeSorter<E extends Comparable<E>> extends MergeSorter<E> {
+@Quality(Stage.TESTED)
+public class ScheduledSimpleMergeSorter<E extends Comparable<E>> extends MergeSorter<E> {
 
     private final SchedulerFactory factory;
 
-    public ScheduledMergeSorter(Comparator<E> comparator, SchedulerFactory factory) {
+    public ScheduledSimpleMergeSorter(Comparator<E> comparator, SchedulerFactory factory) {
         super(comparator);
         this.factory = factory;
     }

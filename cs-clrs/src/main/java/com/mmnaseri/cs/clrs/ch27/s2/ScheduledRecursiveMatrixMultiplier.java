@@ -62,69 +62,69 @@ public class ScheduledRecursiveMatrixMultiplier implements MatrixMultiplier {
             final Matrix<E> temporary = matrixFactory.getMatrix(size, size);
             final int newSize = size / 2;
             //Partitioning the first matrix
-            final DelegatingMatrix<E> A11 = new DelegatingMatrix<>(first, 0, 0, newSize, newSize);
-            final DelegatingMatrix<E> A12 = new DelegatingMatrix<>(first, 0, newSize, newSize, size - newSize);
-            final DelegatingMatrix<E> A21 = new DelegatingMatrix<>(first, newSize, 0, size - newSize, newSize);
-            final DelegatingMatrix<E> A22 = new DelegatingMatrix<>(first, newSize, newSize, size - newSize, size - newSize);
+            final DelegatingMatrix<E> firstTopLeft = new DelegatingMatrix<>(first, 0, 0, newSize, newSize);
+            final DelegatingMatrix<E> firstTopRight = new DelegatingMatrix<>(first, 0, newSize, newSize, size - newSize);
+            final DelegatingMatrix<E> firstBottomLeft = new DelegatingMatrix<>(first, newSize, 0, size - newSize, newSize);
+            final DelegatingMatrix<E> firstBottomRight = new DelegatingMatrix<>(first, newSize, newSize, size - newSize, size - newSize);
             //Partitioning the second matrix
-            final DelegatingMatrix<E> B11 = new DelegatingMatrix<>(second, 0, 0, newSize, newSize);
-            final DelegatingMatrix<E> B12 = new DelegatingMatrix<>(second, 0, newSize, newSize, size - newSize);
-            final DelegatingMatrix<E> B21 = new DelegatingMatrix<>(second, newSize, 0, size - newSize, newSize);
-            final DelegatingMatrix<E> B22 = new DelegatingMatrix<>(second, newSize, newSize, size - newSize, size - newSize);
+            final DelegatingMatrix<E> secondTopLeft = new DelegatingMatrix<>(second, 0, 0, newSize, newSize);
+            final DelegatingMatrix<E> secondTopRight = new DelegatingMatrix<>(second, 0, newSize, newSize, size - newSize);
+            final DelegatingMatrix<E> secondBottomLeft = new DelegatingMatrix<>(second, newSize, 0, size - newSize, newSize);
+            final DelegatingMatrix<E> secondBottomRight = new DelegatingMatrix<>(second, newSize, newSize, size - newSize, size - newSize);
             //Partitioning the result matrix
-            final Matrix<E> C11 = new DelegatingMatrix<>(result, 0, 0, newSize, newSize);
-            final Matrix<E> C12 = new DelegatingMatrix<>(result, 0, newSize, newSize, size - newSize);
-            final Matrix<E> C21 = new DelegatingMatrix<>(result, newSize, 0, size - newSize, newSize);
-            final Matrix<E> C22 = new DelegatingMatrix<>(result, newSize, newSize, size - newSize, size - newSize);
+            final Matrix<E> resultTopLeft = new DelegatingMatrix<>(result, 0, 0, newSize, newSize);
+            final Matrix<E> resultTopRight = new DelegatingMatrix<>(result, 0, newSize, newSize, size - newSize);
+            final Matrix<E> resultBottomLeft = new DelegatingMatrix<>(result, newSize, 0, size - newSize, newSize);
+            final Matrix<E> resultBottomRight = new DelegatingMatrix<>(result, newSize, newSize, size - newSize, size - newSize);
             //Partitioning the temporary matrix
-            final Matrix<E> T11 = new DelegatingMatrix<>(temporary, 0, 0, newSize, newSize);
-            final Matrix<E> T12 = new DelegatingMatrix<>(temporary, 0, newSize, newSize, size - newSize);
-            final Matrix<E> T21 = new DelegatingMatrix<>(temporary, newSize, 0, size - newSize, newSize);
-            final Matrix<E> T22 = new DelegatingMatrix<>(temporary, newSize, newSize, size - newSize, size - newSize);
+            final Matrix<E> temporaryTopLeft = new DelegatingMatrix<>(temporary, 0, 0, newSize, newSize);
+            final Matrix<E> temporaryTopRight = new DelegatingMatrix<>(temporary, 0, newSize, newSize, size - newSize);
+            final Matrix<E> temporaryBottomLeft = new DelegatingMatrix<>(temporary, newSize, 0, size - newSize, newSize);
+            final Matrix<E> temporaryBottomRight = new DelegatingMatrix<>(temporary, newSize, newSize, size - newSize, size - newSize);
             final Scheduler scheduler = schedulerFactory.getScheduler();
             scheduler.spawn(new Action() {
                 @Override
                 public void perform() {
-                    doMultiply(C11, A11, B11);
+                    doMultiply(resultTopLeft, firstTopLeft, secondTopLeft);
                 }
             });
             scheduler.spawn(new Action() {
                 @Override
                 public void perform() {
-                    doMultiply(C12, A11, B12);
+                    doMultiply(resultTopRight, firstTopLeft, secondTopRight);
                 }
             });
             scheduler.spawn(new Action() {
                 @Override
                 public void perform() {
-                    doMultiply(C21, A21, B11);
+                    doMultiply(resultBottomLeft, firstBottomLeft, secondTopLeft);
                 }
             });
             scheduler.spawn(new Action() {
                 @Override
                 public void perform() {
-                    doMultiply(C22, A21, B12);
+                    doMultiply(resultBottomRight, firstBottomLeft, secondTopRight);
                 }
             });
             scheduler.spawn(new Action() {
                 @Override
                 public void perform() {
-                    doMultiply(T11, A12, B21);
+                    doMultiply(temporaryTopLeft, firstTopRight, secondBottomLeft);
                 }
             });
             scheduler.spawn(new Action() {
                 @Override
                 public void perform() {
-                    doMultiply(T12, A12, B22);
+                    doMultiply(temporaryTopRight, firstTopRight, secondBottomRight);
                 }
             });
             scheduler.spawn(new Action() {
                 @Override
                 public void perform() {
-                    doMultiply(T21, A22, B21);
+                    doMultiply(temporaryBottomLeft, firstBottomRight, secondBottomLeft);
                 }
             });
-            doMultiply(T22, A22, B22);
+            doMultiply(temporaryBottomRight, firstBottomRight, secondBottomRight);
             scheduler.sync();
             scheduler.loop(0, size, new LoopStep() {
                 @Override

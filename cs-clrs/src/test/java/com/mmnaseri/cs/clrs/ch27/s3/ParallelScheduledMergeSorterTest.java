@@ -4,10 +4,10 @@ import com.mmnaseri.cs.clrs.ch27.s0.SchedulerFactory;
 import com.mmnaseri.cs.clrs.ch27.s0.impl.ContextAwareParallelSchedulerFactory;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (3/13/16, 6:56 PM)
+ * @author Milad Naseri (milad.naseri@cdk.com)
+ * @since 1.0 (2016/03/07, 14:01)
  */
-public class ParallelScheduledSimpleMergeSorterTest extends ScheduledSimpleMergeSorterTest {
+public class ParallelScheduledMergeSorterTest extends AbstractScheduledMergeSorterTest {
 
     @Override
     protected SchedulerFactory getSchedulerFactory() {

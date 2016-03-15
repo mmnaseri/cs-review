@@ -5,11 +5,13 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
 import static org.hamcrest.collection.IsArrayWithSize.arrayWithSize;
 import static org.hamcrest.collection.IsArrayWithSize.emptyArray;
+import static org.hamcrest.core.Is.is;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -72,6 +74,22 @@ public abstract class BaseSortTest {
         getAscendingSorter().sort(target);
         assertThat(target, arrayWithSize(expected.length));
         assertThat(target, arrayContaining(expected));
+    }
+
+    @Test
+    public void testSortingLargeCollection() {
+        final Sorter<Integer> sorter = getAscendingSorter();
+        final int length = 1000;
+        final Integer[] original = new Integer[length];
+        final Integer[] expected = new Integer[length];
+        final Random random = new Random();
+        for (int i = 0; i < original.length; i++) {
+            original[i] = random.nextInt(10);
+        }
+        System.arraycopy(original, 0, expected, 0, original.length);
+        Arrays.sort(expected);
+        sorter.sort(original);
+        assertThat(original, is(expected));
     }
 
 }

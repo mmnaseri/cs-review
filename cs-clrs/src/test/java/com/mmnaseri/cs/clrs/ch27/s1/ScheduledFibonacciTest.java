@@ -1,6 +1,6 @@
 package com.mmnaseri.cs.clrs.ch27.s1;
 
-import com.mmnaseri.cs.clrs.ch27.s0.impl.ParallelSchedulerFactory;
+import com.mmnaseri.cs.clrs.ch27.s0.impl.ContextAwareParallelSchedulerFactory;
 import com.mmnaseri.cs.clrs.ch27.s0.impl.SerialSchedulerFactory;
 import org.testng.annotations.Test;
 
@@ -15,7 +15,7 @@ public class ScheduledFibonacciTest {
 
     @Test
     public void testParallel() throws Exception {
-        final ScheduledFibonacci fibonacci = new ScheduledFibonacci(new ParallelSchedulerFactory());
+        final ScheduledFibonacci fibonacci = new ScheduledFibonacci(new ContextAwareParallelSchedulerFactory());
         long[] results = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89};
         for (int i = 0; i < 11; i++) {
             assertThat(fibonacci.get(i), is(results[i]));
@@ -33,7 +33,7 @@ public class ScheduledFibonacciTest {
 
     @Test(dependsOnMethods = {"testParallel", "testSerial"})
     public void testParallelizationIntegrity() throws Exception {
-        final ScheduledFibonacci first = new ScheduledFibonacci(new ParallelSchedulerFactory());
+        final ScheduledFibonacci first = new ScheduledFibonacci(new ContextAwareParallelSchedulerFactory());
         final ScheduledFibonacci second = new ScheduledFibonacci(new SerialSchedulerFactory());
         for (int i = 0; i < 10; i++) {
             assertThat(first.get(i), is(second.get(i)));

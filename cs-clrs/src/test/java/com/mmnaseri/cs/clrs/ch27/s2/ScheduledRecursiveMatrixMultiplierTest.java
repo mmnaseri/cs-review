@@ -2,7 +2,7 @@ package com.mmnaseri.cs.clrs.ch27.s2;
 
 import com.mmnaseri.cs.clrs.ch04.s2.MatrixMultiplier;
 import com.mmnaseri.cs.clrs.ch27.s0.SchedulerFactory;
-import com.mmnaseri.cs.clrs.ch27.s0.impl.ParallelSchedulerFactory;
+import com.mmnaseri.cs.clrs.ch27.s0.impl.ContextAwareParallelSchedulerFactory;
 import com.mmnaseri.cs.clrs.ch27.s0.impl.SerialSchedulerFactory;
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
@@ -22,7 +22,7 @@ public class ScheduledRecursiveMatrixMultiplierTest {
     public Object[][] schedulerFactoryProvider() {
         return new Object[][]{
             new Object[]{new SerialSchedulerFactory()},
-            new Object[]{new ParallelSchedulerFactory()}
+            new Object[]{new ContextAwareParallelSchedulerFactory()}
         };
     }
 

@@ -2,7 +2,7 @@ package com.mmnaseri.cs.clrs.ch27.s2;
 
 import com.mmnaseri.cs.clrs.ch04.s2.MatrixMultiplier;
 import com.mmnaseri.cs.clrs.ch27.s0.SchedulerFactory;
-import com.mmnaseri.cs.clrs.ch27.s0.impl.ParallelSchedulerFactory;
+import com.mmnaseri.cs.clrs.ch27.s0.impl.ContextAwareParallelSchedulerFactory;
 import com.mmnaseri.cs.clrs.ch27.s0.impl.SerialSchedulerFactory;
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
@@ -21,7 +21,7 @@ public class ScheduledSimpleMatrixMultiplierTest {
     @DataProvider
     public Object[][] schedulerFactoryProvider() {
         return new Object[][]{
-            new Object[]{new ParallelSchedulerFactory()},
+            new Object[]{new ContextAwareParallelSchedulerFactory()},
             new Object[]{new SerialSchedulerFactory()}
         };
     }
@@ -81,7 +81,7 @@ public class ScheduledSimpleMatrixMultiplierTest {
         second.set(1, 1, 3);
         second.set(1, 2, 2);
         final Matrix<Integer> firstMultiplication = new ScheduledSimpleMatrixMultiplier(new SerialSchedulerFactory()).multiply(first, second);
-        final Matrix<Integer> secondMultiplication = new ScheduledSimpleMatrixMultiplier(new ParallelSchedulerFactory()).multiply(first, second);
+        final Matrix<Integer> secondMultiplication = new ScheduledSimpleMatrixMultiplier(new ContextAwareParallelSchedulerFactory()).multiply(first, second);
         for (int i = 0; i < firstMultiplication.getRows(); i++) {
             for (int j = 0; j < firstMultiplication.getColumns(); j++) {
                 assertThat(firstMultiplication.get(i, j), is(secondMultiplication.get(i, j)));

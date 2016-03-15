@@ -1,13 +1,12 @@
 package com.mmnaseri.cs.clrs.ch27.s1;
 
 import com.mmnaseri.cs.clrs.ch27.s0.SchedulerFactory;
-import com.mmnaseri.cs.clrs.ch27.s0.impl.ParallelSchedulerFactory;
+import com.mmnaseri.cs.clrs.ch27.s0.impl.ContextAwareParallelSchedulerFactory;
 import com.mmnaseri.cs.clrs.ch27.s0.impl.SerialSchedulerFactory;
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.Vector;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
 import com.mmnaseri.cs.clrs.common.impl.ArrayVector;
-import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -52,7 +51,7 @@ public class MatrixVectorMultiplierTest {
     public Object[][] getSchedulerFactory() {
         return new Object[][]{
             new Object[]{"serial", new SerialSchedulerFactory()},
-            new Object[]{"parallel", new ParallelSchedulerFactory()}
+            new Object[]{"parallel", new ContextAwareParallelSchedulerFactory()}
         };
     }
 

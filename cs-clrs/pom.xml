@@ -2,14 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>cs-parent</artifactId>
         <groupId>com.mmnaseri.cs</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../cs-parent/pom.xml</relativePath>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
+
     <artifactId>cs-clrs</artifactId>
+
+    <name>CS Review: CLRS</name>
 
     <dependencies>
         <dependency>
@@ -26,6 +31,5 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
 
 </project>

@@ -7,9 +7,9 @@ import com.mmnaseri.cs.clrs.ch27.s0.SchedulerFactory;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2/27/16)
  */
-public class ParallelSchedulerFactory implements SchedulerFactory {
+public class ContextAwareParallelSchedulerFactory implements SchedulerFactory {
     @Override
     public Scheduler getScheduler() {
-        return new ParallelScheduler();
+        return new ContextAwareParallelScheduler();
     }
 }

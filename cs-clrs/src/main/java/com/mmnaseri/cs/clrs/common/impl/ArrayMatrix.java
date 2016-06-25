@@ -42,6 +42,7 @@ public class ArrayMatrix<E> implements Matrix<E> {
 
     @Override
     public E get(int row, int col) {
+        checkIndices(row, col);
         if (values[row][col] != null) {
             //noinspection unchecked
             return (E) values[row][col];
@@ -51,7 +52,17 @@ public class ArrayMatrix<E> implements Matrix<E> {
 
     @Override
     public void set(int row, int col, E value) {
+        checkIndices(row, col);
         values[row][col] = value;
+    }
+
+    protected void checkIndices(int row, int col) {
+        if (row < 0 || row >= getRows()) {
+            throw new IndexOutOfBoundsException("Row index out of bounds(0," + (getRows() - 1) + "): " + row);
+        }
+        if (col < 0 || col >= getColumns()) {
+            throw new IndexOutOfBoundsException("Columns index out of bounds(0," + (getColumns() - 1) + "): " + col);
+        }
     }
 
     @Override
@@ -74,6 +85,15 @@ public class ArrayMatrix<E> implements Matrix<E> {
             public void remove() {
             }
         };
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        for (MatrixRow<E> row : this) {
+            builder.append(row).append("\n");
+        }
+        return builder.toString().trim();
     }
 
     private class ArrayMatrixRow implements MatrixRow<E> {
@@ -112,6 +132,22 @@ public class ArrayMatrix<E> implements Matrix<E> {
             };
         }
 
+        @Override
+        public String toString() {
+            final StringBuilder builder = new StringBuilder();
+            builder.append("[");
+            boolean first = true;
+            for (MatrixCell<E> cell : this) {
+                if (!first) {
+                    builder.append(",");
+                } else {
+                    first = false;
+                }
+                builder.append(cell);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
     }
 
     private class ArrayMatrixCell implements MatrixCell<E> {
@@ -137,6 +173,11 @@ public class ArrayMatrix<E> implements Matrix<E> {
         @Override
         public E getValue() {
             return ArrayMatrix.this.get(rowNumber, columnNumber);
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(getValue());
         }
     }
 

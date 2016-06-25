@@ -1,26 +1,19 @@
 package com.mmnaseri.cs.clrs.ch27.s0.impl;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.UUID;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2/27/16)
+ * @author Milad Naseri (milad.naseri@cdk.com)
+ * @since 1.0 (2016/03/15, 07:46)
  */
-class SchedulerContext {
+public interface SchedulerContext<M extends ContextMetadata> {
 
-    private final AtomicInteger active = new AtomicInteger(0);
+    UUID id();
 
-    public void increase() {
-        active.incrementAndGet();
-    }
+    void increase(UUID id);
 
-    public void decrease() {
-        active.decrementAndGet();
-    }
+    void decrease(UUID id);
 
-    public int current() {
-        return active.get();
-    }
-
+    M freeze();
 
 }

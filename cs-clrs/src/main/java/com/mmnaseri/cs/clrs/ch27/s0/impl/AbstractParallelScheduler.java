@@ -6,20 +6,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2/27/16)
+ * @author Milad Naseri (milad.naseri@cdk.com)
+ * @since 1.0 (2016/03/15, 07:47)
  */
-public class ParallelScheduler implements Scheduler {
+public abstract class AbstractParallelScheduler implements Scheduler {
 
-    private ExecutorService executor;
-    private final SchedulerContext context;
+    protected final SchedulerContext context;
+    protected ExecutorService executor;
 
-    ParallelScheduler() {
+    public AbstractParallelScheduler() {
         executor = startExecutor();
-        context = new SchedulerContext();
+        context = createSchedulerContext();
     }
 
-    private ExecutorService startExecutor() {
+    protected abstract SchedulerContext createSchedulerContext();
+
+    protected ExecutorService startExecutor() {
         return Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     }
 
@@ -60,6 +62,7 @@ public class ParallelScheduler implements Scheduler {
 
     @Override
     public void sync() {
+        final ContextMetadata metadata = context.freeze();
         synchronized (this) {
             do {
                 try {
@@ -67,7 +70,7 @@ public class ParallelScheduler implements Scheduler {
                 } catch (InterruptedException e) {
                     throw new IllegalStateException(e);
                 }
-            } while (context.current() > 0);
+            } while (metadata.current() > 0);
         }
     }
 

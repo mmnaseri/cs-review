@@ -11,9 +11,9 @@ public class SimpleMatrixMultiplierTest {
 
     /**
      *
-     * |  2  3  |
-     * |  0  4  |  * |  6  1  1  | =  |  11   27 |
-     * | -1  5  |    |  0  3  2  |    |  -2   22 |
+     * |  2  3  |                    | 12 11  8 |
+     * |  0  4  |  * |  6  1  1  | = |  0 12  8 |
+     * | -1  5  |    |  0  3  2  |   | -6 14  9 |
      *
      */
     @Test
@@ -34,12 +34,17 @@ public class SimpleMatrixMultiplierTest {
         second.set(1, 2, 2);
         final SimpleMatrixMultiplier multiplier = new SimpleMatrixMultiplier();
         final Matrix<Integer> multiplication = multiplier.multiply(first, second);
-        assertThat(multiplication.getColumns(), is(2));
-        assertThat(multiplication.getRows(), is(2));
-        assertThat(multiplication.get(0, 0), is(11));
-        assertThat(multiplication.get(0, 1), is(27));
-        assertThat(multiplication.get(1, 0), is(-2));
-        assertThat(multiplication.get(1, 1), is(22));
+        assertThat(multiplication.getColumns(), is(3));
+        assertThat(multiplication.getRows(), is(3));
+        assertThat(multiplication.get(0, 0), is(12));
+        assertThat(multiplication.get(0, 1), is(11));
+        assertThat(multiplication.get(0, 2), is(8));
+        assertThat(multiplication.get(1, 0), is(0));
+        assertThat(multiplication.get(1, 1), is(12));
+        assertThat(multiplication.get(1, 2), is(8));
+        assertThat(multiplication.get(2, 0), is(-6));
+        assertThat(multiplication.get(2, 1), is(14));
+        assertThat(multiplication.get(2, 2), is(9));
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Incompatible matrix dimensions")

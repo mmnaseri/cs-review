@@ -1,13 +1,12 @@
 package com.mmnaseri.cs.clrs.ch27.s1;
 
 import com.mmnaseri.cs.clrs.ch27.s0.SchedulerFactory;
-import com.mmnaseri.cs.clrs.ch27.s0.impl.ParallelSchedulerFactory;
+import com.mmnaseri.cs.clrs.ch27.s0.impl.ContextAwareParallelSchedulerFactory;
 import com.mmnaseri.cs.clrs.ch27.s0.impl.SerialSchedulerFactory;
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.Vector;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
 import com.mmnaseri.cs.clrs.common.impl.ArrayVector;
-import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -52,12 +51,12 @@ public class MatrixVectorMultiplierTest {
     public Object[][] getSchedulerFactory() {
         return new Object[][]{
             new Object[]{"serial", new SerialSchedulerFactory()},
-            new Object[]{"parallel", new ParallelSchedulerFactory()}
+            new Object[]{"parallel", new ContextAwareParallelSchedulerFactory()}
         };
     }
 
     @Test(dataProvider = "getSchedulerFactory")
-    public void testSerial(String name, SchedulerFactory factory) throws Exception {
+    public void testSerial(@SuppressWarnings("UnusedParameters") String name, SchedulerFactory factory) throws Exception {
         final MatrixVectorMultiplier multiplier = new MatrixVectorMultiplier(factory);
         final Vector<Integer> result = multiplier.multiply(matrix, vector);
         assertThat(result, is(notNullValue()));

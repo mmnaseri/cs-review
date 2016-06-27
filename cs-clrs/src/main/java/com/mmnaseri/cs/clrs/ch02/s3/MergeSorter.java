@@ -1,6 +1,7 @@
 package com.mmnaseri.cs.clrs.ch02.s3;
 
 import com.mmnaseri.cs.clrs.common.Sorter;
+import com.mmnaseri.cs.qa.annotation.Complexity;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -11,7 +12,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 2:58 AM)
  */
-@Quality(Stage.TESTED)
+@Quality(Stage.DOCUMENTED)
 public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
 
     private final Comparator<E> comparator;
@@ -20,14 +21,25 @@ public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
         this.comparator = comparator;
     }
 
+    /**
+     * This method merges the two halves of an array, given that each half is sorted individually
+     * @param array    the array
+     * @param from     the starting point of the array
+     * @param mid      the middle of the array
+     * @param to       the end of the array
+     */
+    @Complexity("O(n)")
     @SuppressWarnings("unchecked")
     protected void merge(E[] array, int from, int mid, int to) {
+        //let's create two arrays for the left and right portions of the original array
         final E[] left = (E[]) Array.newInstance(array.getClass().getComponentType(), mid - from);
         final E[] right = (E[]) Array.newInstance(array.getClass().getComponentType(), to - mid);
         System.arraycopy(array, from, left, 0, left.length);
         System.arraycopy(array, mid, right, 0, right.length);
+        //we need two cursors, each of which are pointing at the current point of interest in either array
         int leftCursor = 0;
         int rightCursor = 0;
+        //we need a cursor which points to the point at which the winning item should be written
         int cursor = from;
         while (cursor < to) {
             final E leftItem;
@@ -59,6 +71,14 @@ public class MergeSorter<E extends Comparable<E>> implements Sorter<E> {
         }
     }
 
+    /**
+     * This method sorts the indicated portion of the array by first sorting its two halves, and then merging the sorted havles
+     * using {@link #merge(Comparable[], int, int, int)}
+     * @param items    the array
+     * @param from     the beginning of the target portion
+     * @param to       the end of the target portion
+     */
+    @Complexity("O(n.lg(n))")
     protected void sort(E[] items, int from, int to) {
         if (to - from < 2) {
             return;

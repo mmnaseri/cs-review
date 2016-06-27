@@ -1,5 +1,6 @@
 package com.mmnaseri.cs.clrs.ch02.s3;
 
+import com.mmnaseri.cs.qa.annotation.Complexity;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -9,9 +10,16 @@ import java.util.Arrays;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (5/26/15, 1:50 AM)
  */
-@Quality(Stage.TESTED)
+@Quality(Stage.DOCUMENTED)
 public class CoupleSumFinder {
 
+    /**
+     * This method will look up two items whose sum equals the indicated sum in a sorted array
+     * @param sum       the target sum
+     * @param target    the array of numbers
+     * @return the couple
+     */
+    @Complexity("O(n . lg(n))")
     public Couple findCouple(int sum, int... target) {
         Arrays.sort(target);
         int i = 0;

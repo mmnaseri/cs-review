@@ -8,7 +8,7 @@
     <parent>
         <artifactId>cs-parent</artifactId>
         <groupId>com.mmnaseri.cs</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
         <relativePath>../cs-parent/pom.xml</relativePath>
     </parent>
 

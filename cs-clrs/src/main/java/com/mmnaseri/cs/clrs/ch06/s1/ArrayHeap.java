@@ -189,7 +189,7 @@ public class ArrayHeap<E extends Comparable<E>> implements PriorityQueue<E>, Ite
 
             @Override
             public void remove() {
-
+                throw new UnsupportedOperationException();
             }
         };
     }

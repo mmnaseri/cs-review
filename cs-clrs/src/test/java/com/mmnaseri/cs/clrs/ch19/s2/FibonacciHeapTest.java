@@ -1,16 +1,11 @@
 package com.mmnaseri.cs.clrs.ch19.s2;
 
 import com.mmnaseri.cs.clrs.ch06.s1.ArrayHeap;
+import com.mmnaseri.cs.clrs.common.BaseHeapTest;
 import com.mmnaseri.cs.clrs.common.Heap;
 import com.mmnaseri.cs.clrs.common.MergeableHeap;
-import com.mmnaseri.cs.clrs.common.TestTools;
 import com.mmnaseri.cs.clrs.common.impl.MinHeapProperty;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -19,29 +14,16 @@ import static org.hamcrest.Matchers.is;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/1/15, 11:30 AM)
  */
-public class FibonacciHeapTest {
+public class FibonacciHeapTest extends BaseHeapTest {
 
-    protected MergeableHeap<String> getHeap() {
+    protected MergeableHeap<String> getMinHeap() {
         return new FibonacciHeap<>(new MinHeapProperty<String>());
     }
 
     @Test
-    public void testInitialState() throws Exception {
-        final MergeableHeap<String> heap = getHeap();
-        assertThat(heap.size(), is(0));
-        assertThat(heap.isEmpty(), is(true));
-    }
-
-    @Test(expectedExceptions = ArrayIndexOutOfBoundsException.class)
-    public void testPoppingFromEmptyHeap() throws Exception {
-        final MergeableHeap<String> heap = getHeap();
-        heap.pop();
-    }
-
-    @Test
     public void testMergingTwoHeaps() throws Exception {
-        final MergeableHeap<String> first = getHeap();
-        final MergeableHeap<String> second = getHeap();
+        final MergeableHeap<String> first = getMinHeap();
+        final MergeableHeap<String> second = getMinHeap();
         first.add("6");
         first.add("5");
         first.add("4");
@@ -71,8 +53,8 @@ public class FibonacciHeapTest {
 
     @Test
     public void testMergingEmptyHeapWithNonEmptyHeap() throws Exception {
-        final MergeableHeap<String> first = getHeap();
-        final MergeableHeap<String> second = getHeap();
+        final MergeableHeap<String> first = getMinHeap();
+        final MergeableHeap<String> second = getMinHeap();
         second.add("1");
         second.add("2");
         second.add("3");
@@ -92,8 +74,8 @@ public class FibonacciHeapTest {
 
     @Test
     public void testMergingNonEmptyHeapWithEmptyHeap() throws Exception {
-        final MergeableHeap<String> first = getHeap();
-        final MergeableHeap<String> second = getHeap();
+        final MergeableHeap<String> first = getMinHeap();
+        final MergeableHeap<String> second = getMinHeap();
         second.add("1");
         second.add("2");
         second.add("3");
@@ -113,7 +95,7 @@ public class FibonacciHeapTest {
 
     @Test
     public void testMergingWithNonMergeableHeap() throws Exception {
-        final MergeableHeap<String> heap = getHeap();
+        final MergeableHeap<String> heap = getMinHeap();
         heap.add("1");
         heap.add("2");
         heap.add("3");
@@ -138,57 +120,6 @@ public class FibonacciHeapTest {
         assertThat(heap.size(), is(7));
         assertThat(heap.isEmpty(), is(false));
         assertThat(heap.peek(), is("1"));
-    }
-
-    @Test
-    public void testClearingTheHeap() throws Exception {
-        final MergeableHeap<String> heap = getHeap();
-        heap.add("1");
-        heap.add("2");
-        heap.add("3");
-        heap.add("4");
-        heap.add("5");
-        heap.add("6");
-        heap.add("7");
-        heap.add("8");
-        heap.add("9");
-        heap.pop();
-        assertThat(heap.size(), is(8));
-        assertThat(heap.isEmpty(), is(false));
-        heap.clear();
-        assertThat(heap.size(), is(0));
-        assertThat(heap.isEmpty(), is(true));
-    }
-
-    @DataProvider
-    public Object[][] stressTestDataProvider() {
-        final List<String> sample = TestTools.sampleProducer(5);
-        final List<Object[]> output = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            output.add(new Object[]{sample, i});
-        }
-        return output.toArray(new Object[output.size()][]);
-    }
-    
-    @Test(dataProvider = "stressTestDataProvider")
-    public void stressTest(List<String> input, int size) {
-        final MergeableHeap<String> heap = getHeap();
-        assertThat(heap.isEmpty(), is(true));
-        for (int i = size; i > 0; i--) {
-            assertThat(heap.size(), is(size - i));
-            heap.add(input.get(i - 1));
-            assertThat(heap.size(), is(size - i + 1));
-            assertThat(heap.isEmpty(), is(false));
-        }
-        final List<String> inserted = new ArrayList<>(input).subList(0, size);
-        Collections.sort(inserted);
-        for (int i = 0; i < inserted.size(); i++) {
-            assertThat(heap.size(), is(inserted.size() - i));
-            assertThat(heap.peek(), is(inserted.get(i)));
-            assertThat(heap.pop(), is(inserted.get(i)));
-            assertThat(heap.size(), is(inserted.size() - i - 1));
-        }
-        assertThat(heap.isEmpty(), is(true));
     }
 
 }

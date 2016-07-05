@@ -28,8 +28,8 @@
 
     <modules>
         <module>../cs-parent</module>
-        <module>../cs-clrs</module>
         <module>../cs-qa</module>
+        <module>../cs-clrs</module>
     </modules>
 
     <properties>

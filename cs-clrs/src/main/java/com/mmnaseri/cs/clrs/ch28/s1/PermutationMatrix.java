@@ -3,6 +3,8 @@ package com.mmnaseri.cs.clrs.ch28.s1;
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.MatrixCell;
 import com.mmnaseri.cs.clrs.common.MatrixRow;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +15,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/23/16, 8:59 PM)
  */
+@Quality(Stage.TESTED)
 public class PermutationMatrix implements Matrix<Double> {
 
     private static final double ON = 1.0;

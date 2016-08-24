@@ -58,6 +58,7 @@ public class PermutationMatrixTest {
         PermutationMatrix matrix = new PermutationMatrix(list);
         for (MatrixRow<Double> row : matrix) {
             for (MatrixCell<Double> cell : row) {
+                assertThat(cell.getRowNumber(), is(row.getRowNumber()));
                 assertThat(cell.getValue(), is(permutation[cell.getRowNumber()] == cell.getColumnNumber() ? 1.0 : 0));
             }
         }

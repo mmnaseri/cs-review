@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/25/15, 1:55 PM)
  */
 public class SimpleBoundedCache<K, V> extends AbstractMappingBoundedCache<K, V> {

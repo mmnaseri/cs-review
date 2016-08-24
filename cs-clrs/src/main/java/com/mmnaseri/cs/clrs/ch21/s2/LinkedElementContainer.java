@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch21.s2;
 import java.util.UUID;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/2/15, 3:18 AM)
  */
 public class LinkedElementContainer<E extends LinkedElement<E, I, ?>, I> {

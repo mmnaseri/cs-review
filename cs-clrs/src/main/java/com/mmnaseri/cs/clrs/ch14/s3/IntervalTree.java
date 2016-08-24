@@ -7,7 +7,7 @@ import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/20/15, 4:21 AM)
  */
 @Quality(value = Stage.UNTESTED, explanation = "Node maximum is calculated in O(lgn) and not maintained during insertion and deletion")

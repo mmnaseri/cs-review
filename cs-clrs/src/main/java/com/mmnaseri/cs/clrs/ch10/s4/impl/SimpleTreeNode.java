@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/15, 12:22 AM)
  */
 public class SimpleTreeNode<E> implements TreeNode<E> {

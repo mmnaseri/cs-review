@@ -6,7 +6,7 @@ import com.mmnaseri.cs.clrs.ch25.AllPairsShortestPathFinder;
 import com.mmnaseri.cs.clrs.ch25.BaseAllPairsShortestPathFinderTest;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/10/15)
  */
 public class BruteForceAllPairsShortestPathFinderTest extends BaseAllPairsShortestPathFinderTest {

@@ -5,7 +5,7 @@ import com.mmnaseri.cs.clrs.ch11.s3.DivisionHashCalculator;
 import com.mmnaseri.cs.clrs.ch11.s3.MultiplicationHashCalculator;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/15, 12:34 AM)
  */
 public class DoubleHashingHashTableProbeTest extends BaseHashTableProbeTest {

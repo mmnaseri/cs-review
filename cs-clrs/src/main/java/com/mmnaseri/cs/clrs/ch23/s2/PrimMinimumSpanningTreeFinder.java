@@ -7,7 +7,7 @@ import com.mmnaseri.cs.clrs.common.HeapProperty;
 import java.util.*;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/5/15)
  */
 public class PrimMinimumSpanningTreeFinder<E extends WeightedEdgeDetails, V extends VertexDetails> implements MinimumSpanningTreeFinder<E, V> {

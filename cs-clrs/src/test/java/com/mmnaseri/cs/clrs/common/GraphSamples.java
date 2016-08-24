@@ -10,7 +10,7 @@ import com.mmnaseri.cs.clrs.ch26.s1.FlowEdgeDetails;
 import com.mmnaseri.cs.clrs.ch26.s1.MutableFlowEdgeDetails;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/3/15)
  */
 public abstract class GraphSamples {

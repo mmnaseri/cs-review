@@ -15,7 +15,7 @@ import java.util.Comparator;
  * array size is smaller than a predesignated threshold by relying on the insertion sort algorithm which is inherently
  * faster when working with smaller arrays, due to its nature
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 3:26 AM)
  */
 @Quality(Stage.TESTED)

@@ -14,7 +14,7 @@ import static org.hamcrest.collection.IsArrayWithSize.emptyArray;
 import static org.hamcrest.core.Is.is;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/15, 8:53 PM)
  */
 public abstract class BaseSortTest {

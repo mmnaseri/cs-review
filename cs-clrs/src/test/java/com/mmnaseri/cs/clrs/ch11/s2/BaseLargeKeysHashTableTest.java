@@ -5,7 +5,7 @@ import com.mmnaseri.cs.clrs.ch11.BaseHashTableTest;
 import java.util.Map;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/14/15, 1:10 AM)
  */
 public abstract class BaseLargeKeysHashTableTest extends BaseHashTableTest {

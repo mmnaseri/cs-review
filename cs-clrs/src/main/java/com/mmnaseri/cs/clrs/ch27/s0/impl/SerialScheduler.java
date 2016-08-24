@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch27.s0.impl;
 import com.mmnaseri.cs.clrs.ch27.s0.*;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2/27/16)
  */
 public class SerialScheduler implements Scheduler {

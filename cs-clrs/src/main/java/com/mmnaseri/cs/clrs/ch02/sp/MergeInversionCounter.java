@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 3:39 AM)
  */
 @Quality(Stage.DOCUMENTED)

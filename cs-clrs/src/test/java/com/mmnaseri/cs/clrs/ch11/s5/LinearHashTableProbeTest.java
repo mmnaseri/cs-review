@@ -6,7 +6,7 @@ import com.mmnaseri.cs.clrs.ch11.s3.MultiplicationHashCalculator;
 import com.mmnaseri.cs.clrs.ch11.s4.LinearHashCalculator;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/14/15, 1:32 AM)
  */
 public class LinearHashTableProbeTest extends BaseHashTableProbeTest {

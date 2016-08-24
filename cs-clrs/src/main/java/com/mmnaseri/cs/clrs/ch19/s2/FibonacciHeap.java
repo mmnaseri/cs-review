@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/15, 12:50 AM)
  */
 @Quality(value = Stage.TESTED, explanation = "Stress tested against all interaction possibilities")

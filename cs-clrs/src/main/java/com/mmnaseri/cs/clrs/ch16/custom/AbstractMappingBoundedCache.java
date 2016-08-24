@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/25/15, 1:54 PM)
  */
 public abstract class AbstractMappingBoundedCache<K, V> extends AbstractBoundedCache<K, V> {

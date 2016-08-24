@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.common;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/6/15, 3:17 PM)
  */
 public interface Heap<E extends Comparable<E>> {

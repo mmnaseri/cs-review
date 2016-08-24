@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/21/15)
  */
 @Quality(value = Stage.TESTED, explanation = "Dumbest way to do it, but works with O(2^n)")

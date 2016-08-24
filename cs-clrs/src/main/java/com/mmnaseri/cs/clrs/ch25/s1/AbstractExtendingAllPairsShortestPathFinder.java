@@ -11,7 +11,7 @@ import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/10/15)
  */
 public abstract class AbstractExtendingAllPairsShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> implements AllPairsShortestPathFinder<E, V> {

@@ -6,7 +6,7 @@ import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
 import com.mmnaseri.cs.clrs.common.Matrix;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/7/15)
  */
 public interface AllPairsShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> {

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/3/15)
  */
 public abstract class AbstractGraph<E extends EdgeDetails, V extends VertexDetails> implements Graph<E, V> {

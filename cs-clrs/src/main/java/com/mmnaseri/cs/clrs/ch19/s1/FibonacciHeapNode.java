@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch19.s1;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/15, 11:14 AM)
  */
 public class FibonacciHeapNode<E extends Comparable<E>> {

@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch10.s4;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/15, 12:21 AM)
  */
 public interface TreeNode<E> {

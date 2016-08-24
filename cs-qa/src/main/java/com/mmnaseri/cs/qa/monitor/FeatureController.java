@@ -5,7 +5,7 @@ import com.mmnaseri.cs.qa.monitor.impl.Failure;
 import java.util.Set;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/27/15, 12:41 AM)
  */
 public interface FeatureController<D> {

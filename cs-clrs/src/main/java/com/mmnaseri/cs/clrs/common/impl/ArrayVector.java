@@ -5,7 +5,7 @@ import com.mmnaseri.cs.clrs.common.Vector;
 import java.util.Iterator;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2/27/16)
  */
 public class ArrayVector<E> implements Vector<E> {

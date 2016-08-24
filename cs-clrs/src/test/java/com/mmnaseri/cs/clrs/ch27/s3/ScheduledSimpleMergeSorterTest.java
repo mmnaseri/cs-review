@@ -5,7 +5,7 @@ import com.mmnaseri.cs.clrs.ch27.s0.SchedulerFactory;
 import com.mmnaseri.cs.clrs.common.Sorter;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (3/13/16, 6:52 PM)
  */
 public abstract class ScheduledSimpleMergeSorterTest extends MergeSorterTest {

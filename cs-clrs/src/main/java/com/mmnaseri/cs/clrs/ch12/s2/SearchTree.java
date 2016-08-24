@@ -5,7 +5,7 @@ import com.mmnaseri.cs.clrs.ch10.s4.TreeNode;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/18/15, 7:43 PM)
  */
 public interface SearchTree<E, N extends TreeNode<E>> {

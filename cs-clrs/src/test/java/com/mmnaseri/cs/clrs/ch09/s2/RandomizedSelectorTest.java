@@ -4,7 +4,7 @@ import com.mmnaseri.cs.clrs.ch09.Selector;
 import org.testng.annotations.Test;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/11/15, 5:55 PM)
  */
 public class RandomizedSelectorTest extends BaseSelectorTest {

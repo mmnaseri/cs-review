@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/27/15, 12:14 AM)
  */
 @Quality(Stage.UNTESTED)

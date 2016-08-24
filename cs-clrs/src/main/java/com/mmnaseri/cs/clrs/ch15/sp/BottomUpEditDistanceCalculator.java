@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/22/15)
  */
 @Quality(value = Stage.UNTESTED, explanation = "the whole spec mess is because we want the actual operations and not just the distances")

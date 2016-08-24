@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * This algorithm is due to <a href="https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm">Kosaraju-Sharir</a>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/3/15)
  */
 public class StronglyConnectedComponentFinder<E extends EdgeDetails, V extends VertexDetails> {

@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
 import java.util.Comparator;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/12/15, 7:26 PM)
  */
 @Quality(Stage.TESTED)

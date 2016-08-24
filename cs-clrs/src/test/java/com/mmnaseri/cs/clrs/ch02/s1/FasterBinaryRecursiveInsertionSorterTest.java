@@ -4,7 +4,7 @@ import com.mmnaseri.cs.clrs.common.BaseSortTest;
 import com.mmnaseri.cs.clrs.common.Sorter;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/27/15)
  */
 public class FasterBinaryRecursiveInsertionSorterTest extends BaseSortTest {

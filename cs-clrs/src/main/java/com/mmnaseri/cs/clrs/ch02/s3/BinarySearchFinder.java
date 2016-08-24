@@ -8,7 +8,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 import java.util.Arrays;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 3:16 AM)
  */
 @Quality(Stage.DOCUMENTED)

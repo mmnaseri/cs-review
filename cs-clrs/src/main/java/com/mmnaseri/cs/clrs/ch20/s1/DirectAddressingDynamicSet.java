@@ -6,7 +6,7 @@ import com.mmnaseri.cs.clrs.common.DynamicSet;
 import java.util.Objects;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/15, 2:50 PM)
  */
 public class DirectAddressingDynamicSet<I extends Indexed<Integer>> implements DynamicSet<I> {

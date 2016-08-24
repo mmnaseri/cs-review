@@ -4,7 +4,7 @@ import com.mmnaseri.cs.clrs.ch18.s1.ReflectiveIndexed;
 import com.mmnaseri.cs.clrs.common.DynamicSet;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/15, 3:10 PM)
  */
 public class FixedSizeDynamicSet implements DynamicSet<ReflectiveIndexed<Integer>> {

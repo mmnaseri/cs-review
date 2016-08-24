@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch15.s4;
 import java.util.Comparator;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/21/15)
  */
 public abstract class AbstractLongestAscendingSubSequenceFinder<E> implements LongestAscendingSubSequenceFinder<E> {

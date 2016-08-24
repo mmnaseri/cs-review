@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/2/15, 11:47 AM)
  */
 public abstract class AbstractForestDisjointSet<E extends TreeElement<I, E>, I> implements DisjointSet<E, I> {

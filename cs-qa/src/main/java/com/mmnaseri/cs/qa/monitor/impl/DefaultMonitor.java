@@ -7,7 +7,7 @@ import com.mmnaseri.cs.qa.monitor.error.MonitorFailureException;
 import java.util.*;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/27/15, 12:33 AM)
  */
 public class DefaultMonitor<D> implements Monitor<D> {

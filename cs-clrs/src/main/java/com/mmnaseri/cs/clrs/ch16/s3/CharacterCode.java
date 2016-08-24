@@ -4,7 +4,7 @@ import com.mmnaseri.cs.clrs.ch12.sp.Bit;
 import com.mmnaseri.cs.clrs.ch12.sp.BitUtils;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/25/15, 1:26 AM)
  */
 public class CharacterCode {

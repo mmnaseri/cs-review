@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/6/15, 4:41 PM)
  */
 @Quality(Stage.TESTED)

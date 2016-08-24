@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch18.s1;
 import java.util.UUID;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/28/15)
  */
 public interface Storage<E> {

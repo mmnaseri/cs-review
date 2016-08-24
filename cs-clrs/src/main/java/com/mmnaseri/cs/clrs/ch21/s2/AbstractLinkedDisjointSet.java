@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/2/15, 3:17 AM)
  */
 public abstract class AbstractLinkedDisjointSet<E extends LinkedElement<E, I, C>, I, C extends LinkedElementContainer<E, I>> implements DisjointSet<E, I> {

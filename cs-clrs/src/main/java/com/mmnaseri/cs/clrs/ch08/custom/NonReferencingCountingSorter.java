@@ -11,7 +11,7 @@ import java.util.Comparator;
  * This implementation offers better space and time complexity than {@link CountingSorter} as it
  * appears in the CLRS book.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/11/15, 3:12 PM)
  */
 @Quality(Stage.TESTED)

@@ -17,7 +17,7 @@ import java.util.Set;
 import static com.mmnaseri.cs.qa.monitor.impl.MonitorBuilder.controlDataStructure;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/27/15, 12:53 AM)
  */
 public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {

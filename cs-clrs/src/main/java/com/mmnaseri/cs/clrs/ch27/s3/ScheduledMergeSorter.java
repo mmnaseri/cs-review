@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (3/13/16, 11:27 PM)
  */
 @Quality(Stage.TESTED)

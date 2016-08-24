@@ -5,7 +5,7 @@ import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
 import com.mmnaseri.cs.clrs.ch24.SingleSourceShortestPathFinder;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/6/15)
  */
 public abstract class AbstractSingleSourceShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> implements SingleSourceShortestPathFinder<E, V> {

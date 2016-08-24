@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch14.s1;
 import com.mmnaseri.cs.clrs.ch13.s1.RedBlackTreeNode;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/20/15, 3:34 AM)
  */
 public class OrderStatisticTreeNode<E> extends RedBlackTreeNode<E> {

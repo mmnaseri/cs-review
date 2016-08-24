@@ -8,7 +8,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 import java.util.*;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/22/15)
  */
 @Quality(value = Stage.DOCUMENTED, explanation = "poorest design and running time possible (O(2^n * n^2))")

@@ -7,7 +7,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 import java.util.Comparator;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/27/15)
  */
 @Quality(Stage.DOCUMENTED)

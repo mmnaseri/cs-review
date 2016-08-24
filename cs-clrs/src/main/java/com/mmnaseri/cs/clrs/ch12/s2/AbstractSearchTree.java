@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/18/15, 8:16 PM)
  */
 public abstract class AbstractSearchTree<E, N extends TreeNode<E>> implements SearchTree<E, N> {

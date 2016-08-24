@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.IsNot.not;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/19/15, 11:06 PM)
  */
 public class RotatingBinarySearchTreeTest {

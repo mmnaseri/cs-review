@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch22.s1;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/2/15, 8:02 PM)
  */
 public class Vertex<V extends VertexDetails> extends GraphElement<V> {

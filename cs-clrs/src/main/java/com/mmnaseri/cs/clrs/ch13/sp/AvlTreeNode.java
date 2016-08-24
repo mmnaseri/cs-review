@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch13.sp;
 import com.mmnaseri.cs.clrs.ch10.s4.impl.BinaryTreeNode;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/20/15, 12:51 AM)
  */
 public class AvlTreeNode<E> extends BinaryTreeNode<E> {

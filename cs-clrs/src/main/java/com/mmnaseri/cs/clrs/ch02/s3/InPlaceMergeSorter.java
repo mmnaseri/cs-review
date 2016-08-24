@@ -7,7 +7,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 /**
  * todo the implementation is non-trivial and should be studied before being attempted
  * http://stackoverflow.com/questions/2571049/how-to-sort-in-place-using-the-merge-sort-algorithm
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 3:11 AM)
  */
 @Quality(Stage.INCOMPLETE)

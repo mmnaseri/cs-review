@@ -4,7 +4,7 @@ import com.mmnaseri.cs.clrs.common.BaseSortTest;
 import com.mmnaseri.cs.clrs.common.Sorter;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/12/15, 9:08 PM)
  */
 public class BestCaseQuickSorterTest extends BaseSortTest {

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/21/15, 9:53 PM)
  */
 @Quality(value = Stage.UNTESTED, explanation = "The dumbest implementation possible")

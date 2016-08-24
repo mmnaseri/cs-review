@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.fail;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/12/15, 9:32 PM)
  */
 public class FixedSizeStackTest {

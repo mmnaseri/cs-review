@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch22.s1;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/2/15, 8:09 PM)
  */
 public interface Graph<E extends EdgeDetails, V extends VertexDetails> extends Iterable<Vertex<V>> {

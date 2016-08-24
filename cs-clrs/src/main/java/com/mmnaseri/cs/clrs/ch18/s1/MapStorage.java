@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/28/15)
  */
 public class MapStorage<E> implements Storage<E> {

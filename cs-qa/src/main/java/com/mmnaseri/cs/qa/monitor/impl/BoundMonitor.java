@@ -3,7 +3,7 @@ package com.mmnaseri.cs.qa.monitor.impl;
 import com.mmnaseri.cs.qa.monitor.Monitor;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/27/15, 12:51 AM)
  */
 public class BoundMonitor<D> {

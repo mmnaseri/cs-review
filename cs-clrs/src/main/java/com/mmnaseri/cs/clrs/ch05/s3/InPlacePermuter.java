@@ -7,7 +7,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 import java.util.Random;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/27/15, 12:25 AM)
  */
 @Quality(Stage.UNTESTED)

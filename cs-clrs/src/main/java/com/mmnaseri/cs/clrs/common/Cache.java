@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.common;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/25/15, 1:42 PM)
  */
 public interface Cache<K, V> {

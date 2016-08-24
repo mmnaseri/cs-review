@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/25/15, 12:14 AM)
  */
 @Quality(value = Stage.UNTESTED, explanation = "Works with the example in the book but hasn't been tested really")

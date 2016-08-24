@@ -17,7 +17,7 @@ import java.util.Comparator;
  * @see com.mmnaseri.cs.clrs.common.Sorter
  * @see IterativeInsertionSorter
  * @see RecursiveInsertionSorter
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 2:15 AM)
  */
 @Quality(Stage.DOCUMENTED)

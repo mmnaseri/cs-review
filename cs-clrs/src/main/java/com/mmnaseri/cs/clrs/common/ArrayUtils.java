@@ -6,7 +6,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 import java.util.Arrays;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/6/15, 4:27 PM)
  */
 public abstract class ArrayUtils {

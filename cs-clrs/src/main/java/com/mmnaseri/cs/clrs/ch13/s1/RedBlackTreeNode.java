@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch13.s1;
 import com.mmnaseri.cs.clrs.ch10.s4.impl.BinaryTreeNode;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/19/15, 11:54 PM)
  */
 public class RedBlackTreeNode<E> extends BinaryTreeNode<E> {

@@ -9,7 +9,7 @@ import com.mmnaseri.cs.clrs.common.GraphSamples;
 import org.testng.annotations.Test;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/6/15)
  */
 public class BellmanFordSingleSourceShortestPathFinderTest extends BaseSingleSourceShortestPathFinderTest {

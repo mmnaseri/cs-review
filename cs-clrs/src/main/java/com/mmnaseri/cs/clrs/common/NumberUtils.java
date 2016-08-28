@@ -12,7 +12,11 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 10:57 PM)
  */
-public abstract class NumberUtils {
+public final class NumberUtils {
+
+    private NumberUtils() {
+        throw new UnsupportedOperationException();
+    }
 
     @SuppressWarnings("unchecked")
     @Quality(Stage.UNTESTED)
@@ -207,6 +211,62 @@ public abstract class NumberUtils {
             final BigInteger firstValue = (BigInteger) first;
             final BigInteger secondValue = (BigInteger) second;
             return (E) firstValue.divide(secondValue);
+        } else {
+            throw new UnsupportedOperationException("Unsupported number type");
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> E zero(Class<E> type) {
+        if (Float.class.equals(type)) {
+            return (E) (Float) 0F;
+        } else if (Long.class.equals(type)) {
+            return (E) (Long) 0L;
+        } else if (Double.class.equals(type)) {
+            return (E) (Double) 0D;
+        } else if (Short.class.equals(type)) {
+            return (E) (Short) ((Integer) 0).shortValue();
+        } else if (Byte.class.equals(type)) {
+            return (E) (Byte) ((Integer) 0).byteValue();
+        } else if (Integer.class.equals(type)) {
+            return (E) (Integer) 0;
+        } else if (AtomicLong.class.equals(type)) {
+            return (E) new AtomicLong(0);
+        } else if (AtomicInteger.class.equals(type)) {
+            return (E) new AtomicInteger(0);
+        } else if (BigDecimal.class.equals(type)) {
+            return (E) BigDecimal.ZERO;
+        } else if (BigInteger.class.equals(type)) {
+            return (E) BigInteger.ZERO;
+        } else {
+            throw new UnsupportedOperationException("Unsupported number type");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> E one(Class<E> type) {
+        if (Float.class.equals(type)) {
+            return (E) (Float) 1F;
+        } else if (Long.class.equals(type)) {
+            return (E) (Long) 1L;
+        } else if (Double.class.equals(type)) {
+            return (E) (Double) 1D;
+        } else if (Short.class.equals(type)) {
+            return (E) (Short) ((Integer) 1).shortValue();
+        } else if (Byte.class.equals(type)) {
+            return (E) (Byte) ((Integer) 1).byteValue();
+        } else if (Integer.class.equals(type)) {
+            return (E) (Integer) 1;
+        } else if (AtomicLong.class.equals(type)) {
+            return (E) new AtomicLong(1);
+        } else if (AtomicInteger.class.equals(type)) {
+            return (E) new AtomicInteger(1);
+        } else if (BigDecimal.class.equals(type)) {
+            return (E) BigDecimal.ONE;
+        } else if (BigInteger.class.equals(type)) {
+            return (E) BigInteger.ONE;
         } else {
             throw new UnsupportedOperationException("Unsupported number type");
         }

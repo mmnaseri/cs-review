@@ -9,7 +9,11 @@ import java.util.Arrays;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/6/15, 4:27 PM)
  */
-public abstract class ArrayUtils {
+public final class ArrayUtils {
+
+    private ArrayUtils() {
+        throw new UnsupportedOperationException();
+    }
 
     @Quality(Stage.UNTESTED)
     public static void swap(Object[] array, int i, int j) {

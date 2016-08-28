@@ -1,14 +1,11 @@
 package com.mmnaseri.cs.clrs.ch28.s1;
 
-import com.mmnaseri.cs.clrs.common.Matrix;
-import com.mmnaseri.cs.clrs.common.MatrixCell;
-import com.mmnaseri.cs.clrs.common.MatrixRow;
+import com.mmnaseri.cs.clrs.common.impl.AbstractImmutableMatrix;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,7 +13,7 @@ import java.util.List;
  * @since 1.0 (8/23/16, 8:59 PM)
  */
 @Quality(Stage.TESTED)
-public class PermutationMatrix implements Matrix<Double> {
+public class PermutationMatrix extends AbstractImmutableMatrix<Double> {
 
     private static final double ON = 1.0;
     private static final int OFF = 0;
@@ -51,100 +48,8 @@ public class PermutationMatrix implements Matrix<Double> {
     }
 
     @Override
-    public Double get(int row, int col) {
+    protected Double read(int row, int col) {
         return col == permutation.get(row) ? ON : OFF;
-    }
-
-    @Override
-    public void set(int row, int col, Double value) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Iterator<MatrixRow<Double>> iterator() {
-        return new Iterator<MatrixRow<Double>>() {
-
-            private int row = 0;
-
-            @Override
-            public boolean hasNext() {
-                return row < getRows() - 1;
-            }
-
-            @Override
-            public MatrixRow<Double> next() {
-                return new PermutationMatrixRow(row ++);
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-        };
-    }
-
-    private final class PermutationMatrixRow implements MatrixRow<Double> {
-
-        private int row;
-
-        private PermutationMatrixRow(int row) {
-            this.row = row;
-        }
-
-        @Override
-        public int getRowNumber() {
-            return row;
-        }
-
-        @Override
-        public Iterator<MatrixCell<Double>> iterator() {
-            return new Iterator<MatrixCell<Double>>() {
-
-                private int col = 0;
-
-                @Override
-                public boolean hasNext() {
-                    return col < getColumns() - 1;
-                }
-
-                @Override
-                public MatrixCell<Double> next() {
-                    return new PermutationMatrixCell(row, col ++);
-                }
-
-                @Override
-                public void remove() {
-                    throw new UnsupportedOperationException();
-                }
-            };
-        }
-    }
-
-    private final class PermutationMatrixCell implements MatrixCell<Double> {
-
-        private final int row;
-        private final int col;
-
-        private PermutationMatrixCell(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
-
-        @Override
-        public int getRowNumber() {
-            return row;
-        }
-
-        @Override
-        public int getColumnNumber() {
-            return col;
-        }
-
-        @Override
-        public Double getValue() {
-            return get(row, col);
-        }
-
     }
 
 }

@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.common;
 
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
 import com.mmnaseri.cs.clrs.common.impl.DelegatingMatrix;
+import com.mmnaseri.cs.clrs.common.impl.IdentityMatrix;
+import com.mmnaseri.cs.clrs.common.impl.ZeroMatrix;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -49,12 +51,29 @@ public final class MatrixUtils {
         }
     }
 
+    @Quality(Stage.UNTESTED)
+    public static <T> Matrix<T> copyOf(Matrix<T> original) {
+        final Matrix<T> copy = new ArrayMatrix<>(original.getColumns(), original.getRows());
+        copy(original, copy);
+        return copy;
+    }
+
+    @Quality(Stage.UNTESTED)
     public static <S> Matrix<? extends S> viewOf(Matrix<S> original, int rowOffset, int columnOffset, int rowCount, int columnCount) {
         return new DelegatingMatrix<>(original, rowOffset, columnOffset, rowCount, columnCount);
     }
 
+    @Quality(Stage.UNTESTED)
     public static <S> Matrix<? extends S> viewOf(Matrix<S> original, int rowOffset, int columnOffset) {
         return new DelegatingMatrix<>(original, rowOffset, columnOffset, original.getRows() - rowOffset, original.getColumns() - columnOffset);
+    }
+
+    public static <E extends Number> Matrix<E> zero(Class<E> type, int size) {
+        return new ZeroMatrix<>(type, size);
+    }
+
+    public static <E extends Number> Matrix<E> identity(Class<E> type, int size) {
+        return new IdentityMatrix<>(type, size);
     }
 
 }

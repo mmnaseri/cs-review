@@ -272,4 +272,66 @@ public final class NumberUtils {
         }
     }
 
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> E negate(E original) {
+        return subtract((E) zero(original.getClass()), original);
+    }
+
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> E abs(E original) {
+        final E zero = (E) zero(original.getClass());
+        if (compare(zero, original) < 0) {
+            return original;
+        } else {
+            return negate(original);
+        }
+    }
+
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> int compare(E first, E second) {
+        if (first instanceof Float && second instanceof Float) {
+            final Float firstValue = (Float) first;
+            final Float secondValue = (Float) second;
+            return Float.compare(firstValue, secondValue);
+        } else if (first instanceof Long && second instanceof Long) {
+            final Long firstValue = (Long) first;
+            final Long secondValue = (Long) second;
+            return Long.compare(firstValue, secondValue);
+        } else if (first instanceof Double && second instanceof Double) {
+            final Double firstValue = (Double) first;
+            final Double secondValue = (Double) second;
+            return Double.compare(firstValue, secondValue);
+        } else if (first instanceof Short && second instanceof Short) {
+            final Short firstValue = (Short) first;
+            final Short secondValue = (Short) second;
+            return Short.compare(firstValue, secondValue);
+        } else if (first instanceof Byte && second instanceof Byte) {
+            final Byte firstValue = (Byte) first;
+            final Byte secondValue = (Byte) second;
+            return  Byte.compare(firstValue, secondValue);
+        } else if (first instanceof Integer && second instanceof Integer) {
+            final Integer firstValue = (Integer) first;
+            final Integer secondValue = (Integer) second;
+            return Integer.compare(firstValue, secondValue);
+        } else if (first instanceof AtomicLong && second instanceof AtomicLong) {
+            final AtomicLong firstValue = (AtomicLong) first;
+            final AtomicLong secondValue = (AtomicLong) second;
+            return Long.compare(firstValue.get(), secondValue.get());
+        } else if (first instanceof AtomicInteger && second instanceof AtomicInteger) {
+            final AtomicInteger firstValue = (AtomicInteger) first;
+            final AtomicInteger secondValue = (AtomicInteger) second;
+            return Integer.compare(firstValue.get(), secondValue.get());
+        } else if (first instanceof BigDecimal && second instanceof BigDecimal) {
+            final BigDecimal firstValue = (BigDecimal) first;
+            final BigDecimal secondValue = (BigDecimal) second;
+            return firstValue.compareTo(secondValue);
+        } else if (first instanceof BigInteger && second instanceof BigInteger) {
+            final BigInteger firstValue = (BigInteger) first;
+            final BigInteger secondValue = (BigInteger) second;
+            return firstValue.compareTo(secondValue);
+        } else {
+            throw new UnsupportedOperationException("Unsupported number type");
+        }
+    }
+
 }

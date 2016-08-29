@@ -1,7 +1,5 @@
 package com.mmnaseri.cs.clrs.common;
 
-import com.mmnaseri.cs.clrs.common.Heap;
-import com.mmnaseri.cs.clrs.common.TestTools;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

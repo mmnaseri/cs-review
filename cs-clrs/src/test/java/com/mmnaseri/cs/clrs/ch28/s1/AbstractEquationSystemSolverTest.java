@@ -5,13 +5,12 @@ import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)

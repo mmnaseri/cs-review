@@ -3,6 +3,8 @@ package com.mmnaseri.cs.clrs.ch28.s1;
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.MatrixUtils;
 import com.mmnaseri.cs.clrs.common.NumberUtils;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Objects;
 
@@ -10,6 +12,7 @@ import java.util.Objects;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/28/16, 5:37 PM)
  */
+@Quality(Stage.TESTED)
 public abstract class AbstractMatrixDecomposer<E extends Number> implements MatrixDecomposer<E> {
 
     private final Class<E> type;
@@ -36,11 +39,15 @@ public abstract class AbstractMatrixDecomposer<E extends Number> implements Matr
         Objects.requireNonNull(result);
         Objects.requireNonNull(result.getLower());
         Objects.requireNonNull(result.getUpper());
+        Objects.requireNonNull(result.getPermutation());
         if (matrix.getColumns() != result.getLower().getColumns() || matrix.getRows() != result.getLower().getRows()) {
             throw new IllegalStateException("Resulting lower matrix is incompatible with the original matrix");
         }
         if (matrix.getColumns() != result.getUpper().getColumns() || matrix.getRows() != result.getUpper().getRows()) {
             throw new IllegalStateException("Resulting upper matrix is incompatible with the original matrix");
+        }
+        if (matrix.getColumns() != result.getPermutation().size()) {
+            throw new IllegalStateException("Resulting permutation is incompatible with the original matrix");
         }
         return result;
     }

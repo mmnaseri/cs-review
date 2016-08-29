@@ -13,7 +13,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/28/16, 5:43 PM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class LUPMatrixDecomposer<E extends Number> extends AbstractMatrixDecomposer<E> {
 
     public LUPMatrixDecomposer(Class<E> type) {

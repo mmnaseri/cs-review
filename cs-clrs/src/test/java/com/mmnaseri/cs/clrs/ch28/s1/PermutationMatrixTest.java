@@ -22,40 +22,40 @@ public class PermutationMatrixTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = ".*null.*")
     public void testThatItIsUnhappyAboutNullPermutations() throws Exception {
-        new PermutationMatrix(null);
+        new PermutationMatrix<>(Integer.class, null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = ".*empty.*")
     public void testThatItIsUnhappyAboutEmptyPermutations() throws Exception {
-        new PermutationMatrix(new ArrayList<Integer>());
+        new PermutationMatrix<>(Integer.class, new ArrayList<Integer>());
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = ".*duplicate.*")
     public void testThatItIsUnhappyAboutPermutationsWithDuplicateValues() throws Exception {
-        new PermutationMatrix(Arrays.asList(1, 3, 3, 4));
+        new PermutationMatrix<>(Integer.class, Arrays.asList(1, 3, 3, 4));
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = ".*range.*")
     public void testThatItIsUnhappyAboutPermutationsWithValuesOutOfRange() throws Exception {
-        new PermutationMatrix(Arrays.asList(1, 5, 3));
+        new PermutationMatrix<>(Integer.class, Arrays.asList(1, 5, 3));
     }
 
     @Test(expectedExceptions = UnsupportedOperationException.class)
     public void testThatTheMatrixIsImmutable() throws Exception {
-        PermutationMatrix matrix = new PermutationMatrix(Arrays.asList(0, 1, 2));
+        PermutationMatrix<Double> matrix = new PermutationMatrix<>(Double.class, Arrays.asList(0, 1, 2));
         matrix.set(0, 0, 1.0);
     }
 
     @Test(expectedExceptions = IndexOutOfBoundsException.class)
     public void testThatDoesNotWorkForValuesOutOfBounds() throws Exception {
-        PermutationMatrix matrix = new PermutationMatrix(Arrays.asList(0, 1, 2));
+        PermutationMatrix<?> matrix = new PermutationMatrix<>(Double.class, Arrays.asList(0, 1, 2));
         matrix.get(5, 0);
     }
 
     @Test(dataProvider = "permutations")
     public void testPermutationValues(Integer[] permutation) throws Exception {
         final List<Integer> list = Arrays.asList(permutation);
-        PermutationMatrix matrix = new PermutationMatrix(list);
+        PermutationMatrix<Double> matrix = new PermutationMatrix<>(Double.class, list);
         for (MatrixRow<Double> row : matrix) {
             for (MatrixCell<Double> cell : row) {
                 assertThat(cell.getRowNumber(), is(row.getRowNumber()));

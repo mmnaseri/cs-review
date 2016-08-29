@@ -34,7 +34,7 @@ public class MatrixDecomposition<E extends Number> {
 
     @Override
     public String toString() {
-        return "Upper:\n" + upper + "\nLower:\n" + lower + "\nPermutation:\n" + new PermutationMatrix(permutation);
+        return "Upper:\n" + upper + "\nLower:\n" + lower + "\nPermutation:\n" + new PermutationMatrix<>(Integer.class, permutation);
     }
 
 }

@@ -4,6 +4,7 @@ import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.MatrixRow;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
@@ -53,6 +54,28 @@ public abstract class AbstractMatrix<E> implements Matrix<E> {
             return EMPTY_MATRIX;
         }
         return builder.substring(0, builder.length() - 1);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Matrix<?>)) {
+            return false;
+        }
+        final Matrix that = (Matrix) obj;
+        if (that.getColumns() != this.getColumns() || that.getRows() != this.getRows()) {
+            return false;
+        }
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                if (!Objects.equals(this.get(i, j), that.get(i, j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

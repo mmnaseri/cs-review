@@ -12,7 +12,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/28/16, 5:37 PM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class LUMatrixDecomposer<E extends Number> extends AbstractMatrixDecomposer<E> {
 
     public LUMatrixDecomposer(Class<E> type) {
@@ -30,6 +30,9 @@ public class LUMatrixDecomposer<E extends Number> extends AbstractMatrixDecompos
             permutation.add(i);
         }
         for (int k = 0; k < size; k++) {
+            if (zero().equals(matrix.get(k, k))) {
+                throw new IllegalStateException("Cannot compute LU decomposition without pivoting for this matrix. Use LUP decomposition instead.");
+            }
             upper.set(k, k, matrix.get(k, k));
             for (int i = k + 1; i < size; i++) {
                 lower.set(i, k, divide(matrix.get(i, k), upper.get(k, k)));
@@ -41,7 +44,7 @@ public class LUMatrixDecomposer<E extends Number> extends AbstractMatrixDecompos
                 }
             }
         }
-        return new MatrixDecomposition<>(lower, upper, permutation);
+        return new MatrixDecomposition<>(upper, lower, permutation);
     }
 
 

@@ -1,5 +1,6 @@
 package com.mmnaseri.cs.clrs.ch28.s1;
 
+import com.mmnaseri.cs.clrs.common.NumberUtils;
 import com.mmnaseri.cs.clrs.common.impl.AbstractImmutableMatrix;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
@@ -13,13 +14,15 @@ import java.util.List;
  * @since 1.0 (8/23/16, 8:59 PM)
  */
 @Quality(Stage.TESTED)
-public class PermutationMatrix extends AbstractImmutableMatrix<Double> {
+public class PermutationMatrix<E extends Number> extends AbstractImmutableMatrix<E> {
 
-    private static final double ON = 1.0;
-    private static final int OFF = 0;
     private final List<Integer> permutation;
+    private final E zero;
+    private final E one;
 
-    public PermutationMatrix(List<Integer> permutation) {
+    public PermutationMatrix(Class<E> type, List<Integer> permutation) {
+        zero = NumberUtils.zero(type);
+        one = NumberUtils.one(type);
         if (permutation == null) {
             throw new IllegalArgumentException("Permutation cannot be null");
         }
@@ -48,8 +51,8 @@ public class PermutationMatrix extends AbstractImmutableMatrix<Double> {
     }
 
     @Override
-    protected Double read(int row, int col) {
-        return col == permutation.get(row) ? ON : OFF;
+    protected E read(int row, int col) {
+        return col == permutation.get(row) ? one : zero;
     }
 
 }

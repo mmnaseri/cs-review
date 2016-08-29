@@ -1,5 +1,7 @@
 package com.mmnaseri.cs.clrs.common;
 
+import com.mmnaseri.cs.clrs.ch04.s2.MatrixMultiplier;
+import com.mmnaseri.cs.clrs.ch04.s2.SimpleMatrixMultiplier;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
 import com.mmnaseri.cs.clrs.common.impl.DelegatingMatrix;
 import com.mmnaseri.cs.clrs.common.impl.IdentityMatrix;
@@ -7,6 +9,7 @@ import com.mmnaseri.cs.clrs.common.impl.ZeroMatrix;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,6 +17,8 @@ import java.util.Objects;
  * @since 1.0 (8/28/16, 4:49 PM)
  */
 public final class MatrixUtils {
+
+    private static MatrixMultiplier multiplier = new SimpleMatrixMultiplier();
 
     private MatrixUtils() {
         throw new UnsupportedOperationException();
@@ -68,12 +73,50 @@ public final class MatrixUtils {
         return new DelegatingMatrix<>(original, rowOffset, columnOffset, original.getRows() - rowOffset, original.getColumns() - columnOffset);
     }
 
+    @Quality(Stage.UNTESTED)
     public static <E extends Number> Matrix<E> zero(Class<E> type, int size) {
         return new ZeroMatrix<>(type, size);
     }
 
+    @Quality(Stage.UNTESTED)
     public static <E extends Number> Matrix<E> identity(Class<E> type, int size) {
         return new IdentityMatrix<>(type, size);
+    }
+
+    @Quality(Stage.UNTESTED)
+    public static <E> Matrix<E> row(List<E> list) {
+        final Matrix<E> matrix = new ArrayMatrix<>(1, list.size());
+        for (int i = 0; i < list.size(); i++) {
+            E item = list.get(i);
+            matrix.set(0, i, item);
+        }
+        return matrix;
+    }
+
+    @Quality(Stage.UNTESTED)
+    public static <E> Matrix<E> column(List<E> list) {
+        final Matrix<E> matrix = new ArrayMatrix<>(list.size(), 1);
+        for (int i = 0; i < list.size(); i++) {
+            E item = list.get(i);
+            matrix.set(i, 0, item);
+        }
+        return matrix;
+    }
+
+    @Quality(Stage.UNTESTED)
+    public static <E> Matrix<E> transpose(Matrix<E> original) {
+        final Matrix<E> copy = new ArrayMatrix<>(original.getRows(), original.getColumns());
+        for (int i = 0; i < original.getRows(); i++) {
+            for (int j = 0; j < original.getColumns(); j++) {
+                copy.set(j, i, original.get(i, j));
+            }
+        }
+        return copy;
+    }
+
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> Matrix<E> multiply(Matrix<E> first, Matrix<E> second) {
+        return multiplier.multiply(first, second);
     }
 
 }

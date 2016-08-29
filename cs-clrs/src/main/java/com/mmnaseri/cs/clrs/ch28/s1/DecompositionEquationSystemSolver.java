@@ -11,7 +11,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/28/16, 3:08 PM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class DecompositionEquationSystemSolver<E extends Number> extends AbstractEquationSystemSolver<E> {
 
     private final MatrixDecomposer<E> decomposer;

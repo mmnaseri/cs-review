@@ -72,7 +72,7 @@ given input. To be able to return the actual selection, we need to add one more 
     20                               end = j
     21   return (start, end, x)
 
-which returns the index of the first and the last activities chosen with the list of indices chosen as middle points.
+which returns the index of the source and the last activities chosen with the list of indices chosen as middle points.
 
 Whenever `x[i,j]` is `-1` it means no activity `a[k]` exists with `i < k < j` that can be chosen to maximize the answer.
 

@@ -5,6 +5,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -329,6 +330,75 @@ public final class NumberUtils {
             final BigInteger firstValue = (BigInteger) first;
             final BigInteger secondValue = (BigInteger) second;
             return firstValue.compareTo(secondValue);
+        } else {
+            throw new UnsupportedOperationException("Unsupported number type");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> E random(Class<E> type, Integer bound) {
+        return random(type, new Random(), bound);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> E random(Class<E> type, Random random, Integer bound) {
+        if (Float.class.equals(type)) {
+            return multiply((E) (Float) random.nextFloat(), cast(type, bound));
+        } else if (Long.class.equals(type)) {
+            return shrink((E) (Long) random.nextLong(), bound);
+        } else if (Double.class.equals(type)) {
+            return multiply((E) (Double) random.nextDouble(), cast(type, bound));
+        } else if (Short.class.equals(type)) {
+            return shrink((E) (Short) ((Integer) random.nextInt()).shortValue(), bound);
+        } else if (Byte.class.equals(type)) {
+            return shrink((E) (Byte) ((Integer) random.nextInt()).byteValue(), bound);
+        } else if (Integer.class.equals(type)) {
+            return (E) (Integer) random.nextInt(bound);
+        } else if (AtomicLong.class.equals(type)) {
+            return (E) new AtomicLong(random(Long.class, random, bound));
+        } else if (AtomicInteger.class.equals(type)) {
+            return (E) new AtomicInteger(random.nextInt(bound));
+        } else if (BigDecimal.class.equals(type)) {
+            return (E) new BigDecimal(random(Long.class, random, bound));
+        } else if (BigInteger.class.equals(type)) {
+            return (E) BigInteger.valueOf(random(Long.class, random, bound));
+        } else {
+            throw new UnsupportedOperationException("Unsupported number type");
+        }
+    }
+
+    private static <E extends Number> E shrink(E original, Integer bound) {
+        E result = original;
+        while (compare(result, bound) > 0) {
+            result = divide(result, (E) cast(original.getClass(), 2));
+        }
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <E extends Number> E cast(Class<E> type, Integer original) {
+        if (Float.class.equals(type)) {
+            return (E) (Float) original.floatValue();
+        } else if (Long.class.equals(type)) {
+            return (E) (Long) original.longValue();
+        } else if (Double.class.equals(type)) {
+            return (E) (Double) original.doubleValue();
+        } else if (Short.class.equals(type)) {
+            return (E) (Short) original.shortValue();
+        } else if (Byte.class.equals(type)) {
+            return (E) (Byte) original.byteValue();
+        } else if (Integer.class.equals(type)) {
+            return (E) original;
+        } else if (AtomicLong.class.equals(type)) {
+            return (E) new AtomicLong(original);
+        } else if (AtomicInteger.class.equals(type)) {
+            return (E) new AtomicInteger(original);
+        } else if (BigDecimal.class.equals(type)) {
+            return (E) new BigDecimal(original.longValue());
+        } else if (BigInteger.class.equals(type)) {
+            return (E) BigInteger.valueOf(original.longValue());
         } else {
             throw new UnsupportedOperationException("Unsupported number type");
         }

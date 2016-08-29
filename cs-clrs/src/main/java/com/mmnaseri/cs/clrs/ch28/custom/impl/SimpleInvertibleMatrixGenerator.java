@@ -92,10 +92,4 @@ public class SimpleInvertibleMatrixGenerator<E extends Number> implements Invert
         return null;
     }
 
-    public static void main(String[] args) throws Exception {
-        final SimpleInvertibleMatrixGenerator<?> generator = new SimpleInvertibleMatrixGenerator<>(Double.class);
-        final Matrix<?> matrix = generator.generate(4);
-        System.out.println(matrix);
-    }
-
 }

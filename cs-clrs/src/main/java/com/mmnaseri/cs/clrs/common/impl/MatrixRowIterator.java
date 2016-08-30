@@ -21,7 +21,7 @@ public class MatrixRowIterator<E> implements Iterator<MatrixRow<E>> {
 
     @Override
     public boolean hasNext() {
-        return row < matrix.getColumns();
+        return row < matrix.getRows();
     }
 
     @Override

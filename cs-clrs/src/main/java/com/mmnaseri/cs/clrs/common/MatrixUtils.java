@@ -119,4 +119,38 @@ public final class MatrixUtils {
         return multiplier.multiply(first, second);
     }
 
+    @Quality(Stage.UNTESTED)
+    public static <E> Matrix<E> removeRow(Matrix<E> matrix, int which) {
+        final Matrix<E> result = new ArrayMatrix<>(matrix.getRows() - 1, matrix.getColumns());
+        int i = 0;
+        for (MatrixRow<E> row : matrix) {
+            if (row.getRowNumber() == which) {
+                continue;
+            }
+            int j = 0;
+            for (MatrixCell<E> cell : row) {
+                result.set(i, j ++, cell.getValue());
+            }
+            i ++;
+        }
+        return result;
+    }
+
+    @Quality(Stage.UNTESTED)
+    public static <E> Matrix<E> removeColumn(Matrix<E> matrix, int which) {
+        final Matrix<E> result = new ArrayMatrix<>(matrix.getRows(), matrix.getColumns() - 1);
+        int i = 0;
+        for (MatrixRow<E> row : matrix) {
+            int j = 0;
+            for (MatrixCell<E> cell : row) {
+                if (cell.getColumnNumber() == which) {
+                    continue;
+                }
+                result.set(i, j ++, cell.getValue());
+            }
+            i ++;
+        }
+        return result;
+    }
+
 }

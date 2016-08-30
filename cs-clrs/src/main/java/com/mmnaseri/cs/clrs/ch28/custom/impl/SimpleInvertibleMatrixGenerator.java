@@ -15,6 +15,8 @@ import com.mmnaseri.cs.clrs.ch28.custom.impl.row.RowSwitchElementaryOperationPer
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.MatrixUtils;
 import com.mmnaseri.cs.clrs.common.NumberUtils;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +26,17 @@ import java.util.Random;
  * @author Milad Naseri (milad.naseri@cdk.com)
  * @since 1.0 (8/29/16, 12:11 PM)
  */
+@Quality(Stage.TESTED)
 public class SimpleInvertibleMatrixGenerator<E extends Number> implements InvertibleMatrixGenerator<E> {
 
     private final Class<E> type;
     private static final List<ElementaryOperationPerformer<?, ?>> performers = new ArrayList<>();
     static {
-        performers.add(new RowAdditionElementaryOperationPerformer<>());
         performers.add(new RowMultiplicationElementaryOperationPerformer<>());
-        performers.add(new RowSwitchElementaryOperationPerformer<>());
-        performers.add(new ColumnAdditionElementaryOperationPerformer<>());
         performers.add(new ColumnMultiplicationElementaryOperationPerformer<>());
+        performers.add(new RowAdditionElementaryOperationPerformer<>());
+        performers.add(new ColumnAdditionElementaryOperationPerformer<>());
+        performers.add(new RowSwitchElementaryOperationPerformer<>());
         performers.add(new ColumnSwitchElementaryOperationPerformer<>());
 
     }
@@ -48,9 +51,10 @@ public class SimpleInvertibleMatrixGenerator<E extends Number> implements Invert
         final Random random = new Random();
         final int bound = 1 + random.nextInt(10);
         final List<Matrix<E>> elementaryMatrices = new ArrayList<>(bound);
+        final int eligiblePerformers = size > 1 ? performers.size() : 2;
         for (int i = 0; i < bound; i++) {
             final Matrix<E> seed = MatrixUtils.copyOf(MatrixUtils.identity(type, size));
-            final ElementaryOperationPerformer<E, ElementaryOperation<E>> performer = (ElementaryOperationPerformer<E, ElementaryOperation<E>>) performers.get(random.nextInt(performers.size()));
+            final ElementaryOperationPerformer<E, ElementaryOperation<E>> performer = (ElementaryOperationPerformer<E, ElementaryOperation<E>>) performers.get(random.nextInt(eligiblePerformers));
             performer.perform(seed, getOperation(performer, size, random));
             elementaryMatrices.add(seed);
         }

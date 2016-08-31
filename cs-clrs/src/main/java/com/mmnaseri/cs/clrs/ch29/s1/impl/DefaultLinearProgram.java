@@ -73,11 +73,3 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
     }
 
 }
-
-/**
- * withObjective(1, 2, 3)
- *  .when(2, 3, 4).isGreaterThan()
- *  .and(...).is()
- *  .and(...).isLessThan()
- *  .maximize();
- */

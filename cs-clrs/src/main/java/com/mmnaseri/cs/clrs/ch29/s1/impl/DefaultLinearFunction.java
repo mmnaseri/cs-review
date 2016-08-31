@@ -56,11 +56,18 @@ public class DefaultLinearFunction<E extends Number> implements LinearFunction<E
                 i ++;
                 continue;
             }
-            if (i > 0) {
+            if (builder.length() > 0) {
                 builder.append(" + ");
             }
             if (!NumberUtils.one(type).equals(coefficient)) {
-                builder.append(coefficient).append(" * ");
+                if (NumberUtils.compare(NumberUtils.zero(type), coefficient) > 0) {
+                    builder.append("(");
+                }
+                builder.append(coefficient);
+                if (NumberUtils.compare(NumberUtils.zero(type), coefficient) > 0) {
+                    builder.append(")");
+                }
+                builder.append(" * ");
             }
             builder.append("x_");
             builder.append(i ++);

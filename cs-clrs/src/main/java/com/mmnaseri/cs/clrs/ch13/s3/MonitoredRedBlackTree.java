@@ -5,6 +5,8 @@ import com.mmnaseri.cs.clrs.ch12.s1.TreeWalk;
 import com.mmnaseri.cs.clrs.ch12.s1.TreeWalkCallback;
 import com.mmnaseri.cs.clrs.ch13.s1.NodeColor;
 import com.mmnaseri.cs.clrs.ch13.s1.RedBlackTreeNode;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 import com.mmnaseri.cs.qa.monitor.FeatureController;
 import com.mmnaseri.cs.qa.monitor.impl.BoundMonitor;
 import com.mmnaseri.cs.qa.monitor.impl.Failure;
@@ -20,6 +22,7 @@ import static com.mmnaseri.cs.qa.monitor.impl.MonitorBuilder.controlDataStructur
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/27/15, 12:53 AM)
  */
+@Quality(Stage.TESTED)
 public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {
 
     private final BoundMonitor<MonitoredRedBlackTree<E>> monitor;
@@ -32,11 +35,11 @@ public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {
                 .andFeature("red node has black children").using(new RedBlackTreeLevelColorController<E>())
                 .andFeature("black height").using(new RedBlackTreeBlackHeightController<E>())
                 .viaMonitor();
+        monitor.validate();
     }
 
     @Override
     public RedBlackTreeNode<E> insert(E value) {
-        monitor.validate();
         final RedBlackTreeNode<E> inserted = super.insert(value);
         monitor.validate();
         return inserted;
@@ -44,7 +47,6 @@ public class MonitoredRedBlackTree<E> extends RedBlackTree<E> {
 
     @Override
     public RedBlackTreeNode<E> delete(E value) {
-        monitor.validate();
         final RedBlackTreeNode<E> deleted = super.delete(value);
         monitor.validate();
         return deleted;

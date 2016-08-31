@@ -5,6 +5,8 @@ import com.mmnaseri.cs.clrs.ch29.s1.LinearProgram;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgramConstraint;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgramConverter;
 import com.mmnaseri.cs.clrs.common.NumberUtils;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.*;
 
@@ -12,6 +14,7 @@ import java.util.*;
  * @author Milad Naseri (milad.naseri@cdk.com)
  * @since 1.0 (8/31/16, 10:39 AM)
  */
+@Quality(Stage.TESTED)
 public class StandardLinearProgramConverter<E extends Number> implements LinearProgramConverter<E> {
 
     private final Class<E> type;

@@ -1,5 +1,6 @@
 package com.mmnaseri.cs.clrs.ch05.s3;
 
+import com.mmnaseri.cs.clrs.common.ArrayUtils;
 import com.mmnaseri.cs.clrs.common.Permuter;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
@@ -13,17 +14,11 @@ import java.util.Random;
 @Quality(Stage.UNTESTED)
 public class InPlacePermuter<E> implements Permuter<E> {
 
-    private void swap(E[] array, int i, int j) {
-        E temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-
     @Override
     public void permute(E[] array) {
         final Random random = new Random();
         for (int i = 0; i < array.length; i++) {
-            swap(array, i, i + random.nextInt(array.length - i));
+            ArrayUtils.swap(array, i, i + random.nextInt(array.length - i));
         }
     }
 

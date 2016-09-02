@@ -2,6 +2,8 @@ package com.mmnaseri.cs.clrs.ch05.custom;
 
 import com.mmnaseri.cs.clrs.common.ArrayUtils;
 import com.mmnaseri.cs.clrs.common.Sorter;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Comparator;
 
@@ -9,6 +11,7 @@ import java.util.Comparator;
  * @author Milad Naseri (milad.naseri@cdk.com)
  * @since 1.0 (9/2/16, 2:36 PM)
  */
+@Quality(Stage.TESTED)
 public class StoogeSorter<E extends Comparable<E>> implements Sorter<E> {
 
     private final Comparator<E> comparator;

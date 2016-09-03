@@ -46,24 +46,24 @@ public class StandardLinearProgramConverterTest {
     }
 
     @Test
-    public void testAllConstraintsAreGreaterThan() throws Exception {
+    public void testAllConstraintsAreLessThan() throws Exception {
         final LinearProgram<Integer> program = createProgram();
         final LinearProgram<Integer> converted = converter.convert(program);
         assertThat(converted, is(notNullValue()));
         for (LinearProgramConstraint<Integer> constraint : converted.getConstraints()) {
-            assertThat(constraint.getConstraintType(), is(ConstraintType.GREATER_THAN_OR_EQUAL_TO));
+            assertThat(constraint.getConstraintType(), is(ConstraintType.LESS_THAN_OR_EQUAL_TO));
         }
     }
 
     @Test
     public void testWhenASignIsInvertedVariablesAreNegated() throws Exception {
         final LinearProgram<Integer> program = LinearProgramBuilder.withObjective(1, 2, 3)
-                .when(4, 5, 6).isLessThan(-4).maximize();
+                .when(4, 5, 6).isGreaterThan(-4).maximize();
         final LinearProgram<Integer> converted = converter.convert(program);
         assertThat(converted, is(notNullValue()));
         final LinearProgramConstraint<Integer> constraint = converted.getConstraints().iterator().next();
         assertThat(constraint, is(notNullValue()));
-        assertThat(constraint.getConstraintType(), is(ConstraintType.GREATER_THAN_OR_EQUAL_TO));
+        assertThat(constraint.getConstraintType(), is(ConstraintType.LESS_THAN_OR_EQUAL_TO));
         assertThat(constraint.getValue(), is(4));
         assertThat(constraint.getCoefficient(0), is(-4));
         assertThat(constraint.getCoefficient(1), is(-5));

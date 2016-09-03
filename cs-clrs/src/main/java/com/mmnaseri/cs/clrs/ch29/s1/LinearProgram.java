@@ -1,5 +1,6 @@
 package com.mmnaseri.cs.clrs.ch29.s1;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,10 +11,12 @@ public interface LinearProgram<E extends Number> {
 
     int variables();
 
-    Set<LinearProgramConstraint<E>> getConstraints();
+    List<LinearProgramConstraint<E>> getConstraints();
 
     LinearFunction<E> getObjective();
 
     boolean isSlack();
+
+    int getSlackness();
 
 }

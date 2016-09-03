@@ -3,6 +3,7 @@ package com.mmnaseri.cs.clrs.ch29.s1.dsl.impl;
 import com.mmnaseri.cs.clrs.ch29.s1.ConstraintType;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgram;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgramConstraint;
+import com.mmnaseri.cs.clrs.ch29.s1.dsl.ConstraintDefinition;
 import com.mmnaseri.cs.clrs.ch29.s1.dsl.ConstraintDefinitionConjunction;
 import com.mmnaseri.cs.clrs.ch29.s1.dsl.ConstraintValue;
 import com.mmnaseri.cs.clrs.ch29.s1.dsl.Start;
@@ -23,13 +24,15 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
     private final List<List<E>> constraints;
     private final List<ConstraintType> constraintTypes;
     private final List<E> values;
+    private final int slackness;
 
-    private LinearProgramBuilder(Class<E> type, List<E> objective, List<List<E>> constraints, List<ConstraintType> constraintTypes, List<E> values) {
+    private LinearProgramBuilder(Class<E> type, List<E> objective, List<List<E>> constraints, List<ConstraintType> constraintTypes, List<E> values, int slackness) {
         this.type = type;
         this.objective = objective;
         this.constraints = constraints;
         this.constraintTypes = constraintTypes;
         this.values = values;
+        this.slackness = slackness;
     }
 
     @SafeVarargs
@@ -49,12 +52,17 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
 
     @Override
     public LinearProgram<E> maximize() {
-        final Set<LinearProgramConstraint<E>> constraints = new HashSet<>();
+        final List<LinearProgramConstraint<E>> constraints = new ArrayList<>();
         for (int i = 0; i < this.constraints.size(); i++) {
             final List<E> coefficients = this.constraints.get(i);
             constraints.add(new DefaultLinearProgramConstraint<E>(type, coefficients, constraintTypes.get(i), values.get(i)));
         }
-        return new DefaultLinearProgram<>(constraints, new DefaultLinearFunction<>(type, objective));
+        return new DefaultLinearProgram<>(constraints, new DefaultLinearFunction<>(type, objective), slackness);
+    }
+
+    @Override
+    public ConstraintDefinition<E> andSlackness(int slackness) {
+        return new LinearProgramBuilder<>(type, objective, constraints, constraintTypes, values, slackness);
     }
 
     private static class ConstraintValueBuilder<E extends Number> implements ConstraintValue<E> {
@@ -74,11 +82,17 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
 
         @Override
         public ConstraintDefinitionConjunction<E> isGreaterThan(E value) {
+            if (builder.slackness > 0) {
+                throw new IllegalStateException("Cannot create a non-slack constraint for a linear program with slackness " + builder.slackness);
+            }
             return add(ConstraintType.GREATER_THAN_OR_EQUAL_TO, value);
         }
 
         @Override
         public ConstraintDefinitionConjunction<E> isLessThan(E value) {
+            if (builder.slackness > 0) {
+                throw new IllegalStateException("Cannot create a non-slack constraint for a linear program with slackness " + builder.slackness);
+            }
             return add(ConstraintType.LESS_THAN_OR_EQUAL_TO, value);
         }
 
@@ -89,7 +103,7 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
             constraints.add(coefficients);
             constraintTypes.add(type);
             values.add(value);
-            return new LinearProgramBuilder<>(builder.type, builder.objective, constraints, constraintTypes, values);
+            return new LinearProgramBuilder<>(builder.type, builder.objective, constraints, constraintTypes, values, builder.slackness);
         }
 
     }
@@ -107,7 +121,7 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
         Objects.requireNonNull(first);
         //noinspection unchecked
         final Class<E> type = (Class<E>) first.getClass();
-        return new LinearProgramBuilder<>(type, createList(first, rest), Collections.<List<E>>emptyList(), Collections.<ConstraintType>emptyList(), Collections.<E>emptyList());
+        return new LinearProgramBuilder<>(type, createList(first, rest), Collections.<List<E>>emptyList(), Collections.<ConstraintType>emptyList(), Collections.<E>emptyList(), 0);
     }
 
 }

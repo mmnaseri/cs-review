@@ -4,6 +4,7 @@ import com.mmnaseri.cs.clrs.ch29.s1.LinearFunction;
 import com.mmnaseri.cs.clrs.common.NumberUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,6 +49,11 @@ public class DefaultLinearFunction<E extends Number> implements LinearFunction<E
     }
 
     @Override
+    public List<E> getCoefficients() {
+        return Collections.unmodifiableList(coefficients);
+    }
+
+    @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         int i = 0;
@@ -57,16 +63,15 @@ public class DefaultLinearFunction<E extends Number> implements LinearFunction<E
                 continue;
             }
             if (builder.length() > 0) {
-                builder.append(" + ");
+                if (NumberUtils.compare(NumberUtils.zero(type), coefficient) > 0) {
+                    builder.append(" - ");
+                    coefficient = NumberUtils.negate(coefficient);
+                } else {
+                    builder.append(" + ");
+                }
             }
             if (!NumberUtils.one(type).equals(coefficient)) {
-                if (NumberUtils.compare(NumberUtils.zero(type), coefficient) > 0) {
-                    builder.append("(");
-                }
                 builder.append(coefficient);
-                if (NumberUtils.compare(NumberUtils.zero(type), coefficient) > 0) {
-                    builder.append(")");
-                }
                 builder.append(" * ");
             }
             builder.append("x_");

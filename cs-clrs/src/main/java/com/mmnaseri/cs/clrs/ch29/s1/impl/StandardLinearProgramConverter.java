@@ -8,7 +8,9 @@ import com.mmnaseri.cs.clrs.common.NumberUtils;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Milad Naseri (milad.naseri@cdk.com)
@@ -29,19 +31,19 @@ public class StandardLinearProgramConverter<E extends Number> implements LinearP
         if (original.isSlack()) {
             throw new IllegalArgumentException("Input is not a standard form linear program");
         }
-        final Set<LinearProgramConstraint<E>> constraints = new HashSet<>();
+        final List<LinearProgramConstraint<E>> constraints = new ArrayList<>();
         for (LinearProgramConstraint<E> constraint : original.getConstraints()) {
-            if (ConstraintType.LESS_THAN_OR_EQUAL_TO.equals(constraint.getConstraintType())) {
+            if (ConstraintType.GREATER_THAN_OR_EQUAL_TO.equals(constraint.getConstraintType())) {
                 final List<E> coefficients = new ArrayList<>();
                 for (int i = 0; i < constraint.size(); i++) {
                     coefficients.add(NumberUtils.negate(constraint.getCoefficient(i)));
                 }
-                constraints.add(new DefaultLinearProgramConstraint<>(type, coefficients, ConstraintType.GREATER_THAN_OR_EQUAL_TO, NumberUtils.negate(constraint.getValue())));
+                constraints.add(new DefaultLinearProgramConstraint<>(type, coefficients, ConstraintType.LESS_THAN_OR_EQUAL_TO, NumberUtils.negate(constraint.getValue())));
             } else {
                 constraints.add(constraint);
             }
         }
-        return new DefaultLinearProgram<>(constraints, original.getObjective());
+        return new DefaultLinearProgram<>(constraints, original.getObjective(), 0);
     }
 
 }

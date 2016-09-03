@@ -4,6 +4,7 @@ import com.mmnaseri.cs.clrs.ch29.s1.LinearFunction;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgram;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgramConstraint;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,14 +13,16 @@ import java.util.Set;
  */
 public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> {
 
-    private final Set<LinearProgramConstraint<E>> constraints;
+    private final List<LinearProgramConstraint<E>> constraints;
     private final LinearFunction<E> objective;
     private final boolean slack;
     private final int variables;
+    private final int slackness;
 
-    public DefaultLinearProgram(Set<LinearProgramConstraint<E>> constraints, LinearFunction<E> objective) {
+    public DefaultLinearProgram(List<LinearProgramConstraint<E>> constraints, LinearFunction<E> objective, int slackness) {
         this.constraints = constraints;
         this.objective = objective;
+        this.slackness = slackness;
         boolean slack = false;
         int variables = objective.size();
         if (variables == 0) {
@@ -46,7 +49,7 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
     }
 
     @Override
-    public Set<LinearProgramConstraint<E>> getConstraints() {
+    public List<LinearProgramConstraint<E>> getConstraints() {
         return constraints;
     }
 
@@ -58,6 +61,11 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
     @Override
     public boolean isSlack() {
         return slack;
+    }
+
+    @Override
+    public int getSlackness() {
+        return slackness;
     }
 
     @Override

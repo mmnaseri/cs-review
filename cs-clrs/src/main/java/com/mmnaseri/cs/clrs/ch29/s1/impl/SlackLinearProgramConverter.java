@@ -47,14 +47,14 @@ public class SlackLinearProgramConverter<E extends Number> implements LinearProg
                 coefficients.set(constraint.getCoefficients().size() + index, NumberUtils.one(type));
                 index ++;
             }
-            final LinearProgramConstraint<E> substitute = new DefaultLinearProgramConstraint<>(type, coefficients, ConstraintType.EQUAL_TO, constraint.getValue());
+            final LinearProgramConstraint<E> substitute = new DefaultLinearProgramConstraint<>(type, coefficients, ConstraintType.EQUAL_TO, constraint.getValue(), constraint.getOffset());
             constraints.add(substitute);
         }
         final List<E> objectiveCoefficients = new ArrayList<>(original.getObjective().getCoefficients());
         for (int i = 0; i < slackness; i++) {
             objectiveCoefficients.add(NumberUtils.zero(type));
         }
-        return new DefaultLinearProgram<>(constraints, new DefaultLinearFunction<>(type, objectiveCoefficients), slackness);
+        return new DefaultLinearProgram<>(constraints, new DefaultLinearFunction<>(type, objectiveCoefficients, original.getObjective().getOffset()), slackness);
     }
 
 }

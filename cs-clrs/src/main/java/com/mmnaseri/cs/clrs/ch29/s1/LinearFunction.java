@@ -17,4 +17,6 @@ public interface LinearFunction<E extends Number> {
 
     List<E> getCoefficients();
 
+    E getOffset();
+
 }

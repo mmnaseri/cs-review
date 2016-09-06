@@ -11,12 +11,11 @@ import java.util.List;
  */
 public class DefaultLinearProgramConstraint<E extends Number> extends DefaultLinearFunction<E> implements LinearProgramConstraint<E> {
 
-    private static final String REPRESENTATION = "%s %s %s";
     private final ConstraintType constraintType;
     private final E value;
 
-    public DefaultLinearProgramConstraint(Class<E> type, List<E> coefficients, ConstraintType constraintType, E value) {
-        super(type, coefficients);
+    public DefaultLinearProgramConstraint(Class<E> type, List<E> coefficients, ConstraintType constraintType, E value, E offset) {
+        super(type, coefficients, offset);
         this.constraintType = constraintType;
         this.value = value;
     }
@@ -34,12 +33,6 @@ public class DefaultLinearProgramConstraint<E extends Number> extends DefaultLin
     @Override
     public boolean isSlack() {
         return ConstraintType.EQUAL_TO.equals(constraintType);
-    }
-
-    @Override
-    public String toString() {
-        final String leftHand = super.toString();
-        return String.format(REPRESENTATION, leftHand, constraintType, value);
     }
 
 }

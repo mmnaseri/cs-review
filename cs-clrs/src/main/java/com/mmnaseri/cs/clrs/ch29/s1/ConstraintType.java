@@ -6,17 +6,22 @@ package com.mmnaseri.cs.clrs.ch29.s1;
  */
 public enum ConstraintType {
 
-    LESS_THAN_OR_EQUAL_TO("<="), GREATER_THAN_OR_EQUAL_TO(">="), EQUAL_TO("=");
+    LESS_THAN_OR_EQUAL_TO("<=", "\u2264"), GREATER_THAN_OR_EQUAL_TO(">=", "\u2265"), EQUAL_TO("=", "=");
 
     private final String representation;
+    private final String formatted;
 
-    ConstraintType(String representation) {
+    ConstraintType(String representation, String formatted) {
         this.representation = representation;
+        this.formatted = formatted;
     }
 
-    @Override
-    public String toString() {
+    public String getRepresentation() {
         return representation;
+    }
+
+    public String getFormatted() {
+        return formatted;
     }
 
 }

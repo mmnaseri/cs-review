@@ -17,11 +17,13 @@ public class DefaultLinearFunction<E extends Number> implements LinearFunction<E
     private final Class<E> type;
     private final int size;
     private final List<E> coefficients;
+    private final E offset;
 
-    public DefaultLinearFunction(Class<E> type, List<E> coefficients) {
+    public DefaultLinearFunction(Class<E> type, List<E> coefficients, E offset) {
         this.type = type;
         this.size = coefficients.size();
         this.coefficients = new ArrayList<>(coefficients);
+        this.offset = offset;
     }
 
     @Override
@@ -54,30 +56,8 @@ public class DefaultLinearFunction<E extends Number> implements LinearFunction<E
     }
 
     @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        int i = 0;
-        for (E coefficient : coefficients) {
-            if (NumberUtils.zero(type).equals(coefficient)) {
-                i ++;
-                continue;
-            }
-            if (builder.length() > 0) {
-                if (NumberUtils.compare(NumberUtils.zero(type), coefficient) > 0) {
-                    builder.append(" - ");
-                    coefficient = NumberUtils.negate(coefficient);
-                } else {
-                    builder.append(" + ");
-                }
-            }
-            if (!NumberUtils.one(type).equals(coefficient)) {
-                builder.append(coefficient);
-                builder.append(" * ");
-            }
-            builder.append("x_");
-            builder.append(i ++);
-        }
-        return builder.toString();
+    public E getOffset() {
+        return offset;
     }
 
 }

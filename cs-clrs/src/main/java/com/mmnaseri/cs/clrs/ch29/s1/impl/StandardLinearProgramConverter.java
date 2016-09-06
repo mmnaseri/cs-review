@@ -38,7 +38,7 @@ public class StandardLinearProgramConverter<E extends Number> implements LinearP
                 for (int i = 0; i < constraint.size(); i++) {
                     coefficients.add(NumberUtils.negate(constraint.getCoefficient(i)));
                 }
-                constraints.add(new DefaultLinearProgramConstraint<>(type, coefficients, ConstraintType.LESS_THAN_OR_EQUAL_TO, NumberUtils.negate(constraint.getValue())));
+                constraints.add(new DefaultLinearProgramConstraint<>(type, coefficients, ConstraintType.LESS_THAN_OR_EQUAL_TO, NumberUtils.negate(constraint.getValue()), NumberUtils.negate(constraint.getOffset())));
             } else {
                 constraints.add(constraint);
             }

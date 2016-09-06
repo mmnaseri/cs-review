@@ -5,7 +5,6 @@ import com.mmnaseri.cs.clrs.ch29.s1.LinearProgram;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgramConstraint;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Milad Naseri (milad.naseri@cdk.com)
@@ -66,18 +65,6 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
     @Override
     public int getSlackness() {
         return slackness;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("z = ");
-        builder.append(objective);
-        builder.append("\n");
-        for (LinearProgramConstraint<E> constraint : constraints) {
-            builder.append("\n").append(constraint);
-        }
-        return builder.append("\n").toString();
     }
 
 }

@@ -7,6 +7,6 @@ package com.mmnaseri.cs.clrs.ch29.s1.dsl;
 public interface ConstraintDefinition<E extends Number> {
 
     @SuppressWarnings("unchecked")
-    ConstraintValue<E> when(E first, E... rest);
+    ConstraintOffset<E> when(E first, E... rest);
 
 }

@@ -22,7 +22,7 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
         this.constraints = constraints;
         this.objective = objective;
         this.slackness = slackness;
-        boolean slack = false;
+        boolean slack = true;
         int variables = objective.size();
         if (variables == 0) {
             throw new IllegalArgumentException("Objective function cannot have zero variables");
@@ -31,7 +31,7 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
             throw new IllegalStateException("Unsolvable program");
         }
         for (LinearProgramConstraint<E> constraint : constraints) {
-            slack = slack || constraint.isSlack();
+            slack = slack && constraint.isSlack();
         }
         for (LinearProgramConstraint<E> constraint : constraints) {
             if (variables != constraint.size()) {
@@ -39,6 +39,9 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
             }
         }
         this.slack = slack;
+        if (!slack && slackness > 0) {
+            throw new IllegalStateException("This program is not completely slack, and yet has a slackness of " + slackness);
+        }
         this.variables = variables;
     }
 

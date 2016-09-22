@@ -17,6 +17,6 @@ public interface LinearProgram<E extends Number> {
 
     boolean isSlack();
 
-    int getSlackness();
+    List<Integer> getBasicVariables();
 
 }

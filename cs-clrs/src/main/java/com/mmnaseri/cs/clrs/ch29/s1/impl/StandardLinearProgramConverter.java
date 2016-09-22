@@ -43,7 +43,7 @@ public class StandardLinearProgramConverter<E extends Number> implements LinearP
                 constraints.add(constraint);
             }
         }
-        return new DefaultLinearProgram<>(constraints, original.getObjective(), 0);
+        return new DefaultLinearProgram<>(constraints, original.getObjective());
     }
 
 }

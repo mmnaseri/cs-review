@@ -3,6 +3,7 @@ package com.mmnaseri.cs.clrs.ch29.s1.impl;
 import com.mmnaseri.cs.clrs.ch29.s1.ConstraintType;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgram;
 import com.mmnaseri.cs.clrs.ch29.s1.dsl.impl.LinearProgramBuilder;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -26,12 +27,12 @@ public class SlackLinearProgramConverterTest {
     public void testSlackness() throws Exception {
         final LinearProgram<Integer> program = program();
         assertThat(program.isSlack(), is(false));
-        assertThat(program.getSlackness(), is(0));
+        assertThat(program.getBasicVariables(), is(Matchers.<Integer>empty()));
         assertThat(program.variables(), is(3));
         final LinearProgram<Integer> converted = converter.convert(program);
         assertThat(converted, is(notNullValue()));
         assertThat(converted.isSlack(), is(true));
-        assertThat(converted.getSlackness(), is(3));
+        assertThat(converted.getBasicVariables(), hasSize(3));
     }
 
     @Test

@@ -54,7 +54,11 @@ public class SlackLinearProgramConverter<E extends Number> implements LinearProg
         for (int i = 0; i < slackness; i++) {
             objectiveCoefficients.add(NumberUtils.zero(type));
         }
-        return new DefaultLinearProgram<>(constraints, new DefaultLinearFunction<>(type, objectiveCoefficients, original.getObjective().getOffset()), slackness);
+        final List<Integer> basicVariables = new ArrayList<>();
+        for (int i = original.variables(); i < original.variables() + slackness; i++) {
+            basicVariables.add(i);
+        }
+        return new DefaultLinearProgram<>(constraints, new DefaultLinearFunction<>(type, objectiveCoefficients, original.getObjective().getOffset()));
     }
 
 }

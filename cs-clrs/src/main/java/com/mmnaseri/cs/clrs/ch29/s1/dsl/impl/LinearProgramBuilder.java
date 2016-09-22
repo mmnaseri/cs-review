@@ -24,9 +24,8 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
     private final List<ConstraintType> constraintTypes;
     private final List<E> values;
     private final List<E> offsets;
-    private final int slackness;
 
-    private LinearProgramBuilder(Class<E> type, List<E> objective, E objectiveOffset, List<List<E>> constraints, List<ConstraintType> constraintTypes, List<E> values, List<E> offsets, int slackness) {
+    private LinearProgramBuilder(Class<E> type, List<E> objective, E objectiveOffset, List<List<E>> constraints, List<ConstraintType> constraintTypes, List<E> values, List<E> offsets) {
         this.type = type;
         this.objective = objective;
         this.objectiveOffset = objectiveOffset;
@@ -34,7 +33,6 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
         this.constraintTypes = constraintTypes;
         this.values = values;
         this.offsets = offsets;
-        this.slackness = slackness;
     }
 
     @SafeVarargs
@@ -59,17 +57,12 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
             final List<E> coefficients = this.constraints.get(i);
             constraints.add(new DefaultLinearProgramConstraint<>(type, coefficients, constraintTypes.get(i), values.get(i), offsets.get(i)));
         }
-        return new DefaultLinearProgram<>(constraints, new DefaultLinearFunction<>(type, objective, objectiveOffset), slackness);
+        return new DefaultLinearProgram<>(constraints, new DefaultLinearFunction<>(type, objective, objectiveOffset));
     }
 
     @Override
-    public ConstraintDefinition<E> andSlackness(int slackness) {
-        return new LinearProgramBuilder<>(type, objective, objectiveOffset, constraints, constraintTypes, values, offsets, slackness);
-    }
-
-    @Override
-    public Slackness<E> offsetBy(E offset) {
-        return new LinearProgramBuilder<>(type, objective, offset, constraints, constraintTypes, values, offsets, slackness);
+    public ConstraintDefinition<E> offsetBy(E offset) {
+        return new LinearProgramBuilder<>(type, objective, offset, constraints, constraintTypes, values, offsets);
     }
 
     private static class ConstraintValueBuilder<E extends Number> implements ConstraintOffset<E> {
@@ -95,17 +88,11 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
 
         @Override
         public ConstraintDefinitionConjunction<E> isGreaterThan(E value) {
-            if (builder.slackness > 0) {
-                throw new IllegalStateException("Cannot create a non-slack constraint for a linear program with slackness " + builder.slackness);
-            }
             return add(ConstraintType.GREATER_THAN_OR_EQUAL_TO, value);
         }
 
         @Override
         public ConstraintDefinitionConjunction<E> isLessThan(E value) {
-            if (builder.slackness > 0) {
-                throw new IllegalStateException("Cannot create a non-slack constraint for a linear program with slackness " + builder.slackness);
-            }
             return add(ConstraintType.LESS_THAN_OR_EQUAL_TO, value);
         }
 
@@ -118,7 +105,7 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
             constraintTypes.add(type);
             values.add(value);
             offsets.add(offset);
-            return new LinearProgramBuilder<>(builder.type, builder.objective, builder.objectiveOffset, constraints, constraintTypes, values, offsets, builder.slackness);
+            return new LinearProgramBuilder<>(builder.type, builder.objective, builder.objectiveOffset, constraints, constraintTypes, values, offsets);
         }
 
         @Override
@@ -141,7 +128,7 @@ public class LinearProgramBuilder<E extends Number> implements Start<E>, Constra
         Objects.requireNonNull(first);
         //noinspection unchecked
         final Class<E> type = (Class<E>) first.getClass();
-        return new LinearProgramBuilder<>(type, createList(first, rest), NumberUtils.zero(type), Collections.<List<E>>emptyList(), Collections.<ConstraintType>emptyList(), Collections.<E>emptyList(), Collections.<E>emptyList(), 0);
+        return new LinearProgramBuilder<>(type, createList(first, rest), NumberUtils.zero(type), Collections.<List<E>>emptyList(), Collections.<ConstraintType>emptyList(), Collections.<E>emptyList(), Collections.<E>emptyList());
     }
 
 }

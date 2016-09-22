@@ -3,7 +3,9 @@ package com.mmnaseri.cs.clrs.ch29.s1.impl;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearFunction;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgram;
 import com.mmnaseri.cs.clrs.ch29.s1.LinearProgramConstraint;
+import com.mmnaseri.cs.clrs.common.NumberUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,12 +18,11 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
     private final LinearFunction<E> objective;
     private final boolean slack;
     private final int variables;
-    private final int slackness;
+    private final List<Integer> basicVariables;
 
-    public DefaultLinearProgram(List<LinearProgramConstraint<E>> constraints, LinearFunction<E> objective, int slackness) {
+    public DefaultLinearProgram(List<LinearProgramConstraint<E>> constraints, LinearFunction<E> objective) {
         this.constraints = constraints;
         this.objective = objective;
-        this.slackness = slackness;
         boolean slack = true;
         int variables = objective.size();
         if (variables == 0) {
@@ -38,10 +39,15 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
                 throw new IllegalArgumentException("Constraints must all have the same number of variables");
             }
         }
-        this.slack = slack;
-        if (!slack && slackness > 0) {
-            throw new IllegalStateException("This program is not completely slack, and yet has a slackness of " + slackness);
+        basicVariables = new ArrayList<>();
+        List<E> coefficients = objective.getCoefficients();
+        for (int i = 0; i < coefficients.size(); i++) {
+            final E coefficient = coefficients.get(i);
+            if (NumberUtils.zero(coefficient).equals(coefficient)) {
+                basicVariables.add(i);
+            }
         }
+        this.slack = slack;
         this.variables = variables;
     }
 
@@ -66,8 +72,8 @@ public class DefaultLinearProgram<E extends Number> implements LinearProgram<E> 
     }
 
     @Override
-    public int getSlackness() {
-        return slackness;
+    public List<Integer> getBasicVariables() {
+        return basicVariables;
     }
 
 }

@@ -247,6 +247,34 @@ public final class NumberUtils {
 
     @SuppressWarnings("unchecked")
     @Quality(Stage.UNTESTED)
+    public static <E extends Number> E zero(E sample) {
+        if (sample instanceof Float) {
+            return (E) (Float) 0F;
+        } else if (sample instanceof Long) {
+            return (E) (Long) 0L;
+        } else if (sample instanceof Double) {
+            return (E) (Double) 0D;
+        } else if (sample instanceof Short) {
+            return (E) (Short) ((Integer) 0).shortValue();
+        } else if (sample instanceof Byte) {
+            return (E) (Byte) ((Integer) 0).byteValue();
+        } else if (sample instanceof Integer) {
+            return (E) (Integer) 0;
+        } else if (sample instanceof AtomicLong) {
+            return (E) new AtomicLong(0);
+        } else if (sample instanceof AtomicInteger) {
+            return (E) new AtomicInteger(0);
+        } else if (sample instanceof BigDecimal) {
+            return (E) BigDecimal.ZERO;
+        } else if (sample instanceof BigInteger) {
+            return (E) BigInteger.ZERO;
+        } else {
+            throw new UnsupportedOperationException("Unsupported number type");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
     public static <E extends Number> E one(Class<E> type) {
         if (Float.class.equals(type)) {
             return (E) (Float) 1F;
@@ -267,6 +295,34 @@ public final class NumberUtils {
         } else if (BigDecimal.class.equals(type)) {
             return (E) BigDecimal.ONE;
         } else if (BigInteger.class.equals(type)) {
+            return (E) BigInteger.ONE;
+        } else {
+            throw new UnsupportedOperationException("Unsupported number type");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Quality(Stage.UNTESTED)
+    public static <E extends Number> E one(E sample) {
+        if (sample instanceof Float) {
+            return (E) (Float) 1F;
+        } else if (sample instanceof Long) {
+            return (E) (Long) 1L;
+        } else if (sample instanceof Double) {
+            return (E) (Double) 1D;
+        } else if (sample instanceof Short) {
+            return (E) (Short) ((Integer) 1).shortValue();
+        } else if (sample instanceof Byte) {
+            return (E) (Byte) ((Integer) 1).byteValue();
+        } else if (sample instanceof Integer) {
+            return (E) (Integer) 1;
+        } else if (sample instanceof AtomicLong) {
+            return (E) new AtomicLong(1);
+        } else if (sample instanceof AtomicInteger) {
+            return (E) new AtomicInteger(1);
+        } else if (sample instanceof BigDecimal) {
+            return (E) BigDecimal.ONE;
+        } else if (sample instanceof BigInteger) {
             return (E) BigInteger.ONE;
         } else {
             throw new UnsupportedOperationException("Unsupported number type");

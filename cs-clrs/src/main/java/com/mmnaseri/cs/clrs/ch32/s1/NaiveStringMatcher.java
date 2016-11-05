@@ -18,7 +18,7 @@ public class NaiveStringMatcher extends AbstractStringMatcher {
 
     @Complexity(value = "O((n - m + 1)m) or simply O(mn)", explanation = "m is the length of the needle, and n is the length of the haystack")
     @Override
-    protected Integer[] findIndexOf(String needle, String haystack) {
+    protected List<Integer> findIndexOf(String needle, String haystack) {
         final List<Integer> indices = new ArrayList<>();
         for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
             if (haystack.charAt(i) == needle.charAt(0)) {
@@ -34,7 +34,7 @@ public class NaiveStringMatcher extends AbstractStringMatcher {
                 }
             }
         }
-        return indices.toArray(new Integer[indices.size()]);
+        return indices;
     }
 
 }

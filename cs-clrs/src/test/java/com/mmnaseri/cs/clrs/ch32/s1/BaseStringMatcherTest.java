@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.*;
  * @since 1.0 (11/4/16, 6:35 PM)
  */
 public abstract class BaseStringMatcherTest {
+
     protected abstract StringMatcher getStringMatcher();
 
     @Test(expectedExceptions = NullPointerException.class, expectedExceptionsMessageRegExp = ".*haystack.*")

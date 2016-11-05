@@ -1,5 +1,6 @@
 package com.mmnaseri.cs.clrs.ch32.s1;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,8 +16,12 @@ public abstract class AbstractStringMatcher implements StringMatcher {
         if (needle.isEmpty()) {
             throw new IllegalArgumentException("The needle cannot be empty");
         }
-        return findIndexOf(needle, haystack);
+        if (haystack.isEmpty()) {
+            return new Integer[0];
+        }
+        final List<Integer> indices = findIndexOf(needle, haystack);
+        return indices.toArray(new Integer[indices.size()]);
     }
 
-    protected abstract Integer[] findIndexOf(String needle, String haystack);
+    protected abstract List<Integer> findIndexOf(String needle, String haystack);
 }

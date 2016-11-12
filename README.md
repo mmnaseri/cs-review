@@ -10,7 +10,8 @@ What's covered
 
 ### CLRS
 
-From the esteemed Introduction to Algorithms book by Cormen, Leiserson, Rivest, and Stein:
+From the esteemed "**Introduction to Algorithms (3rd Edition)**" *(ISBN-13: 978-0262033848)*
+book by Cormen, Leiserson, Rivest, and Stein:
 
 Chapters missing implementation:
 
@@ -38,6 +39,17 @@ Chapters missing implementation:
  
 > As you might have noticed from the above, I mostly got lazy when it came to the selected topics. I might one day get back to it and implement them properly :-)
 
+
+### Skiena
+
+From the book "**The Algorithm Design Manual (2nd Edition)**" *(ISBN-13: 978-1848000698)* by Steven S. Skiena.
+
+I will only implement things that are not already covered in the CLRS book (or things I was too lazy
+to implement when reading the CLRS book), as I am covering this book as a supplement to my knowledge
+from the CLRS book.
+
+I will try to stick to the same level of testing and quality assurance as with the CLRS implementations, and will
+continue to annotate all classes accordingly.
 
 The Annotations
 ---------------

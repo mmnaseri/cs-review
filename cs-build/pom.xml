@@ -30,6 +30,7 @@
         <module>../cs-parent</module>
         <module>../cs-qa</module>
         <module>../cs-clrs</module>
+        <module>../cs-skiena</module>
     </modules>
 
     <properties>

@@ -13,6 +13,9 @@ public class PostOrderTreeWalk<E, N extends TreeNode<E>> implements TreeWalk<E, 
 
     @Override
     public <C extends TreeWalkCallback<E, N>> C perform(N root, C callback) {
+        if (root == null) {
+            return null;
+        }
         for (TreeNode<E> child : root.getChildren()) {
             if (child != null) {
                 //noinspection unchecked

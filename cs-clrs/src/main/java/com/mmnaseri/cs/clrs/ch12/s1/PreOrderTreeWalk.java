@@ -13,6 +13,9 @@ public class PreOrderTreeWalk<E, N extends TreeNode<E>> implements TreeWalk<E, N
 
     @Override
     public <C extends TreeWalkCallback<E, N>> C perform(N root, C callback) {
+        if (root == null) {
+            return null;
+        }
         callback.apply(root);
         for (TreeNode<E> child : root.getChildren()) {
             if (child != null) {

@@ -50,6 +50,9 @@ public abstract class AbstractBinarySearchTree<E, N extends BinaryTreeNode<E>> e
 
     @Override
     public N minimum(N root) {
+        if (root == null) {
+            return null;
+        }
         return root.getLeftChild() == null ? root : minimum((N) root.getLeftChild());
     }
 
@@ -60,6 +63,9 @@ public abstract class AbstractBinarySearchTree<E, N extends BinaryTreeNode<E>> e
 
     @Override
     public N maximum(N root) {
+        if (root == null) {
+            return null;
+        }
         return root.getRightChild() == null ? root : maximum((N) root.getRightChild());
     }
 

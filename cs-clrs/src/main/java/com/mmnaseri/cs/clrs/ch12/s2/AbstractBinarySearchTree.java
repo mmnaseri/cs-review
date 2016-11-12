@@ -133,6 +133,4 @@ public abstract class AbstractBinarySearchTree<E, N extends BinaryTreeNode<E>> e
 
     abstract protected N insert(N root, E value);
 
-    abstract protected void delete(N node);
-
 }

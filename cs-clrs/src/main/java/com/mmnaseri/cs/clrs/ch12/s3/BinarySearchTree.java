@@ -42,7 +42,7 @@ public class BinarySearchTree<E, N extends BinaryTreeNode<E>> extends AbstractBi
     }
 
     @Override
-    protected void delete(N node) {
+    public void delete(N node) {
         if (node.getLeftChild() == null) {
             transplant(node, (N) node.getRightChild());
         } else if (node.getRightChild() == null) {

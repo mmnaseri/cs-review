@@ -40,4 +40,6 @@ public interface SearchTree<E, N extends TreeNode<E>> {
 
     N delete(E value);
 
+    void delete(N node);
+
 }

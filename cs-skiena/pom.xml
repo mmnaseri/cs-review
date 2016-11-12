@@ -29,6 +29,11 @@
             <artifactId>cs-qa</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cs-clrs</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

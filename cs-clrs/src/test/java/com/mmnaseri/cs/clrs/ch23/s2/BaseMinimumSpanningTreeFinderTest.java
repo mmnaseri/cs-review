@@ -1,6 +1,6 @@
 package com.mmnaseri.cs.clrs.ch23.s2;
 
-import com.mmnaseri.cs.clrs.ch22.EdgeColor;
+import com.mmnaseri.cs.clrs.ch22.GraphColor;
 import com.mmnaseri.cs.clrs.ch22.GraphVertexVisitorAdapter;
 import com.mmnaseri.cs.clrs.ch22.s1.Edge;
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
@@ -54,7 +54,7 @@ public abstract class BaseMinimumSpanningTreeFinderTest {
         visitor.visit(tree, new GraphVertexVisitorAdapter<WeightedEdgeDetails, VertexDetails>() {
             @Override
             public void beforeExploration(Graph<WeightedEdgeDetails, VertexDetails> graph, Vertex<VertexDetails> vertex) {
-                assertThat(vertex.getProperty("color", EdgeColor.class), isIn(Arrays.asList(EdgeColor.WHITE, EdgeColor.GREY)));
+                assertThat(vertex.getProperty("color", GraphColor.class), isIn(Arrays.asList(GraphColor.WHITE, GraphColor.GREY)));
             }
         });
     }

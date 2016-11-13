@@ -1,6 +1,6 @@
 package com.mmnaseri.cs.clrs.ch22.s2;
 
-import com.mmnaseri.cs.clrs.ch22.EdgeColor;
+import com.mmnaseri.cs.clrs.ch22.GraphColor;
 import com.mmnaseri.cs.clrs.ch22.GraphVertexVisitor;
 import com.mmnaseri.cs.clrs.ch22.GraphVisitor;
 import com.mmnaseri.cs.clrs.ch22.s1.*;
@@ -31,7 +31,7 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
         final Graph<E, V> copy = GraphUtils.copy(graph);
         final List<Vertex<V>> vertices = copy.getVertices();
         for (Vertex<V> vertex : vertices) {
-            vertex.setProperty("color", EdgeColor.WHITE);
+            vertex.setProperty("color", GraphColor.WHITE);
             vertex.setProperty("distance", Integer.MAX_VALUE);
             vertex.setProperty("parent", null);
         }
@@ -39,7 +39,7 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
             Collections.sort(vertices, comparator);
         }
         for (Vertex<V> vertex : vertices) {
-            if (EdgeColor.WHITE.equals(vertex.getProperty("color", EdgeColor.class))) {
+            if (GraphColor.WHITE.equals(vertex.getProperty("color", GraphColor.class))) {
                 visitSubGraph(copy, visitor, vertex);
             }
         }
@@ -54,7 +54,7 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
             if (vertex.getIndex() == start) {
                 continue;
             }
-            vertex.setProperty("color", EdgeColor.WHITE);
+            vertex.setProperty("color", GraphColor.WHITE);
             vertex.setProperty("distance", Integer.MAX_VALUE);
             vertex.setProperty("parent", null);
         }
@@ -64,7 +64,7 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
     }
 
     private void visitSubGraph(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor, Vertex<V> startingVertex) {
-        startingVertex.setProperty("color", EdgeColor.GREY);
+        startingVertex.setProperty("color", GraphColor.GREY);
         startingVertex.setProperty("distance", 0);
         startingVertex.setProperty("parent", null);
         final Queue<Vertex<V>> queue = new ArrayDeque<>();
@@ -73,14 +73,15 @@ public class BreadthFirstGraphVisitor<E extends EdgeDetails, V extends VertexDet
             final Vertex<V> vertex = queue.poll();
             visitor.beforeExploration(graph, vertex);
             for (Vertex<V> neighbor : graph.getNeighbors(vertex)) {
-                if (EdgeColor.WHITE.equals(neighbor.getProperty("color", EdgeColor.class))) {
-                    neighbor.setProperty("color", EdgeColor.GREY);
+                visitor.visitEdge(graph, graph.edge(vertex.getIndex(), neighbor.getIndex()));
+                if (GraphColor.WHITE.equals(neighbor.getProperty("color", GraphColor.class))) {
+                    neighbor.setProperty("color", GraphColor.GREY);
                     neighbor.setProperty("distance", vertex.getProperty("distance", Integer.class) + 1);
                     neighbor.setProperty("parent", vertex);
                     queue.add(neighbor);
                 }
             }
-            vertex.setProperty("color", EdgeColor.BLACK);
+            vertex.setProperty("color", GraphColor.BLACK);
             visitor.afterExploration(graph, vertex);
         }
     }

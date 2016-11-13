@@ -1,4 +1,4 @@
-package com.mmnaseri.cs.skiena.ch04.s9;
+package com.mmnaseri.cs.skiena.ch04.s9.ss1;
 
 import org.testng.annotations.Test;
 

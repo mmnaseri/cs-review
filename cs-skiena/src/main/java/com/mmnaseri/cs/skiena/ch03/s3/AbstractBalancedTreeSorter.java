@@ -1,7 +1,5 @@
 package com.mmnaseri.cs.skiena.ch03.s3;
 
-import com.mmnaseri.cs.clrs.ch10.s4.TreeNode;
-import com.mmnaseri.cs.clrs.ch12.s2.SearchTree;
 import com.mmnaseri.cs.clrs.ch13.s3.RedBlackTree;
 import com.mmnaseri.cs.clrs.common.Sorter;
 

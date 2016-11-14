@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -24,9 +24,8 @@ public class NaiveMerger<E> implements Merger<E> {
     @SafeVarargs
     @Override
     public final List<E> merge(List<E>... lists) {
-        int done = 0;
         final List<E> result = new ArrayList<>();
-        while (done < lists.length) {
+        while (true) {
             int which = -1;
             for (int i = 0; i < lists.length; i++) {
                 final List<E> list = lists[i];
@@ -36,9 +35,8 @@ public class NaiveMerger<E> implements Merger<E> {
             }
             if (which >= 0) {
                 result.add(lists[which].remove(0));
-                if (lists[which].isEmpty()) {
-                    done++;
-                }
+            } else {
+                break;
             }
         }
         return result;

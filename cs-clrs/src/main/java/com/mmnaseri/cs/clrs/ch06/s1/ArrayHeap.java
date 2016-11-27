@@ -80,7 +80,7 @@ public class ArrayHeap<E extends Comparable<E>> implements PriorityQueue<E>, Ite
         data[j] = temp;
     }
 
-    public void heapify(int index) {
+    private void heapify(int index) {
         final int left = left(index);
         final int right = right(index);
         int value;

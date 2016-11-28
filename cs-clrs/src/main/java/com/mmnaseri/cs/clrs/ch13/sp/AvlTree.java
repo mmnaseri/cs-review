@@ -38,13 +38,7 @@ public class AvlTree<E> extends RotatingBinarySearchTree<E, AvlTreeNode<E>> {
                 current = current.getRightChild();
             }
         }
-        if (parent == null) {
-            setRoot(node);
-        } else if (lessThan(value, parent.getValue())) {
-            parent.setLeftChild(node);
-        } else {
-            parent.setRightChild(node);
-        }
+        postInsert(value, node, parent);
         insertFix(node);
         return node;
     }

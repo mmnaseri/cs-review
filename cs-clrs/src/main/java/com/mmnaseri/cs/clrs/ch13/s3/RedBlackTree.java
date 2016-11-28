@@ -14,7 +14,7 @@ import java.util.Comparator;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/19/15, 11:55 PM)
  */
-@Quality(value = Stage.TESTED)
+@Quality(value = Stage.BUGGY)
 @Monitored(MonitoredRedBlackTree.class)
 public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNode<E>> {
 
@@ -43,19 +43,13 @@ public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNod
             }
         }
         node.setParent(parent);
-        if (parent == null) {
-            setRoot(node);
-        } else if (lessThan(value, parent.getValue())) {
-            parent.setLeftChild(node);
-        } else {
-            parent.setRightChild(node);
-        }
         node.setColor(NodeColor.RED);
+        postInsert(value, node, parent);
         insertFix(node);
         return node;
     }
 
-    protected void insertFix(RedBlackTreeNode<E> node) {
+    private void insertFix(RedBlackTreeNode<E> node) {
         while (!node.isRoot() && node.getParent().getColor().equals(NodeColor.RED)) {
             if (node.getParent() == node.getParent().getParent().getLeftChild()) {
                 final RedBlackTreeNode<E> uncle = node.getParent().getParent().getRightChild();
@@ -114,7 +108,9 @@ public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNod
             originalColor = current.getColor();
             target = current.getRightChild();
             if (node == current.getParent()) {
-                target.setParent(current);
+                if (target != null) {
+                    target.setParent(current);
+                }
             } else {
                 transplant(current, current.getRightChild());
                 current.setRightChild(node.getRightChild());

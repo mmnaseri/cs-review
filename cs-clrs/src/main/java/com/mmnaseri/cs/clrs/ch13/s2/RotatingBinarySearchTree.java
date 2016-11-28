@@ -19,21 +19,23 @@ public class RotatingBinarySearchTree<E, N extends BinaryTreeNode<E>> extends Bi
         super(comparator, factory);
     }
 
+    protected void postInsert(E value, N node, N parent) {
+        if (parent == null) {
+            setRoot(node);
+        } else if (lessThan(value, parent.getValue())) {
+            parent.setLeftChild(node);
+        } else {
+            parent.setRightChild(node);
+        }
+    }
+
     protected void rotateRight(N target) {
         //noinspection unchecked
         final N substitute = (N) target.getLeftChild();
         if (substitute == null) {
             throw new IllegalStateException();
         }
-        if (target.getParent() != null) {
-            if (target.getParent().getRightChild() == target) {
-                target.getParent().setRightChild(substitute);
-            } else {
-                target.getParent().setLeftChild(substitute);
-            }
-        } else {
-            setRoot(substitute);
-        }
+        initiateRotation(target, substitute);
         target.setLeftChild(substitute.getRightChild());
         substitute.setParent(target.getParent());
         substitute.setRightChild(target);
@@ -46,6 +48,14 @@ public class RotatingBinarySearchTree<E, N extends BinaryTreeNode<E>> extends Bi
         if (substitute == null) {
             throw new IllegalStateException();
         }
+        initiateRotation(target, substitute);
+        target.setRightChild(substitute.getLeftChild());
+        substitute.setParent(target.getParent());
+        substitute.setLeftChild(target);
+        target.setParent(substitute);
+    }
+
+    private void initiateRotation(N target, N substitute) {
         if (target.getParent() != null) {
             if (target.getParent().getRightChild() == target) {
                 target.getParent().setRightChild(substitute);
@@ -55,10 +65,6 @@ public class RotatingBinarySearchTree<E, N extends BinaryTreeNode<E>> extends Bi
         } else {
             setRoot(substitute);
         }
-        target.setRightChild(substitute.getLeftChild());
-        substitute.setParent(target.getParent());
-        substitute.setLeftChild(target);
-        target.setParent(substitute);
     }
 
 }

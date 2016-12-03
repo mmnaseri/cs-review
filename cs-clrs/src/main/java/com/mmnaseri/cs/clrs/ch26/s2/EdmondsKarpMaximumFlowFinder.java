@@ -1,10 +1,11 @@
 package com.mmnaseri.cs.clrs.ch26.s2;
 
 import com.mmnaseri.cs.clrs.ch22.GraphVertexVisitorAdapter;
+import com.mmnaseri.cs.clrs.ch22.GraphVisitor;
 import com.mmnaseri.cs.clrs.ch22.s1.Graph;
 import com.mmnaseri.cs.clrs.ch22.s1.Vertex;
 import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
-import com.mmnaseri.cs.clrs.ch22.s2.BreadthFirstGraphVisitor;
+import com.mmnaseri.cs.clrs.ch22.s3.DepthFirstGraphVisitor;
 import com.mmnaseri.cs.clrs.ch26.s1.FlowEdgeDetails;
 import com.mmnaseri.cs.clrs.common.ParameterizedTypeReference;
 import com.mmnaseri.cs.qa.annotation.Quality;
@@ -21,7 +22,7 @@ import java.util.List;
 @Quality(Stage.TESTED)
 public class EdmondsKarpMaximumFlowFinder<E extends FlowEdgeDetails, V extends VertexDetails> extends AbstractFordFulkersonMaximumFlowFinder<E, V> {
 
-    private final BreadthFirstGraphVisitor<FlowEdgeDetails, V> visitor = new BreadthFirstGraphVisitor<>();
+    private final GraphVisitor<FlowEdgeDetails, V> visitor = new DepthFirstGraphVisitor<>();
 
     @Override
     protected List<Integer> findAugmentingPath(Graph<FlowEdgeDetails, V> residualNetwork, int source, int destination) {

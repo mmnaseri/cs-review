@@ -8,6 +8,8 @@ import java.util.List;
  */
 public interface ContextFreeGrammar {
 
+    GrammarRule getStartingRule();
+
     List<GrammarRule> getRules();
 
 }

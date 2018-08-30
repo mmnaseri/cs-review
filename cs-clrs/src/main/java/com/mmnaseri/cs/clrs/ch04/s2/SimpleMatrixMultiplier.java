@@ -4,6 +4,7 @@ import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.MatrixFactory;
 import com.mmnaseri.cs.clrs.common.NumberUtils;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrixFactory;
+import com.mmnaseri.cs.qa.annotation.Complexity;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -24,6 +25,7 @@ public class SimpleMatrixMultiplier implements MatrixMultiplier {
         this.factory = factory;
     }
 
+    @Complexity(value = "O(N^3)")
     @Override
     public <E extends Number> Matrix<E> multiply(Matrix<E> first, Matrix<E> second) {
         if (first.getColumns() != second.getRows()) {

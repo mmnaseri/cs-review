@@ -1,6 +1,5 @@
 package com.mmnaseri.cs.clrs.ch04.s1;
 
-import com.mmnaseri.cs.qa.annotation.Action;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -8,8 +7,6 @@ import com.mmnaseri.cs.qa.annotation.Stage;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 1:54 AM)
  */
-@Action(value = "Revisit", explanation = "Read this code again and figure out why divide and conquer has " +
-        "splitted the code into three parts. I need to understand why the findAcrossMiddle returns the sum of leftSum and rightSum.")
 @Quality(Stage.TESTED)
 public class RecursiveMaximumSubArrayFinder implements MaximumSubArrayFinder {
 

@@ -9,16 +9,6 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 import java.util.Comparator;
 
 /**
- * Bubble sort iterates on the elements of the array from the beginning and compares each element with the
- * next element. If the element is larger, it swaps the elements. After one round of iteration, the largest
- * element is the last element of the array.
- *
- * Now that the last element is sorted, we need to iterate again till the next largest element is positioned correctly.
- * We continue this operation till all elements are sorted. If all elements are reversely sorted, number of iterations
- * times the number of swaps will become N square which is the worst case scenario.
- *
- * The following code implements the algorithm from the end to the beginning with two for loops.
- *
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 3:30 AM)
  */

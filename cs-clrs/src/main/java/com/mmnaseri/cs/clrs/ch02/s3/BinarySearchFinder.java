@@ -45,10 +45,10 @@ public class BinarySearchFinder<E extends Comparable<E>> implements Finder<E> {
         } else if (to - from > 1) {
             if (comparison < 0) {
                 //if the item is smaller than the middle, try searching in the left half of the array
-                return find(items, needle, from, mid);
+                return find(items, needle, 0, mid);
             } else {
                 //otherwise, try searching the right half of the array
-                return find(items, needle, mid+1, to);
+                return find(items, needle, mid, to);
             }
         } else {
             //if the size of the search array is small enough that only contains a single item or less and we still haven't

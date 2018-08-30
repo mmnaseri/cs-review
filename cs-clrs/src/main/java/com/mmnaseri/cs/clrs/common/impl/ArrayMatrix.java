@@ -7,7 +7,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 11:09 PM)
  */
-@Quality(Stage.TESTED)
+@Quality(Stage.UNTESTED)
 public class ArrayMatrix<E> extends AbstractMatrix<E> {
 
     private final Object[][] values;

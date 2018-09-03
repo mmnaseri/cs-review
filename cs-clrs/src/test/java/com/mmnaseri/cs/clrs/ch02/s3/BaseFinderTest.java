@@ -25,6 +25,12 @@ public abstract class BaseFinderTest {
     }
 
     @Test
+    public void testFindingItemInArrayOfSmallSize() throws Exception {
+        assertThat(getFinder().find(2, 1, 2), is(1));
+        assertThat(getFinder().find(3, 3, 4), is(0));
+    }
+
+    @Test
     public void testFindingFromAnEmptyList() throws Exception {
         assertThat(getFinder().find(0), is(-1));
     }

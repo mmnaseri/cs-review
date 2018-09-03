@@ -60,4 +60,23 @@ public class ArrayHeapTest extends BaseHeapTest {
         assertThat(heap.isEmpty(), is(true));
     }
 
+    @Test
+    public void testAddingEqualItemsToTheHeap() throws Exception {
+        final Heap<String> heap = new ArrayHeap<>(new MinHeapProperty<String>(), 0);
+        assertThat(heap.size(), is(0));
+        heap.add("b");
+        assertThat(heap.peek(), is("b"));
+        heap.add("a");
+        assertThat(heap.peek(), is("a"));
+        heap.add("c");
+        assertThat(heap.peek(), is("a"));
+        heap.add("a");
+        assertThat(heap.peek(), is("a"));
+        assertThat(heap.pop(), is("a"));
+        assertThat(heap.pop(), is("a"));
+        assertThat(heap.pop(), is("b"));
+        assertThat(heap.pop(), is("c"));
+        assertThat(heap.isEmpty(), is(true));
+    }
+
 }

@@ -86,9 +86,9 @@ public class LinearSelector<E extends Comparable<E>> implements Selector<E> {
         if (pivot == order) {
             return pivot;
         } else if (order < pivot) {
-            return select(items, positions, from, pivot, order);
+            return select(items, positions, from, pivot-1, order);
         } else {
-            return select(items, positions, pivot, to, order);
+            return select(items, positions, pivot+1, to, order);
         }
     }
 

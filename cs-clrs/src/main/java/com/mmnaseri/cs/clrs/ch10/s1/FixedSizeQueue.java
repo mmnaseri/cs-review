@@ -50,7 +50,7 @@ public class FixedSizeQueue<E> {
         size --;
         final Object object = items[tail];
         items[tail] = null;
-        if (tail == items.length) {
+        if (tail == items.length - 1) {
             tail = -1;
         }
         //noinspection unchecked

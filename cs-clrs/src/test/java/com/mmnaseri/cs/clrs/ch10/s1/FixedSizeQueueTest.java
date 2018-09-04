@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.fail;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
@@ -54,6 +55,21 @@ public class FixedSizeQueueTest {
             assertThat(queue.getSize(), is(items.length - i - 1));
         }
         assertThat(queue.isEmpty(), is(true));
+    }
+
+    @Test
+    public void testQueueCanRecoverAfterExtremeShrinkage() throws Exception {
+        final FixedSizeQueue<Integer> queue = new FixedSizeQueue<>(1);
+        assertThat(queue.isEmpty(), is(true));
+        try {
+            queue.dequeue();
+            fail("dequeue operation should not be possible when the queue is empty");
+        } catch (Exception e) {
+            final int value = 1;
+            queue.enqueue(value);
+            assertThat(queue.dequeue(),is(value));
+        }
+
     }
 
     @Test(dataProvider = "queueExpansionDataProvider")

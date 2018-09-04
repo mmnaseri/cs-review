@@ -35,7 +35,9 @@ public class FixedSizeStack<E> {
             throw new IllegalStateException("Stack is empty");
         }
         //noinspection unchecked
-        return (E) items[-- top];
+        final E item = (E) items[--top];
+        items[top] = null; // to avoid loitering
+        return item;
     }
 
     public int getSize() {

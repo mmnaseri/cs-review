@@ -23,10 +23,10 @@ public class FixedSizeQueueTest {
     @DataProvider
     public Object[][] queueExpansionDataProvider() {
         return new Object[][]{
-            new Object[]{new Integer[]{8, 7, 6, 5, 4}},
-            new Object[]{new Integer[]{null, null, null, null}},
-            new Object[]{new Integer[]{1, 2, 3, 9, 7, 6}},
-            new Object[]{new Integer[]{Integer.MAX_VALUE, 0, 0, 0, 0, 0, 0, 0}},
+                new Object[]{new Integer[]{8, 7, 6, 5, 4}},
+                new Object[]{new Integer[]{null, null, null, null}},
+                new Object[]{new Integer[]{1, 2, 3, 9, 7, 6}},
+                new Object[]{new Integer[]{Integer.MAX_VALUE, 0, 0, 0, 0, 0, 0, 0}},
         };
     }
 
@@ -59,7 +59,11 @@ public class FixedSizeQueueTest {
 
     @Test
     public void testQueueCanRecoverAfterExtremeShrinkage() throws Exception {
-        final FixedSizeQueue<Integer> queue = new FixedSizeQueue<>(1);
+        final FixedSizeQueue<Integer> queue = new FixedSizeQueue<>(2);
+        queue.enqueue(5);
+        queue.enqueue(4);
+        queue.dequeue();
+        queue.dequeue();
         assertThat(queue.isEmpty(), is(true));
         try {
             queue.dequeue();
@@ -67,7 +71,7 @@ public class FixedSizeQueueTest {
         } catch (Exception e) {
             final int value = 1;
             queue.enqueue(value);
-            assertThat(queue.dequeue(),is(value));
+            assertThat(queue.dequeue(), is(value));
         }
 
     }

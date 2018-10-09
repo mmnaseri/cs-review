@@ -13,7 +13,7 @@ import java.util.Iterator;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/6/15, 3:21 PM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class ArrayHeap<E extends Comparable<E>> implements PriorityQueue<E>, Iterable<E> {
 
     public static final int DEFAULT_CAPACITY = 256;

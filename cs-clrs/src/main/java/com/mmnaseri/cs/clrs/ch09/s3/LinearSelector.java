@@ -10,6 +10,7 @@ import java.util.Comparator;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (7/12/15, 7:26 PM)
  */
 @Quality(Stage.TESTED)

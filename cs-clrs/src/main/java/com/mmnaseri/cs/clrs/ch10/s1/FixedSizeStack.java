@@ -5,6 +5,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (7/12/15, 9:29 PM)
  */
 @Quality(Stage.TESTED)
@@ -35,7 +36,9 @@ public class FixedSizeStack<E> {
             throw new IllegalStateException("Stack is empty");
         }
         //noinspection unchecked
-        return (E) items[-- top];
+        final E item = (E) items[--top];
+        items[top] = null; // to avoid loitering
+        return item;
     }
 
     public int getSize() {

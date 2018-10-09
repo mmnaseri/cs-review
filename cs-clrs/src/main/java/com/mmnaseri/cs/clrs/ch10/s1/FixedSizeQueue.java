@@ -5,6 +5,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (7/12/15, 9:44 PM)
  */
 @Quality(Stage.TESTED)

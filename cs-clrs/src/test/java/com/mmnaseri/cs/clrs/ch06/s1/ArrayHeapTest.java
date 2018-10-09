@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.is;
 
 /**
  * @author Milad Naseri (milad.naseri@cdk.com)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (7/5/16, 2:38 PM)
  */
 public class ArrayHeapTest extends BaseHeapTest {

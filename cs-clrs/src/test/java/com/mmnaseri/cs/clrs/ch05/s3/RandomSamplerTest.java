@@ -8,6 +8,11 @@ import java.util.Arrays;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+
+/**
+ * @author Ramin Farhanian (rf.tech@icloud.com)
+ * @since 1.0 (10/01/18, 4:34 AM)
+ */
 public class RandomSamplerTest {
 
     private RandomSampler<Integer> sampler;

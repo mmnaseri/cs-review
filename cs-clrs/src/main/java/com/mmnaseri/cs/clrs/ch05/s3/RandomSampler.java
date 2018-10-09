@@ -11,9 +11,10 @@ import java.util.Set;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (5/27/15, 12:34 AM)
  */
-@Quality(Stage.UNTESTED)
+@Quality(Stage.TESTED)
 public class RandomSampler<E> implements Sampler<E> {
 
     private Set<E> sample(E[] array, int size, int consider) {

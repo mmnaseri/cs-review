@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (5/26/15, 3:16 AM)
  */
 @Quality(Stage.DOCUMENTED)

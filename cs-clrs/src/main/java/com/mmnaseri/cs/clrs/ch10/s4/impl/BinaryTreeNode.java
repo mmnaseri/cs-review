@@ -1,6 +1,8 @@
 package com.mmnaseri.cs.clrs.ch10.s4.impl;
 
 import com.mmnaseri.cs.clrs.ch10.s4.TreeNode;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/15, 12:38 AM)
  */
+@Quality(Stage.TESTED)
 public class BinaryTreeNode<E> extends SimpleTreeNode<E> {
 
     public static final int RIGHT_CHILD = 1;

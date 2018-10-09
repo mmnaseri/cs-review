@@ -8,6 +8,10 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * @author Ramin Farhanian (rf.tech@icloud.com)
+ * @since 1.0 (09/03/18, 5:31 AM)
+ */
 public class ArrayMatrixTest {
 
     private int[][] input = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
@@ -31,6 +35,7 @@ public class ArrayMatrixTest {
         assertThat(matrix.getRows(), is(input.length));
         assertThat(matrix.getColumns(), is(input[0].length));
     }
+
     @Test
     public void testGetReturnsTheCorrectValue() {
         assertThat(matrix.get(0, 0), is(input[0][0]));

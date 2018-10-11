@@ -1,14 +1,18 @@
 package com.mmnaseri.cs.clrs.ch10.s4.impl;
 
 import com.mmnaseri.cs.clrs.ch10.s4.TreeNode;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.net)
  * @since 1.0 (7/27/15)
  */
+@Quality(Stage.TESTED)
 public class LevelLinkedTreeNode<E> implements TreeNode<E> {
 
     private E value;
@@ -58,12 +62,12 @@ public class LevelLinkedTreeNode<E> implements TreeNode<E> {
     @Override
     public void deleteChild(int index) {
         LevelLinkedTreeNode<E> node = this.firstChild;
-        while (index > 0 ) {
+        while (index > 0) {
             if (node == null) {
                 return;
             }
             node = node.getNextSibling();
-            index --;
+            index--;
         }
         deleteChild(node);
     }
@@ -75,6 +79,8 @@ public class LevelLinkedTreeNode<E> implements TreeNode<E> {
         node.setParent(null);
         if (node.getPreviousSibling() == null) {
             setFirstChild(node.getNextSibling());
+        } else {
+            node.getPreviousSibling().setNextSibling(node.getNextSibling());
         }
         if (node.getNextSibling() != null) {
             node.getNextSibling().setPreviousSibling(node.getPreviousSibling());

@@ -9,25 +9,20 @@ import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (7/22/15)
  */
-@Quality(value = Stage.UNTESTED, explanation = "the whole spec mess is because we want the actual operations and not just the distances")
+@Quality(value = Stage.TESTED, explanation = "the whole spec mess is because we want the actual operations and not just the distances")
 public class BottomUpEditDistanceCalculator implements EditDistanceCalculator {
 
-    private final CostFunction function;
-
-    public BottomUpEditDistanceCalculator(CostFunction function) {
-        this.function = function;
-    }
-
     @Override
-    public List<EditOperation> calculate(String source, String target) {
-        final Specification[][] specifications = prepareDistanceMatrix(source, target);
-        calculateDistance(source, target, specifications);
+    public List<EditOperation> calculate(String source, String target, CostFunction costFunction) {
+        final Specification[][] specifications = prepareDistanceMatrix(source, target, costFunction);
+        calculateDistance(source, target, specifications, costFunction);
         return constructEditOperations(source, target, specifications);
     }
 
-    private void calculateDistance(String source, String target, Specification[][] specifications) {
+    private void calculateDistance(String source, String target, Specification[][] specifications, CostFunction function) {
         for (int j = 1; j < target.length() + 1; j++) {
             for (int i = 1; i < source.length() + 1; i++) {
                 Specification minimum = new Specification(null, Integer.MAX_VALUE, Integer.MAX_VALUE);
@@ -36,7 +31,7 @@ public class BottomUpEditDistanceCalculator implements EditDistanceCalculator {
                     final int previousCost = specifications[i - 1][j - 1].getCost();
                     minimum = new Specification(EditOperationType.COPY, previousCost + functionCost, functionCost);
                 }
-                if (i > 2 && j > 2 && source.charAt(i - 1) == target.charAt(j - 2) && source.charAt(i - 2) == target.charAt(j - 1)) {
+                if (i >= 2 && j >= 2 && source.charAt(i - 1) == target.charAt(j - 2) && source.charAt(i - 2) == target.charAt(j - 1)) {
                     final int functionCost = function.getCost(EditOperationType.TWIDDLE, source, target, i - 2, j - 2);
                     final int previousCost = specifications[i - 2][j - 2].getCost();
                     if (functionCost + previousCost < minimum.getCost()) {
@@ -59,7 +54,7 @@ public class BottomUpEditDistanceCalculator implements EditDistanceCalculator {
         final List<EditOperation> operations = new ArrayList<>();
         int i = source.length();
         int j = target.length();
-        while (i > 0 && j > 0) {
+        while ((i > 0 && j > 0) || (i > 0 && j == 0) || (i == 0 && j > 0)) {
             final EditOperationType type = specifications[i][j].getType();
             String original = source.substring(i - type.getSource(), i);
             String replacement = target.substring(j - type.getTarget(), j);
@@ -77,7 +72,7 @@ public class BottomUpEditDistanceCalculator implements EditDistanceCalculator {
         return operations;
     }
 
-    private Specification[][] prepareDistanceMatrix(String source, String target) {
+    private Specification[][] prepareDistanceMatrix(String source, String target, CostFunction function) {
         final Specification[][] distances = new Specification[source.length() + 1][];
         for (int i = 0; i < source.length() + 1; i++) {
             distances[i] = new Specification[target.length() + 1];

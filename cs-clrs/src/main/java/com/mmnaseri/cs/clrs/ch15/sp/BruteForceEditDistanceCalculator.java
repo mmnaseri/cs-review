@@ -10,36 +10,35 @@ import java.util.Set;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (7/21/15, 9:53 PM)
  */
-@Quality(value = Stage.UNTESTED, explanation = "The dumbest implementation possible")
+@Quality(value = Stage.TESTED, explanation = "The dumbest implementation possible")
 public class BruteForceEditDistanceCalculator implements EditDistanceCalculator {
 
-    private final CostFunction function;
-
-    public BruteForceEditDistanceCalculator(CostFunction function) {
-        this.function = function;
+    @Override
+    public List<EditOperation> calculate(String source, String target, CostFunction function) {
+        return calculate(source, target, 0, 0, function);
     }
 
-    private List<EditOperation> calculate(String source, String target, int sourceCursor, int targetCursor) {
+    private List<EditOperation> calculate(String source, String target, int sourceCursor, int targetCursor, CostFunction function) {
         final List<EditOperation> operations = new ArrayList<>();
         if (sourceCursor >= source.length()) {
             for (int i = targetCursor; i < target.length(); i++) {
-                operations.add(new EditOperation(EditOperationType.INSERT, String.valueOf(target.charAt(i)), function.getCost(EditOperationType.INSERT, source, target, sourceCursor, targetCursor)));
+                operations.add(new EditOperation(EditOperationType.INSERT, String.valueOf(target.charAt(i)), function.getCost(EditOperationType.INSERT, null, target, sourceCursor, targetCursor)));
             }
             return operations;
         }
         if (targetCursor >= target.length()) {
             for (int i = sourceCursor; i < source.length(); i++) {
-                operations.add(new EditOperation(EditOperationType.DELETE, String.valueOf(source.charAt(i)), function.getCost(EditOperationType.INSERT, source, target, sourceCursor, targetCursor)));
+                operations.add(new EditOperation(EditOperationType.DELETE, String.valueOf(source.charAt(i)), function.getCost(EditOperationType.DELETE, source, null, sourceCursor, targetCursor)));
             }
             return operations;
         }
         final Set<Specification> candidates = new HashSet<>();
         if (source.charAt(sourceCursor) == target.charAt(targetCursor)) {
             candidates.add(new Specification(EditOperationType.COPY, sourceCursor, targetCursor, String.valueOf(source.charAt(sourceCursor))));
-        }
-        if (sourceCursor < source.length() - 1 && targetCursor < target.length() - 1 && source.charAt(sourceCursor + 1) == target.charAt(targetCursor) && source.charAt(sourceCursor) == target.charAt(targetCursor + 1)) {
+        } else if (sourceCursor < source.length() - 1 && targetCursor < target.length() - 1 && source.charAt(sourceCursor + 1) == target.charAt(targetCursor) && source.charAt(sourceCursor) == target.charAt(targetCursor + 1)) {
             candidates.add(new Specification(EditOperationType.TWIDDLE, sourceCursor, targetCursor, source.substring(sourceCursor, sourceCursor + 2)));
         }
         candidates.add(new Specification(EditOperationType.DELETE, sourceCursor, targetCursor, source.charAt(sourceCursor) + " for " + target.charAt(targetCursor)));
@@ -47,7 +46,7 @@ public class BruteForceEditDistanceCalculator implements EditDistanceCalculator 
         candidates.add(new Specification(EditOperationType.REPLACE, sourceCursor, targetCursor, source.charAt(sourceCursor) + " for " + target.charAt(targetCursor)));
         int minimum = Integer.MAX_VALUE;
         for (Specification candidate : candidates) {
-            final List<EditOperation> rest = calculate(source, target, candidate.getSource(), candidate.getTarget());
+            final List<EditOperation> rest = calculate(source, target, candidate.getSource(), candidate.getTarget(), function);
             final int current = function.getCost(candidate.getType(), source, target, sourceCursor, targetCursor);
             final int localCost = current + cost(rest);
             if (localCost < minimum) {
@@ -66,11 +65,6 @@ public class BruteForceEditDistanceCalculator implements EditDistanceCalculator 
             cost += operation.getCost();
         }
         return cost;
-    }
-
-    @Override
-    public List<EditOperation> calculate(String source, String target) {
-        return calculate(source, target, 0, 0);
     }
 
     private static class Specification {

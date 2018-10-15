@@ -5,9 +5,11 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.fail;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (7/12/15, 9:49 PM)
  */
 public class FixedSizeQueueTest {
@@ -22,10 +24,10 @@ public class FixedSizeQueueTest {
     @DataProvider
     public Object[][] queueExpansionDataProvider() {
         return new Object[][]{
-            new Object[]{new Integer[]{8, 7, 6, 5, 4}},
-            new Object[]{new Integer[]{null, null, null, null}},
-            new Object[]{new Integer[]{1, 2, 3, 9, 7, 6}},
-            new Object[]{new Integer[]{Integer.MAX_VALUE, 0, 0, 0, 0, 0, 0, 0}},
+                new Object[]{new Integer[]{8, 7, 6, 5, 4}},
+                new Object[]{new Integer[]{null, null, null, null}},
+                new Object[]{new Integer[]{1, 2, 3, 9, 7, 6}},
+                new Object[]{new Integer[]{Integer.MAX_VALUE, 0, 0, 0, 0, 0, 0, 0}},
         };
     }
 
@@ -54,6 +56,25 @@ public class FixedSizeQueueTest {
             assertThat(queue.getSize(), is(items.length - i - 1));
         }
         assertThat(queue.isEmpty(), is(true));
+    }
+
+    @Test
+    public void testQueueCanRecoverAfterExtremeShrinkage() throws Exception {
+        final FixedSizeQueue<Integer> queue = new FixedSizeQueue<>(2);
+        queue.enqueue(5);
+        queue.enqueue(4);
+        queue.dequeue();
+        queue.dequeue();
+        assertThat(queue.isEmpty(), is(true));
+        try {
+            queue.dequeue();
+            fail("dequeue operation should not be possible when the queue is empty");
+        } catch (Exception e) {
+            final int value = 1;
+            queue.enqueue(value);
+            assertThat(queue.dequeue(), is(value));
+        }
+
     }
 
     @Test(dataProvider = "queueExpansionDataProvider")

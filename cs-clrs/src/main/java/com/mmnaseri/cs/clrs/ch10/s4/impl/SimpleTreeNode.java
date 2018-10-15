@@ -1,6 +1,8 @@
 package com.mmnaseri.cs.clrs.ch10.s4.impl;
 
 import com.mmnaseri.cs.clrs.ch10.s4.TreeNode;
+import com.mmnaseri.cs.qa.annotation.Quality;
+import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +12,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/15, 12:22 AM)
  */
+@Quality(Stage.TESTED)
 public class SimpleTreeNode<E> implements TreeNode<E> {
 
     private E value = null;

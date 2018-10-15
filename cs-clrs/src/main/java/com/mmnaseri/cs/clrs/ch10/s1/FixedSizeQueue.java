@@ -5,6 +5,7 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
+ * @author Ramin Farhanian (rf.tech@icloud.com)
  * @since 1.0 (7/12/15, 9:44 PM)
  */
 @Quality(Stage.TESTED)
@@ -50,7 +51,7 @@ public class FixedSizeQueue<E> {
         size --;
         final Object object = items[tail];
         items[tail] = null;
-        if (tail == items.length) {
+        if (tail == items.length - 1) {
             tail = -1;
         }
         //noinspection unchecked

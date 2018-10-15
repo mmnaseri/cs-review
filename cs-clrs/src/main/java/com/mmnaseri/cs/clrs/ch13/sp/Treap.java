@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch13.sp;
 
 import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
-import com.mmnaseri.cs.clrs.ch13.s2.RotatingBinarySearchTree;
+import com.mmnaseri.cs.clrs.ch13.s2.AbstractRotatingBinarySearchTree;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -15,7 +15,7 @@ import java.util.Set;
  * @since 1.0 (7/26/15, 8:05 PM)
  */
 @Quality(Stage.UNTESTED)
-public class Treap<E> extends RotatingBinarySearchTree<E, TreapNode<E>> {
+public class Treap<E> extends AbstractRotatingBinarySearchTree<E, TreapNode<E>> {
 
     public Treap(Comparator<E> comparator) {
         super(comparator, new TreapNodeFactory<E>());
@@ -84,6 +84,7 @@ public class Treap<E> extends RotatingBinarySearchTree<E, TreapNode<E>> {
             do {
                 priority = Math.abs(random.nextInt());
             } while (priorities.contains(priority));
+            priorities.add(priority);
             return priority;
         }
 

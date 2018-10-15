@@ -3,7 +3,7 @@ package com.mmnaseri.cs.clrs.ch13.s3;
 import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
 import com.mmnaseri.cs.clrs.ch13.s1.NodeColor;
 import com.mmnaseri.cs.clrs.ch13.s1.RedBlackTreeNode;
-import com.mmnaseri.cs.clrs.ch13.s2.RotatingBinarySearchTree;
+import com.mmnaseri.cs.clrs.ch13.s2.AbstractRotatingBinarySearchTree;
 import com.mmnaseri.cs.qa.annotation.Monitored;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
@@ -16,7 +16,7 @@ import java.util.Comparator;
  */
 @Quality(value = Stage.BUGGY)
 @Monitored(MonitoredRedBlackTree.class)
-public class RedBlackTree<E> extends RotatingBinarySearchTree<E, RedBlackTreeNode<E>> {
+public class RedBlackTree<E> extends AbstractRotatingBinarySearchTree<E, RedBlackTreeNode<E>> {
 
     public RedBlackTree(Comparator<E> comparator) {
         super(comparator, new TreeNodeFactory<E, RedBlackTreeNode<E>>() {

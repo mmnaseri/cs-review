@@ -15,10 +15,10 @@ import static org.hamcrest.core.IsNot.not;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/19/15, 11:06 PM)
  */
-public class RotatingBinarySearchTreeTest {
+public class AbstractRotatingBinarySearchTreeTest {
 
-    protected RotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>> tree() {
-        return new RotatingBinarySearchTree<>(new Comparator<Integer>() {
+    protected AbstractRotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>> tree() {
+        return new AbstractRotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o1.compareTo(o2);
@@ -30,12 +30,12 @@ public class RotatingBinarySearchTreeTest {
                 node.setValue(value);
                 return node;
             }
-        });
+        }){};
     }
 
     @Test
     public void testRotateLeft() throws Exception {
-        final RotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>> tree = tree();
+        final AbstractRotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>> tree = tree();
         tree.insert(5, 3, 7, 1, 4, 6, 9, 8, 10);
         final BinaryTreeNode<Integer> node = tree.find(7);
         tree.rotateLeft(node);
@@ -49,7 +49,7 @@ public class RotatingBinarySearchTreeTest {
 
     @Test
     public void testRotateRight() throws Exception {
-        final RotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>> tree = tree();
+        final AbstractRotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>> tree = tree();
         tree.insert(5, 3, 9, 1, 4, 7, 10, 6, 8);
         final BinaryTreeNode<Integer> node = tree.find(9);
         tree.rotateRight(node);
@@ -63,7 +63,7 @@ public class RotatingBinarySearchTreeTest {
 
     @Test
     public void testSymmetry() throws Exception {
-        final RotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>> tree = tree();
+        final AbstractRotatingBinarySearchTree<Integer, BinaryTreeNode<Integer>> tree = tree();
         tree.insert(5, 3, 7, 1, 4, 6, 8);
         final String original = tree.toString();
         tree.rotateLeft(tree.getRoot());

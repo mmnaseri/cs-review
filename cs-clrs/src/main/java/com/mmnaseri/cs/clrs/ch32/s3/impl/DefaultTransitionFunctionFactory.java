@@ -16,13 +16,13 @@ import java.util.Map;
 public class DefaultTransitionFunctionFactory implements TransitionFunctionFactory {
 
     private String extractAlphabet(String pattern) {
-        String alphabet = "";
+        StringBuilder alphabet = new StringBuilder();
         for (int i = 0; i < pattern.length(); i++) {
-            if (alphabet.indexOf(pattern.charAt(i)) == -1) {
-                alphabet += pattern.charAt(i);
+            if (alphabet.toString().indexOf(pattern.charAt(i)) == -1) {
+                alphabet.append(pattern.charAt(i));
             }
         }
-        return alphabet;
+        return alphabet.toString();
     }
 
     @Override

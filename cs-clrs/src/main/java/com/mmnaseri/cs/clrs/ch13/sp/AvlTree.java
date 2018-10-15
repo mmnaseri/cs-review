@@ -1,7 +1,7 @@
 package com.mmnaseri.cs.clrs.ch13.sp;
 
 import com.mmnaseri.cs.clrs.ch12.s2.TreeNodeFactory;
-import com.mmnaseri.cs.clrs.ch13.s2.RotatingBinarySearchTree;
+import com.mmnaseri.cs.clrs.ch13.s2.AbstractRotatingBinarySearchTree;
 import com.mmnaseri.cs.qa.annotation.Quality;
 import com.mmnaseri.cs.qa.annotation.Stage;
 
@@ -12,7 +12,7 @@ import java.util.Comparator;
  * @since 1.0 (7/20/15, 12:54 AM)
  */
 @Quality(Stage.UNTESTED)
-public class AvlTree<E> extends RotatingBinarySearchTree<E, AvlTreeNode<E>> {
+public class AvlTree<E> extends AbstractRotatingBinarySearchTree<E, AvlTreeNode<E>> {
 
     public AvlTree(Comparator<E> comparator) {
         super(comparator, new TreeNodeFactory<E, AvlTreeNode<E>>() {

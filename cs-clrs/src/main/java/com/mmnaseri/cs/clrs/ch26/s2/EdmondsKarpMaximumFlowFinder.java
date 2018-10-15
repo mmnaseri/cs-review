@@ -19,7 +19,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/26/15)
  */
-@Quality(Stage.TESTED)
+@Quality(Stage.BUGGY)
 public class EdmondsKarpMaximumFlowFinder<E extends FlowEdgeDetails, V extends VertexDetails> extends AbstractFordFulkersonMaximumFlowFinder<E, V> {
 
     private final GraphVisitor<FlowEdgeDetails, V> visitor = new DepthFirstGraphVisitor<>();

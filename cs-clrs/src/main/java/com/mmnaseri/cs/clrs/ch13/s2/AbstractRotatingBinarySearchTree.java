@@ -13,9 +13,9 @@ import java.util.Comparator;
  * @since 1.0 (7/19/15, 10:57 PM)
  */
 @Quality(Stage.TESTED)
-public class RotatingBinarySearchTree<E, N extends BinaryTreeNode<E>> extends BinarySearchTree<E, N> {
+public abstract class AbstractRotatingBinarySearchTree<E, N extends BinaryTreeNode<E>> extends BinarySearchTree<E, N> {
 
-    public RotatingBinarySearchTree(Comparator<E> comparator, TreeNodeFactory<E, N> factory) {
+    public AbstractRotatingBinarySearchTree(Comparator<E> comparator, TreeNodeFactory<E, N> factory) {
         super(comparator, factory);
     }
 

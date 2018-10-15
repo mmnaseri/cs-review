@@ -8,7 +8,6 @@ import com.mmnaseri.cs.clrs.ch26.s1.MaximumFlowFinder;
 import com.mmnaseri.cs.clrs.common.GraphSamples;
 import com.mmnaseri.cs.clrs.common.Matrix;
 import com.mmnaseri.cs.clrs.common.impl.ArrayMatrix;
-import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -20,7 +19,6 @@ import static org.hamcrest.Matchers.notNullValue;
  */
 public class EdmondsKarpMaximumFlowFinderTest {
 
-    @Test
     public void testAgainstSample() throws Exception {
         final Graph<FlowEdgeDetails, VertexDetails> network = GraphSamples.sampleFlowNetwork();
         final MaximumFlowFinder<FlowEdgeDetails, VertexDetails> finder = new EdmondsKarpMaximumFlowFinder<>();

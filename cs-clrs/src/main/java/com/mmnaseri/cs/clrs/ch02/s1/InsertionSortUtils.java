@@ -1,6 +1,7 @@
 package com.mmnaseri.cs.clrs.ch02.s1;
 
 import java.util.Comparator;
+import java.util.function.Supplier;
 
 /** Utilities for the insertion sort implementations. */
 public class InsertionSortUtils {
@@ -19,5 +20,19 @@ public class InsertionSortUtils {
       }
     }
     return from;
+  }
+
+  public static <E> int placementSpecialCaseHandler(
+      E[] items,
+      E item,
+      int length,
+      Comparator<E> comparator,
+      Supplier<Integer> regularCaseHAndler) {
+    if (comparator.compare(items[0], item) > 0) {
+      return 0;
+    } else if (comparator.compare(items[length - 1], item) < 0) {
+      return length;
+    }
+    return regularCaseHAndler.get();
   }
 }

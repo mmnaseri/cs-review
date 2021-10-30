@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @since 1.0 (5/26/15, 1:50 AM)
  */
 @Quality(Stage.DOCUMENTED)
-public class CoupleSumFinder {
+public class PairSumFinder {
 
     /**
      * This method will look up two items whose sum equals the indicated sum in a sorted array
@@ -19,15 +19,15 @@ public class CoupleSumFinder {
      * @param target    the array of numbers
      * @return the couple
      */
-    @Complexity("O(n . lg(n))")
-    public Couple findCouple(int sum, int... target) {
+    @Complexity(value = "O(n . lg(n))", explanation = "If the array is given to us pre-sorted, it will be O(n).")
+    public Pair findPair(int sum, int... target) {
         Arrays.sort(target);
         int i = 0;
         int j = target.length - 1;
         while (i >= 0 && j < target.length && i < j) {
             final int result = target[i] + target[j];
             if (result == sum) {
-                return new Couple(target[i], target[j]);
+                return new Pair(target[i], target[j]);
             } else if (result < sum) {
                 //we need to increase the lower bound
                 i ++;

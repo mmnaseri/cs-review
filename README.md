@@ -54,7 +54,7 @@ continue to annotate all classes accordingly.
 The Annotations
 ---------------
 
-The code is well organized, and mostly well annotated. There are a couple of specific annotations defined in `cs-qa` and
+The code is well organized, and mostly well annotated. There are a pair of specific annotations defined in `cs-qa` and
 used throughout the codebase:
 
   * `@Test` which points to specific test cases directed at the annotated piece of code.

@@ -24,7 +24,7 @@ public class MergeInversionCounter<E extends Comparable<E>> implements Inversion
     @SuppressWarnings("unchecked")
     @Complexity("O(n)")
     private int merge(E[] array, int from, int mid, int to) {
-        //beak the original array into two halves around the designated pivot point
+        //break the original array into two halves around the designated pivot point
         final E[] left = (E[]) Array.newInstance(array.getClass().getComponentType(), mid - from);
         final E[] right = (E[]) Array.newInstance(array.getClass().getComponentType(), to - mid);
         System.arraycopy(array, from, left, 0, left.length);

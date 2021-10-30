@@ -15,29 +15,30 @@ import java.util.Comparator;
 @Quality(Stage.DOCUMENTED)
 public class SelectionSorter<E extends Comparable<E>> implements Sorter<E> {
 
-    private final Comparator<E> comparator;
+  private final Comparator<E> comparator;
 
-    public SelectionSorter(Comparator<E> comparator) {
-        this.comparator = comparator;
-    }
+  public SelectionSorter(Comparator<E> comparator) {
+    this.comparator = comparator;
+  }
 
-    /**
-     * This method implements the "selection" sort algorithm by considering the shrinking tail of the array (which contains
-     * the full array at the start) and then finding the local minimum and placing it at the beginning of the array.
-     * @param items    the items to be sorted
-     */
-    @Override
-    @Complexity("O(n^2)")
-    public void sort(E[] items) {
-        for (int i = 0; i < items.length; i ++) {
-            int localMinimum = -1;
-            for (int j = i; j < items.length; j ++) {
-                if (localMinimum < 0 || comparator.compare(items[j], items[localMinimum]) < 0) {
-                    localMinimum = j;
-                }
-            }
-            ArrayUtils.swap(items, i, localMinimum);
+  /**
+   * This method implements the "selection" sort algorithm by considering the shrinking tail of the
+   * array (which contains the full array at the start) and then finding the local minimum and
+   * placing it at the beginning of the array.
+   *
+   * @param items the items to be sorted
+   */
+  @Override
+  @Complexity("O(n^2)")
+  public void sort(E[] items) {
+    for (int i = 0; i < items.length; i++) {
+      Integer localMinimum = null;
+      for (int j = i; j < items.length; j++) {
+        if (localMinimum == null || comparator.compare(items[j], items[localMinimum]) < 0) {
+          localMinimum = j;
         }
+      }
+      ArrayUtils.swap(items, i, localMinimum);
     }
-
+  }
 }

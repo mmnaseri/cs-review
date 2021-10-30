@@ -4,12 +4,12 @@ package com.mmnaseri.cs.clrs.ch02.s3;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/26/15, 1:50 AM)
  */
-public class Couple {
+public class Pair {
 
     private final int first;
     private final int second;
 
-    public Couple(int first, int second) {
+    public Pair(int first, int second) {
         this.first = first;
         this.second = second;
     }
@@ -31,8 +31,8 @@ public class Couple {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Couple couple = (Couple) o;
-        return (first == couple.first && second == couple.second) || (second == couple.first && first == couple.second);
+        Pair pair = (Pair) o;
+        return (first == pair.first && second == pair.second) || (second == pair.first && first == pair.second);
     }
 
     @Override

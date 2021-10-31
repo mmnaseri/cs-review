@@ -26,7 +26,6 @@ public class SortingPermuter<E> implements Permuter<E> {
             this.priority = priority;
         }
 
-        @SuppressWarnings("NullableProblems")
         @Override
         public int compareTo(PrioritizedElement<E> target) {
             return Integer.compare(priority, target.priority);

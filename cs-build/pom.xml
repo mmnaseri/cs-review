@@ -32,6 +32,7 @@
         <module>../cs-clrs</module>
         <module>../cs-skiena</module>
         <module>../cs-ctci</module>
+        <module>../cs-leetcode</module>
     </modules>
 
     <properties>

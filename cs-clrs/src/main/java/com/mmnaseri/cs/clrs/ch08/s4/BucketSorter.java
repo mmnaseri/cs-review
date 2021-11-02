@@ -18,45 +18,40 @@ import java.util.List;
 @Quality(Stage.TESTED)
 public class BucketSorter implements Sorter<Double> {
 
-    private final int buckets;
-    private final InsertionSorter<Double> sorter = new IterativeInsertionSorter<>(new Comparator<Double>() {
-        @Override
-        public int compare(Double first, Double second) {
-            return first.compareTo(second);
-        }
-    });
+  private final int buckets;
+  private final InsertionSorter<Double> sorter =
+      new IterativeInsertionSorter<>(Comparator.<Double>naturalOrder());
 
-    public BucketSorter(int buckets) {
-        this.buckets = buckets;
+  public BucketSorter(int buckets) {
+    this.buckets = buckets;
+  }
+
+  @Override
+  public void sort(Double[] items) {
+    double min = Integer.MAX_VALUE;
+    double max = Integer.MIN_VALUE;
+    for (Double item : items) {
+      if (min > item) {
+        min = item;
+      }
+      if (max < item) {
+        max = item;
+      }
     }
-
-    @Override
-    public void sort(Double[] items) {
-        double min = Integer.MAX_VALUE;
-        double max = Integer.MIN_VALUE;
-        for (Double item : items) {
-            if (min > item) {
-                min = item;
-            }
-            if (max < item) {
-                max = item;
-            }
-        }
-        double bucketSize = (max - min) / (this.buckets - 1.0);
-        final List<List<Double>> buckets = new ArrayList<>(this.buckets);
-        for (int i = 0; i < this.buckets; i ++) {
-            buckets.add(new LinkedList<Double>());
-        }
-        for (Double item : items) {
-            buckets.get((int) ((item - min) / bucketSize)).add(item);
-        }
-        int copied = 0;
-        for (final List<Double> bucket : buckets) {
-            final Double[] values = bucket.toArray(new Double[bucket.size()]);
-            sorter.sort(values);
-            System.arraycopy(values, 0, items, copied, values.length);
-            copied += values.length;
-        }
+    double bucketSize = (max - min) / (this.buckets - 1.0);
+    final List<List<Double>> buckets = new ArrayList<>(this.buckets);
+    for (int i = 0; i < this.buckets; i++) {
+      buckets.add(new LinkedList<>());
     }
-
+    for (Double item : items) {
+      buckets.get((int) ((item - min) / bucketSize)).add(item);
+    }
+    int copied = 0;
+    for (final List<Double> bucket : buckets) {
+      final Double[] values = bucket.toArray(new Double[0]);
+      sorter.sort(values);
+      System.arraycopy(values, 0, items, copied, values.length);
+      copied += values.length;
+    }
+  }
 }

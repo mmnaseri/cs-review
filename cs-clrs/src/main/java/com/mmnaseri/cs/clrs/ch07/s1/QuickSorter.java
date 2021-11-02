@@ -7,6 +7,8 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Comparator;
 
+import static com.mmnaseri.cs.clrs.ch07.QuickSortUtils.quickSortPartition;
+
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/6/15, 4:22 PM)
@@ -35,18 +37,7 @@ public class QuickSorter<E extends Comparable<E>> implements Sorter<E> {
   }
 
   protected int partition(E[] items, int from, int to) {
-    final E partition = items[to - 1];
-    int smaller = from - 1;
-    int seen = from;
-    while (seen < to - 1) {
-      if (comparator.compare(partition, items[seen]) >= 0) {
-        smaller++;
-        ArrayUtils.swap(items, smaller, seen);
-      }
-      seen++;
-    }
-    ArrayUtils.swap(items, smaller + 1, to - 1);
-    return smaller + 1;
+    return quickSortPartition(comparator, items, from, to);
   }
 
   @Override

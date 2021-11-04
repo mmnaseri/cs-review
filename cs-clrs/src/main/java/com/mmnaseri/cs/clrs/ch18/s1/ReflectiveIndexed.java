@@ -6,20 +6,19 @@ package com.mmnaseri.cs.clrs.ch18.s1;
  */
 public class ReflectiveIndexed<K extends Comparable<K>> implements Indexed<K> {
 
-    private final K data;
+  private final K data;
 
-    public ReflectiveIndexed(K data) {
-        this.data = data;
-    }
+  public ReflectiveIndexed(K data) {
+    this.data = data;
+  }
 
-    @Override
-    public K getKey() {
-        return data;
-    }
+  @Override
+  public K getKey() {
+    return data;
+  }
 
-    @Override
-    public String toString() {
-        return String.valueOf(data);
-    }
-
+  @Override
+  public String toString() {
+    return String.valueOf(data);
+  }
 }

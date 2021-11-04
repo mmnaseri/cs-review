@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch18.s1;
  */
 public interface Indexed<K extends Comparable<K>> {
 
-    K getKey();
-
+  K getKey();
 }

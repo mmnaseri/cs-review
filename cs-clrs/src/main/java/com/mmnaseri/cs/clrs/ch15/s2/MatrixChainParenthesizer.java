@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch15.s2;
  */
 public interface MatrixChainParenthesizer {
 
-    MatrixParenthesization parenthesize(int... dimensions);
-
+  MatrixParenthesization parenthesize(int... dimensions);
 }

@@ -8,6 +8,5 @@ import java.util.List;
  */
 public interface LongestCommonSubSequenceFinder<E> {
 
-    List<E> find(List<E> first, List<E> second);
-
+  List<E> find(List<E> first, List<E> second);
 }

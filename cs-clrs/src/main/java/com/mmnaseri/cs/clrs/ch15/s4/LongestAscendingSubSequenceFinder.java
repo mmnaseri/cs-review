@@ -8,6 +8,5 @@ import java.util.List;
  */
 public interface LongestAscendingSubSequenceFinder<E> {
 
-    List<E> find(List<E> items);
-
+  List<E> find(List<E> items);
 }

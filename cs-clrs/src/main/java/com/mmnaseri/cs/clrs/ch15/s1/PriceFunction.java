@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch15.s1;
  */
 public interface PriceFunction {
 
-    int getPrice(int cutSize);
-
+  int getPrice(int cutSize);
 }

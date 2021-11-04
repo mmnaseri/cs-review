@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch15.s1;
  */
 public interface RodCutter {
 
-    Integer cut(Integer rodSize);
-
+  Integer cut(Integer rodSize);
 }

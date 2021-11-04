@@ -6,6 +6,10 @@ package com.mmnaseri.cs.clrs.ch15.sp;
  */
 public interface CostFunction {
 
-    int getCost(EditOperationType operationType, String source, String target, int sourceIndex, int targetIndex);
-
+  int getCost(
+      EditOperationType operationType,
+      String source,
+      String target,
+      int sourceIndex,
+      int targetIndex);
 }

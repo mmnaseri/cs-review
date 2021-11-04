@@ -12,41 +12,36 @@ import java.util.List;
  * @since 1.0 (7/20/15)
  */
 @Quality(Stage.TESTED)
-public class BruteForceLongestCommonSubSequenceFinder<E> implements LongestCommonSubSequenceFinder<E> {
+public class BruteForceLongestCommonSubSequenceFinder<E>
+    implements LongestCommonSubSequenceFinder<E> {
 
-    @Override
-    public List<E> find(List<E> first, List<E> second) {
-        if (first == null || second == null) {
-            return null;
-        }
-        final List<List<E>> subSequences = SequenceUtils.subSequences(first);
-        Collections.sort(subSequences, new Comparator<List<E>>() {
-            @Override
-            public int compare(List<E> o1, List<E> o2) {
-                return Integer.compare(o2.size(), o1.size());
-            }
-        });
-        for (List<E> subSequence : subSequences) {
-            if (subSequence.isEmpty()) {
-                continue;
-            }
-            if (has(subSequence, second)) {
-                return subSequence;
-            }
-        }
-        return Collections.emptyList();
+  @Override
+  public List<E> find(List<E> first, List<E> second) {
+    if (first == null || second == null) {
+      return null;
     }
-
-    private static <E> boolean has(List<E> needle, List<E> haystack) {
-        int i = 0;
-        int j = 0;
-        while (i < needle.size() && j < haystack.size()) {
-            if (needle.get(i).equals(haystack.get(j))) {
-                i ++;
-            }
-            j ++;
-        }
-        return i >= needle.size();
+    final List<List<E>> subSequences = SequenceUtils.subSequences(first);
+    subSequences.sort(Comparator.comparingInt(List::size));
+    for (List<E> subSequence : subSequences) {
+      if (subSequence.isEmpty()) {
+        continue;
+      }
+      if (has(subSequence, second)) {
+        return subSequence;
+      }
     }
+    return Collections.emptyList();
+  }
 
+  private static <E> boolean has(List<E> needle, List<E> haystack) {
+    int i = 0;
+    int j = 0;
+    while (i < needle.size() && j < haystack.size()) {
+      if (needle.get(i).equals(haystack.get(j))) {
+        i++;
+      }
+      j++;
+    }
+    return i >= needle.size();
+  }
 }

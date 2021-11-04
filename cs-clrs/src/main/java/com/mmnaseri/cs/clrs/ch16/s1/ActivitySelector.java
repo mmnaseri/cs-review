@@ -8,6 +8,5 @@ import java.util.Set;
  */
 public interface ActivitySelector {
 
-    Set<Integer> select(Activity... activities);
-
+  Set<Integer> select(Activity... activities);
 }

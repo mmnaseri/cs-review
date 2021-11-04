@@ -10,20 +10,19 @@ import java.util.Set;
  */
 public class GreedyActivitySelector implements ActivitySelector {
 
-    @Override
-    public Set<Integer> select(Activity... activities) {
-        final IndexedActivity[] indexedActivities = IndexedActivity.index(activities);
-        Arrays.sort(indexedActivities);
-        final Set<Integer> indices = new HashSet<>();
-        indices.add(indexedActivities[0].getIndex());
-        int current = 0;
-        for (int i = 1; i < indexedActivities.length; i++) {
-            if (indexedActivities[i].getStart() >= indexedActivities[current].getFinish()) {
-                indices.add(indexedActivities[i].getIndex());
-                current = i;
-            }
-        }
-        return indices;
+  @Override
+  public Set<Integer> select(Activity... activities) {
+    final IndexedActivity[] indexedActivities = IndexedActivity.index(activities);
+    Arrays.sort(indexedActivities);
+    final Set<Integer> indices = new HashSet<>();
+    indices.add(indexedActivities[0].getIndex());
+    int current = 0;
+    for (int i = 1; i < indexedActivities.length; i++) {
+      if (indexedActivities[i].getStart() >= indexedActivities[current].getFinish()) {
+        indices.add(indexedActivities[i].getIndex());
+        current = i;
+      }
     }
-
+    return indices;
+  }
 }

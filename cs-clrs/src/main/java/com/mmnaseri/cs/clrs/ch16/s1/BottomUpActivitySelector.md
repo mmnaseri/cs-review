@@ -5,15 +5,11 @@ We define `S(i, j)` as the sub-problem of finding the largest number of activiti
 
 We therefore face the following situations:
 
-  - `i == j` in which case `a[i] == a[j]` is chosen and the length is set to `1` (or `length(S(i, j)) = 1`).
-  - `i != j` in which case either `a[i]` is incompatible with `a[j]` and such a sequence does not exist and therefore
-  we have `length(S(i, j)) = 0`. Otherwise, we look for index `k`, where `i < k < j`, and `a[k]` is compatible with
-  both `a[i]` and `a[j]` and for all such `a[k]`s we figure out the answer to `S(i,k)` and `S(k, j)`. Since our sub-problem
-  is inclusive, then the answer coming back from that route is `S(i,k) + S(k,j) - 1` since we have counted `a[k]` twice. We
-  then take the maximum of `2` (having a sequence only containing `a[i]` and `a[j]`) and all such possible sub-problem
-  solutions. If we find a `k` that is better suited than the rest, we should log it somewhere to be able to reconstruct
-  the answer.
-  
+- `i == j` in which case `a[i] == a[j]` is chosen and the length is set to `1` (or `length(S(i, j)) = 1`).
+- `i != j` in which case either `a[i]` is incompatible with `a[j]` and such a sequence does not exist and therefore we have `length(S(i, j)) = 0`. Otherwise, we look for index `k`, where `i < k < j`, and `a[k]` is compatible with both `a[i]` and `a[j]` and for all such `a[k]`s we figure out the answer to `S(i,k)` and `S(k, j)`. Since our
+  sub-problem is inclusive, then the answer coming back from that route is `S(i,k) + S(k,j) - 1` since we have counted `a[k]` twice. We then take the maximum of `2` (having a sequence only containing `a[i]` and `a[j]`) and all such possible sub-problem solutions. If we find a `k` that is better suited than the rest, we should log it somewhere to be
+  able to reconstruct the answer.
+
 So, the recursive solution to our problem is:
 
     S(i, j) =
@@ -23,8 +19,7 @@ So, the recursive solution to our problem is:
 
 which is slightly different from the one outlined in the book, but is much easier to use for a bottom-up, iterative solution.
 
-The assumption here, the same as in the book, is that activities are sorted base on their finish time. So, we can write the
-pseudo-code for the algorithm in its iterative form as follows:
+The assumption here, the same as in the book, is that activities are sorted base on their finish time. So, we can write the pseudo-code for the algorithm in its iterative form as follows:
 
      1 Bottom-Up-Activity-Selection(f, s)
      2    n = f.length
@@ -46,10 +41,9 @@ pseudo-code for the algorithm in its iterative form as follows:
     18                               best = v
     19   return best
 
-At this point, we get the answer back as the maximum number of compatible activities that could be selected from the
-given input. To be able to return the actual selection, we need to add one more piece of information: the set of indices
+At this point, we get the answer back as the maximum number of compatible activities that could be selected from the given input. To be able to return the actual selection, we need to add one more piece of information: the set of indices
 `k` such that `k` was chosen as the middle point for solving `S(i,j) = S(i,k) + S(k,j) - 1`:
-                    
+
      1 Bottom-Up-Activity-Selection(f, s)
      2    n = f.length
      3   create table c[1 .. n, 1 .. n], with c[i,j] = 0
@@ -86,8 +80,7 @@ We can then write the following function to print out the selection:
     6        if l == true
     7            print end
 
-where `l` is a flag that says whether or not we should print the last element in the interval `[i,j]` and is to avoid
-printing `k` for `a[k]` twice.
+where `l` is a flag that says whether or not we should print the last element in the interval `[i,j]` and is to avoid printing `k` for `a[k]` twice.
 
 The solution would then be reproducible using:
 
@@ -95,9 +88,8 @@ The solution would then be reproducible using:
 
 which will print out all the solutions.
 
-It is notable that we only use the top half of both tables `c` and `x` in `Bottom-Up-Activity-Selection` while leaving
-the main diagonal alone. Since both tables only store numbers, we can merge them into one, utilizing the upper half for
-storing the counts and the lower half for the indices. Thus, our activity selection implementation becomes as follows:
+It is notable that we only use the top half of both tables `c` and `x` in `Bottom-Up-Activity-Selection` while leaving the main diagonal alone. Since both tables only store numbers, we can merge them into one, utilizing the upper half for storing the counts and the lower half for the indices. Thus, our activity selection implementation becomes as
+follows:
 
      1 Bottom-Up-Activity-Selection(f, s)
      2    n = f.length
@@ -133,6 +125,4 @@ and the print function now needs to read from the lower half as well:
 The print operation works in `O(n)` since we do not go over each item more than once (line 3 is executed exactly
 `n` times at worst). This is similar to the analysis for binary search.
 
-The actual bottom-up solution operates in `O(n^3)` which is considerably worse than the normal greedy algorithm.
-This is because, mainly, the number of uniquely exhibited sub-problems is too much and the overlap frequency of
-these sub-problems is too little to allow us to properly utilize their recurrence to minimize time complexity.
+The actual bottom-up solution operates in `O(n^3)` which is considerably worse than the normal greedy algorithm. This is because, mainly, the number of uniquely exhibited sub-problems is too much and the overlap frequency of these sub-problems is too little to allow us to properly utilize their recurrence to minimize time complexity.

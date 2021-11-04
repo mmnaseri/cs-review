@@ -5,30 +5,30 @@ package com.mmnaseri.cs.clrs.ch16.s3;
  * @since 1.0 (7/25/15, 12:15 AM)
  */
 public class CharacterComponent implements Comparable<CharacterComponent> {
-    
-    private final Character character;
-    private final int frequency;
 
-    public CharacterComponent(Character character, int frequency) {
-        this.character = character;
-        this.frequency = frequency;
-    }
+  private final Character character;
+  private final int frequency;
 
-    public Character getCharacter() {
-        return character;
-    }
+  public CharacterComponent(Character character, int frequency) {
+    this.character = character;
+    this.frequency = frequency;
+  }
 
-    public int getFrequency() {
-        return frequency;
-    }
+  public Character getCharacter() {
+    return character;
+  }
 
-    @Override
-    public int compareTo(@SuppressWarnings("NullableProblems") CharacterComponent that) {
-        return Integer.compare(this.getFrequency(), that.getFrequency());
-    }
+  public int getFrequency() {
+    return frequency;
+  }
 
-    @Override
-    public String toString() {
-        return (getCharacter() != null ? getCharacter() + ":" : "") + getFrequency();
-    }
+  @Override
+  public int compareTo(CharacterComponent that) {
+    return Integer.compare(this.getFrequency(), that.getFrequency());
+  }
+
+  @Override
+  public String toString() {
+    return (getCharacter() != null ? getCharacter() + ":" : "") + getFrequency();
+  }
 }

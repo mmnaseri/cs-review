@@ -6,15 +6,14 @@ package com.mmnaseri.cs.clrs.ch23.s1;
  */
 public class MutableWeightedEdgeDetails implements WeightedEdgeDetails {
 
-    private int weight;
+  private int weight;
 
-    @Override
-    public int getWeight() {
-        return weight;
-    }
+  @Override
+  public int getWeight() {
+    return weight;
+  }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
+  public void setWeight(int weight) {
+    this.weight = weight;
+  }
 }

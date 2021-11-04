@@ -8,37 +8,37 @@ import java.util.UUID;
  */
 public class LinkedElementContainer<E extends LinkedElement<E, I, ?>, I> {
 
-    private UUID uuid;
-    private E head;
-    private E tail;
+  private UUID uuid;
+  private E head;
+  private E tail;
 
-    public UUID getUuid() {
-        return uuid;
-    }
+  public UUID getUuid() {
+    return uuid;
+  }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
 
-    public E getHead() {
-        return head;
-    }
+  public E getHead() {
+    return head;
+  }
 
-    public void setHead(E head) {
-        this.head = head;
-    }
+  public void setHead(E head) {
+    this.head = head;
+  }
 
-    public E getTail() {
-        return tail;
-    }
+  public E getTail() {
+    return tail;
+  }
 
-    public void setTail(E tail) {
-        this.tail = tail;
-    }
+  public void setTail(E tail) {
+    this.tail = tail;
+  }
 
-    public void unlink() {
-        uuid = null;
-        head = null;
-        tail = null;
-    }
+  public void unlink() {
+    uuid = null;
+    head = null;
+    tail = null;
+  }
 }

@@ -10,35 +10,34 @@ import java.util.List;
  */
 public class TreapNode<E> extends BinaryTreeNode<E> {
 
-    private int priority;
+  private int priority;
 
-    public int getPriority() {
-        return priority;
-    }
+  public int getPriority() {
+    return priority;
+  }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
+  public void setPriority(int priority) {
+    this.priority = priority;
+  }
 
-    @Override
-    public TreapNode<E> getRightChild() {
-        return (TreapNode<E>) super.getRightChild();
-    }
+  @Override
+  public TreapNode<E> getRightChild() {
+    return (TreapNode<E>) super.getRightChild();
+  }
 
-    @Override
-    public List<? extends TreapNode<E>> getChildren() {
-        //noinspection unchecked
-        return (List<? extends TreapNode<E>>) super.getChildren();
-    }
+  @Override
+  public List<? extends TreapNode<E>> getChildren() {
+    //noinspection unchecked
+    return (List<? extends TreapNode<E>>) super.getChildren();
+  }
 
-    @Override
-    public TreapNode<E> getLeftChild() {
-        return (TreapNode<E>) super.getLeftChild();
-    }
+  @Override
+  public TreapNode<E> getLeftChild() {
+    return (TreapNode<E>) super.getLeftChild();
+  }
 
-    @Override
-    public TreapNode<E> getParent() {
-        return (TreapNode<E>) super.getParent();
-    }
-
+  @Override
+  public TreapNode<E> getParent() {
+    return (TreapNode<E>) super.getParent();
+  }
 }

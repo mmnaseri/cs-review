@@ -15,33 +15,35 @@ import java.util.Map;
 @Quality(Stage.UNTESTED)
 public class DefaultTransitionFunctionFactory implements TransitionFunctionFactory {
 
-    private String extractAlphabet(String pattern) {
-        StringBuilder alphabet = new StringBuilder();
-        for (int i = 0; i < pattern.length(); i++) {
-            if (alphabet.toString().indexOf(pattern.charAt(i)) == -1) {
-                alphabet.append(pattern.charAt(i));
-            }
-        }
-        return alphabet.toString();
+  private String extractAlphabet(String pattern) {
+    StringBuilder alphabet = new StringBuilder();
+    for (int i = 0; i < pattern.length(); i++) {
+      if (alphabet.toString().indexOf(pattern.charAt(i)) == -1) {
+        alphabet.append(pattern.charAt(i));
+      }
     }
+    return alphabet.toString();
+  }
 
-    @Override
-    public TransitionFunction getInstance(String pattern) {
-        final String alphabet = extractAlphabet(pattern);
-        final Map<Integer, Map<Character, Integer>> mappings = new HashMap<>();
-        for (int i = 0; i <= pattern.length(); i++) {
-            final Map<Character, Integer> transitions = new HashMap<>();
-            mappings.put(i, transitions);
-            for (int j = 0; j < alphabet.length(); j++) {
-                final char character = alphabet.charAt(j);
-                int next = Math.min(pattern.length(), i + 1);
-                while (!pattern.substring(0, i).concat(String.valueOf(character)).endsWith(pattern.substring(0, next))) {
-                    next --;
-                }
-                transitions.put(character, next);
-            }
+  @Override
+  public TransitionFunction getInstance(String pattern) {
+    final String alphabet = extractAlphabet(pattern);
+    final Map<Integer, Map<Character, Integer>> mappings = new HashMap<>();
+    for (int i = 0; i <= pattern.length(); i++) {
+      final Map<Character, Integer> transitions = new HashMap<>();
+      mappings.put(i, transitions);
+      for (int j = 0; j < alphabet.length(); j++) {
+        final char character = alphabet.charAt(j);
+        int next = Math.min(pattern.length(), i + 1);
+        while (!pattern
+            .substring(0, i)
+            .concat(String.valueOf(character))
+            .endsWith(pattern.substring(0, next))) {
+          next--;
         }
-        return new MapTransitionFunction(mappings);
+        transitions.put(character, next);
+      }
     }
-
+    return new MapTransitionFunction(mappings);
+  }
 }

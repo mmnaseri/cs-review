@@ -13,24 +13,23 @@ import java.util.Map;
 @Quality(Stage.UNTESTED)
 public class MapTransitionFunction implements TransitionFunction {
 
-    private final Map<Integer, Map<Character, Integer>> mappings;
+  private final Map<Integer, Map<Character, Integer>> mappings;
 
-    public MapTransitionFunction(Map<Integer, Map<Character, Integer>> mappings) {
-        this.mappings = mappings;
+  public MapTransitionFunction(Map<Integer, Map<Character, Integer>> mappings) {
+    this.mappings = mappings;
+  }
+
+  @Override
+  public int transition(int state, char next) {
+    if (mappings.containsKey(state)) {
+      final Map<Character, Integer> transitions = mappings.get(state);
+      if (transitions.containsKey(next)) {
+        return transitions.get(next);
+      }
+      // reject
+      return 0;
     }
-
-    @Override
-    public int transition(int state, char next) {
-        if (mappings.containsKey(state)) {
-            final Map<Character, Integer> transitions = mappings.get(state);
-            if (transitions.containsKey(next)) {
-                return transitions.get(next);
-            }
-            //reject
-            return 0;
-        }
-        //reject
-        return 0;
-    }
-
+    // reject
+    return 0;
+  }
 }

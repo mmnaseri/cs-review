@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch32.s4;
  */
 public interface PrefixFunctionFactory {
 
-    PrefixFunction getInstance(String pattern);
-
+  PrefixFunction getInstance(String pattern);
 }

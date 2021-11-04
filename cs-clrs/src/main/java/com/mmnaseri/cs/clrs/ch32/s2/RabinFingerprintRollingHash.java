@@ -8,26 +8,27 @@ import java.math.BigInteger;
  */
 public class RabinFingerprintRollingHash implements RollingHasher {
 
-    private final BigInteger prime;
+  private final BigInteger prime;
 
-    public RabinFingerprintRollingHash(int prime) {
-        this.prime = BigInteger.valueOf(prime);
+  public RabinFingerprintRollingHash(int prime) {
+    this.prime = BigInteger.valueOf(prime);
+  }
+
+  @Override
+  public BigInteger hash(String text) {
+    BigInteger code = new BigInteger("0");
+    for (int i = 0; i < text.length(); i++) {
+      final BigInteger term =
+          prime.pow(text.length() - i - 1).multiply(BigInteger.valueOf(text.charAt(i)));
+      code = code.add(term);
     }
+    return code;
+  }
 
-    @Override
-    public BigInteger hash(String text) {
-        BigInteger code = new BigInteger("0");
-        for (int i = 0; i < text.length(); i++) {
-            final BigInteger term = prime.pow(text.length() - i - 1).multiply(BigInteger.valueOf(text.charAt(i)));
-            code = code.add(term);
-        }
-        return code;
-    }
-
-    @Override
-    public BigInteger roll(String text, BigInteger hash, char next) {
-        final BigInteger high = prime.pow(text.length() - 1).multiply(BigInteger.valueOf(text.charAt(0)));
-        return hash.subtract(high).multiply(prime).add(BigInteger.valueOf(next));
-    }
-
+  @Override
+  public BigInteger roll(String text, BigInteger hash, char next) {
+    final BigInteger high =
+        prime.pow(text.length() - 1).multiply(BigInteger.valueOf(text.charAt(0)));
+    return hash.subtract(high).multiply(prime).add(BigInteger.valueOf(next));
+  }
 }

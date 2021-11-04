@@ -15,32 +15,36 @@ import java.util.Queue;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/6/15)
  */
-public class DijkstraSingleSourceShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> extends AbstractSingleSourceShortestPathFinder<E, V> {
+public class DijkstraSingleSourceShortestPathFinder<
+        E extends WeightedEdgeDetails, V extends VertexDetails>
+    extends AbstractSingleSourceShortestPathFinder<E, V> {
+
+  @Override
+  public Graph<E, V> find(Graph<E, V> graph, int start) {
+    final Graph<E, V> result = initialize(graph, start);
+    final Queue<Vertex<V>> queue =
+        new PriorityQueue<>(result.size(), new DijkstraVertexComparator<>());
+    for (Vertex<V> vertex : result) {
+      queue.add(vertex);
+    }
+    while (!queue.isEmpty()) {
+      final Vertex<V> vertex = queue.remove();
+      final List<Vertex<V>> neighbors = result.getNeighbors(vertex);
+      for (Vertex<V> neighbor : neighbors) {
+        relax(result, vertex, neighbor);
+      }
+    }
+    return result;
+  }
+
+  private static class DijkstraVertexComparator<V extends VertexDetails>
+      implements Comparator<Vertex<V>> {
 
     @Override
-    public Graph<E, V> find(Graph<E, V> graph, int start) {
-        final Graph<E, V> result = initialize(graph, start);
-        final Queue<Vertex<V>> queue = new PriorityQueue<>(result.size(), new DijkstraVertexComparator<V>());
-        for (Vertex<V> vertex : result) {
-            queue.add(vertex);
-        }
-        while (!queue.isEmpty()) {
-            final Vertex<V> vertex = queue.remove();
-            final List<Vertex<V>> neighbors = result.getNeighbors(vertex);
-            for (Vertex<V> neighbor : neighbors) {
-                relax(result, vertex, neighbor);
-            }
-        }
-        return result;
+    public int compare(Vertex<V> first, Vertex<V> second) {
+      return Integer.compare(
+          first.getProperty("distance", Integer.class),
+          second.getProperty("distance", Integer.class));
     }
-
-    private static class DijkstraVertexComparator<V extends VertexDetails> implements Comparator<Vertex<V>> {
-
-        @Override
-        public int compare(Vertex<V> first, Vertex<V> second) {
-            return Integer.compare(first.getProperty("distance", Integer.class), second.getProperty("distance", Integer.class));
-        }
-
-    }
-
+  }
 }

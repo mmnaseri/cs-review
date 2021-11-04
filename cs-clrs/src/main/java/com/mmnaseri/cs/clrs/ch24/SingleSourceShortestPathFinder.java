@@ -8,8 +8,8 @@ import com.mmnaseri.cs.clrs.ch23.s1.WeightedEdgeDetails;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/6/15)
  */
-public interface SingleSourceShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> {
+public interface SingleSourceShortestPathFinder<
+    E extends WeightedEdgeDetails, V extends VertexDetails> {
 
-    Graph<E, V> find(Graph<E, V> graph, int start);
-
+  Graph<E, V> find(Graph<E, V> graph, int start);
 }

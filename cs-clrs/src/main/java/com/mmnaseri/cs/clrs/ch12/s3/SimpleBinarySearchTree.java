@@ -14,15 +14,13 @@ import java.util.Comparator;
 @Quality(Stage.TESTED)
 public class SimpleBinarySearchTree<E> extends BinarySearchTree<E, BinaryTreeNode<E>> {
 
-    public SimpleBinarySearchTree(Comparator<E> comparator) {
-        super(comparator, new TreeNodeFactory<E, BinaryTreeNode<E>>() {
-            @Override
-            public BinaryTreeNode<E> createNode(E value) {
-                final BinaryTreeNode<E> node = new BinaryTreeNode<>();
-                node.setValue(value);
-                return node;
-            }
+  public SimpleBinarySearchTree(Comparator<E> comparator) {
+    super(
+        comparator,
+        value -> {
+          final BinaryTreeNode<E> node = new BinaryTreeNode<>();
+          node.setValue(value);
+          return node;
         });
-    }
-
+  }
 }

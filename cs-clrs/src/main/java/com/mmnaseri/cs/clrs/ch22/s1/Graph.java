@@ -8,38 +8,37 @@ import java.util.List;
  */
 public interface Graph<E extends EdgeDetails, V extends VertexDetails> extends Iterable<Vertex<V>> {
 
-    int size();
+  int size();
 
-    boolean isEmpty();
+  boolean isEmpty();
 
-    V delete(int index);
+  V delete(int index);
 
-    int add();
+  int add();
 
-    int add(V details);
+  int add(V details);
 
-    Vertex<V> get(int index);
+  Vertex<V> get(int index);
 
-    Edge<E, V> edge(int from, int to);
+  Edge<E, V> edge(int from, int to);
 
-    boolean connected(int from, int to);
+  boolean connected(int from, int to);
 
-    Edge<E, V> connect(int from, int to);
+  Edge<E, V> connect(int from, int to);
 
-    Edge<E, V> connect(int from, int to, E details);
+  Edge<E, V> connect(int from, int to, E details);
 
-    E disconnect(int from, int to);
+  E disconnect(int from, int to);
 
-    Graph<E, V> inverse();
+  Graph<E, V> inverse();
 
-    Graph<E, V> transpose();
+  Graph<E, V> transpose();
 
-    List<Vertex<V>> getVertices();
+  List<Vertex<V>> getVertices();
 
-    List<Vertex<V>> getNeighbors(int index);
+  List<Vertex<V>> getNeighbors(int index);
 
-    List<Vertex<V>> getNeighbors(Vertex<V> vertex);
+  List<Vertex<V>> getNeighbors(Vertex<V> vertex);
 
-    List<Edge<E, V>> getEdges();
-
+  List<Edge<E, V>> getEdges();
 }

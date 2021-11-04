@@ -5,7 +5,7 @@ package com.mmnaseri.cs.clrs.ch22;
  * @since 1.0 (8/5/15)
  */
 public enum GraphColor {
-
-    WHITE, GREY, BLACK
-
+  WHITE,
+  GREY,
+  BLACK
 }

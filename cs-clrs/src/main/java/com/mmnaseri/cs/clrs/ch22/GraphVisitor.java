@@ -10,8 +10,7 @@ import com.mmnaseri.cs.clrs.ch22.s1.VertexDetails;
  */
 public interface GraphVisitor<E extends EdgeDetails, V extends VertexDetails> {
 
-    Graph<E, V> visit(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor);
+  Graph<E, V> visit(Graph<E, V> graph, GraphVertexVisitor<E, V> visitor);
 
-    Graph<E, V> visit(Graph<E, V> graph, int start, GraphVertexVisitor<E, V> visitor);
-
+  Graph<E, V> visit(Graph<E, V> graph, int start, GraphVertexVisitor<E, V> visitor);
 }

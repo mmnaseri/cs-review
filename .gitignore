@@ -8,10 +8,7 @@
 .idea/
 # if you remove the above rule, at least ignore the following:
 
-cs-build/target
-cs-parent/target
-cs-clrs/target
-cs-qa/target
+/*/target
 
 # User-specific stuff:
 # .idea/workspace.xml

@@ -6,14 +6,13 @@ package com.mmnaseri.cs.clrs.ch21.s3;
  */
 public class RankedTreeElement<I> extends TreeElement<I, RankedTreeElement<I>> {
 
-    private int rank;
+  private int rank;
 
-    public int getRank() {
-        return rank;
-    }
+  public int getRank() {
+    return rank;
+  }
 
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
+  public void setRank(int rank) {
+    this.rank = rank;
+  }
 }

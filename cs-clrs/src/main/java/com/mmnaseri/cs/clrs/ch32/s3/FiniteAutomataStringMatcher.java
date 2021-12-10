@@ -15,31 +15,32 @@ import java.util.List;
 @Quality(Stage.TESTED)
 public class FiniteAutomataStringMatcher extends AbstractStringMatcher {
 
-    private final TransitionFunctionFactory factory;
+  private final TransitionFunctionFactory factory;
 
-    public FiniteAutomataStringMatcher(TransitionFunctionFactory factory) {
-        this.factory = factory;
+  public FiniteAutomataStringMatcher(TransitionFunctionFactory factory) {
+    this.factory = factory;
+  }
+
+  @Override
+  @Complexity("O(max(n, m^3.|Sigma|))")
+  protected List<Integer> findIndexOf(String needle, String haystack) {
+    final TransitionFunction function = getFunction(needle);
+    final List<Integer> indices = new ArrayList<>();
+    int state = 0;
+    for (int i = 0; i < haystack.length(); i++) {
+      final char character = haystack.charAt(i);
+      state = function.transition(state, character);
+      if (state == needle.length()) {
+        indices.add(i - needle.length() + 1);
+      }
     }
+    return indices;
+  }
 
-    @Override
-    @Complexity("O(max(n, m^3.|Sigma|))")
-    protected List<Integer> findIndexOf(String needle, String haystack) {
-        final TransitionFunction function = getFunction(needle);
-        final List<Integer> indices = new ArrayList<>();
-        int state = 0;
-        for (int i = 0; i < haystack.length(); i++) {
-            final char character = haystack.charAt(i);
-            state = function.transition(state, character);
-            if (state == needle.length()) {
-                indices.add(i - needle.length() + 1);
-            }
-        }
-        return indices;
-    }
-
-    @Complexity(value = "O(m^3 . |Sigma|)", explanation = "Here, `m` is the length of the needle, and `Sigma` is the alphabet.")
-    private TransitionFunction getFunction(String needle) {
-        return factory.getInstance(needle);
-    }
-
+  @Complexity(
+      value = "O(m^3 . |Sigma|)",
+      explanation = "Here, `m` is the length of the needle, and `Sigma` is the alphabet.")
+  private TransitionFunction getFunction(String needle) {
+    return factory.getInstance(needle);
+  }
 }

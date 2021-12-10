@@ -8,8 +8,7 @@ import java.math.BigInteger;
  */
 public interface RollingHasher {
 
-    BigInteger hash(String text);
+  BigInteger hash(String text);
 
-    BigInteger roll(String text, BigInteger hash, char next);
-
+  BigInteger roll(String text, BigInteger hash, char next);
 }

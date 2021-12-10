@@ -13,6 +13,5 @@ import java.util.List;
  */
 public interface TopologicalSorter<E extends EdgeDetails, V extends VertexDetails> {
 
-    List<Vertex<V>> sort(Graph<E, V> graph);
-
+  List<Vertex<V>> sort(Graph<E, V> graph);
 }

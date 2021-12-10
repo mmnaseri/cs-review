@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch32.s4;
  */
 public interface PrefixFunction {
 
-    int prefix(int index);
-
+  int prefix(int index);
 }

@@ -9,6 +9,7 @@ import java.util.Objects;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/15, 2:50 PM)
  */
+@SuppressWarnings("unused")
 public class DirectAddressingDynamicSet<I extends Indexed<Integer>> implements DynamicSet<I> {
 
     private Object[] storage = new Object[0];
@@ -46,7 +47,6 @@ public class DirectAddressingDynamicSet<I extends Indexed<Integer>> implements D
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void delete(Integer index) {
         checkIndex(index, false);

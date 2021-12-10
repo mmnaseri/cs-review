@@ -9,20 +9,19 @@ import java.util.Map;
  */
 public class BinarySearchTreeSpecification {
 
-    private final Map<Integer, Map<Integer, SplitSpecification>> splits = new HashMap<>();
+  private final Map<Integer, Map<Integer, SplitSpecification>> splits = new HashMap<>();
 
-    public SplitSpecification get(int i, int j) {
-        if (!splits.containsKey(i)) {
-            return null;
-        }
-        return splits.get(i).get(j);
+  public SplitSpecification get(int i, int j) {
+    if (!splits.containsKey(i)) {
+      return null;
     }
+    return splits.get(i).get(j);
+  }
 
-    public void set(int i, int j, SplitSpecification specification) {
-        if (!splits.containsKey(i)) {
-            splits.put(i, new HashMap<Integer, SplitSpecification>());
-        }
-        splits.get(i).put(j, specification);
+  public void set(int i, int j, SplitSpecification specification) {
+    if (!splits.containsKey(i)) {
+      splits.put(i, new HashMap<>());
     }
-
+    splits.get(i).put(j, specification);
+  }
 }

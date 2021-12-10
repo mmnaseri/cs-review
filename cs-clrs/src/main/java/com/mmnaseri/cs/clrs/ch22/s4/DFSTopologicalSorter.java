@@ -14,20 +14,22 @@ import java.util.List;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/3/15)
  */
-public class DFSTopologicalSorter<E extends EdgeDetails, V extends VertexDetails> implements TopologicalSorter<E, V> {
+public class DFSTopologicalSorter<E extends EdgeDetails, V extends VertexDetails>
+    implements TopologicalSorter<E, V> {
 
-    final DepthFirstGraphVisitor<E, V> visitor = new DepthFirstGraphVisitor<>();
+  final DepthFirstGraphVisitor<E, V> visitor = new DepthFirstGraphVisitor<>();
 
-    @Override
-    public List<Vertex<V>> sort(Graph<E, V> graph) {
-        final LinkedList<Vertex<V>> sorted = new LinkedList<>();
-        visitor.visit(graph, new GraphVertexVisitorAdapter<E, V>() {
-            @Override
-            public void afterExploration(Graph<E, V> graph, Vertex<V> vertex) {
-                sorted.add(0, vertex);
-            }
+  @Override
+  public List<Vertex<V>> sort(Graph<E, V> graph) {
+    final LinkedList<Vertex<V>> sorted = new LinkedList<>();
+    visitor.visit(
+        graph,
+        new GraphVertexVisitorAdapter<E, V>() {
+          @Override
+          public void afterExploration(Graph<E, V> graph, Vertex<V> vertex) {
+            sorted.add(0, vertex);
+          }
         });
-        return sorted;
-    }
-
+    return sorted;
+  }
 }

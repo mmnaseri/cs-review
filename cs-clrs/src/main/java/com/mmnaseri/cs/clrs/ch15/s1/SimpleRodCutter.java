@@ -10,22 +10,21 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 @Quality(Stage.UNTESTED)
 public class SimpleRodCutter implements RodCutter {
 
-    private final PriceFunction function;
+  private final PriceFunction function;
 
-    public SimpleRodCutter(PriceFunction function) {
-        this.function = function;
+  public SimpleRodCutter(PriceFunction function) {
+    this.function = function;
+  }
+
+  @Override
+  public Integer cut(Integer rodSize) {
+    if (rodSize == 0) {
+      return 0;
     }
-
-    @Override
-    public Integer cut(Integer rodSize) {
-        if (rodSize == 0) {
-            return 0;
-        }
-        Integer revenue = Integer.MIN_VALUE;
-        for (int i = 0; i < rodSize; i ++) {
-            revenue = Math.max(revenue, function.getPrice(i) + cut(rodSize - i));
-        }
-        return revenue;
+    int revenue = Integer.MIN_VALUE;
+    for (int i = 0; i < rodSize; i++) {
+      revenue = Math.max(revenue, function.getPrice(i) + cut(rodSize - i));
     }
-
+    return revenue;
+  }
 }

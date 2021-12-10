@@ -9,6 +9,5 @@ import java.util.List;
  */
 public interface EditDistanceCalculator {
 
-    List<EditOperation> calculate(String source, String target, CostFunction costFunction);
-
+  List<EditOperation> calculate(String source, String target, CostFunction costFunction);
 }

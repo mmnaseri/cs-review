@@ -7,6 +7,7 @@ import com.mmnaseri.cs.clrs.common.DynamicSet;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/15, 3:10 PM)
  */
+@SuppressWarnings("unused")
 public class FixedSizeDynamicSet implements DynamicSet<ReflectiveIndexed<Integer>> {
 
     private int size;

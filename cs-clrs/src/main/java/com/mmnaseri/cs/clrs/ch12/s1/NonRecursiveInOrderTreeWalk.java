@@ -38,7 +38,6 @@ public class NonRecursiveInOrderTreeWalk<E, N extends BinaryTreeNode<E>> impleme
             } else {
                 stack.push(current);
                 current = (N) current.getLeftChild();
-                popped = false;
             }
         } while (true);
         return callback;

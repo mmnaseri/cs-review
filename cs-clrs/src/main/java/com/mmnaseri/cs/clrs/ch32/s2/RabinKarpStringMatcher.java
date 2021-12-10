@@ -13,38 +13,37 @@ import java.util.Objects;
  */
 public class RabinKarpStringMatcher extends AbstractStringMatcher {
 
-    private final RollingHasher hasher;
+  private final RollingHasher hasher;
 
-    public RabinKarpStringMatcher(RollingHasher hasher) {
-        this.hasher = hasher;
-    }
+  public RabinKarpStringMatcher(RollingHasher hasher) {
+    this.hasher = hasher;
+  }
 
-    @Override
-    protected List<Integer> findIndexOf(String needle, String haystack) {
-        final List<Integer> indices = new ArrayList<>();
-        final BigInteger needleHash = hasher.hash(needle);
-        String portion = haystack.substring(0, needle.length());
-        BigInteger current = hasher.hash(portion);
-        for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
-            if (Objects.equals(needleHash, current)) {
-                boolean found = true;
-                for (int j = 0; j < needle.length(); j++) {
-                    if (haystack.charAt(i + j) != needle.charAt(j)) {
-                        found = false;
-                        break;
-                    }
-                }
-                if (found) {
-                    indices.add(i);
-                }
-            }
-            if (i + needle.length() < haystack.length()) {
-                final char next = haystack.charAt(i + needle.length());
-                current = hasher.roll(portion, current, next);
-                portion = portion.substring(1) + next;
-            }
+  @Override
+  protected List<Integer> findIndexOf(String needle, String haystack) {
+    final List<Integer> indices = new ArrayList<>();
+    final BigInteger needleHash = hasher.hash(needle);
+    String portion = haystack.substring(0, needle.length());
+    BigInteger current = hasher.hash(portion);
+    for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
+      if (Objects.equals(needleHash, current)) {
+        boolean found = true;
+        for (int j = 0; j < needle.length(); j++) {
+          if (haystack.charAt(i + j) != needle.charAt(j)) {
+            found = false;
+            break;
+          }
         }
-        return indices;
+        if (found) {
+          indices.add(i);
+        }
+      }
+      if (i + needle.length() < haystack.length()) {
+        final char next = haystack.charAt(i + needle.length());
+        current = hasher.roll(portion, current, next);
+        portion = portion.substring(1) + next;
+      }
     }
-
+    return indices;
+  }
 }

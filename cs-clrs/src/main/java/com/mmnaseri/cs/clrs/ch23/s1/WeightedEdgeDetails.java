@@ -8,6 +8,5 @@ import com.mmnaseri.cs.clrs.ch22.s1.EdgeDetails;
  */
 public interface WeightedEdgeDetails extends EdgeDetails {
 
-    int getWeight();
-
+  int getWeight();
 }

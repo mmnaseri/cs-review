@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch32.s3;
  */
 public interface TransitionFunction {
 
-    int transition(int state, char next);
-
+  int transition(int state, char next);
 }

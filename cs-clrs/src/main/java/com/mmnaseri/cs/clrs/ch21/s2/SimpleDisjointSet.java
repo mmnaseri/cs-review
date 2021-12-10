@@ -8,22 +8,22 @@ import com.mmnaseri.cs.qa.annotation.Stage;
  * @since 1.0 (8/2/15, 2:56 AM)
  */
 @Quality(Stage.TESTED)
-public class SimpleDisjointSet<I> extends AbstractLinkedDisjointSet<SimpleLinkedElement<I>, I, SimpleLinkedElementContainer<I>> {
+public class SimpleDisjointSet<I>
+    extends AbstractLinkedDisjointSet<SimpleLinkedElement<I>, I, SimpleLinkedElementContainer<I>> {
 
-    @Override
-    protected SimpleLinkedElement<I> newRoot(I representative) {
-        final SimpleLinkedElement<I> element = new SimpleLinkedElement<>();
-        final SimpleLinkedElementContainer<I> container = new SimpleLinkedElementContainer<>();
-        container.setHead(element);
-        container.setTail(element);
-        element.setContainer(container);
-        element.setValue(representative);
-        return element;
-    }
+  @Override
+  protected SimpleLinkedElement<I> newRoot(I representative) {
+    final SimpleLinkedElement<I> element = new SimpleLinkedElement<>();
+    final SimpleLinkedElementContainer<I> container = new SimpleLinkedElementContainer<>();
+    container.setHead(element);
+    container.setTail(element);
+    element.setContainer(container);
+    element.setValue(representative);
+    return element;
+  }
 
-    @Override
-    public SimpleLinkedElement<I> union(SimpleLinkedElement<I> first, SimpleLinkedElement<I> second) {
-        return absorb(first, second);
-    }
-
+  @Override
+  public SimpleLinkedElement<I> union(SimpleLinkedElement<I> first, SimpleLinkedElement<I> second) {
+    return absorb(first, second);
+  }
 }

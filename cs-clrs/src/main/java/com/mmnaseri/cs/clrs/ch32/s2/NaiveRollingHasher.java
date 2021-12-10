@@ -8,18 +8,17 @@ import java.math.BigInteger;
  */
 public class NaiveRollingHasher implements RollingHasher {
 
-    @Override
-    public BigInteger hash(String text) {
-        BigInteger code = BigInteger.valueOf(0);
-        for (int i = 0; i < text.length(); i++) {
-            code = code.add(BigInteger.valueOf(text.charAt(i)));
-        }
-        return code;
+  @Override
+  public BigInteger hash(String text) {
+    BigInteger code = BigInteger.valueOf(0);
+    for (int i = 0; i < text.length(); i++) {
+      code = code.add(BigInteger.valueOf(text.charAt(i)));
     }
+    return code;
+  }
 
-    @Override
-    public BigInteger roll(String text, BigInteger hash, char next) {
-        return hash.subtract(BigInteger.valueOf(text.charAt(0))).add(BigInteger.valueOf(next));
-    }
-
+  @Override
+  public BigInteger roll(String text, BigInteger hash, char next) {
+    return hash.subtract(BigInteger.valueOf(text.charAt(0))).add(BigInteger.valueOf(next));
+  }
 }

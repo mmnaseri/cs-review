@@ -12,7 +12,7 @@ public class SimpleForestDisjointSetTest extends BaseDisjointSetTest {
 
     @Override
     protected DisjointSet<Element<Integer>, Integer> createSet() {
-        //noinspection unchecked
+        //noinspection unchecked,rawtypes
         return new SimpleForestDisjointSet();
     }
 

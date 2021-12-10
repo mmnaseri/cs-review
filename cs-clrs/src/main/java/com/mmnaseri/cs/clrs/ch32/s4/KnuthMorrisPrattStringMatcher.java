@@ -14,30 +14,30 @@ import java.util.List;
 @Quality(Stage.TESTED)
 public class KnuthMorrisPrattStringMatcher extends AbstractStringMatcher {
 
-    private final PrefixFunctionFactory factory;
+  private final PrefixFunctionFactory factory;
 
-    public KnuthMorrisPrattStringMatcher(PrefixFunctionFactory factory) {
-        this.factory = factory;
-    }
+  public KnuthMorrisPrattStringMatcher(PrefixFunctionFactory factory) {
+    this.factory = factory;
+  }
 
-    @Override
-    protected List<Integer> findIndexOf(String needle, String haystack) {
-        final PrefixFunction function = factory.getInstance(needle);
-        final List<Integer> indices = new ArrayList<>();
-        int matched = 0;
-        for (int i = 0; i < haystack.length(); i++) {
-            final char character = haystack.charAt(i);
-            while (matched > 0 && character != needle.charAt(matched)) {
-                matched = function.prefix(matched - 1);
-            }
-            if (character == needle.charAt(matched)) {
-                matched ++;
-            }
-            if (matched == needle.length()) {
-                indices.add(i - needle.length() + 1);
-                matched = function.prefix(matched - 1);
-            }
-        }
-        return indices;
+  @Override
+  protected List<Integer> findIndexOf(String needle, String haystack) {
+    final PrefixFunction function = factory.getInstance(needle);
+    final List<Integer> indices = new ArrayList<>();
+    int matched = 0;
+    for (int i = 0; i < haystack.length(); i++) {
+      final char character = haystack.charAt(i);
+      while (matched > 0 && character != needle.charAt(matched)) {
+        matched = function.prefix(matched - 1);
+      }
+      if (character == needle.charAt(matched)) {
+        matched++;
+      }
+      if (matched == needle.length()) {
+        indices.add(i - needle.length() + 1);
+        matched = function.prefix(matched - 1);
+      }
     }
+    return indices;
+  }
 }

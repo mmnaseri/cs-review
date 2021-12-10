@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch32.s3;
  */
 public interface TransitionFunctionFactory {
 
-    TransitionFunction getInstance(String pattern);
-
+  TransitionFunction getInstance(String pattern);
 }

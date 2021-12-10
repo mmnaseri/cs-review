@@ -13,24 +13,23 @@ import java.util.Map;
 @Quality(Stage.UNTESTED)
 public class BottomUpRodCutter implements RodCutter {
 
-    private final PriceFunction function;
+  private final PriceFunction function;
 
-    public BottomUpRodCutter(PriceFunction function) {
-        this.function = function;
+  public BottomUpRodCutter(PriceFunction function) {
+    this.function = function;
+  }
+
+  @Override
+  public Integer cut(Integer rodSize) {
+    final Map<Integer, Integer> memory = new HashMap<>();
+    memory.put(0, 0);
+    for (int i = 1; i < rodSize; i++) {
+      int revenue = Integer.MIN_VALUE;
+      for (int j = 1; j < i; j++) {
+        revenue = Math.max(revenue, function.getPrice(j) + memory.get(i - j));
+      }
+      memory.put(i, revenue);
     }
-
-    @Override
-    public Integer cut(Integer rodSize) {
-        final Map<Integer, Integer> memory = new HashMap<>();
-        memory.put(0, 0);
-        for (int i = 1; i < rodSize; i ++) {
-            int revenue = Integer.MIN_VALUE;
-            for (int j = 1; j < i; j ++) {
-                revenue = Math.max(revenue, function.getPrice(j) + memory.get(i - j));
-            }
-            memory.put(i, revenue);
-        }
-        return memory.get(rodSize);
-    }
-
+    return memory.get(rodSize);
+  }
 }

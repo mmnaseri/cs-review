@@ -11,15 +11,14 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 @Quality(Stage.TESTED)
 public class ArrayPrefixFunction implements PrefixFunction {
 
-    private final int[] lengths;
+  private final int[] lengths;
 
-    public ArrayPrefixFunction(int[] lengths) {
-        this.lengths = lengths;
-    }
+  public ArrayPrefixFunction(int[] lengths) {
+    this.lengths = lengths;
+  }
 
-    @Override
-    public int prefix(int index) {
-        return lengths[index];
-    }
-
+  @Override
+  public int prefix(int index) {
+    return lengths[index];
+  }
 }

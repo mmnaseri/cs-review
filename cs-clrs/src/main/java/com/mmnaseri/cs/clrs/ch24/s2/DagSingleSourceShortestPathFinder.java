@@ -17,29 +17,30 @@ import java.util.List;
  * @since 1.0 (8/6/15)
  */
 @Quality(Stage.TESTED)
-public class DagSingleSourceShortestPathFinder<E extends WeightedEdgeDetails, V extends VertexDetails> extends AbstractSingleSourceShortestPathFinder<E, V> {
+public class DagSingleSourceShortestPathFinder<
+        E extends WeightedEdgeDetails, V extends VertexDetails>
+    extends AbstractSingleSourceShortestPathFinder<E, V> {
 
-    private final TopologicalSorter<E, V> sorter;
+  private final TopologicalSorter<E, V> sorter;
 
-    public DagSingleSourceShortestPathFinder() {
-        this(new DFSTopologicalSorter<E, V>());
+  public DagSingleSourceShortestPathFinder() {
+    this(new DFSTopologicalSorter<>());
+  }
+
+  public DagSingleSourceShortestPathFinder(TopologicalSorter<E, V> sorter) {
+    this.sorter = sorter;
+  }
+
+  @Override
+  public Graph<E, V> find(Graph<E, V> graph, int start) {
+    final Graph<E, V> result = initialize(graph, start);
+    final List<Vertex<V>> vertices = sorter.sort(result);
+    for (Vertex<V> vertex : vertices) {
+      final List<Vertex<V>> neighbors = result.getNeighbors(vertex);
+      for (Vertex<V> neighbor : neighbors) {
+        relax(result, vertex, neighbor);
+      }
     }
-
-    public DagSingleSourceShortestPathFinder(TopologicalSorter<E, V> sorter) {
-        this.sorter = sorter;
-    }
-
-    @Override
-    public Graph<E, V> find(Graph<E, V> graph, int start) {
-        final Graph<E, V> result = initialize(graph, start);
-        final List<Vertex<V>> vertices = sorter.sort(result);
-        for (Vertex<V> vertex : vertices) {
-            final List<Vertex<V>> neighbors = result.getNeighbors(vertex);
-            for (Vertex<V> neighbor : neighbors) {
-                relax(result, vertex, neighbor);
-            }
-        }
-        return result;
-    }
-
+    return result;
+  }
 }

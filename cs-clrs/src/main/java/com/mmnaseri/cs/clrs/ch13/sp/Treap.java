@@ -14,102 +14,100 @@ import java.util.Set;
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/26/15, 8:05 PM)
  */
+@SuppressWarnings("unused")
 @Quality(Stage.UNTESTED)
 public class Treap<E> extends AbstractRotatingBinarySearchTree<E, TreapNode<E>> {
 
-    public Treap(Comparator<E> comparator) {
-        super(comparator, new TreapNodeFactory<E>());
+  public Treap(Comparator<E> comparator) {
+    super(comparator, new TreapNodeFactory<>());
+  }
+
+  protected PriorityManager getPriorityManager() {
+    return ((TreapNodeFactory<E>) getFactory()).getPriorityManager();
+  }
+
+  protected void rotateUp(TreapNode<E> node) {
+    while (!node.isRoot() && node.getParent().getPriority() < node.getPriority()) {
+      if (node == node.getParent().getLeftChild()) {
+        rotateRight(node);
+      } else {
+        rotateLeft(node);
+      }
+    }
+    if (node.isRoot()) {
+      setRoot(node);
+    }
+  }
+
+  protected void trickleDown(TreapNode<E> node) {
+    while (!node.isLeaf()) {
+      final boolean root = node.isRoot();
+      if (node.getLeftChild() == null) {
+        rotateLeft(node);
+      } else if (node.getRightChild() == null) {
+        rotateRight(node);
+      } else if (node.getLeftChild().getPriority() < node.getRightChild().getPriority()) {
+        rotateRight(node);
+      } else {
+        rotateLeft(node);
+      }
+      if (root) {
+        setRoot(node.getParent());
+      }
+    }
+  }
+
+  @Override
+  public TreapNode<E> insert(E value) {
+    final TreapNode<E> node = super.insert(value);
+    rotateUp(node);
+    return node;
+  }
+
+  @Override
+  public TreapNode<E> delete(E value) {
+    final TreapNode<E> node = find(value);
+    if (node == null) {
+      return null;
+    }
+    trickleDown(node);
+    delete(node);
+    return node;
+  }
+
+  protected static class PriorityManager {
+
+    private final Set<Integer> priorities = new HashSet<>();
+    private final Random random = new Random();
+
+    private int get() {
+      int priority;
+      do {
+        priority = Math.abs(random.nextInt());
+      } while (priorities.contains(priority));
+      priorities.add(priority);
+      return priority;
     }
 
-    protected PriorityManager getPriorityManager() {
-        return ((TreapNodeFactory<E>) getFactory()).getPriorityManager();
+    private void discard(int priority) {
+      priorities.remove(priority);
     }
+  }
 
-    protected void rotateUp(TreapNode<E> node) {
-        while (!node.isRoot() && node.getParent().getPriority() < node.getPriority()) {
-            if (node == node.getParent().getLeftChild()) {
-                rotateRight(node);
-            } else {
-                rotateLeft(node);
-            }
-        }
-        if (node.isRoot()) {
-            setRoot(node);
-        }
-    }
+  private static class TreapNodeFactory<E> implements TreeNodeFactory<E, TreapNode<E>> {
 
-    protected void trickleDown(TreapNode<E> node) {
-        while (!node.isLeaf()) {
-            final boolean root = node.isRoot();
-            if (node.getLeftChild() == null) {
-                rotateLeft(node);
-            } else if (node.getRightChild() == null) {
-                rotateRight(node);
-            } else if (node.getLeftChild().getPriority() < node.getRightChild().getPriority()) {
-                rotateRight(node);
-            } else {
-                rotateLeft(node);
-            }
-            if (root) {
-                setRoot(node.getParent());
-            }
-        }
-    }
+    private final PriorityManager priorityManager = new PriorityManager();
 
     @Override
-    public TreapNode<E> insert(E value) {
-        final TreapNode<E> node = super.insert(value);
-        rotateUp(node);
-        return node;
+    public TreapNode<E> createNode(E value) {
+      final TreapNode<E> node = new TreapNode<>();
+      node.setValue(value);
+      node.setPriority(priorityManager.get());
+      return node;
     }
 
-    @Override
-    public TreapNode<E> delete(E value) {
-        final TreapNode<E> node = find(value);
-        if (node == null) {
-            return null;
-        }
-        trickleDown(node);
-        delete(node);
-        return node;
+    public PriorityManager getPriorityManager() {
+      return priorityManager;
     }
-
-    protected static class PriorityManager {
-
-        private final Set<Integer> priorities = new HashSet<>();
-        private final Random random = new Random();
-
-        private int get() {
-            int priority;
-            do {
-                priority = Math.abs(random.nextInt());
-            } while (priorities.contains(priority));
-            priorities.add(priority);
-            return priority;
-        }
-
-        private void discard(int priority) {
-            priorities.remove(priority);
-        }
-
-    }
-
-    private static class TreapNodeFactory<E> implements TreeNodeFactory<E, TreapNode<E>> {
-
-        private final PriorityManager priorityManager = new PriorityManager();
-
-        @Override
-        public TreapNode<E> createNode(E value) {
-            final TreapNode<E> node = new TreapNode<>();
-            node.setValue(value);
-            node.setPriority(priorityManager.get());
-            return node;
-        }
-
-        public PriorityManager getPriorityManager() {
-            return priorityManager;
-        }
-
-    }
-
+  }
 }

@@ -6,6 +6,5 @@ package com.mmnaseri.cs.clrs.ch21;
  */
 public interface Element<E> {
 
-    E getValue();
-
+  E getValue();
 }

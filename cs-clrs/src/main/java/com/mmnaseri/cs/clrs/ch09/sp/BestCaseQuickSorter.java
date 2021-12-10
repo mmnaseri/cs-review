@@ -8,6 +8,8 @@ import com.mmnaseri.cs.qa.annotation.Stage;
 
 import java.util.Comparator;
 
+import static com.mmnaseri.cs.clrs.ch09.SelectionUtils.selectPartition;
+
 /**
  * @author Mohammad Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/12/15, 9:05 PM)
@@ -24,19 +26,7 @@ public class BestCaseQuickSorter<E extends Comparable<E>> implements Sorter<E> {
     }
 
     private int partition(E[] items, int from, int to, int pivot) {
-        ArrayUtils.swap(items, pivot, to - 1);
-        final E partition = items[to - 1];
-        int smaller = from - 1;
-        int seen = from;
-        while (seen < to - 1) {
-            if (comparator.compare(partition, items[seen]) >= 0) {
-                smaller ++;
-                ArrayUtils.swap(items, smaller, seen);
-            }
-            seen ++;
-        }
-        ArrayUtils.swap(items, smaller + 1, to - 1);
-        return smaller + 1;
+        return selectPartition(comparator, items, from, to, pivot);
     }
 
     private void sort(E[] items, int from, int to) {

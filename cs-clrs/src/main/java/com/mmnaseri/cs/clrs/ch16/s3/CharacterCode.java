@@ -9,25 +9,24 @@ import com.mmnaseri.cs.clrs.ch12.sp.BitUtils;
  */
 public class CharacterCode {
 
-    private final Character character;
-    private final Bit[] code;
+  private final Character character;
+  private final Bit[] code;
 
-    public CharacterCode(Character character, Bit[] code) {
-        this.character = character;
-        this.code = code;
-    }
+  public CharacterCode(Character character, Bit[] code) {
+    this.character = character;
+    this.code = code;
+  }
 
-    public Character getCharacter() {
-        return character;
-    }
+  public Character getCharacter() {
+    return character;
+  }
 
-    public Bit[] getCode() {
-        return code;
-    }
+  public Bit[] getCode() {
+    return code;
+  }
 
-    @Override
-    public String toString() {
-        return getCharacter() + ":" + BitUtils.toString(getCode());
-    }
-
+  @Override
+  public String toString() {
+    return getCharacter() + ":" + BitUtils.toString(getCode());
+  }
 }
